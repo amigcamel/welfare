@@ -1,0 +1,96 @@
+[
+    {
+        "step": [
+            {
+                "question": {
+                    "groupLabel": "group1",
+                    "item": [
+                        {
+                            "key": "brave",
+                            "label": "Bravery Rating",
+                            "type": "dropdown",
+                            "options": [
+                                {
+                                    "key": "solid",
+                                    "value": "Solid"
+                                },
+                                {
+                                    "key": "great",
+                                    "value": "Great"
+                                },
+                                {
+                                    "key": "good",
+                                    "value": "Good"
+                                },
+                                {
+                                    "key": "unproven",
+                                    "value": "Unproven"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "firstName",
+                            "label": "First name",
+                            "type": "text",
+                            "value": "Bombasto",
+                            "required": true
+                        },
+                        {
+                            "key": "lastName",
+                            "label": "Last name",
+                            "type": "text",
+                            "value": "Bombasto",
+                            "required": true
+                        }
+                    ],
+                    "isEnd": false
+                }
+            },
+            {
+                "question": {
+                    "groupLabel": "group2",
+                    "item": [
+                        {
+                            "key": "brave",
+                            "label": "Bravery Rating",
+                            "type": "dropdown",
+                            "options": [
+                                {
+                                    "key": "solid",
+                                    "value": "Solid"
+                                },
+                                {
+                                    "key": "great",
+                                    "value": "Great"
+                                },
+                                {
+                                    "key": "good",
+                                    "value": "Good"
+                                },
+                                {
+                                    "key": "unproven",
+                                    "value": "Unproven"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "firstName",
+                            "label": "First name",
+                            "type": "text",
+                            "value": "Bombasto",
+                            "required": true
+                        },
+                        {
+                            "key": "lastName",
+                            "label": "Last name",
+                            "type": "text",
+                            "value": "Bombasto",
+                            "required": true
+                        }
+                    ],
+                    "isEnd": true
+                }
+            }
+        ]
+    }
+]
