@@ -2,7 +2,6 @@
 import json
 
 from flask import Flask, request, redirect, jsonify, url_for, g
-from flask_cors import CORS
 from loguru import logger
 from jwcrypto import jwe
 from jwcrypto.common import json_encode
@@ -12,7 +11,6 @@ import settings
 
 app = Flask(__name__)
 app.debug = True
-CORS(app)
 app.config["SECRET_KEY"] = settings.APP_SECRET
 
 
@@ -24,7 +22,9 @@ def _decrypt(token):
 
 
 def _encrypt(data):
-    token = jwe.JWE(data.encode('utf-8'), json_encode({'alg': 'A256KW', 'enc': 'A256CBC-HS512'}))
+    token = jwe.JWE(
+        data.encode("utf-8"), json_encode({"alg": "A256KW", "enc": "A256CBC-HS512"})
+    )
     token.add_recipient(settings.JWK_KEY)
     return token.serialize(compact=True)
 
@@ -33,22 +33,22 @@ def _encrypt(data):
 def auth():
     """Authenticate."""
     logger.debug(request.headers)
-    if request.method == 'OPTIONS':
+    if request.method == "OPTIONS":
         return
     if request.path in (url_for("login"), url_for("login_redirect")):
         return
-    token = request.headers['Authorization'].split('Bearer')[-1].strip()
-    if token:
-        logger.debug(f'token -----> {token}')
+    auth = request.headers.get("Authorization")
+    if auth:
         try:
+            token = request.headers["Authorization"].split("Bearer")[-1].strip()
+            logger.debug(f"token -----> {token}")
             data = _decrypt(token)
+            g.token = token
+            logger.debug(data)
+            return
         except Exception as e:
             logger.critical(e)
-            return 'Unauthorized', 401
-        g.token = token
-        logger.debug(data)
-    else:
-        return "Unauthorized", 401
+    return "Unauthorized", 401
 
 
 @app.route("/redirect")
@@ -60,8 +60,8 @@ def login_redirect():
     data = get_userinfo(code)
     logger.info(data)
     token = _encrypt(json.dumps(data))
-    logger.debug(f'token: {token}')
-    return redirect(f'http://localhost:4200/#/home?token={token}')
+    logger.debug(f"token: {token}")
+    return redirect(f"http://localhost:4200/#/home?token={token}")
 
 
 @app.route("/login")
@@ -81,16 +81,16 @@ def user():
 def hello():
     """Hello."""
     logger.debug(request.headers)
-    return '', 200
+    return "", 200
 
 
 @app.route("/byebye")
 def byebye():
     """byebye."""
-    return '', 401
+    return "", 401
 
 
-@app.route('/token')
+@app.route("/token")
 def token():
     """Token."""
     code = request.args.get("code")
