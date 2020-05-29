@@ -52,6 +52,7 @@ export class AppComponent implements OnInit, OnDestroy
     )
     {
         // Get default navigation
+
         this.navigation = navigation;
 
         // Register the navigation to the service

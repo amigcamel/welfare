@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -20,6 +20,9 @@ import { LayoutModule } from 'app/layout/layout.module';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FakeDbService } from './fake-db/fake-db.service';
+import { JwtInterceptor } from './helper/jwt.interceptor';
+import { ErrorInterceptor } from './helper/error.interceptor';
+import { HomeComponent } from './main/home/home.component';
 
 const appRoutes: Routes = [
     {
@@ -37,18 +40,31 @@ const appRoutes: Routes = [
     {
         path        : 'forms',
         loadChildren: () => import('./main/forms/forms.module').then(m => m.UIFormsModule)
+    },
+    {
+        path        : 'home',
+        component   : HomeComponent
+    },
+    {
+        path        : 'coming-soon',
+        loadChildren: () => import('./main/coming-soon/coming-soon.module').then(m => m.ComingSoonModule)
+    },
+    {
+        path        : '**',
+        redirectTo  : 'login'
     }
 ];
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        HomeComponent
     ],
     imports     : [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        RouterModule.forRoot(appRoutes, {useHash: true}),
+        RouterModule.forRoot(appRoutes, { useHash: true}),
 
         TranslateModule.forRoot(),
         InMemoryWebApiModule.forRoot(FakeDbService, {
@@ -75,6 +91,10 @@ const appRoutes: Routes = [
     ],
     bootstrap   : [
         AppComponent
+    ],
+    providers : [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ]
 })
 export class AppModule

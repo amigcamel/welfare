@@ -3,18 +3,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
-import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../../service/auth.service';
 
 @Component({
-    selector     : 'login',
-    templateUrl  : './login.component.html',
-    styleUrls    : ['./login.component.scss'],
+    selector     : 'coming-soon',
+    templateUrl  : './coming-soon.component.html',
+    styleUrls    : ['./coming-soon.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations
 })
-export class LoginComponent implements OnInit
+export class ComingSoonComponent implements OnInit
 {
+    comingSoonForm: FormGroup;
+
     /**
      * Constructor
      *
@@ -23,9 +23,7 @@ export class LoginComponent implements OnInit
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder,
-        private http: HttpClient,
-        private auth: AuthService
+        private _formBuilder: FormBuilder
     )
     {
         // Configure the layout
@@ -47,13 +45,17 @@ export class LoginComponent implements OnInit
         };
     }
 
+    // -----------------------------------------------------------------------------------------------------
+    // @ Lifecycle hooks
+    // -----------------------------------------------------------------------------------------------------
+
+    /**
+     * On init
+     */
     ngOnInit(): void
     {
-
-    }
-
-    Login(): void {
-        this.auth.setIsLogin(true);
-        location.assign('http://welfare.local.com:5000/login');
+        this.comingSoonForm = this._formBuilder.group({
+            email: ['', [Validators.required, Validators.email]]
+        });
     }
 }

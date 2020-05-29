@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { QuestionService } from '../../service/question.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector   : 'forms',
@@ -22,6 +24,7 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     constructor(
         private _formBuilder: FormBuilder,
+        private http: HttpClient,
         private  mock: QuestionService
     )
     {
@@ -40,7 +43,6 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-
         this.steps = this.mock.getJSON().map(e => {
             const group: any = {};
             // @ts-ignore
@@ -81,6 +83,9 @@ export class FormsComponent implements OnInit, OnDestroy
     finishVerticalStepper(): void
     {
         const result = this.steps.map(item => item['formGroup']['value']);
-        console.log(JSON.stringify(result));
+        this.http.get('/hello').subscribe(data => console.log(data));
+    }
+    bye(): void {
+        this.http.get('/byebye').subscribe(data => console.log(data));
     }
 }

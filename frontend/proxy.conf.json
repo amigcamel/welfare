@@ -1,0 +1,6 @@
+{
+    "/": {
+        "target": "http://welfare.local.com:5000",
+        "secure": false
+    }
+}

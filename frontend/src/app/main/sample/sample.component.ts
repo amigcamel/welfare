@@ -4,6 +4,7 @@ import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.
 
 import { locale as english } from './i18n/en';
 import { locale as turkish } from './i18n/tr';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
     selector   : 'sample',
@@ -18,7 +19,8 @@ export class SampleComponent
      * @param {FuseTranslationLoaderService} _fuseTranslationLoaderService
      */
     constructor(
-        private _fuseTranslationLoaderService: FuseTranslationLoaderService
+        private _fuseTranslationLoaderService: FuseTranslationLoaderService,
+        private http: HttpClient
     )
     {
         this._fuseTranslationLoaderService.loadTranslations(english, turkish);

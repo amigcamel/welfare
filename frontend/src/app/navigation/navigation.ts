@@ -22,5 +22,21 @@ export const navigation: FuseNavigation[] = [
                 }
             }
         ]
+    },
+    {
+        id       : 'page',
+        title    : 'Page',
+        translate: 'NAV.PAGE',
+        type     : 'group',
+        children : [
+            {
+                id       : 'form',
+                title    : 'Form',
+                translate: 'NAV.FORM.TITLE',
+                type     : 'item',
+                icon     : 'form',
+                url      : '/forms',
+            }
+        ]
     }
 ];
