@@ -13,6 +13,7 @@ google-api-python-client = "==1.8.3"
 loguru = "==0.5.0"
 requests = "==2.23.0"
 jwcrypto = "==0.7"
+uwsgi = "==2.0.18"
 
 [requires]
 python_version = "3.8"
