@@ -8,6 +8,6 @@ import * as data from './mock.json';
 export class QuestionService {
   constructor() { }
   getJSON(): [] {
-    return data['default'][0]['step'];
+    return data['default'][0]['form'];
   }
 }

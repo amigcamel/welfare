@@ -23,6 +23,8 @@ import { FakeDbService } from './fake-db/fake-db.service';
 import { JwtInterceptor } from './helper/jwt.interceptor';
 import { ErrorInterceptor } from './helper/error.interceptor';
 import { HomeComponent } from './main/home/home.component';
+import { DialogComponent } from './component/dialog/dialog.component';
+import { PhotoDialogComponent } from './component/photo-dialog/photo-dialog.component';
 
 const appRoutes: Routes = [
     {
@@ -58,7 +60,9 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        DialogComponent,
+        PhotoDialogComponent,
     ],
     imports     : [
         BrowserModule,

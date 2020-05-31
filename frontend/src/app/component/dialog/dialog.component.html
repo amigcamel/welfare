@@ -1,0 +1,12 @@
+<div>
+    <ng-container ngSwitch="error">
+        <ng-container *ngSwitchCase="'error'">
+            <ng-template [ngTemplateOutlet]="error"></ng-template>
+        </ng-container>
+    </ng-container>
+</div>
+
+<ng-template #error>
+    <p>{{data.errorMessage}}</p>
+</ng-template>
+

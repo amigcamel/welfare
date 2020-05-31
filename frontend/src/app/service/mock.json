@@ -1,96 +1,80 @@
 [
     {
-        "step": [
+        "form": [
             {
-                "question": {
-                    "groupLabel": "group1",
-                    "item": [
-                        {
-                            "key": "brave",
-                            "label": "Bravery Rating",
-                            "type": "dropdown",
-                            "options": [
-                                {
-                                    "key": "solid",
-                                    "value": "Solid"
-                                },
-                                {
-                                    "key": "great",
-                                    "value": "Great"
-                                },
-                                {
-                                    "key": "good",
-                                    "value": "Good"
-                                },
-                                {
-                                    "key": "unproven",
-                                    "value": "Unproven"
-                                }
-                            ]
-                        },
-                        {
-                            "key": "firstName",
-                            "label": "First name",
-                            "type": "text",
-                            "value": "Bombasto",
-                            "required": true
-                        },
-                        {
-                            "key": "lastName",
-                            "label": "Last name",
-                            "type": "text",
-                            "value": "Bombasto",
-                            "required": true
-                        }
-                    ],
-                    "isEnd": false
-                }
+                "stepLabel": "group1",
+                "imageSource": "https://unblast.com/wp-content/uploads/2019/08/Restaurant-Menu-Template-2.jpg",
+                "stepKey": "step1",
+                "isEnd": false,
+                "items": [
+                    {
+                        "key": "item1",
+                        "label": "French Fries",
+                        "type": "number",
+                        "value": "0",
+                        "price": "50",
+                        "required": true,
+                        "options": [
+
+                        ]
+                    },
+                    {
+                        "key": "item2",
+                        "label": "Fire Chicken",
+                        "type": "number",
+                        "value": "0",
+                        "price": "100",
+                        "required": true,
+                        "options": [
+                            {
+                                "key": "option1",
+                                "label": "Gen Gu",
+                                "type": "checkbox",
+                                "choose": false,
+                                "price": "5"
+                            },
+                            {
+                                "key": "option2",
+                                "label": "ya gle",
+                                "type": "checkbox",
+                                "choose": true,
+                                "price": "15"
+                            }
+                        ]
+                    }
+                ]
             },
             {
-                "question": {
-                    "groupLabel": "group2",
-                    "item": [
-                        {
-                            "key": "brave",
-                            "label": "Bravery Rating",
-                            "type": "dropdown",
-                            "options": [
-                                {
-                                    "key": "solid",
-                                    "value": "Solid"
-                                },
-                                {
-                                    "key": "great",
-                                    "value": "Great"
-                                },
-                                {
-                                    "key": "good",
-                                    "value": "Good"
-                                },
-                                {
-                                    "key": "unproven",
-                                    "value": "Unproven"
-                                }
-                            ]
-                        },
-                        {
-                            "key": "firstName",
-                            "label": "First name",
-                            "type": "text",
-                            "value": "Bombasto",
-                            "required": true
-                        },
-                        {
-                            "key": "lastName",
-                            "label": "Last name",
-                            "type": "text",
-                            "value": "Bombasto",
-                            "required": true
-                        }
-                    ],
-                    "isEnd": true
-                }
+                "stepLabel": "group2",
+                "stepKey": "step2",
+                "imageSource": "https://unblast.com/wp-content/uploads/2019/08/Restaurant-Menu-Template-2.jpg",
+                "isEnd": true,
+                "items": [
+                    {
+                        "key": "item3",
+                        "label": "French Fries",
+                        "type": "number",
+                        "value": "0",
+                        "price": "30",
+                        "required": true,
+                        "options": [
+
+                        ]
+                    },
+                    {
+                        "key": "item4",
+                        "label": "Fire Chicken",
+                        "type": "number",
+                        "value": "0",
+                        "price": "130",
+                        "required": true,
+                        "options": [
+
+                        ]
+                    }
+                ]
             }
         ]
     }
 ]
+    

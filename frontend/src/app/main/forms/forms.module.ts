@@ -9,6 +9,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FormsComponent } from './forms.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 
 const routes: Routes = [
@@ -21,7 +23,8 @@ const routes: Routes = [
 @NgModule({
     declarations: [
 
-        FormsComponent
+        FormsComponent,
+
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -32,6 +35,8 @@ const routes: Routes = [
         MatInputModule,
         MatSelectModule,
         MatStepperModule,
+        MatDialogModule,
+        MatCheckboxModule,
 
         FuseSharedModule,
     ]
