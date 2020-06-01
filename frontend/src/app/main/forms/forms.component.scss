@@ -23,4 +23,14 @@
     mat-icon.button {
         cursor: pointer;
     }
+    .option-title {
+        margin-right: 20px;
+    }
+    .order-item {
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 20px;
+        border: solid #888 1px;
+        overflow: hidden;
+    }
 }

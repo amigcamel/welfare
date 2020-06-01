@@ -1,16 +1,31 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { QuestionService } from '../../service/question.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
-import {FormService} from "../../service/form.service";
-import { MatDialog } from "@angular/material/dialog";
-import { DialogComponent } from "../../component/dialog/dialog.component";
-import { PhotoDialogComponent } from "../../component/photo-dialog/photo-dialog.component";
+
+import { MatExpansionPanel } from '@angular/material/expansion';
+import { FormService } from '../../service/form.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PhotoDialogComponent } from '../../component/photo-dialog/photo-dialog.component';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
     selector   : 'forms',
+    animations: [
+        trigger('openClose', [
+            state('open', style({
+                height: '*',
+            })),
+            state('closed', style({
+                height: '100px',
+            })),
+            transition('open <=> closed', [
+                animate('.5s ease-in')
+            ]),
+        ]),
+    ],
     templateUrl: './forms.component.html',
     styleUrls  : ['./forms.component.scss']
 })
@@ -18,7 +33,7 @@ export class FormsComponent implements OnInit, OnDestroy
 {
     form: FormGroup;
     steps: any[] = [];
-    sum: number = 0;
+    sum = 0;
     // Private
     private _unsubscribeAll: Subject<any>;
 
@@ -65,57 +80,52 @@ export class FormsComponent implements OnInit, OnDestroy
         // });
         this.steps = this.mock.getJSON();
     }
-    print(s) {
-        console.log(s)
+    print(s): void {
+        console.log(s);
     }
-    subOne(step, key) {
-        for(let item of this.steps[step]['items']) {
-            if (item.key === key && item.value > 0) {
-                item.value =  parseInt(item.value) - 1
-                this.sum -= parseInt(item.price)
+    subOne(step, key): void {
+        for (const item of this.steps[step]['items']) {
+            if (item.key === key) {
+                if (item.value > 0) {
+                    item.value =  parseInt(item.value) - 1;
+                    this.sum -= parseInt(item.price);
+                }
+            } else {
+                item['isOpen'] = false;
             }
         }
     }
-    addOne(step, key) {
-        // this.matDialog.open(DialogComponent, {
-        //     data: {
-        //         errorMessage: 'stupid control'
-        //     }
-        // })
-        for(let item of this.steps[step]['items']) {
-            if (item.key === key ) {
-                item.value =  parseInt(item.value) + 1
-                this.sum += parseInt(item.price)
+    addOne(step, key): void {
+        for (const item of this.steps[step]['items']) {
+            if (item.key === key) {
+                item.value =  parseInt(item.value) + 1;
+                this.sum += parseInt(item.price);
+            } else {
+                item['isOpen'] = false;
             }
         }
 
     }
-    seeMenu(src) {
+    seeMenu(src): void {
         this.matDialog.open(PhotoDialogComponent, {
             data: {
                 imageSource: src
             }
-        })
+        });
     }
-    checkedOption(step, itemKey, optionKey) {
-        for(let item of this.steps[step]['items']) {
+    checkedOption(step, itemKey, optionKey): void {
+        for (const item of this.steps[step]['items']) {
             if (item.key === itemKey) {
-                for (let option of item.options) {
+                for (const option of item.options) {
                     if (option.key === optionKey) {
-                        if (option.choose) {
-                            console.log(option.choose)
-                            this.sum -= parseInt(option.price)
-                            option.choose = false;
-                            console.log(option.choose)
-                        } else {
-                            console.log(option.choose)
-                            this.sum += parseInt(option.price)
-                            option.choose = true;
-                        }
+                        option['choose'] = option['choose'];
                     }
                 }
             }
         }
+    }
+    calculatorSum(): void {
+
     }
 
     /**
@@ -137,7 +147,7 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     finishHorizontalStepper(): void
     {
-        console.log(this.steps)
+        console.log(this.steps);
     }
 
     /**

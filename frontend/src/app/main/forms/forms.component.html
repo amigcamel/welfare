@@ -25,44 +25,48 @@
                 <mat-step *ngFor="let step of steps; let i = index">
                     <ng-template matStepLabel>
                         <div fxLayout="row" fxLayoutAlign="start center">
-                            <div>
+                            <h1>
                                 {{step.stepLabel}}
-                            </div>
+                            </h1>
                             <mat-icon (click)="seeMenu(step.imageSource)" style="width: 24px !important; height: 24px !important;">search</mat-icon>
                         </div>
 
                     </ng-template>
-                    <mat-expansion-panel [disabled]="true" *ngFor="let item of step['items']" #mep="matExpansionPanel" style="margin-bottom: 20px">
-                            <mat-expansion-panel-header (focusin)="mep.expanded = true" (blur)="mep.expanded = false">
-                                <mat-panel-title>{{item.label}}</mat-panel-title>
-                                <mat-panel-description>
-                                    <mat-icon class="button" (click)="subOne(i, item.key)" style="width: 32px; height: 32px">remove</mat-icon>
-                                    <input matInput [(ngModel)]="item.value" type="number" disabled style="text-align: center; color: black" >
-                                    <mat-icon class="button" (click)="addOne(i, item.key)" style="width: 32px; height: 32px">add</mat-icon>
-                                </mat-panel-description>
-                            </mat-expansion-panel-header>
-                            <div fxLayout="row" fxLayoutAlign="start center">
-                                <mat-radio-group [(ngModel)]="item['iceDefault']">
-                                    <mat-radio-button  *ngFor="let ice of item['ice']">{{ice['label']}}</mat-radio-button>
-                                    {{item['iceDefault']}}
-                                </mat-radio-group>
+                    <div class="order-item" [@openClose]="item['isOpen'] ? 'open' : 'closed'" *ngFor="let item of step['items']" fxLayout="column">
+                        <div class="title" fxLayout="row" fxLayoutAlign="space-between center">
+                            <h2>{{item.label}}</h2>
+                            <div class="title-option" fxLayout="row" fxLayoutAlign="space-around center" fxFlex="50">
+                                <mat-icon class="button" (click)="subOne(i, item.key); item['isOpen'] = true;" style="width: 32px; height: 32px">remove</mat-icon>
+                                <input matInput [(ngModel)]="item.value" type="number" style="text-align: center;">
+                                <mat-icon class="button" (click)="addOne(i, item.key);  item['isOpen'] = true;" style="width: 32px; height: 32px">add</mat-icon>
                             </div>
-                            <div fxLayout="row" fxLayoutAlign="start center">
-                                <mat-radio-group [(ngModel)]="item['sugarDefault']">
-                                    <mat-radio-button *ngFor="let sugar of item['sugar']">{{sugar['label']}}</mat-radio-button>
-                                </mat-radio-group>
+                        </div>
+                        <div>
+                            <h2 class="option-title">Ice: </h2>
+                            <mat-radio-group [(ngModel)]="item['iceDefault']" fxLayoutAlign="space-between center" fxFlex="100">
+                                <mat-radio-button  *ngFor="let ice of item['ice']" [value]="ice['value']">{{ice['label']}}</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <h2 class="option-title">Sugar: </h2>
+                            <mat-radio-group [(ngModel)]="item['sugarDefault']" fxLayoutAlign="space-between center" fxFlex="100">
+                                <mat-radio-button *ngFor="let sugar of item['sugar']" [value]="sugar['value']">{{sugar['label']}}</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <h2 class="option-title">Size: </h2>
+                            <mat-radio-group [(ngModel)]="item['sizeDefault']" fxLayoutAlign="space-between center" fxFlex="100">
+                                <mat-radio-button *ngFor="let size of item['size']" [value]="size['value']">{{size['label']}}</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <h2 class="option-title">Extra: </h2>
+                            <div *ngFor="let o of item['options']" fxLayoutAlign="space-between center" fxFlex="100">
+                                <mat-checkbox [checked]="o.choose"  (change)="checkedOption(i, item.key, o.key)">{{o.label}}</mat-checkbox>
                             </div>
-                            <div fxLayout="row" fxLayoutAlign="start center">
-                                <mat-radio-group [(ngModel)]="item['sizeDefault']">
-                                    <mat-radio-button *ngFor="let size of item['size']">{{size['label']}}</mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div fxLayout="row" fxLayoutAlign="start center">
-                                <div *ngFor="let o of item['options']">
-                                    <mat-checkbox [checked]="o.choose"  (change)="checkedOption(i, item.key, o.key)">{{o.label}}</mat-checkbox>
-                                </div>
-                            </div>
-                    </mat-expansion-panel>
+                        </div>
+                    </div>
+
                     <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
                         <button mat-raised-button matStepperPrevious>previous</button>
                         <button *ngIf="!step.isEnd" mat-raised-button matStepperNext>next</button>

@@ -8,29 +8,16 @@
                 "isEnd": false,
                 "items": [
                     {
-                        "key": "item1",
-                        "label": "French Fries",
-                        "type": "number",
-                        "value": "0",
-                        "price": "50",
-                        "required": true,
-                        "iceDefault": "",
-                        "sugarDefault": "",
-                        "sizeDefault": "",
-                        "options": [
-
-                        ]
-                    },
-                    {
                         "key": "item2",
                         "label": "Fire Chicken",
                         "type": "number",
                         "value": "0",
                         "price": "100",
                         "required": true,
+                        "isOpen": false,
                         "iceDefault": "Rice",
                         "sugarDefault": "Rsugar",
-                        "sizeDefault": "M",
+                        "sizeDefault": "60",
                         "options": [
                             {
                                 "key": "option1",
@@ -52,14 +39,14 @@
                                 "key": "size1",
                                 "label": "M",
                                 "type": "radio-box",
-                                "price": "60",
+                                "value": "60",
                                 "choose": true
                             },
                             {
                                 "key": "size1",
                                 "label": "L",
                                 "type": "radio-box",
-                                "price": "70",
+                                "value": "70",
                                 "choose": false
                             }
                         ],
@@ -127,41 +114,113 @@
                                 "disable": false
                             }
                         ]
-                    }
-                ]
-            },
-            {
-                "stepLabel": "group2",
-                "stepKey": "step2",
-                "imageSource": "https://unblast.com/wp-content/uploads/2019/08/Restaurant-Menu-Template-2.jpg",
-                "isEnd": true,
-                "items": [
-                    {
-                        "key": "item3",
-                        "label": "French Fries",
-                        "type": "number",
-                        "value": "0",
-                        "price": "30",
-                        "required": true,
-                        "iceDefault": "",
-                        "sugarDefault": "",
-                        "sizeDefault": "",
-                        "options": [
-
-                        ]
                     },
                     {
-                        "key": "item4",
+                        "key": "item1",
                         "label": "Fire Chicken",
                         "type": "number",
                         "value": "0",
-                        "price": "130",
+                        "price": "100",
                         "required": true,
-                        "iceDefault": "",
-                        "sugarDefault": "",
-                        "sizeDefault": "",
+                        "isOpen": false,
+                        "iceDefault": "Rice",
+                        "sugarDefault": "Rsugar",
+                        "sizeDefault": "60",
                         "options": [
-
+                            {
+                                "key": "option1",
+                                "label": "Gen Gu",
+                                "type": "checkbox",
+                                "choose": false,
+                                "price": "5"
+                            },
+                            {
+                                "key": "option2",
+                                "label": "ya gle",
+                                "type": "checkbox",
+                                "choose": true,
+                                "price": "15"
+                            }
+                        ],
+                        "size": [
+                            {
+                                "key": "size1",
+                                "label": "M",
+                                "type": "radio-box",
+                                "value": "60",
+                                "choose": true
+                            },
+                            {
+                                "key": "size1",
+                                "label": "L",
+                                "type": "radio-box",
+                                "value": "70",
+                                "choose": false
+                            }
+                        ],
+                        "ice": [
+                            {
+                                "key": "ice1",
+                                "label": "Regular Ice",
+                                "type": "radio-box",
+                                "value": "Rice",
+                                "disable": false,
+                                "checked": true
+                            },
+                            {
+                                "key": "ice2",
+                                "label": "70% Ice",
+                                "type": "radio-box",
+                                "value": "7Ice",
+                                "disable": false,
+                                "checked": false
+                            },
+                            {
+                                "key": "ice3",
+                                "label": "30% Ice",
+                                "type": "radio-box",
+                                "value": "3Ice",
+                                "disable": false,
+                                "checked": false
+                            },
+                            {
+                                "key": "ice4",
+                                "label": "No Ice",
+                                "type": "radio-box",
+                                "value": "0Ice",
+                                "disable": false,
+                                "checked": false
+                            }
+                        ],
+                        "sugar": [
+                            {
+                                "key": "sugar1",
+                                "label": "Regular Sugar",
+                                "type": "radio-box",
+                                "value": "Rsugar",
+                                "disable": true
+                            },
+                            {
+                                "key": "sugar2",
+                                "label": "70% Sugar",
+                                "type": "radio-box",
+                                "value": "7sugar",
+                                "disable": false
+                            },
+                            {
+                                "key": "sugar3",
+                                "label": "30% Sugar",
+                                "type": "radio-box",
+                                "value": "3sugar",
+                                "disable": false
+                            },
+                            {
+                                "key": "sugar4",
+                                "label": "No Sugar",
+                                "type": "radio-box",
+                                "value": "0sugar",
+                                "disable": false
+                            }
                         ]
                     }
                 ]
