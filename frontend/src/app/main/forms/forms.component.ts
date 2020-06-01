@@ -88,7 +88,7 @@ export class FormsComponent implements OnInit, OnDestroy
             if (item.key === key) {
                 if (item.value > 0) {
                     item.value =  parseInt(item.value) - 1;
-                    this.sum -= parseInt(item.price);
+                    this.calculatorSum();
                 }
             } else {
                 item['isOpen'] = false;
@@ -99,7 +99,7 @@ export class FormsComponent implements OnInit, OnDestroy
         for (const item of this.steps[step]['items']) {
             if (item.key === key) {
                 item.value =  parseInt(item.value) + 1;
-                this.sum += parseInt(item.price);
+                this.calculatorSum();
             } else {
                 item['isOpen'] = false;
             }
@@ -118,14 +118,33 @@ export class FormsComponent implements OnInit, OnDestroy
             if (item.key === itemKey) {
                 for (const option of item.options) {
                     if (option.key === optionKey) {
-                        option['choose'] = option['choose'];
+                        option['choose'] = !option['choose'];
+                        this.calculatorSum();
                     }
                 }
             }
         }
     }
     calculatorSum(): void {
-
+        this.sum = 0;
+        for (let step of this.steps) {
+            for (let item of step['items']) {
+                let options = 0;
+                for (let option of item['options']) {
+                    if (option['choose']) {
+                        options += parseInt(option['price'])
+                    }
+                }
+                this.sum +=  (options + parseInt(item['sizeSelect'])) * parseInt(item['value']);
+            }
+        }
+    }
+    closeAllExpand(): void {
+        for (let step of this.steps) {
+            for (let item of step['items']) {
+                item['isOpen'] = false;
+            }
+        }
     }
 
     /**
