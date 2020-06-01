@@ -9,10 +9,10 @@ export class FormService {
     }
 
     private isValid(value): boolean {
-        return !isNaN(parseInt(value))
+        return !isNaN(parseInt(value));
     }
     private lessZero(value): boolean {
-        return value < 0
+        return value < 0;
     }
     private isExceed(order, value, sum) {
 

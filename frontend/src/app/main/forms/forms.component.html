@@ -32,24 +32,37 @@
                         </div>
 
                     </ng-template>
-                    <div *ngFor="let item of step['items']">
-                        <div fxLayout="row" >
-                            <div fxFlex="50">
-                                {{item.label}}
+                    <mat-expansion-panel [disabled]="true" *ngFor="let item of step['items']" #mep="matExpansionPanel" style="margin-bottom: 20px">
+                            <mat-expansion-panel-header (focusin)="mep.expanded = true" (blur)="mep.expanded = false">
+                                <mat-panel-title>{{item.label}}</mat-panel-title>
+                                <mat-panel-description>
+                                    <mat-icon class="button" (click)="subOne(i, item.key)" style="width: 32px; height: 32px">remove</mat-icon>
+                                    <input matInput [(ngModel)]="item.value" type="number" disabled style="text-align: center; color: black" >
+                                    <mat-icon class="button" (click)="addOne(i, item.key)" style="width: 32px; height: 32px">add</mat-icon>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <mat-radio-group [(ngModel)]="item['iceDefault']">
+                                    <mat-radio-button  *ngFor="let ice of item['ice']">{{ice['label']}}</mat-radio-button>
+                                    {{item['iceDefault']}}
+                                </mat-radio-group>
                             </div>
-                            <div fxLayout="row" fxFlex="40" fxLayoutAlign="space-around center">
-                                <mat-icon class="button" (click)="subOne(i, item.key)">remove</mat-icon>
-                                <input matInput [(ngModel)]="item.value" type="number" disabled style="text-align: center; color: black" >
-                                <mat-icon class="button" (click)="addOne(i, item.key)">add</mat-icon>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <mat-radio-group [(ngModel)]="item['sugarDefault']">
+                                    <mat-radio-button *ngFor="let sugar of item['sugar']">{{sugar['label']}}</mat-radio-button>
+                                </mat-radio-group>
                             </div>
-                        </div>
-                        <div fxLayout="row" fxLayoutAlign="start center">
-                            <div *ngFor="let o of item['options']">
-                                <mat-checkbox [checked]="o.choose"  (change)="checkedOption(i, item.key, o.key)">{{o.label}}</mat-checkbox>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <mat-radio-group [(ngModel)]="item['sizeDefault']">
+                                    <mat-radio-button *ngFor="let size of item['size']">{{size['label']}}</mat-radio-button>
+                                </mat-radio-group>
                             </div>
-                        </div>
-
-                    </div>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <div *ngFor="let o of item['options']">
+                                    <mat-checkbox [checked]="o.choose"  (change)="checkedOption(i, item.key, o.key)">{{o.label}}</mat-checkbox>
+                                </div>
+                            </div>
+                    </mat-expansion-panel>
                     <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
                         <button mat-raised-button matStepperPrevious>previous</button>
                         <button *ngIf="!step.isEnd" mat-raised-button matStepperNext>next</button>

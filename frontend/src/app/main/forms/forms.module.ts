@@ -11,6 +11,8 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { FormsComponent } from './forms.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
 
 
 const routes: Routes = [
@@ -37,6 +39,8 @@ const routes: Routes = [
         MatStepperModule,
         MatDialogModule,
         MatCheckboxModule,
+        MatExpansionModule,
+        MatRadioModule,
 
         FuseSharedModule,
     ]

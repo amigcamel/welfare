@@ -65,6 +65,9 @@ export class FormsComponent implements OnInit, OnDestroy
         // });
         this.steps = this.mock.getJSON();
     }
+    print(s) {
+        console.log(s)
+    }
     subOne(step, key) {
         for(let item of this.steps[step]['items']) {
             if (item.key === key && item.value > 0) {
