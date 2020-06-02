@@ -1,5 +1,6 @@
 [
     {
+        "budget": 200,
         "form": [
             {
                 "stepLabel": "drink",

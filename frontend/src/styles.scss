@@ -3,3 +3,9 @@
 
 // Import app.theme.scss
 @import "app/app.theme";
+.form-dialog .mat-dialog-container {
+    padding: 0;
+    width: 350px;
+    height: 227px;
+    border-radius: 20px;
+}

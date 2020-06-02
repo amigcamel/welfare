@@ -10,4 +10,7 @@ export class QuestionService {
   getJSON(): [] {
     return data['default'][0]['form'];
   }
+  getBudget(): number{
+      return data['default'][0]['budget'];
+  }
 }

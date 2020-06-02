@@ -25,6 +25,7 @@ import { ErrorInterceptor } from './helper/error.interceptor';
 import { HomeComponent } from './main/home/home.component';
 import { DialogComponent } from './component/dialog/dialog.component';
 import { PhotoDialogComponent } from './component/photo-dialog/photo-dialog.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 const appRoutes: Routes = [
     {
@@ -82,6 +83,7 @@ const appRoutes: Routes = [
         // Material
         MatButtonModule,
         MatIconModule,
+        MatToolbarModule,
 
         // Fuse modules
         FuseModule.forRoot(fuseConfig),

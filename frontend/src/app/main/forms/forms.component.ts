@@ -10,6 +10,7 @@ import { FormService } from '../../service/form.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PhotoDialogComponent } from '../../component/photo-dialog/photo-dialog.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { DialogComponent } from '../../component/dialog/dialog.component';
 
 @Component({
     selector   : 'forms',
@@ -34,6 +35,7 @@ export class FormsComponent implements OnInit, OnDestroy
     form: FormGroup;
     steps: any[] = [];
     sum = 0;
+    budget: number;
     // Private
     private _unsubscribeAll: Subject<any>;
 
@@ -69,16 +71,8 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        // this.steps = this.mock.getJSON().map(step => {
-        //     const group: any = {};
-        //     // @ts-ignore
-        //     step['question']['item'].forEach(item => {
-        //         group[item.key] = item.required ? new FormControl(item.value || '', Validators.required)
-        //             : new FormControl(item.value || '');
-        //     });
-        //     return {formGroup: new FormGroup(group), form: step};
-        // });
         this.steps = this.mock.getJSON();
+        this.budget = this.mock.getBudget();
     }
     print(s): void {
         console.log(s);
@@ -127,21 +121,38 @@ export class FormsComponent implements OnInit, OnDestroy
     }
     calculatorSum(): void {
         this.sum = 0;
-        for (let step of this.steps) {
-            for (let item of step['items']) {
+        for (const step of this.steps) {
+            for (const item of step['items']) {
                 let options = 0;
-                for (let option of item['options']) {
+                for (const option of item['options']) {
                     if (option['choose']) {
-                        options += parseInt(option['price'])
+                        options += parseInt(option['price']);
                     }
                 }
                 this.sum +=  (options + parseInt(item['sizeSelect'])) * parseInt(item['value']);
             }
         }
+        if (isNaN(this.sum)) {
+            this.matDialog.open(DialogComponent, {
+                data: {
+                    title: 'Error Message',
+                    errorMessage: 'Please Input correct number'
+                },
+                panelClass: 'form-dialog'
+            });
+        } else if (this.sum > this.budget) {
+            this.matDialog.open(DialogComponent, {
+                data: {
+                    title: 'Warn Message',
+                    errorMessage: 'Sorry you exceed budget'
+                },
+                panelClass: 'form-dialog'
+            });
+        }
     }
     closeAllExpand(): void {
-        for (let step of this.steps) {
-            for (let item of step['items']) {
+        for (const step of this.steps) {
+            for (const item of step['items']) {
                 item['isOpen'] = false;
             }
         }
