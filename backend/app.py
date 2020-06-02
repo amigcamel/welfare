@@ -9,6 +9,7 @@ from jwcrypto.common import json_encode
 from oauth import gen_login_url, get_userinfo
 from db import AfternoonTea
 import settings
+import exceptions
 
 app = Flask(__name__)
 app.debug = True
@@ -104,9 +105,12 @@ def token():
     return jsonify({"token": token})
 
 
-@app.route("/afternoontea/<id>")
-def afternoontea(id):
+@app.route("/afternoontea/<oid>")
+def afternoontea(oid):
     """Afternoon Tea."""
-    logger.debug(f"form ID: {id}")
-    data = AfternoonTea()[id]
-    return jsonify(data)
+    logger.debug(f"form ID: {oid}")
+    try:
+        return jsonify(AfternoonTea()[oid])
+    except exceptions.DBError as err:
+        logger.error(err.args)
+        return jsonify({"msg": str(err), "status": err.args[1]}), err.args[1]
