@@ -36,10 +36,9 @@
                         <input placeholder="Search item" type="text" fxFlex [(ngModel)]="filterTarget">
                         <mat-icon>search</mat-icon>
                     </div>
-                    <div *ngFor="let item of step['items']">
+                    <div *ngFor="let item of step['items']" class="order-item" [@openClose]="item['isOpen'] ? 'open' : 'closed'">
                         <ng-container *ngIf="filterText(item['label'])">
-                        <div class="order-item" [@openClose]="item['isOpen'] ? 'open' : 'closed'"  fxLayout="column">
-
+                        <div fxLayout="column">
                                 <div class="title" fxLayout="row" fxLayoutAlign="space-between center" (click)="item['isOpen'] = true;">
                                     <h2>{{item.label}}</h2>
                                     <div class="title-option" fxLayout="row" fxLayoutAlign="space-around center" fxFlex="50">
