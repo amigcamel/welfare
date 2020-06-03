@@ -199,6 +199,7 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     finishHorizontalStepper(): void
     {
+        this.formService.sendForm({budget: this.budget, form: this.steps}).subscribe(data => console.log(data));
         console.log(this.steps);
     }
 

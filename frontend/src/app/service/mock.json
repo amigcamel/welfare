@@ -224,7 +224,7 @@
                 "stepLabel": "drink",
                 "imageSource": "https://unblast.com/wp-content/uploads/2019/08/Restaurant-Menu-Template-2.jpg",
                 "stepKey": "step1",
-                "isEnd": false,
+                "isEnd": true,
                 "items": [
                     {
                         "key": "item1",
