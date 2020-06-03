@@ -37,7 +37,7 @@
                             <h2>{{item.label}}</h2>
                             <div class="title-option" fxLayout="row" fxLayoutAlign="space-around center" fxFlex="50">
                                 <mat-icon class="button" (click)="subOne(i, item.key);"style="width: 32px; height: 32px">remove</mat-icon>
-                                <input matInput [(ngModel)]="item.value" type="number" style="text-align: center;">
+                                <input matInput [(ngModel)]="item.value" disabled type="number" [ngClass]="{'isDark': isDark}" style="text-align: center;">
                                 <mat-icon class="button" (click)="addOne(i, item.key); "style="width: 32px; height: 32px">add</mat-icon>
                             </div>
                         </div>

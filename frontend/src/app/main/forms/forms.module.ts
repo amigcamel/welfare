@@ -13,11 +13,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
+import { HistoryComponent } from '../history/history.component';
 
 const routes: Routes = [
     {
-        path     : '',
+        path     : 'forms',
         component: FormsComponent
+    },
+    {
+        path     : 'history',
+        component: HistoryComponent
     }
 ];
 
@@ -25,6 +30,7 @@ const routes: Routes = [
     declarations: [
 
         FormsComponent,
+        HistoryComponent,
     ],
     imports     : [
         RouterModule.forChild(routes),

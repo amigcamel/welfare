@@ -96,7 +96,7 @@ $matHues: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, A100, A200, A400, A70
             .hint-text,
             &.disabled-text,
             .disabled-text {
-                color: rgba(0, 0, 0, 0.38) !important;
+                color: rgba(0, 0, 0, 1) !important;
             }
 
             &.divider,
@@ -134,7 +134,7 @@ $matHues: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, A100, A200, A400, A70
             .hint-text,
             &.disabled-text,
             .disabled-text {
-                color: rgba(255, 255, 255, 0.50) !important;
+                color: rgba(255, 255, 255, 1) !important;
             }
 
             &.divider,

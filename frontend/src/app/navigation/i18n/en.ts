@@ -7,9 +7,12 @@ export const locale = {
                 'TITLE': 'Sample',
                 'BADGE': '25'
             },
-            'PAGE': 'Forms',
-            'FORM'       : {
-                'TITLE': 'Forms'
+            'PAGE': {
+               'PAGE1': 'Afternoon Tea'
+            },
+            'AFTERNOONTEA': {
+                'PAGE1': 'Current',
+                'PAGE2': 'History'
             }
         }
     }

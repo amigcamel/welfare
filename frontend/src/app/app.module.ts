@@ -41,7 +41,7 @@ const appRoutes: Routes = [
         loadChildren: () => import('./main/sample/sample.module').then(m => m.SampleModule)
     },
     {
-        path        : 'forms',
+        path        : 'afternoon-tea',
         loadChildren: () => import('./main/forms/forms.module').then(m => m.UIFormsModule)
     },
     {

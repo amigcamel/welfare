@@ -24,18 +24,26 @@ export const navigation: FuseNavigation[] = [
         ]
     },
     {
-        id       : 'page',
-        title    : 'Page',
-        translate: 'NAV.PAGE',
+        id       : 'nav1',
+        title    : 'Afternoon Tea',
+        translate: 'NAV.PAGE.PAGE1',
         type     : 'group',
         children : [
             {
-                id       : 'form',
-                title    : 'Form',
-                translate: 'NAV.FORM.TITLE',
+                id       : 'subNav1',
+                title    : 'Current',
+                translate: 'NAV.AFTERNOONTEA.PAGE1',
                 type     : 'item',
                 icon     : 'form',
-                url      : '/forms',
+                url      : 'afternoon-tea/forms',
+            },
+            {
+                id       : 'subNav2',
+                title    : 'History',
+                translate: 'NAV.AFTERNOONTEA.PAGE2',
+                type     : 'item',
+                icon     : 'form',
+                url      : 'afternoon-tea/history',
             }
         ]
     }

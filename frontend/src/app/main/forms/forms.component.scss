@@ -33,4 +33,10 @@
         border: solid #888 1px;
         overflow: hidden;
     }
+    input.isDark {
+        color: white !important;
+    }
+    input {
+        color: black !important;
+    }
 }

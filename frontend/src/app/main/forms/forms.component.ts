@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PhotoDialogComponent } from '../../component/photo-dialog/photo-dialog.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { DialogComponent } from '../../component/dialog/dialog.component';
+import { FuseConfigService } from '../../../@fuse/services/config.service';
 
 @Component({
     selector   : 'forms',
@@ -36,6 +37,8 @@ export class FormsComponent implements OnInit, OnDestroy
     steps: any[] = [];
     sum = 0;
     budget: number;
+    isDark = false;
+    previousSize: string;
     // Private
     private _unsubscribeAll: Subject<any>;
 
@@ -45,6 +48,7 @@ export class FormsComponent implements OnInit, OnDestroy
      * @param {FormBuilder} _formBuilder
      * @param http
      * @param mock
+     * @param fuseConfigService
      * @param formService
      * @param matDialog
      */
@@ -52,6 +56,7 @@ export class FormsComponent implements OnInit, OnDestroy
         private _formBuilder: FormBuilder,
         private http: HttpClient,
         private  mock: QuestionService,
+        private fuseConfigService: FuseConfigService,
         private  formService: FormService,
         private  matDialog: MatDialog
     )
@@ -73,6 +78,13 @@ export class FormsComponent implements OnInit, OnDestroy
     {
         this.steps = this.mock.getJSON();
         this.budget = this.mock.getBudget();
+        this.fuseConfigService.getConfig().subscribe(config => {
+            if (config['colorTheme'] === 'theme-yellow-light' || config['colorTheme'] === 'theme-default') {
+                this.isDark = false;
+            } else {
+                this.isDark = true;
+            }
+        });
     }
     print(s): void {
         console.log(s);
@@ -94,6 +106,10 @@ export class FormsComponent implements OnInit, OnDestroy
             if (item.key === key) {
                 item.value =  parseInt(item.value) + 1;
                 this.calculatorSum();
+                if (this.sum > this.budget) {
+                    item.value =  parseInt(item.value) - 1;
+                    this.calculatorSum();
+                }
             } else {
                 item['isOpen'] = false;
             }
