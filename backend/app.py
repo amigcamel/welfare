@@ -7,10 +7,13 @@ from jwcrypto import jwe
 from jwcrypto.common import json_encode
 
 from oauth import gen_login_url, get_userinfo
+from db import AfternoonTea
 import settings
+import exceptions
 
 app = Flask(__name__)
 app.debug = True
+app.config["JSON_AS_ASCII"] = False
 app.config["SECRET_KEY"] = settings.APP_SECRET
 
 
@@ -100,3 +103,14 @@ def token():
     logger.info(data)
     token = _encrypt(data)
     return jsonify({"token": token})
+
+
+@app.route("/afternoontea/<oid>")
+def afternoontea(oid):
+    """Afternoon Tea."""
+    logger.debug(f"form ID: {oid}")
+    try:
+        return jsonify(AfternoonTea()[oid])
+    except exceptions.DBError as err:
+        logger.error(err.args)
+        return jsonify({"msg": str(err), "status": err.args[1]}), err.args[1]

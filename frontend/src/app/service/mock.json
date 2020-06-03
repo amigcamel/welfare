@@ -1,444 +1,2842 @@
-[
+{
+  "budget": 200, 
+  "form": [
     {
-        "budget": 200,
-        "form": [
+      "imageSource": "https://napteazzz.com/images/index/napteazzz_menu.png", 
+      "isEnd": true, 
+      "items": [
+        {
+          "ice": [
             {
-                "stepLabel": "drink",
-                "imageSource": "https://unblast.com/wp-content/uploads/2019/08/Restaurant-Menu-Template-2.jpg",
-                "stepKey": "step1",
-                "isEnd": false,
-                "items": [
-                    {
-                        "key": "item1",
-                        "label": "Fire Chicken",
-                        "type": "number",
-                        "value": "0",
-                        "required": true,
-                        "isOpen": false,
-                        "iceSelect": "Rice",
-                        "sugarSelect": "Rsugar",
-                        "sizeSelect": "60",
-                        "options": [
-                            {
-                                "key": "option1",
-                                "label": "Gen Gu",
-                                "type": "checkbox",
-                                "choose": false,
-                                "price": "5"
-                            },
-                            {
-                                "key": "option2",
-                                "label": "ya gle",
-                                "type": "checkbox",
-                                "choose": false,
-                                "price": "15"
-                            }
-                        ],
-                        "size": [
-                            {
-                                "key": "size1",
-                                "label": "M",
-                                "type": "radio-box",
-                                "value": "60"
-                            },
-                            {
-                                "key": "size1",
-                                "label": "L",
-                                "type": "radio-box",
-                                "value": "70"
-                            }
-                        ],
-                        "ice": [
-                            {
-                                "key": "ice1",
-                                "label": "Regular Ice",
-                                "type": "radio-box",
-                                "value": "Rice",
-                                "disable": false,
-                                "checked": true
-                            },
-                            {
-                                "key": "ice2",
-                                "label": "70% Ice",
-                                "type": "radio-box",
-                                "value": "7Ice",
-                                "disable": false,
-                                "checked": false
-                            },
-                            {
-                                "key": "ice3",
-                                "label": "30% Ice",
-                                "type": "radio-box",
-                                "value": "3Ice",
-                                "disable": false,
-                                "checked": false
-                            },
-                            {
-                                "key": "ice4",
-                                "label": "No Ice",
-                                "type": "radio-box",
-                                "value": "0Ice",
-                                "disable": false,
-                                "checked": false
-                            }
-                        ],
-                        "sugar": [
-                            {
-                                "key": "sugar1",
-                                "label": "Regular Sugar",
-                                "type": "radio-box",
-                                "value": "Rsugar",
-                                "disable": true
-                            },
-                            {
-                                "key": "sugar2",
-                                "label": "70% Sugar",
-                                "type": "radio-box",
-                                "value": "7sugar",
-                                "disable": false
-                            },
-                            {
-                                "key": "sugar3",
-                                "label": "30% Sugar",
-                                "type": "radio-box",
-                                "value": "3sugar",
-                                "disable": false
-                            },
-                            {
-                                "key": "sugar4",
-                                "label": "No Sugar",
-                                "type": "radio-box",
-                                "value": "0sugar",
-                                "disable": false
-                            }
-                        ]
-                    },
-                    {
-                        "key": "item2",
-                        "label": "Fire Chicken",
-                        "type": "number",
-                        "value": "0",
-                        "required": true,
-                        "isOpen": false,
-                        "iceSelect": "Rice",
-                        "sugarSelect": "Rsugar",
-                        "sizeSelect": "60",
-                        "options": [
-                            {
-                                "key": "option1",
-                                "label": "Gen Gu",
-                                "type": "checkbox",
-                                "choose": false,
-                                "price": "5"
-                            },
-                            {
-                                "key": "option2",
-                                "label": "ya gle",
-                                "type": "checkbox",
-                                "choose": false,
-                                "price": "15"
-                            }
-                        ],
-                        "size": [
-                            {
-                                "key": "size1",
-                                "label": "M",
-                                "type": "radio-box",
-                                "value": "60"
-                            },
-                            {
-                                "key": "size1",
-                                "label": "L",
-                                "type": "radio-box",
-                                "value": "70"
-                            }
-                        ],
-                        "ice": [
-                            {
-                                "key": "ice1",
-                                "label": "Regular Ice",
-                                "type": "radio-box",
-                                "value": "Rice",
-                                "disable": false,
-                                "checked": true
-                            },
-                            {
-                                "key": "ice2",
-                                "label": "70% Ice",
-                                "type": "radio-box",
-                                "value": "7Ice",
-                                "disable": false,
-                                "checked": false
-                            },
-                            {
-                                "key": "ice3",
-                                "label": "30% Ice",
-                                "type": "radio-box",
-                                "value": "3Ice",
-                                "disable": false,
-                                "checked": false
-                            },
-                            {
-                                "key": "ice4",
-                                "label": "No Ice",
-                                "type": "radio-box",
-                                "value": "0Ice",
-                                "disable": false,
-                                "checked": false
-                            }
-                        ],
-                        "sugar": [
-                            {
-                                "key": "sugar1",
-                                "label": "Regular Sugar",
-                                "type": "radio-box",
-                                "value": "Rsugar",
-                                "disable": true
-                            },
-                            {
-                                "key": "sugar2",
-                                "label": "70% Sugar",
-                                "type": "radio-box",
-                                "value": "7sugar",
-                                "disable": false
-                            },
-                            {
-                                "key": "sugar3",
-                                "label": "30% Sugar",
-                                "type": "radio-box",
-                                "value": "3sugar",
-                                "disable": false
-                            },
-                            {
-                                "key": "sugar4",
-                                "label": "No Sugar",
-                                "type": "radio-box",
-                                "value": "0sugar",
-                                "disable": false
-                            }
-                        ]
-                    }
-                ]
-            },
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
             {
-                "stepLabel": "drink",
-                "imageSource": "https://unblast.com/wp-content/uploads/2019/08/Restaurant-Menu-Template-2.jpg",
-                "stepKey": "step1",
-                "isEnd": true,
-                "items": [
-                    {
-                        "key": "item1",
-                        "label": "Fire Chicken",
-                        "type": "number",
-                        "value": "0",
-                        "required": true,
-                        "isOpen": false,
-                        "iceSelect": "Rice",
-                        "sugarSelect": "Rsugar",
-                        "sizeSelect": "60",
-                        "options": [
-                            {
-                                "key": "option1",
-                                "label": "Gen Gu",
-                                "type": "checkbox",
-                                "choose": false,
-                                "price": "5"
-                            },
-                            {
-                                "key": "option2",
-                                "label": "ya gle",
-                                "type": "checkbox",
-                                "choose": false,
-                                "price": "15"
-                            }
-                        ],
-                        "size": [
-                            {
-                                "key": "size1",
-                                "label": "M",
-                                "type": "radio-box",
-                                "value": "60"
-                            },
-                            {
-                                "key": "size1",
-                                "label": "L",
-                                "type": "radio-box",
-                                "value": "70"
-                            }
-                        ],
-                        "ice": [
-                            {
-                                "key": "ice1",
-                                "label": "Regular Ice",
-                                "type": "radio-box",
-                                "value": "Rice",
-                                "disable": false,
-                                "checked": true
-                            },
-                            {
-                                "key": "ice2",
-                                "label": "70% Ice",
-                                "type": "radio-box",
-                                "value": "7Ice",
-                                "disable": false,
-                                "checked": false
-                            },
-                            {
-                                "key": "ice3",
-                                "label": "30% Ice",
-                                "type": "radio-box",
-                                "value": "3Ice",
-                                "disable": false,
-                                "checked": false
-                            },
-                            {
-                                "key": "ice4",
-                                "label": "No Ice",
-                                "type": "radio-box",
-                                "value": "0Ice",
-                                "disable": false,
-                                "checked": false
-                            }
-                        ],
-                        "sugar": [
-                            {
-                                "key": "sugar1",
-                                "label": "Regular Sugar",
-                                "type": "radio-box",
-                                "value": "Rsugar",
-                                "disable": true
-                            },
-                            {
-                                "key": "sugar2",
-                                "label": "70% Sugar",
-                                "type": "radio-box",
-                                "value": "7sugar",
-                                "disable": false
-                            },
-                            {
-                                "key": "sugar3",
-                                "label": "30% Sugar",
-                                "type": "radio-box",
-                                "value": "3sugar",
-                                "disable": false
-                            },
-                            {
-                                "key": "sugar4",
-                                "label": "No Sugar",
-                                "type": "radio-box",
-                                "value": "0sugar",
-                                "disable": false
-                            }
-                        ]
-                    },
-                    {
-                        "key": "item2",
-                        "label": "Fire Chicken",
-                        "type": "number",
-                        "value": "0",
-                        "required": true,
-                        "isOpen": false,
-                        "iceSelect": "Rice",
-                        "sugarSelect": "Rsugar",
-                        "sizeSelect": "60",
-                        "options": [
-                            {
-                                "key": "option1",
-                                "label": "Gen Gu",
-                                "type": "checkbox",
-                                "choose": false,
-                                "price": "5"
-                            },
-                            {
-                                "key": "option2",
-                                "label": "ya gle",
-                                "type": "checkbox",
-                                "choose": false,
-                                "price": "15"
-                            }
-                        ],
-                        "size": [
-                            {
-                                "key": "size1",
-                                "label": "M",
-                                "type": "radio-box",
-                                "value": "60"
-                            },
-                            {
-                                "key": "size1",
-                                "label": "L",
-                                "type": "radio-box",
-                                "value": "70"
-                            }
-                        ],
-                        "ice": [
-                            {
-                                "key": "ice1",
-                                "label": "Regular Ice",
-                                "type": "radio-box",
-                                "value": "Rice",
-                                "disable": false,
-                                "checked": true
-                            },
-                            {
-                                "key": "ice2",
-                                "label": "70% Ice",
-                                "type": "radio-box",
-                                "value": "7Ice",
-                                "disable": false,
-                                "checked": false
-                            },
-                            {
-                                "key": "ice3",
-                                "label": "30% Ice",
-                                "type": "radio-box",
-                                "value": "3Ice",
-                                "disable": false,
-                                "checked": false
-                            },
-                            {
-                                "key": "ice4",
-                                "label": "No Ice",
-                                "type": "radio-box",
-                                "value": "0Ice",
-                                "disable": false,
-                                "checked": false
-                            }
-                        ],
-                        "sugar": [
-                            {
-                                "key": "sugar1",
-                                "label": "Regular Sugar",
-                                "type": "radio-box",
-                                "value": "Rsugar",
-                                "disable": true
-                            },
-                            {
-                                "key": "sugar2",
-                                "label": "70% Sugar",
-                                "type": "radio-box",
-                                "value": "7sugar",
-                                "disable": false
-                            },
-                            {
-                                "key": "sugar3",
-                                "label": "30% Sugar",
-                                "type": "radio-box",
-                                "value": "3sugar",
-                                "disable": false
-                            },
-                            {
-                                "key": "sugar4",
-                                "label": "No Sugar",
-                                "type": "radio-box",
-                                "value": "0sugar",
-                                "disable": false
-                            }
-                        ]
-                    }
-                ]
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
             }
-        ]
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item1", 
+          "label": "日安紅歐蕾", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 60
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 70
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item2", 
+          "label": "午茉綠歐蕾", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 55
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 65
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item3", 
+          "label": "夕紅烏歐蕾", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 60
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 70
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item4", 
+          "label": "四季金萱歐蕾", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 60
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 70
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item5", 
+          "label": "鐵觀音歐蕾", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 55
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 65
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item6", 
+          "label": "棉被日安紅", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 70
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item7", 
+          "label": "棉被午茉綠", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 65
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item8", 
+          "label": "棉被夕紅烏", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 70
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item9", 
+          "label": "棉被四季金萱", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 70
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item10", 
+          "label": "棉被鐵觀音", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 65
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item11", 
+          "label": "日安紅珍珠歐蕾", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 65
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 75
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item12", 
+          "label": "午茉綠珍珠歐蕾", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 60
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 70
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item13", 
+          "label": "夕紅烏珍珠歐蕾", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 65
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 75
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item14", 
+          "label": "四季金萱珍珠歐蕾", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 65
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 75
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item15", 
+          "label": "鐵觀音珍珠歐蕾", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 60
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 70
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item16", 
+          "label": "黑糖珍珠好濃鮮奶", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 70
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item17", 
+          "label": "冬瓜珍珠好濃鮮奶", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 70
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item18", 
+          "label": "嫩仙草好濃鮮奶", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 70
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item19", 
+          "label": "日安紅", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 35
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 40
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item20", 
+          "label": "午茉綠", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 30
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 35
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item21", 
+          "label": "夕紅烏", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 35
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 40
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item22", 
+          "label": "四季金萱", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 30
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 35
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item23", 
+          "label": "鐵觀音", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 30
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 35
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item24", 
+          "label": "檸檬午茉", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 50
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 60
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item25", 
+          "label": "多多午茉", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 50
+            }, 
+            {
+              "key": "size2", 
+              "label": "L", 
+              "type": "checkbox", 
+              "value": 60
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item26", 
+          "label": "全糖女神", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 80
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }, 
+        {
+          "ice": [
+            {
+              "checked": true, 
+              "disable": false, 
+              "key": "ice1", 
+              "label": "Regular Ice", 
+              "type": "radio-box", 
+              "value": "Rice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice2", 
+              "label": "70% Ice", 
+              "type": "radio-box", 
+              "value": "7Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice3", 
+              "label": "30% Ice", 
+              "type": "radio-box", 
+              "value": "3Ice"
+            }, 
+            {
+              "checked": false, 
+              "disable": false, 
+              "key": "ice4", 
+              "label": "No Ice", 
+              "type": "radio-box", 
+              "value": "0Ice"
+            }
+          ], 
+          "iceSelect": "Rice", 
+          "isOpen": false, 
+          "key": "item27", 
+          "label": "香芋啵啵", 
+          "options": [
+            {
+              "choose": false, 
+              "key": "option1", 
+              "label": "Boba", 
+              "price": 5, 
+              "type": "checkbox"
+            }, 
+            {
+              "choose": false, 
+              "key": "option2", 
+              "label": "Grass Jelly", 
+              "price": 10, 
+              "type": "checkbox"
+            }
+          ], 
+          "required": true, 
+          "size": [
+            {
+              "key": "size1", 
+              "label": "M", 
+              "type": "checkbox", 
+              "value": 80
+            }
+          ], 
+          "sizeDefault": "", 
+          "sizeSelect": "60", 
+          "sugar": [
+            {
+              "disable": true, 
+              "key": "sugar1", 
+              "label": "Regular Sugar", 
+              "type": "radio-box", 
+              "value": "Rsugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar2", 
+              "label": "70% Sugar", 
+              "type": "radio-box", 
+              "value": "7sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar3", 
+              "label": "30% Sugar", 
+              "type": "radio-box", 
+              "value": "3sugar"
+            }, 
+            {
+              "disable": false, 
+              "key": "sugar4", 
+              "label": "No Sugar", 
+              "type": "radio-box", 
+              "value": "0sugar"
+            }
+          ], 
+          "sugarDefault": "", 
+          "sugarSelect": "Rsugar", 
+          "type": "number", 
+          "value": 0
+        }
+      ], 
+      "stepKey": "step2", 
+      "stepLabel": "再睡五分鐘"
     }
-]
-    
+  ]
+}

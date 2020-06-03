@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import * as data from './mock.json';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
-  constructor() { }
-  getJSON(): [] {
-    return data['default'][0]['form'];
-  }
-  getBudget(): number{
-      return data['default'][0]['budget'];
+  constructor(private http: HttpClient) { }
+  getJSON(): Observable<any> {
+    return this.http.get<any>('/afternoontea/5ed7162dabef6e0f09705354');
   }
 }
