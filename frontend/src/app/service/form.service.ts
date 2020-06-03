@@ -13,7 +13,7 @@ export class FormService {
         return  this.http.get('/form');
     }
     sendForm(data: any): Observable<any> {
-        return this.http.post('/form', data);
+        return this.http.post('/afternoontea/demo_1', data);
     }
 
 }

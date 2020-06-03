@@ -8,6 +8,6 @@ import { Observable } from 'rxjs';
 export class QuestionService {
   constructor(private http: HttpClient) { }
   getJSON(): Observable<any> {
-    return this.http.get<any>('/afternoontea/5ed7162dabef6e0f09705354');
+    return this.http.get<any>('/afternoontea/demo_1');
   }
 }
