@@ -47,6 +47,7 @@ def auth():
             logger.debug(f"token -----> {token}")
             data = _decrypt(token)
             g.token = token
+            g.user = data['email']
             logger.debug(data)
             return
         except Exception as e:
@@ -105,12 +106,16 @@ def token():
     return jsonify({"token": token})
 
 
-@app.route("/afternoontea/<oid>")
-def afternoontea(oid):
+@app.route("/afternoontea/<col>", methods=["GET", "POST"])
+def afternoontea(col):
     """Afternoon Tea."""
-    logger.debug(f"form ID: {oid}")
-    try:
-        return jsonify(AfternoonTea()[oid])
-    except exceptions.DBError as err:
-        logger.error(err.args)
-        return jsonify({"msg": str(err), "status": err.args[1]}), err.args[1]
+    if request.method == "GET":
+        try:
+            return jsonify(AfternoonTea(col=col, user="default").get())
+        except exceptions.DBError as err:
+            logger.error(err.args)
+            return jsonify({"msg": str(err), "status": err.args[1]}), err.args[1]
+    elif request.method == "POST":
+        res = AfternoonTea(col=col, user=g.user).upsert(data=request.json)
+        logger.info(res)
+        return jsonify(str(res))
