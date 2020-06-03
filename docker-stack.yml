@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  frontend:
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: fe:latest
+    networks:
+      - welfare
+    ports:
+      - 4200:80
+  backend:
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: be:latest
+    networks:
+      - welfare
+    ports:
+      - 5000:5000
+  redis:
+    depends_on:
+      - backend
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: redis:6.0.4-alpine3.11
+    networks:
+      - welfare
+  mongo:
+    depends_on:
+      - backend
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: mongo:4.2.7
+    networks:
+      - welfare
+    ports:
+      - 27017:27017
+
+networks:
+  welfare:
+
+volumes:
+  db-data:
