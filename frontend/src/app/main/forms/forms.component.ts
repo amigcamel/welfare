@@ -38,6 +38,7 @@ export class FormsComponent implements OnInit, OnDestroy
     sum = 0;
     budget: number;
     isDark = false;
+    filterTarget = '';
     previousSize: string;
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -79,12 +80,16 @@ export class FormsComponent implements OnInit, OnDestroy
         this.steps = this.mock.getJSON();
         this.budget = this.mock.getBudget();
         this.fuseConfigService.getConfig().subscribe(config => {
-            if (config['colorTheme'] === 'theme-yellow-light' || config['colorTheme'] === 'theme-default') {
-                this.isDark = false;
-            } else {
-                this.isDark = true;
-            }
+            this.isDark = !(config['colorTheme'] === 'theme-yellow-light' || config['colorTheme'] === 'theme-default');
         });
+    }
+    filterText(target: string): boolean {
+        if (this.filterTarget === '') {
+            return true;
+        } else {
+            const regexp = new RegExp(this.filterTarget, 'gi');
+            return regexp.test(target);
+        }
     }
     print(s): void {
         console.log(s);
@@ -172,6 +177,7 @@ export class FormsComponent implements OnInit, OnDestroy
                 item['isOpen'] = false;
             }
         }
+        this.filterTarget = '';
     }
 
     /**

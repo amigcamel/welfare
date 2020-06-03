@@ -32,39 +32,49 @@
                         </div>
 
                     </ng-template>
-                    <div class="order-item" [@openClose]="item['isOpen'] ? 'open' : 'closed'" *ngFor="let item of step['items']" fxLayout="column">
-                        <div class="title" fxLayout="row" fxLayoutAlign="space-between center" (click)="item['isOpen'] = true;">
-                            <h2>{{item.label}}</h2>
-                            <div class="title-option" fxLayout="row" fxLayoutAlign="space-around center" fxFlex="50">
-                                <mat-icon class="button" (click)="subOne(i, item.key);"style="width: 32px; height: 32px">remove</mat-icon>
-                                <input matInput [(ngModel)]="item.value" disabled type="number" [ngClass]="{'isDark': isDark}" style="text-align: center;">
-                                <mat-icon class="button" (click)="addOne(i, item.key); "style="width: 32px; height: 32px">add</mat-icon>
-                            </div>
+                    <div class="filter-bar" fxLayout="row" fxLayoutAlign="starter center">
+                        <input placeholder="Search item" type="text" fxFlex [(ngModel)]="filterTarget">
+                        <mat-icon>search</mat-icon>
+                    </div>
+                    <div *ngFor="let item of step['items']">
+                        <ng-container *ngIf="filterText(item['label'])">
+                        <div class="order-item" [@openClose]="item['isOpen'] ? 'open' : 'closed'"  fxLayout="column">
+
+                                <div class="title" fxLayout="row" fxLayoutAlign="space-between center" (click)="item['isOpen'] = true;">
+                                    <h2>{{item.label}}</h2>
+                                    <div class="title-option" fxLayout="row" fxLayoutAlign="space-around center" fxFlex="50">
+                                        <mat-icon class="button" (click)="subOne(i, item.key);"style="width: 32px; height: 32px">remove</mat-icon>
+                                        <input matInput [(ngModel)]="item.value" disabled type="number" [ngClass]="{'isDark': isDark}" style="text-align: center;">
+                                        <mat-icon class="button" (click)="addOne(i, item.key); "style="width: 32px; height: 32px">add</mat-icon>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h2 class="option-title">Ice: </h2>
+                                    <mat-radio-group [(ngModel)]="item['iceSelect']" fxLayoutAlign="space-between center" fxFlex="100">
+                                        <mat-radio-button  *ngFor="let ice of item['ice']" [value]="ice['value']">{{ice['label']}}</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="start center">
+                                    <h2 class="option-title">Sugar: </h2>
+                                    <mat-radio-group [(ngModel)]="item['sugarSelect']" fxLayoutAlign="space-between center" fxFlex="100">
+                                        <mat-radio-button *ngFor="let sugar of item['sugar']" [value]="sugar['value']">{{sugar['label']}}</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="start center">
+                                    <h2 class="option-title">Size: </h2>
+                                    <mat-radio-group [(ngModel)]="item['sizeSelect']" fxLayoutAlign="space-between center" fxFlex="100" (change)="calculatorSum()">
+                                        <mat-radio-button *ngFor="let size of item['size']" [value]="size['value']">{{size['label']}}</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="start center">
+                                    <h2 class="option-title">Extra: </h2>
+                                    <div *ngFor="let o of item['options']" fxLayoutAlign="space-between center" fxFlex="100">
+                                        <mat-checkbox [checked]="o.choose"  (change)="checkedOption(i, item.key, o.key)">{{o.label}}</mat-checkbox>
+                                    </div>
+                                </div>
+
                         </div>
-                        <div>
-                            <h2 class="option-title">Ice: </h2>
-                            <mat-radio-group [(ngModel)]="item['iceSelect']" fxLayoutAlign="space-between center" fxFlex="100">
-                                <mat-radio-button  *ngFor="let ice of item['ice']" [value]="ice['value']">{{ice['label']}}</mat-radio-button>
-                            </mat-radio-group>
-                        </div>
-                        <div fxLayout="row" fxLayoutAlign="start center">
-                            <h2 class="option-title">Sugar: </h2>
-                            <mat-radio-group [(ngModel)]="item['sugarSelect']" fxLayoutAlign="space-between center" fxFlex="100">
-                                <mat-radio-button *ngFor="let sugar of item['sugar']" [value]="sugar['value']">{{sugar['label']}}</mat-radio-button>
-                            </mat-radio-group>
-                        </div>
-                        <div fxLayout="row" fxLayoutAlign="start center">
-                            <h2 class="option-title">Size: </h2>
-                            <mat-radio-group [(ngModel)]="item['sizeSelect']" fxLayoutAlign="space-between center" fxFlex="100" (change)="calculatorSum()">
-                                <mat-radio-button *ngFor="let size of item['size']" [value]="size['value']">{{size['label']}}</mat-radio-button>
-                            </mat-radio-group>
-                        </div>
-                        <div fxLayout="row" fxLayoutAlign="start center">
-                            <h2 class="option-title">Extra: </h2>
-                            <div *ngFor="let o of item['options']" fxLayoutAlign="space-between center" fxFlex="100">
-                                <mat-checkbox [checked]="o.choose"  (change)="checkedOption(i, item.key, o.key)">{{o.label}}</mat-checkbox>
-                            </div>
-                        </div>
+                        </ng-container>
                     </div>
 
                     <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
