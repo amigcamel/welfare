@@ -59,7 +59,8 @@ export class FormsComponent implements OnInit, OnDestroy
         private  mock: QuestionService,
         private fuseConfigService: FuseConfigService,
         private  formService: FormService,
-        private  matDialog: MatDialog
+        private  matDialog: MatDialog,
+        private questionService: QuestionService
     )
     {
         // Set the private defaults
@@ -77,8 +78,12 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        this.steps = this.mock.getJSON();
-        this.budget = this.mock.getBudget();
+        this.mock.getJSON().subscribe(data => {
+          this.steps = data['form'];
+          this.budget = data['budget'];
+        }, error => {
+          console.log(error);
+        });
         this.fuseConfigService.getConfig().subscribe(config => {
             this.isDark = !(config['colorTheme'] === 'theme-yellow-light' || config['colorTheme'] === 'theme-default');
         });
