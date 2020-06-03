@@ -16,4 +16,4 @@ class AfternoonTea(dict):
         """Get latest form."""
         data = self.client.drink.items.find_one()
         data = self.client.drink.items.find({"_id": ObjectId(id)}, {"_id": 0}).next()
-        return data["form"]
+        return data
