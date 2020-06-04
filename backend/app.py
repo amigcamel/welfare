@@ -1,4 +1,5 @@
 """App."""
+from datetime import datetime
 import json
 
 from flask import Flask, request, redirect, jsonify, url_for, g
@@ -117,6 +118,9 @@ def afternoontea(col):
             logger.error(err.args)
             return jsonify({"msg": str(err), "status": err.args[1]}), err.args[1]
     elif request.method == "POST":
-        res = AfternoonTea(col=col, user=g.user).upsert(data=request.json)
+        data = request.json
+        output = {'update_time': datetime.now()}
+        data.update(output)
+        res = AfternoonTea(col=col, user=g.user).upsert(data=data)
         logger.info(res)
-        return jsonify(str(res))
+        return jsonify(output)

@@ -41,6 +41,7 @@ export class FormsComponent implements OnInit, OnDestroy
     // Private
     private _unsubscribeAll: Subject<any>;
     private budget: number;
+    private updateTime: Date;
     private unSub: Subject<boolean>;
 
     /**
@@ -218,7 +219,9 @@ export class FormsComponent implements OnInit, OnDestroy
                 return;
             }
         }))
-        .subscribe(data => console.log(data));
+        .subscribe(data => {
+          this.updateTime = data.update_time;
+        });
     }
     previewCart(): Cart[] {
         const data: Cart[] = [];

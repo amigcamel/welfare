@@ -17,8 +17,12 @@
     <div class="content p-24">
 
         <div class="h1">
-            Reactive Forms
+          Reactive Forms
         </div>
+
+        <p *ngIf="updateTime">
+          Last edited: {{updateTime}}
+        </p>
 
         <div class="vertical-stepper-wrapper" fxLayout="column">
             <mat-vertical-stepper class="mat-elevation-z4" [linear]="true">
