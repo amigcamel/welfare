@@ -1,0 +1,33 @@
+<div class="dialog-content-wrapper" fxLayout="column">
+
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row>
+            <div class="title dialog-title" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
+                <div>Cart</div>
+                <mat-icon (click)="matDialogRef.close()"> close</mat-icon>
+            </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 m-0"  fxFlex="100" fxLayoutAlign="center center">
+        <div class="cart-grid">
+            <div class="title">Product Name</div>
+            <div class="title">Price</div>
+            <div class="title">Count</div>
+            <div class="title">Total</div>
+            <ng-container *ngFor="let item of data['items']">
+                <div class="item">
+                    <div>{{item['productName']}}</div>
+                    <div class="item-sub">{{item['subExtra']}}</div>
+                </div>
+                <div class="item">{{item['price']}}</div>
+                <div class="item">{{item['count']}}</div>
+                <div class="item">{{item['total']}}</div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="cart-footer" fxLayout="row" fxLayoutAlign="space-around center" >
+        <button mat-raised-button color="warn" (click)="close()">Close</button>
+        <button mat-raised-button color="accent" (click)="accept()">Finish</button>
+    </div>
+</div>

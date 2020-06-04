@@ -26,6 +26,7 @@ import { HomeComponent } from './main/home/home.component';
 import { DialogComponent } from './component/dialog/dialog.component';
 import { PhotoDialogComponent } from './component/photo-dialog/photo-dialog.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { CartDialogComponent } from './component/cart-dialog/cart-dialog.component';
 
 const appRoutes: Routes = [
     {
@@ -64,6 +65,7 @@ const appRoutes: Routes = [
         HomeComponent,
         DialogComponent,
         PhotoDialogComponent,
+        CartDialogComponent,
     ],
     imports     : [
         BrowserModule,

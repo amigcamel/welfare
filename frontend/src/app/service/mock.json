@@ -77,7 +77,7 @@
             }
           ], 
           "sizeDefault": "", 
-          "sizeSelect": "60", 
+          "sizeSelect": 60,
           "sugar": [
             {
               "disable": true, 

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { QuestionService } from '../../service/question.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
@@ -12,6 +12,9 @@ import { PhotoDialogComponent } from '../../component/photo-dialog/photo-dialog.
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { DialogComponent } from '../../component/dialog/dialog.component';
 import { FuseConfigService } from '../../../@fuse/services/config.service';
+import { CartDialogComponent } from '../../component/cart-dialog/cart-dialog.component';
+import { Cart } from '../../model/cart';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
     selector   : 'forms',
@@ -78,12 +81,14 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        this.mock.getJSON().subscribe(data => {
-          this.steps = data['form'];
-          this.budget = data['budget'];
-        }, error => {
-          console.log(error);
-        });
+        this.steps = this.mock.getJSON()['form'];
+        this.budget = this.mock.getJSON()['budget'];
+        // this.mock.getJSON().subscribe(data => {
+        //   this.steps = data['form'];
+        //   this.budget = data['budget'];
+        // }, error => {
+        //   console.log(error);
+        // });
         this.fuseConfigService.getConfig().subscribe(config => {
             this.isDark = !(config['colorTheme'] === 'theme-yellow-light' || config['colorTheme'] === 'theme-default');
         });
@@ -204,8 +209,47 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     finishHorizontalStepper(): void
     {
-        this.formService.sendForm({budget: this.budget, form: this.steps}).subscribe(data => console.log(data));
-        console.log(this.steps);
+
+        this.matDialog.open(CartDialogComponent, {
+            data: {
+                items: this.previewCart()
+            },
+            panelClass: 'cart-dialog'
+        }).afterClosed().pipe(switchMap(result => {
+            if (result) {
+                return this.formService.sendForm({budget: this.budget, form: this.steps});
+            } else {
+                return;
+            }
+        }))
+        .subscribe(data => console.log(data));
+    }
+    previewCart(): Cart[] {
+        const data: Cart[] = [];
+        for (const step of this.steps) {
+            for (const item of step['items']) {
+                if (item['value'] >  0) {
+                    let price = 0;
+                    let options = '';
+                    for (const option of item['options']) {
+                        if (option['choose']) {
+                            price += parseInt(option['price']);
+                            options += option['label'] + ' ';
+                        }
+                    }
+                    price += parseInt(item['sizeSelect']);
+                    data.push({
+                            productName: item['label'],
+                            subExtra: options,
+                            price: price,
+                            count: item['value'],
+                            total: parseInt(item['value']) * price,
+                        }
+                    );
+                }
+            }
+        }
+        return data;
     }
 
     /**

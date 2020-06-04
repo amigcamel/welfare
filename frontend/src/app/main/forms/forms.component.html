@@ -78,8 +78,8 @@
 
                     <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
                         <button mat-raised-button matStepperPrevious (click)="closeAllExpand()">previous</button>
-                        <button *ngIf="!step.isEnd" mat-raised-button matStepperNext (click)="closeAllExpand()">next</button>
-                        <button *ngIf="step.isEnd" mat-raised-button type="button" color="accent" (click)="finishHorizontalStepper()">
+                        <button *ngIf="!step['isEnd']" mat-raised-button matStepperNext (click)="closeAllExpand()">next</button>
+                        <button *ngIf="step['isEnd']" mat-raised-button type="button" color="accent" (click)="finishHorizontalStepper()">
                             Finish
                         </button>
                     </div>
