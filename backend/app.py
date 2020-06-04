@@ -111,7 +111,8 @@ def afternoontea(col):
     """Afternoon Tea."""
     if request.method == "GET":
         try:
-            return jsonify(AfternoonTea(col=col, user="default").get())
+            data = AfternoonTea(col=col, user=g.user).get(return_default=True)
+            return jsonify(data)
         except exceptions.DBError as err:
             logger.error(err.args)
             return jsonify({"msg": str(err), "status": err.args[1]}), err.args[1]

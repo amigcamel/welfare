@@ -20,15 +20,17 @@ class AfternoonTea:
         """__repr__ method."""
         # TODO
 
-    def get(self):
+    def get(self, *, return_default: bool = False):
         """Get form."""
         data = None
         try:
-            cur = self.collection.find({"user": self.user}, {"_id": 0})
-            data = cur.next()
-            return data
-        except StopIteration:
-            raise exceptions.NoAfternoonTeaFound(self.user)
+            data = self.collection.find_one({"user": self.user}, {"_id": 0})
+            if (data is None) and (return_default is True):
+                data = self.collection.find_one({"user": 'default'}, {"_id": 0})
+            if data:
+                return data
+            else:
+                raise exceptions.NoAfternoonTeaFound(self.user)
         except InvalidId:
             raise exceptions.InvalidOidError(self.user)
         except Exception as err:
