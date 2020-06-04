@@ -34,10 +34,6 @@ const appRoutes: Routes = [
         loadChildren: () => import('./main/login/login.module').then(m => m.LoginModule)
     },
     {
-        path        : 'page',
-        loadChildren: () => import('./main/e-commerce/e-commerce.module').then(m => m.EcommerceModule)
-    },
-    {
         path        : 'sample',
         loadChildren: () => import('./main/sample/sample.module').then(m => m.SampleModule)
     },

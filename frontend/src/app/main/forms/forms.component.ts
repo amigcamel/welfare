@@ -1,11 +1,9 @@
-import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { QuestionService } from '../../service/question.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
 
-import { MatExpansionPanel } from '@angular/material/expansion';
 import { FormService } from '../../service/form.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PhotoDialogComponent } from '../../component/photo-dialog/photo-dialog.component';
@@ -14,7 +12,7 @@ import { DialogComponent } from '../../component/dialog/dialog.component';
 import { FuseConfigService } from '../../../@fuse/services/config.service';
 import { CartDialogComponent } from '../../component/cart-dialog/cart-dialog.component';
 import { Cart } from '../../model/cart';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector   : 'forms',
@@ -36,15 +34,14 @@ import { switchMap } from 'rxjs/operators';
 })
 export class FormsComponent implements OnInit, OnDestroy
 {
-    form: FormGroup;
-    steps: any[] = [];
-    sum = 0;
-    budget: number;
-    isDark = false;
-    filterTarget = '';
-    previousSize: string;
+    public steps: any[] = [];
+    public sum = 0;
+    public isDark = false;
+    public filterTarget = '';
     // Private
     private _unsubscribeAll: Subject<any>;
+    private budget: number;
+    private unSub: Subject<boolean>;
 
     /**
      * Constructor
@@ -63,11 +60,11 @@ export class FormsComponent implements OnInit, OnDestroy
         private fuseConfigService: FuseConfigService,
         private  formService: FormService,
         private  matDialog: MatDialog,
-        private questionService: QuestionService
     )
     {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
+        this.unSub = new Subject();
     }
 
 
@@ -89,11 +86,11 @@ export class FormsComponent implements OnInit, OnDestroy
         // }, error => {
         //   console.log(error);
         // });
-        this.fuseConfigService.getConfig().subscribe(config => {
+        this.fuseConfigService.getConfig().pipe(takeUntil(this.unSub.asObservable())).subscribe(config => {
             this.isDark = !(config['colorTheme'] === 'theme-yellow-light' || config['colorTheme'] === 'theme-default');
         });
     }
-    filterText(target: string): boolean {
+    public filterText(target: string): boolean {
         if (this.filterTarget === '') {
             return true;
         } else {
@@ -101,14 +98,11 @@ export class FormsComponent implements OnInit, OnDestroy
             return regexp.test(target);
         }
     }
-    print(s): void {
-        console.log(s);
-    }
-    subOne(step, key): void {
+    public subOne(step: number, key: string): void {
         for (const item of this.steps[step]['items']) {
             if (item.key === key) {
                 if (item.value > 0) {
-                    item.value =  parseInt(item.value) - 1;
+                    item.value =  parseInt(item.value, 10) - 1;
                     this.calculatorSum();
                 }
             } else {
@@ -116,13 +110,13 @@ export class FormsComponent implements OnInit, OnDestroy
             }
         }
     }
-    addOne(step, key): void {
+    public addOne(step: number, key: string): void {
         for (const item of this.steps[step]['items']) {
             if (item.key === key) {
-                item.value =  parseInt(item.value) + 1;
+                item.value =  parseInt(item.value, 10) + 1;
                 this.calculatorSum();
                 if (this.sum > this.budget) {
-                    item.value =  parseInt(item.value) - 1;
+                    item.value =  parseInt(item.value, 10) - 1;
                     this.calculatorSum();
                 }
             } else {
@@ -131,14 +125,14 @@ export class FormsComponent implements OnInit, OnDestroy
         }
 
     }
-    seeMenu(src): void {
+    public seeMenu(src: string): void {
         this.matDialog.open(PhotoDialogComponent, {
             data: {
                 imageSource: src
             }
         });
     }
-    checkedOption(step, itemKey, optionKey): void {
+    public checkedOption(step: number, itemKey: string, optionKey: string): void {
         for (const item of this.steps[step]['items']) {
             if (item.key === itemKey) {
                 for (const option of item.options) {
@@ -150,17 +144,17 @@ export class FormsComponent implements OnInit, OnDestroy
             }
         }
     }
-    calculatorSum(): void {
+    public calculatorSum(): void {
         this.sum = 0;
         for (const step of this.steps) {
             for (const item of step['items']) {
                 let options = 0;
                 for (const option of item['options']) {
                     if (option['choose']) {
-                        options += parseInt(option['price']);
+                        options += parseInt(option['price'], 10);
                     }
                 }
-                this.sum +=  (options + parseInt(item['sizeSelect'])) * parseInt(item['value']);
+                this.sum +=  (options + parseInt(item['sizeSelect'], 10)) * parseInt(item['value'], 10);
             }
         }
         if (isNaN(this.sum)) {
@@ -181,7 +175,7 @@ export class FormsComponent implements OnInit, OnDestroy
             });
         }
     }
-    closeAllExpand(): void {
+    public closeAllExpand(): void {
         for (const step of this.steps) {
             for (const item of step['items']) {
                 item['isOpen'] = false;
@@ -198,6 +192,8 @@ export class FormsComponent implements OnInit, OnDestroy
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
+        this.unSub.next(true);
+        this.unSub.complete();
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -215,7 +211,7 @@ export class FormsComponent implements OnInit, OnDestroy
                 items: this.previewCart()
             },
             panelClass: 'cart-dialog'
-        }).afterClosed().pipe(switchMap(result => {
+        }).afterClosed().pipe(takeUntil(this.unSub.asObservable()), switchMap(result => {
             if (result) {
                 return this.formService.sendForm({budget: this.budget, form: this.steps});
             } else {
@@ -233,17 +229,17 @@ export class FormsComponent implements OnInit, OnDestroy
                     let options = '';
                     for (const option of item['options']) {
                         if (option['choose']) {
-                            price += parseInt(option['price']);
+                            price += parseInt(option['price'], 10);
                             options += option['label'] + ' ';
                         }
                     }
-                    price += parseInt(item['sizeSelect']);
+                    price += parseInt(item['sizeSelect'], 10);
                     data.push({
                             productName: item['label'],
                             subExtra: options,
                             price: price,
                             count: item['value'],
-                            total: parseInt(item['value']) * price,
+                            total: parseInt(item['value'], 10) * price,
                         }
                     );
                 }
@@ -252,15 +248,4 @@ export class FormsComponent implements OnInit, OnDestroy
         return data;
     }
 
-    /**
-     * Finish the vertical stepper
-     */
-    finishVerticalStepper(): void
-    {
-        const result = this.steps.map(item => item['formGroup']['value']);
-        this.http.get('/hello').subscribe(data => console.log(data));
-    }
-    bye(): void {
-        this.http.get('/byebye').subscribe(data => console.log(data));
-    }
 }
