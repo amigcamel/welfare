@@ -48,7 +48,9 @@ def auth():
             logger.debug(f"token -----> {token}")
             data = _decrypt(token)
             g.token = token
-            g.user = data['email']
+            if data["email"].split("@")[-1] not in settings.EMAIL_ALLOWED_DOMAINS:
+                return "Forbidden", 403
+            g.user = data["email"]
             logger.debug(data)
             return
         except Exception as e:
