@@ -27,6 +27,8 @@ import { DialogComponent } from './component/dialog/dialog.component';
 import { PhotoDialogComponent } from './component/photo-dialog/photo-dialog.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CartDialogComponent } from './component/cart-dialog/cart-dialog.component';
+import { NotFoundComponent } from './main/error-page/not-found/not-found.component';
+import { ErrorPageModule } from './main/error-page/error-page.module';
 
 const appRoutes: Routes = [
     {
@@ -68,7 +70,7 @@ const appRoutes: Routes = [
         BrowserAnimationsModule,
         HttpClientModule,
         RouterModule.forRoot(appRoutes, { useHash: true}),
-
+        ErrorPageModule,
         TranslateModule.forRoot(),
         InMemoryWebApiModule.forRoot(FakeDbService, {
             delay             : 0,

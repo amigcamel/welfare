@@ -15,6 +15,8 @@ import { Cart } from '../../model/cart';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { WelfareTimeService } from '../../service/welfare-time.service';
 import { CountDown } from '../../model/count-down';
+import { AfternoonTeaForm } from '../../model/afternoon-tea-form';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector   : 'forms',
@@ -36,15 +38,13 @@ import { CountDown } from '../../model/count-down';
 })
 export class FormsComponent implements OnInit, OnDestroy
 {
-    public steps: any[] = [];
     public sum = 0;
     public isDark = false;
     public filterTarget = '';
-    public updateTime: Date;
     public expiration: CountDown;
+    public formData: AfternoonTeaForm;
     // Private
     private _unsubscribeAll: Subject<any>;
-    private budget: number;
     private unSub: Subject<boolean>;
 
     /**
@@ -57,15 +57,17 @@ export class FormsComponent implements OnInit, OnDestroy
      * @param formService
      * @param matDialog
      * @param welfareTimeService
+     * @param activatedRoute
      */
     constructor(
         private _formBuilder: FormBuilder,
         private http: HttpClient,
-        private  mock: QuestionService,
+        private mock: QuestionService,
         private fuseConfigService: FuseConfigService,
-        private  formService: FormService,
-        private  matDialog: MatDialog,
-        private welfareTimeService: WelfareTimeService
+        private formService: FormService,
+        private matDialog: MatDialog,
+        private welfareTimeService: WelfareTimeService,
+        private activatedRoute: ActivatedRoute
     )
     {
         // Set the private defaults
@@ -84,18 +86,10 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-
-        // this.steps = this.mock.getJSON()['form'];
-        // this.budget = this.mock.getJSON()['budget'];
-        this.mock.getJSON().subscribe(data => {
-          this.steps = data['form'];
-          this.budget = data['budget'];
-          this.updateTime = data['update_time'];
-        }, error => {
-          console.log(error);
-        });
+        console.log(this.activatedRoute.snapshot.data, 'init');
+        this.formData = this.activatedRoute.snapshot.data.formData;
         setInterval(_ => {
-            this.expiration = this.welfareTimeService.countDown(this.mock.getJSON()['expiration']);
+            this.expiration = this.welfareTimeService.countDown(this.formData.expiration);
         }, 1000);
 
         this.fuseConfigService.getConfig().pipe(takeUntil(this.unSub.asObservable())).subscribe(config => {
@@ -112,7 +106,7 @@ export class FormsComponent implements OnInit, OnDestroy
         }
     }
     public subOne(step: number, key: string): void {
-        for (const item of this.steps[step]['items']) {
+        for (const item of this.formData.form[step]['items']) {
             if (item.key === key) {
                 if (item.value > 0) {
                     item.value =  parseInt(item.value, 10) - 1;
@@ -124,11 +118,11 @@ export class FormsComponent implements OnInit, OnDestroy
         }
     }
     public addOne(step: number, key: string): void {
-        for (const item of this.steps[step]['items']) {
+        for (const item of this.formData.form[step]['items']) {
             if (item.key === key) {
                 item.value =  parseInt(item.value, 10) + 1;
                 this.calculatorSum();
-                if (this.sum > this.budget) {
+                if (this.sum > parseInt(this.formData.budget, 10)) {
                     item.value =  parseInt(item.value, 10) - 1;
                     this.calculatorSum();
                 }
@@ -146,7 +140,7 @@ export class FormsComponent implements OnInit, OnDestroy
         });
     }
     public checkedOption(step: number, itemKey: string, optionKey: string): void {
-        for (const item of this.steps[step]['items']) {
+        for (const item of this.formData.form[step]['items']) {
             if (item.key === itemKey) {
                 for (const option of item.options) {
                     if (option.key === optionKey) {
@@ -159,7 +153,7 @@ export class FormsComponent implements OnInit, OnDestroy
     }
     public calculatorSum(): void {
         this.sum = 0;
-        for (const step of this.steps) {
+        for (const step of this.formData.form) {
             for (const item of step['items']) {
                 let options = 0;
                 for (const option of item['options']) {
@@ -178,7 +172,7 @@ export class FormsComponent implements OnInit, OnDestroy
                 },
                 panelClass: 'form-dialog'
             });
-        } else if (this.sum > this.budget) {
+        } else if (this.sum > parseInt(this.formData.budget, 10)) {
             this.matDialog.open(DialogComponent, {
                 data: {
                     title: 'Warn Message',
@@ -189,7 +183,7 @@ export class FormsComponent implements OnInit, OnDestroy
         }
     }
     public closeAllExpand(): void {
-        for (const step of this.steps) {
+        for (const step of this.formData.form) {
             for (const item of step['items']) {
                 item['isOpen'] = false;
             }
@@ -226,18 +220,18 @@ export class FormsComponent implements OnInit, OnDestroy
             panelClass: 'cart-dialog'
         }).afterClosed().pipe(takeUntil(this.unSub.asObservable()), switchMap(result => {
             if (result) {
-                return this.formService.sendForm({budget: this.budget, form: this.steps});
+                return this.formService.sendForm(this.formData);
             } else {
                 return;
             }
         }))
         .subscribe(data => {
-          this.updateTime = data.update_time;
+          this.formData.update_time = data.update_time;
         });
     }
     previewCart(): Cart[] {
         const data: Cart[] = [];
-        for (const step of this.steps) {
+        for (const step of this.formData.form) {
             for (const item of step['items']) {
                 if (item['value'] >  0) {
                     let price = 0;

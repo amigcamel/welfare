@@ -22,8 +22,11 @@ export class ErrorInterceptor implements HttpInterceptor {
                 // auto logout if 401 response returned from api
                 this.authenticationService.logout();
                 this.router.navigateByUrl('/login');
+            } else if (err.status === 404) {
+                this.router.navigateByUrl('/not-found');
+            } else if (err.status === 403) {
+                this.router.navigateByUrl('/no-auth');
             }
-
             const error = err.error.message || err.statusText;
             return throwError(error);
         }));

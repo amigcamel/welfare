@@ -10,7 +10,7 @@
             </div>
             <div class="h1 mt-16">SLEEP 5 MIN</div>
         </div>
-        <div class="count-down-group" fxLayout="column" fxLayoutAlign="center start" fxFlex="40">
+        <div *ngIf="!!expiration" class="count-down-group" fxLayout="column" fxLayoutAlign="center start" fxFlex="40">
             <div class="count-down-item">Expiration: </div>
             <div fxLayout="row" fxLayoutAlign="space-around center">
                 <div class="count-down-item">{{this.expiration.days}} Days </div>
@@ -30,13 +30,13 @@
           Reactive Forms
         </div>
 
-        <p *ngIf="updateTime">
-          Last edited: {{updateTime}}
+        <p *ngIf="!!formData.update_time">
+          Last edited: {{formData.update_time}}
         </p>
 
         <div class="vertical-stepper-wrapper" fxLayout="column">
             <mat-vertical-stepper class="mat-elevation-z4" [linear]="true">
-                <mat-step *ngFor="let step of steps; let i = index">
+                <mat-step *ngFor="let step of formData.form; let i = index">
                     <ng-template matStepLabel>
                         <div fxLayout="row" fxLayoutAlign="start center">
                             <h1>

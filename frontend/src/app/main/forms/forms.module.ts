@@ -14,11 +14,15 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
 import { HistoryComponent } from '../history/history.component';
+import { FormService } from '../../service/form.service';
 
 const routes: Routes = [
     {
         path     : 'forms',
-        component: FormsComponent
+        component: FormsComponent,
+        resolve: {
+            formData: FormService
+        }
     },
     {
         path     : 'history',
