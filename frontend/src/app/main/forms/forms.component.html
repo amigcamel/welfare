@@ -1,15 +1,25 @@
 <div id="forms" class="page-layout simple fullwidth" fxLayout="column">
 
     <!-- HEADER -->
-    <div class="header accent p-24 h-160" fxLayout="row" fxLayoutAlign="start center">
+    <div class="header accent p-24 h-160" fxLayout="row" fxLayout.sm="column" fxLayoutAlign="space-between center">
         <div fxLayout="column" fxLayoutAlign="center start">
             <div fxLayout="row" fxLayoutAlign="start center">
                 <mat-icon class="secondary-text s-18">home</mat-icon>
                 <mat-icon class="secondary-text s-16">chevron_right</mat-icon>
-                <span class="secondary-text">User Interface</span>
+                <span class="secondary-text">Afternoon tea</span>
             </div>
-            <div class="h1 mt-16">Forms</div>
+            <div class="h1 mt-16">SLEEP 5 MIN</div>
         </div>
+        <div class="count-down-group" fxLayout="column" fxLayoutAlign="center start" fxFlex="40">
+            <div class="count-down-item">Expiration: </div>
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+                <div class="count-down-item">{{this.expiration.days}} Days </div>
+                <div class="count-down-item">{{this.expiration.hours}} Hours </div>
+                <div class="count-down-item">{{this.expiration.minutes}} Minutes </div>
+                <div class="count-down-item">{{this.expiration.seconds}} Seconds</div>
+            </div>
+        </div>
+
     </div>
     <!-- / HEADER -->
 

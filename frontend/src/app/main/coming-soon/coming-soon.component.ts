@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 import { Router } from '@angular/router';
+import { WelfareTimeService } from '../../service/welfare-time.service';
+import { CountDown } from '../../model/count-down';
 
 @Component({
     selector     : 'coming-soon',
@@ -14,11 +16,7 @@ import { Router } from '@angular/router';
 })
 export class ComingSoonComponent implements OnInit
 {
-    countdownDate;
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
+    countdownDate: CountDown;
 
     /**
      * Constructor
@@ -26,11 +24,13 @@ export class ComingSoonComponent implements OnInit
      * @param {FuseConfigService} _fuseConfigService
      * @param {FormBuilder} _formBuilder
      * @param router
+     * @param welfareTimeService
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
         private router: Router,
+        private welfareTimeService: WelfareTimeService
     )
     {
         // Configure the layout
@@ -61,18 +61,11 @@ export class ComingSoonComponent implements OnInit
      */
     ngOnInit(): void
     {
-        this.countdownDate = new Date('2020-06-08');
-        setInterval(_ => this.countDown(), 1000);
+        setInterval(_ => {
+            this.countdownDate = this.welfareTimeService.countDown('2020-06-08');
+        }, 1000);
     }
-    countDown(): void{
-        const now = new Date().getTime();
-        const timeleft = this.countdownDate - now;
 
-        this.days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
-        this.hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        this.minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-        this.seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
-    }
     goBack(): void {
         this.router.navigateByUrl('/sample');
     }

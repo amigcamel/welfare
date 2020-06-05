@@ -13,6 +13,8 @@ import { FuseConfigService } from '../../../@fuse/services/config.service';
 import { CartDialogComponent } from '../../component/cart-dialog/cart-dialog.component';
 import { Cart } from '../../model/cart';
 import { switchMap, takeUntil } from 'rxjs/operators';
+import { WelfareTimeService } from '../../service/welfare-time.service';
+import { CountDown } from '../../model/count-down';
 
 @Component({
     selector   : 'forms',
@@ -39,6 +41,7 @@ export class FormsComponent implements OnInit, OnDestroy
     public isDark = false;
     public filterTarget = '';
     public updateTime: Date;
+    public expiration: CountDown;
     // Private
     private _unsubscribeAll: Subject<any>;
     private budget: number;
@@ -53,6 +56,7 @@ export class FormsComponent implements OnInit, OnDestroy
      * @param fuseConfigService
      * @param formService
      * @param matDialog
+     * @param welfareTimeService
      */
     constructor(
         private _formBuilder: FormBuilder,
@@ -61,6 +65,7 @@ export class FormsComponent implements OnInit, OnDestroy
         private fuseConfigService: FuseConfigService,
         private  formService: FormService,
         private  matDialog: MatDialog,
+        private welfareTimeService: WelfareTimeService
     )
     {
         // Set the private defaults
@@ -88,9 +93,14 @@ export class FormsComponent implements OnInit, OnDestroy
         // }, error => {
         //   console.log(error);
         // });
+        setInterval(_ => {
+            this.expiration = this.welfareTimeService.countDown(this.mock.getJSON()['expiration']);
+        }, 1000);
+
         this.fuseConfigService.getConfig().pipe(takeUntil(this.unSub.asObservable())).subscribe(config => {
             this.isDark = !(config['colorTheme'] === 'theme-yellow-light' || config['colorTheme'] === 'theme-default');
         });
+
     }
     public filterText(target: string): boolean {
         if (this.filterTarget === '') {
