@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  backend:
+    command: >
+      -c "
+      python -c 'import json as j, pymongo as p; p.MongoClient(\"mongo\").afternoontea.demo_1.insert_one(j.load(open(\"/tmp/service/mock.json\")))' &&
+      flask run -h 0.0.0.0
+      "
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    entrypoint: /bin/sh
+    environment:
+      - FLASK_ENV=development
+    image: be:latest
+    networks:
+      - welfare
+    ports:
+      - 5000:5000
+    volumes:
+      - ./backend:/backend 
+      - ./frontend/src/app/service:/tmp/service
+  mongo:
+    depends_on:
+      - backend
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: mongo:4.2.7
+    networks:
+      - welfare
+    ports:
+      - 27017:27017
+
+networks:
+  welfare:
+
+volumes:
+  db-data:

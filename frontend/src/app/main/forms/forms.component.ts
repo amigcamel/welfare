@@ -84,15 +84,16 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        this.steps = this.mock.getJSON()['form'];
-        this.budget = this.mock.getJSON()['budget'];
-        // this.mock.getJSON().subscribe(data => {
-        //   this.steps = data['form'];
-        //   this.budget = data['budget'];
-        //   this.updateTime = data['update_time'];
-        // }, error => {
-        //   console.log(error);
-        // });
+
+        // this.steps = this.mock.getJSON()['form'];
+        // this.budget = this.mock.getJSON()['budget'];
+        this.mock.getJSON().subscribe(data => {
+          this.steps = data['form'];
+          this.budget = data['budget'];
+          this.updateTime = data['update_time'];
+        }, error => {
+          console.log(error);
+        });
         setInterval(_ => {
             this.expiration = this.welfareTimeService.countDown(this.mock.getJSON()['expiration']);
         }, 1000);
