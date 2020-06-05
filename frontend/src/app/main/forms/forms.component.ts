@@ -38,10 +38,10 @@ export class FormsComponent implements OnInit, OnDestroy
     public sum = 0;
     public isDark = false;
     public filterTarget = '';
+    public updateTime: Date;
     // Private
     private _unsubscribeAll: Subject<any>;
     private budget: number;
-    private updateTime: Date;
     private unSub: Subject<boolean>;
 
     /**
@@ -84,6 +84,7 @@ export class FormsComponent implements OnInit, OnDestroy
         // this.mock.getJSON().subscribe(data => {
         //   this.steps = data['form'];
         //   this.budget = data['budget'];
+        //   this.updateTime = data['update_time'];
         // }, error => {
         //   console.log(error);
         // });
