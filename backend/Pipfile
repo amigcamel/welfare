@@ -15,6 +15,7 @@ requests = "==2.23.0"
 jwcrypto = "==0.7"
 uwsgi = "==2.0.18"
 pymongo = "==3.10.1"
+redis = "==3.5.3"
 
 [requires]
 python_version = "3.8"
