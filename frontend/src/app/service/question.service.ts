@@ -8,10 +8,7 @@ import * as data from '../service/mock.json'
 })
 export class QuestionService {
   constructor(private http: HttpClient) { }
-  // getJSON(): Observable<any> {
-  //   return this.http.get<any>('/afternoontea/demo_1');
-  // }
-    getJSON(): any {
-      return data['default'];
-    }
+  getJSON(): Observable<any> {
+    return this.http.get<any>('/afternoontea/demo_1');
+  }
 }

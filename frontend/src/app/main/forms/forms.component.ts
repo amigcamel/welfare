@@ -79,15 +79,13 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        this.steps = this.mock.getJSON()['form'];
-        this.budget = this.mock.getJSON()['budget'];
-        // this.mock.getJSON().subscribe(data => {
-        //   this.steps = data['form'];
-        //   this.budget = data['budget'];
-        //   this.updateTime = data['update_time'];
-        // }, error => {
-        //   console.log(error);
-        // });
+        this.mock.getJSON().subscribe(data => {
+          this.steps = data['form'];
+          this.budget = data['budget'];
+          this.updateTime = data['update_time'];
+        }, error => {
+          console.log(error);
+        });
         this.fuseConfigService.getConfig().pipe(takeUntil(this.unSub.asObservable())).subscribe(config => {
             this.isDark = !(config['colorTheme'] === 'theme-yellow-light' || config['colorTheme'] === 'theme-default');
         });
