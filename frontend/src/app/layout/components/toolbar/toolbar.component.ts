@@ -38,6 +38,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
      * @param {FuseConfigService} _fuseConfigService
      * @param {FuseSidebarService} _fuseSidebarService
      * @param {TranslateService} _translateService
+     * @param authService
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
@@ -164,5 +165,8 @@ export class ToolbarComponent implements OnInit, OnDestroy
 
         // Use the selected language for translations
         this._translateService.use(lang.id);
+    }
+    logout(): void {
+        this.authService.logout();
     }
 }

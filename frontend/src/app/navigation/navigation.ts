@@ -44,6 +44,14 @@ export const navigation: FuseNavigation[] = [
                 type     : 'item',
                 icon     : 'form',
                 url      : 'afternoon-tea/history',
+            },
+            {
+                id       : 'subNav2',
+                title    : 'Coming Soon',
+                translate: 'NAV.AFTERNOONTEA.PAGE3',
+                type     : 'item',
+                icon     : 'form',
+                url      : 'coming-soon',
             }
         ]
     }

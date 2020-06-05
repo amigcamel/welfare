@@ -12,7 +12,8 @@ export const locale = {
             },
             'AFTERNOONTEA': {
                 'PAGE1': 'Current',
-                'PAGE2': 'History'
+                'PAGE2': 'History',
+                'PAGE3': 'Coming Soon'
             }
         }
     }

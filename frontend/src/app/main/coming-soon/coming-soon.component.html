@@ -1,52 +1,44 @@
-<div id="coming-soon" fxLayout="column">
+<div class="coming-soon" fxLayout="column">
 
-    <div id="coming-soon-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
-
-        <div id="coming-soon-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
-
-            <div class="top">
-
-                <div class="logo">
-                    <img src="assets/images/logos/fuse.svg">
-                </div>
-
-                <div class="title">Hey! Thank you for checking out our app.</div>
-                <div class="subtitle">It’s not quite ready yet, but we are working hard and it will be ready in
-                    approximately:
-                </div>
-
-                <fuse-countdown eventDate="2021-07-28"></fuse-countdown>
-
+    <div class="shadow-cover">
+        <div class="coming-group" fxLayoutAlign="center center" fxFlex="100" fxLayout="column">
+            <div class="title">We're coming soon
+                <br>
+                <br>
+            </div>
+            <div class="subtitle">It’s not quite ready yet, but we are working hard and it will be ready in
+                approximately:
             </div>
 
-            <form name="comingSoonForm" [formGroup]="comingSoonForm" novalidate>
 
-                <div class="message">
-                    If you would like to be notified when the app is ready, you can subscribe to our e-mail list.
+
+
+            <div class="message">
+                If you would like to be notified when the app is ready, you can subscribe to our e-mail list.
+                <br>
+                <br>
+            </div>
+            <div class="count-time" fxLayout="row">
+                <div class="circle" fxLayout="column">
+                    <div class="time-text">{{days}}</div>
+                    <div class="time-unit">days</div>
                 </div>
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input matInput formControlName="email">
-                    <mat-icon matSuffix class="secondary-text">mail</mat-icon>
-                    <mat-error *ngIf="comingSoonForm.get('email').hasError('required')">
-                        Email is required
-                    </mat-error>
-                    <mat-error *ngIf="!comingSoonForm.get('email').hasError('required') &&
-                                       comingSoonForm.get('email').hasError('email')">
-                        Please enter a valid email address
-                    </mat-error>
-                </mat-form-field>
-
-                <button mat-raised-button color="accent" class="subscribe-button" aria-label="SUBSCRIBE"
-                        [disabled]="comingSoonForm.invalid">
-                    SUBSCRIBE
-                </button>
-
-            </form>
-
+                <div class="circle" fxLayout="column">
+                    <div class="time-text">{{hours}}</div>
+                    <div class="time-unit">hours</div>
+                </div>
+                <div class="circle" fxLayout="column">
+                    <div class="time-text">{{minutes}}</div>
+                    <div class="time-unit">minutes</div>
+                </div>
+                <div class="circle" fxLayout="column">
+                    <div class="time-text">{{seconds}}</div>
+                    <div class="time-unit">seconds</div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <button class="go-back" (click)="goBack()">Go back</button>
         </div>
-
     </div>
-
 </div>
