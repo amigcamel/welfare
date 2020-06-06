@@ -7,4 +7,5 @@ JWK_KEY = pickle.loads(
 )  # noqa: E501
 MONGODB = {"host": "mongo", "port": 27017}
 REDIS = {"host": "redis", "port": 6379, 'db': 0}
+AUTH_TOKEN_TTL = 120 * 60
 EMAIL_ALLOWED_DOMAINS = ["ffn.com"]
