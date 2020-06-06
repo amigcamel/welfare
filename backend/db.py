@@ -55,9 +55,16 @@ class AuthToken(dict):
     def __setitem__(self, token: str, user_data: str) -> None:
         """Cache token info."""
         res = self.conn.set(token, user_data)
+        self.update_ttl(token)
         logger.debug(res)
 
     def __getitem__(self, token: str) -> Union[str, None]:
         """Retrieve user data."""
         if (payload := self.conn.get(token)):
+            self.update_ttl(token)
             return payload
+
+    def update_ttl(self, token: str):
+        """Set or update TTL of a token."""
+        self.conn.expire(token, settings.AUTH_TOKEN_TTL)
+        logger.debug(f'Update TTL: {token}')

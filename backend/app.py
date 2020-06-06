@@ -1,11 +1,10 @@
 """App."""
 from datetime import datetime
-import json
 
 from flask import Flask, request, redirect, jsonify, url_for, g
 from loguru import logger
 
-from auth import gen_login_url, get_userinfo, encrypt, authenticate
+from auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
 from db import AfternoonTea
 import settings
 import exceptions
@@ -27,7 +26,7 @@ def auth():
     auth = request.headers.get("Authorization")
     if auth:
         token = request.headers["Authorization"].split("Bearer")[-1].strip()
-        data = authenticate(token)
+        data = get_userinfo_from_token(token)
         g.token = token
         g.user = data["email"]
         return
@@ -52,9 +51,7 @@ def login_redirect():
     if not code:
         return "Code is not provided", 400
     data = get_userinfo(code)
-    logger.info(data)
-    token = encrypt(json.dumps(data))
-    logger.debug(f"token: {token}")
+    token = encrypt(data)
     return redirect(f"http://localhost:4200/#/home?token={token}")
 
 
@@ -67,7 +64,7 @@ def login():
 @app.route("/user")
 def user():
     """User info."""
-    data = authenticate(g.token)  # TODO: consider rename `authenticate`
+    data = get_userinfo_from_token(g.token)
     return jsonify(data)
 
 

@@ -74,27 +74,33 @@ def decrypt(token: str) -> str:
     return jwetoken.payload
 
 
-def encrypt(data: str) -> str:
+def encrypt(data: dict) -> str:
     """Encrypt to JWE token."""
+    if data["email"].split("@")[-1] not in settings.EMAIL_ALLOWED_DOMAINS:
+        raise exceptions.DomainNotAllowedError(data['email'])
+    payload = json.dumps(data)
     token = jwe.JWE(
-        data.encode("utf-8"), json_encode({"alg": "A256KW", "enc": "A256CBC-HS512"})
+        payload.encode("utf-8"), json_encode({"alg": "A256KW", "enc": "A256CBC-HS512"})
     )
     token.add_recipient(settings.JWK_KEY)
-    return token.serialize(compact=True)
+    token = token.serialize(compact=True)
+    AuthToken()[token] = payload
+    logger.debug(f"Save user data to cache: {data['email']}")
+    return token
 
 
-def authenticate(token: str) -> dict:
-    """Authenticate user."""
-    # retrieve from cache
+def get_userinfo_from_token(token: str) -> dict:
+    """Get user info from a JWE token."""
     if (payload := AuthToken()[token]):
         data = json.loads(payload)
         logger.debug(f"Retrieve from cache: {data['email']}")
+        return data
     else:
         payload = decrypt(token)
         data = json.loads(payload)
-        if data["email"].split("@")[-1] not in settings.EMAIL_ALLOWED_DOMAINS:
-            raise exceptions.DomainNotAllowedError(data['email'])
-        # store cache
-        AuthToken()[token] = payload
-        logger.debug(f"Save user data to cache: {data['email']}")
-    return data
+        if (user := data.get('email')):
+            # XXX: If a token can be decrypted, I assume it was issued by me,
+            # and why it couldn't be found is that it was expired.
+            # There's no plan for storing issued tokens, so this is the best
+            # bet to check if a token is expired.
+            raise exceptions.TokenExpiredError(user)
