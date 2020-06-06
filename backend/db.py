@@ -1,5 +1,4 @@
 """Database."""
-from bson.objectid import ObjectId
 from bson.errors import InvalidId
 from loguru import logger
 from pymongo import MongoClient

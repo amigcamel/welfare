@@ -20,12 +20,6 @@ class DBError(Exception):
         return f"{self.__class__.__name__}: {self.message}"
 
 
-class InvalidOidError(DBError):
-    """Invalid Object ID."""
-
-    errcode = 400
-
-
 class NoAfternoonTeaFound(DBError):
     """No afternoon tea found."""
 
