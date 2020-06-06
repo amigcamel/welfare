@@ -7,6 +7,9 @@ services:
       python -c 'import json as j, pymongo as p; p.MongoClient(\"mongo\").afternoontea.demo_1.insert_one(j.load(open(\"/tmp/service/mock.json\")))' &&
       flask run -h 0.0.0.0
       "
+    depends_on:
+      - mongo
+      - redis
     deploy:
       replicas: 1
       restart_policy:
@@ -23,8 +26,6 @@ services:
       - ./backend:/backend 
       - ./frontend/src/app/service:/tmp/service
   mongo:
-    depends_on:
-      - backend
     deploy:
       replicas: 1
       restart_policy:
@@ -34,6 +35,17 @@ services:
       - welfare
     ports:
       - 27017:27017
+  redis:
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: redis:6.0.4-alpine3.11
+    networks:
+      - welfare
+    ports:
+      - 6379:6379
+
 
 networks:
   welfare:

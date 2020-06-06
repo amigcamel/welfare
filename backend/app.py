@@ -8,7 +8,7 @@ from jwcrypto import jwe
 from jwcrypto.common import json_encode
 
 from oauth import gen_login_url, get_userinfo
-from db import AfternoonTea
+from db import AfternoonTea, AuthToken
 import settings
 import exceptions
 
@@ -19,9 +19,14 @@ app.config["SECRET_KEY"] = settings.APP_SECRET
 
 
 def _decrypt(token):
+    if (data := AuthToken()[token]):
+        logger.debug(f"Retrieve user data from cache: {data}")
+        return data
     jwetoken = jwe.JWE()
     jwetoken.deserialize(token)
     jwetoken.decrypt(settings.JWK_KEY)
+    AuthToken()[token] = jwetoken.payload
+    logger.debug(f"Cache user data: {jwetoken.payload}")
     return json.loads(jwetoken.payload)
 
 
