@@ -7,7 +7,7 @@ from loguru import logger
 from jwcrypto import jwe
 from jwcrypto.common import json_encode
 
-from oauth import gen_login_url, get_userinfo
+from auth import gen_login_url, get_userinfo
 from db import AfternoonTea, AuthToken
 import settings
 import exceptions
