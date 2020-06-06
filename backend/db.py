@@ -1,6 +1,5 @@
 """Database."""
 from typing import Union
-import json
 
 from bson.errors import InvalidId
 from loguru import logger
@@ -60,5 +59,5 @@ class AuthToken(dict):
 
     def __getitem__(self, token: str) -> Union[str, None]:
         """Retrieve user data."""
-        if (data := self.conn.get(token)):
-            return json.loads(data)
+        if (payload := self.conn.get(token)):
+            return payload

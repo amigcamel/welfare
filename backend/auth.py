@@ -9,6 +9,7 @@ import requests
 
 
 from db import AuthToken
+import exceptions
 import settings
 
 
@@ -67,15 +68,10 @@ def get_userinfo(code):
 
 def decrypt(token: str) -> str:
     """Decrypt JWE token."""
-    if (data := AuthToken()[token]):
-        logger.debug(f"Retrieve user data from cache: {data}")
-        return data
     jwetoken = jwe.JWE()
     jwetoken.deserialize(token)
     jwetoken.decrypt(settings.JWK_KEY)
-    AuthToken()[token] = jwetoken.payload
-    logger.debug(f"Cache user data: {jwetoken.payload}")
-    return json.loads(jwetoken.payload)
+    return jwetoken.payload
 
 
 def encrypt(data: str) -> str:
@@ -85,3 +81,20 @@ def encrypt(data: str) -> str:
     )
     token.add_recipient(settings.JWK_KEY)
     return token.serialize(compact=True)
+
+
+def authenticate(token: str) -> dict:
+    """Authenticate user."""
+    # retrieve from cache
+    if (payload := AuthToken()[token]):
+        data = json.loads(payload)
+        logger.debug(f"Retrieve from cache: {data['email']}")
+    else:
+        payload = decrypt(token)
+        data = json.loads(payload)
+        if data["email"].split("@")[-1] not in settings.EMAIL_ALLOWED_DOMAINS:
+            raise exceptions.DomainNotAllowedError(data['email'])
+        # store cache
+        AuthToken()[token] = payload
+        logger.debug(f"Save user data to cache: {data['email']}")
+    return data

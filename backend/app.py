@@ -5,7 +5,7 @@ import json
 from flask import Flask, request, redirect, jsonify, url_for, g
 from loguru import logger
 
-from auth import gen_login_url, get_userinfo, encrypt, decrypt
+from auth import gen_login_url, get_userinfo, encrypt, authenticate
 from db import AfternoonTea
 import settings
 import exceptions
@@ -28,13 +28,9 @@ def auth():
     if auth:
         try:
             token = request.headers["Authorization"].split("Bearer")[-1].strip()
-            logger.debug(f"token -----> {token}")
-            data = decrypt(token)
+            data = authenticate(token)
             g.token = token
-            if data["email"].split("@")[-1] not in settings.EMAIL_ALLOWED_DOMAINS:
-                return "Forbidden", 403
             g.user = data["email"]
-            logger.debug(data)
             return
         except Exception as e:
             logger.critical(e)
@@ -63,7 +59,7 @@ def login():
 @app.route("/user")
 def user():
     """User info."""
-    data = decrypt(g.token)
+    data = authenticate(g.token)  # TODO: consider rename `authenticate`
     return jsonify(data)
 
 
