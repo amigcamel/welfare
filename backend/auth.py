@@ -2,7 +2,16 @@
 from urllib.parse import urlencode
 import json
 
+from loguru import logger
+from jwcrypto import jwe
+from jwcrypto.common import json_encode
 import requests
+
+
+from db import AuthToken
+import exceptions
+import settings
+
 
 client_id = "67320997794-5c21iin6ti7o5ihvugic84g03gaqrelj.apps.googleusercontent.com"
 client_secret = "9PMLulb0qUkliNdv70dM3mq8"
@@ -55,3 +64,37 @@ def get_userinfo(code):
         "https://www.googleapis.com/oauth2/v2/userinfo", headers=authorization_header
     )
     return r.json()
+
+
+def decrypt(token: str) -> str:
+    """Decrypt JWE token."""
+    jwetoken = jwe.JWE()
+    jwetoken.deserialize(token)
+    jwetoken.decrypt(settings.JWK_KEY)
+    return jwetoken.payload
+
+
+def encrypt(data: str) -> str:
+    """Encrypt to JWE token."""
+    token = jwe.JWE(
+        data.encode("utf-8"), json_encode({"alg": "A256KW", "enc": "A256CBC-HS512"})
+    )
+    token.add_recipient(settings.JWK_KEY)
+    return token.serialize(compact=True)
+
+
+def authenticate(token: str) -> dict:
+    """Authenticate user."""
+    # retrieve from cache
+    if (payload := AuthToken()[token]):
+        data = json.loads(payload)
+        logger.debug(f"Retrieve from cache: {data['email']}")
+    else:
+        payload = decrypt(token)
+        data = json.loads(payload)
+        if data["email"].split("@")[-1] not in settings.EMAIL_ALLOWED_DOMAINS:
+            raise exceptions.DomainNotAllowedError(data['email'])
+        # store cache
+        AuthToken()[token] = payload
+        logger.debug(f"Save user data to cache: {data['email']}")
+    return data

@@ -4,10 +4,8 @@ import json
 
 from flask import Flask, request, redirect, jsonify, url_for, g
 from loguru import logger
-from jwcrypto import jwe
-from jwcrypto.common import json_encode
 
-from oauth import gen_login_url, get_userinfo
+from auth import gen_login_url, get_userinfo, encrypt, authenticate
 from db import AfternoonTea
 import settings
 import exceptions
@@ -16,21 +14,6 @@ app = Flask(__name__)
 app.debug = True
 app.config["JSON_AS_ASCII"] = False
 app.config["SECRET_KEY"] = settings.APP_SECRET
-
-
-def _decrypt(token):
-    jwetoken = jwe.JWE()
-    jwetoken.deserialize(token)
-    jwetoken.decrypt(settings.JWK_KEY)
-    return json.loads(jwetoken.payload)
-
-
-def _encrypt(data):
-    token = jwe.JWE(
-        data.encode("utf-8"), json_encode({"alg": "A256KW", "enc": "A256CBC-HS512"})
-    )
-    token.add_recipient(settings.JWK_KEY)
-    return token.serialize(compact=True)
 
 
 @app.before_request
@@ -45,13 +28,9 @@ def auth():
     if auth:
         try:
             token = request.headers["Authorization"].split("Bearer")[-1].strip()
-            logger.debug(f"token -----> {token}")
-            data = _decrypt(token)
+            data = authenticate(token)
             g.token = token
-            if data["email"].split("@")[-1] not in settings.EMAIL_ALLOWED_DOMAINS:
-                return "Forbidden", 403
             g.user = data["email"]
-            logger.debug(data)
             return
         except Exception as e:
             logger.critical(e)
@@ -66,7 +45,7 @@ def login_redirect():
         return "Code is not provided", 400
     data = get_userinfo(code)
     logger.info(data)
-    token = _encrypt(json.dumps(data))
+    token = encrypt(json.dumps(data))
     logger.debug(f"token: {token}")
     return redirect(f"http://localhost:4200/#/home?token={token}")
 
@@ -80,7 +59,7 @@ def login():
 @app.route("/user")
 def user():
     """User info."""
-    data = _decrypt(g.token)
+    data = authenticate(g.token)  # TODO: consider rename `authenticate`
     return jsonify(data)
 
 
@@ -105,7 +84,7 @@ def token():
         return "Code is not provided", 400
     data = get_userinfo(code)
     logger.info(data)
-    token = _encrypt(data)
+    token = encrypt(data)
     return jsonify({"token": token})
 
 

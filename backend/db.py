@@ -1,7 +1,10 @@
 """Database."""
+from typing import Union
+
 from bson.errors import InvalidId
 from loguru import logger
 from pymongo import MongoClient
+from redis import StrictRedis
 
 import settings
 import exceptions
@@ -40,3 +43,21 @@ class AfternoonTea:
         """Insert or update a doc."""
         data["user"] = self.user
         return self.collection.update({"user": self.user}, data, upsert=True)
+
+
+class AuthToken(dict):
+    """Handle auth token."""
+
+    def __init__(self):
+        """Build reids connection."""
+        self.conn = StrictRedis(**settings.REDIS)
+
+    def __setitem__(self, token: str, user_data: str) -> None:
+        """Cache token info."""
+        res = self.conn.set(token, user_data)
+        logger.debug(res)
+
+    def __getitem__(self, token: str) -> Union[str, None]:
+        """Retrieve user data."""
+        if (payload := self.conn.get(token)):
+            return payload
