@@ -26,15 +26,23 @@ def auth():
         return
     auth = request.headers.get("Authorization")
     if auth:
-        try:
-            token = request.headers["Authorization"].split("Bearer")[-1].strip()
-            data = authenticate(token)
-            g.token = token
-            g.user = data["email"]
-            return
-        except Exception as e:
-            logger.critical(e)
-    return "Unauthorized", 401
+        token = request.headers["Authorization"].split("Bearer")[-1].strip()
+        data = authenticate(token)
+        g.token = token
+        g.user = data["email"]
+        return
+
+
+@app.errorhandler(Exception)
+def handle_error(error):
+    """Handle errors for every request."""
+    if issubclass(error.__class__, exceptions.CustomError):
+        response = jsonify({"msg": str(error), "status": error.args[1]})
+        response.status_code = error.args[1]
+        return response
+    else:
+        logger.critical(error)
+        return "Internal Server Error", 500
 
 
 @app.route("/redirect")
@@ -92,12 +100,8 @@ def token():
 def afternoontea(col):
     """Afternoon Tea."""
     if request.method == "GET":
-        try:
-            data = AfternoonTea(col=col, user=g.user).get(return_default=True)
-            return jsonify(data)
-        except exceptions.DBError as err:
-            logger.error(err.args)
-            return jsonify({"msg": str(err), "status": err.args[1]}), err.args[1]
+        data = AfternoonTea(col=col, user=g.user).get(return_default=True)
+        return jsonify(data)
     elif request.method == "POST":
         data = request.json
         output = {'update_time': datetime.now()}
