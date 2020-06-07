@@ -36,6 +36,8 @@ def auth():
 def handle_error(error):
     """Handle errors for every request."""
     if issubclass(error.__class__, exceptions.CustomError):
+        if isinstance(error, exceptions.DomainNotAllowedError):
+            return redirect("http://localhost:4200/#/error-page/no-auth")  # TODO: DRY
         response = jsonify({"msg": str(error), "status": error.args[1]})
         response.status_code = error.args[1]
         return response
