@@ -13,18 +13,12 @@ import exceptions
 import settings
 
 
-client_id = "67320997794-5c21iin6ti7o5ihvugic84g03gaqrelj.apps.googleusercontent.com"
-client_secret = "9PMLulb0qUkliNdv70dM3mq8"
-redirect_uri = settings.OAUTH_REDIRECT_URL
-base_url = r"https://accounts.google.com/o/oauth2/"
-
-
 def gen_login_url():
     """Retrieve authorization code."""
     authorization_code_req = {
         "response_type": "code",
-        "client_id": client_id,
-        "redirect_uri": redirect_uri,
+        "client_id": settings.OAUTH_CLIENT_ID,
+        "redirect_uri": settings.OAUTH_REDIRECT_URL,
         "scope": (
             r"https://www.googleapis.com/auth/userinfo.profile"
             + r" https://www.googleapis.com/auth/userinfo.email"
@@ -32,7 +26,7 @@ def gen_login_url():
     }
 
     r = requests.get(
-        base_url + "auth?%s" % urlencode(authorization_code_req), allow_redirects=False
+        settings.OAUTH_BASE_URL + "auth?%s" % urlencode(authorization_code_req), allow_redirects=False
     )
     url = r.headers.get("location")
     return url
@@ -42,15 +36,15 @@ def retrieve_tokens(authorization_code):
     """Retrieve token."""
     access_token_req = {
         "code": authorization_code,
-        "client_id": client_id,
-        "client_secret": client_secret,
-        "redirect_uri": redirect_uri,
+        "client_id": settings.OAUTH_CLIENT_ID,
+        "client_secret": settings.OAUTH_CLIENT_SECRET,
+        "redirect_uri": settings.OAUTH_REDIRECT_URL,
         "grant_type": "authorization_code",
     }
     content_length = len(urlencode(access_token_req))
     access_token_req["content-length"] = str(content_length)
 
-    r = requests.post(base_url + "token", data=access_token_req)
+    r = requests.post(settings.OAUTH_BASE_URL + "token", data=access_token_req)
     data = json.loads(r.text)
     return data
 

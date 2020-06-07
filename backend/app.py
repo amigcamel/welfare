@@ -10,7 +10,7 @@ import settings
 import exceptions
 
 app = Flask(__name__)
-app.debug = True
+app.debug = settings.DEBUG
 app.config["JSON_AS_ASCII"] = False
 app.config["SECRET_KEY"] = settings.APP_SECRET
 
