@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { UserService } from '../../service/user.service';
 import { switchMap, takeUntil, tap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -30,14 +30,19 @@ export class HomeComponent implements OnInit, OnDestroy {
                   return this.userService.getUser();
               } else {
                   this.router.navigateByUrl('/login');
+                  return of(null)
               }
           } else {
+              this.authService.setIsLogin(true);
               this.router.navigateByUrl('/afternoon-tea/forms');
+              return of(null)
           }
       })).subscribe(
           user => {
-              this.authService.setUser(user);
-              this.router.navigateByUrl('/sample');
+              if (user !== null) {
+                  this.authService.setUser(user);
+                  this.router.navigateByUrl('/sample');
+              }
           }, error => {
               console.log('login error', error);
           });
