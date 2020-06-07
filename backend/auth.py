@@ -19,6 +19,7 @@ def gen_login_url():
         "response_type": "code",
         "client_id": settings.OAUTH_CLIENT_ID,
         "redirect_uri": settings.OAUTH_REDIRECT_URL,
+        "prompt": "select_account",
         "scope": (
             r"https://www.googleapis.com/auth/userinfo.profile"
             + r" https://www.googleapis.com/auth/userinfo.email"
