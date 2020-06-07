@@ -9,12 +9,14 @@ import { MatInputModule } from '@angular/material/input';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseCountdownModule } from '@fuse/components';
 import { ComingSoonComponent } from './coming-soon.component';
+import { AuthGuard } from "../../helper/auth.guard";
 
 
 const routes = [
     {
         path     : '',
-        component: ComingSoonComponent
+        component: ComingSoonComponent,
+        canActivate: [AuthGuard]
     }
 ];
 

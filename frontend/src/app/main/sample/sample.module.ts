@@ -5,12 +5,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { SampleComponent } from './sample.component';
-import { LoginComponent } from '../login/login.component';
+import { AuthGuard } from "../../helper/auth.guard";
 
 const routes = [
     {
         path     : '',
         component:  SampleComponent,
+        canActivate: [AuthGuard]
     }
 ];
 

@@ -15,6 +15,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
 import { HistoryComponent } from '../history/history.component';
 import { FormService } from '../../service/form.service';
+import { AuthGuard } from "../../helper/auth.guard";
 
 const routes: Routes = [
     {
@@ -22,11 +23,13 @@ const routes: Routes = [
         component: FormsComponent,
         resolve: {
             formData: FormService
-        }
+        },
+        canActivate: [AuthGuard]
     },
     {
         path     : 'history',
-        component: HistoryComponent
+        component: HistoryComponent,
+        canActivate: [AuthGuard]
     }
 ];
 
