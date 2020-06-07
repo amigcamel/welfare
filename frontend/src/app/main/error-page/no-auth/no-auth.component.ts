@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FuseConfigService } from "../../../../@fuse/services/config.service";
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-no-auth',
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoAuthComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _fuseConfigService: FuseConfigService, private location: Location) { }
 
   ngOnInit(): void {
+      this._fuseConfigService.config = {
+          layout: {
+              navbar   : {
+                  hidden: true
+              },
+              toolbar  : {
+                  hidden: true
+              },
+              footer   : {
+                  hidden: true
+              },
+              sidepanel: {
+                  hidden: true
+              }
+          }
+      };
+  }
+  goBack() {
+      this.location.back();
   }
 
 }

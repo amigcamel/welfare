@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NoAuthComponent } from './no-auth/no-auth.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { FuseSharedModule } from "../../../@fuse/shared.module";
+import { MatButtonModule } from "@angular/material/button";
 const routes = [
     {
         path     : 'not-found',
@@ -18,8 +20,10 @@ const routes = [
         NoAuthComponent,
         NotFoundComponent
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
+        FuseSharedModule,
+        MatButtonModule,
     ]
 })
 export class ErrorPageModule {}

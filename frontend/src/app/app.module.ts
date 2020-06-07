@@ -27,7 +27,6 @@ import { DialogComponent } from './component/dialog/dialog.component';
 import { PhotoDialogComponent } from './component/photo-dialog/photo-dialog.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CartDialogComponent } from './component/cart-dialog/cart-dialog.component';
-import { NotFoundComponent } from './main/error-page/not-found/not-found.component';
 import { ErrorPageModule } from './main/error-page/error-page.module';
 
 const appRoutes: Routes = [
@@ -45,11 +44,15 @@ const appRoutes: Routes = [
     },
     {
         path        : 'home',
-        component   : HomeComponent
+        component   : HomeComponent,
     },
     {
         path        : 'coming-soon',
         loadChildren: () => import('./main/coming-soon/coming-soon.module').then(m => m.ComingSoonModule)
+    },
+    {
+        path        : 'error-page',
+        loadChildren: () => import('./main/error-page/error-page.module').then(m => m.ErrorPageModule)
     },
     {
         path        : '**',

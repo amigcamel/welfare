@@ -26,7 +26,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           if (localStorage.getItem('token') === null) {
               if (params && params['token'] !== undefined) {
                   localStorage.setItem('token', params['token']);
-                  return  this.userService.getUser();
+                  this.authService.setIsLogin(true);
+                  return this.userService.getUser();
               } else {
                   this.router.navigateByUrl('/login');
               }
