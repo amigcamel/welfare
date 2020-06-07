@@ -21,7 +21,7 @@ def auth():
     logger.debug(request.headers)
     if request.method == "OPTIONS":
         return
-    if request.path in (url_for("login"), url_for("login_redirect")):
+    if request.path in (url_for("login"), ):
         return
     auth = request.headers.get("Authorization")
     if auth:
@@ -44,21 +44,15 @@ def handle_error(error):
         return "Internal Server Error", 500
 
 
-@app.route("/redirect")
-def login_redirect():
-    """Login redirect."""
-    code = request.args.get("code")
-    if not code:
-        return "Code is not provided", 400
-    data = get_userinfo(code)
-    token = encrypt(data)
-    return redirect(f"http://localhost:4200/#/home?token={token}")
-
-
 @app.route("/login")
 def login():
     """Login."""
-    return redirect(gen_login_url())
+    if (code := request.args.get("code")):
+        data = get_userinfo(code)
+        token = encrypt(data)
+        return redirect(settings.LOGIN_REDIRECT_URL.format(token=token))
+    else:
+        return redirect(gen_login_url())
 
 
 @app.route("/user")

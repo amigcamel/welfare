@@ -15,7 +15,7 @@ import settings
 
 client_id = "67320997794-5c21iin6ti7o5ihvugic84g03gaqrelj.apps.googleusercontent.com"
 client_secret = "9PMLulb0qUkliNdv70dM3mq8"
-redirect_uri = "http://welfare.local.com:5000/redirect"
+redirect_uri = settings.OAUTH_REDIRECT_URL
 base_url = r"https://accounts.google.com/o/oauth2/"
 
 

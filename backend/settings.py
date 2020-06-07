@@ -6,6 +6,8 @@ JWK_KEY = pickle.loads(
     b"\x80\x04\x95\x82\x00\x00\x00\x00\x00\x00\x00\x8c\x0cjwcrypto.jwk\x94\x8c\x03JWK\x94\x93\x94)\x81\x94}\x94(\x8c\x07_params\x94}\x94\x8c\x03kty\x94\x8c\x03oct\x94s\x8c\x04_key\x94}\x94\x8c\x01k\x94\x8c+lP8ISAVLUg1hYy8FZ225aVCH-ipvvodi79BO0rknlrA\x94s\x8c\x08_unknown\x94}\x94ub."
 )  # noqa: E501
 MONGODB = {"host": "mongo", "port": 27017}
-REDIS = {"host": "redis", "port": 6379, 'db': 0}
+REDIS = {"host": "redis", "port": 6379, "db": 0}
 AUTH_TOKEN_TTL = 120 * 60
+LOGIN_REDIRECT_URL = "http://localhost:4200/#/home?token={token}"
+OAUTH_REDIRECT_URL = "http://welfare.local.com:5000/login"
 EMAIL_ALLOWED_DOMAINS = ["ffn.com"]
