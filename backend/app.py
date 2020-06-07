@@ -5,7 +5,7 @@ from flask import Flask, request, redirect, jsonify, url_for, g
 from loguru import logger
 
 from auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
-from db import AfternoonTea
+from db import AfternoonTea, AuthToken
 import settings
 import exceptions
 
@@ -53,6 +53,14 @@ def login():
         return redirect(settings.LOGIN_REDIRECT_URL.format(token=token))
     else:
         return redirect(gen_login_url())
+
+
+@app.route("/logout")
+def logout():
+    """Logout."""
+    logger.info(f'Log out: {g.token}')
+    del AuthToken()[g.token]
+    return jsonify({"msg": "ok"})
 
 
 @app.route("/user")

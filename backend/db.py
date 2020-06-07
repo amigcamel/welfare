@@ -64,6 +64,10 @@ class AuthToken(dict):
             self.update_ttl(token)
             return payload
 
+    def __delitem__(self, token: str):
+        """Delete a token."""
+        self.conn.delete(token)
+
     def update_ttl(self, token: str):
         """Set or update TTL of a token."""
         self.conn.expire(token, settings.AUTH_TOKEN_TTL)
