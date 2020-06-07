@@ -68,31 +68,6 @@ def user():
     return jsonify(data)
 
 
-@app.route("/hello")
-def hello():
-    """Hello."""
-    logger.debug(request.headers)
-    return "", 200
-
-
-@app.route("/byebye")
-def byebye():
-    """byebye."""
-    return "", 401
-
-
-@app.route("/token")
-def token():
-    """Token."""
-    code = request.args.get("code")
-    if not code:
-        return "Code is not provided", 400
-    data = get_userinfo(code)
-    logger.info(data)
-    token = encrypt(data)
-    return jsonify({"token": token})
-
-
 @app.route("/afternoontea/<col>", methods=["GET", "POST"])
 def afternoontea(col):
     """Afternoon Tea."""
