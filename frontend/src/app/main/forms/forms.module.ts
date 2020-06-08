@@ -16,6 +16,7 @@ import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
 import { HistoryComponent } from '../history/history.component';
 import { FormService } from '../../service/form.service';
 import { AuthGuard } from "../../helper/auth.guard";
+import { HistoryService } from "../../service/history.service";
 
 const routes: Routes = [
     {
@@ -29,6 +30,9 @@ const routes: Routes = [
     {
         path     : 'history',
         component: HistoryComponent,
+        resolve: {
+            historyData: HistoryService
+        },
         canActivate: [AuthGuard]
     }
 ];

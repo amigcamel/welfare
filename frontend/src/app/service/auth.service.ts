@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { UserInfo } from '../model/userinfo';
 import {HttpClient} from "@angular/common/http";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,17 @@ export class AuthService {
         verified_email: false
     });
     public currentUser$ = this.currentUser.asObservable();
+    public redirectURL: string;
 
-    constructor(private http: HttpClient) {
-        if ( localStorage.getItem('user') !== null) {
+    constructor(private http: HttpClient,private router: Router) {
+        if (localStorage.getItem('token') !== null && localStorage.getItem('user') !== null) {
+            this.setIsLogin(true);
             this.setUser(JSON.parse(localStorage.getItem('user')));
+            if(this.redirectURL) {
+                this.router.navigate([this.redirectURL]);
+            }
+        } else {
+            this.setIsLogin(false);
         }
     }
 

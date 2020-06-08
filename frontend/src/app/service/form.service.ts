@@ -26,5 +26,4 @@ export class FormService implements Resolve<AfternoonTeaForm> {
     sendForm(data: any): Observable<any> {
         return this.http.post('/afternoontea/demo_1', data);
     }
-
 }

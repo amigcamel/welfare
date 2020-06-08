@@ -54,4 +54,10 @@ faq {
         width: 100%;
         margin: 0 auto;
     }
+
+}
+.grid-order {
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr 1fr 1fr;
+    grid-row-gap: 10px;
 }
