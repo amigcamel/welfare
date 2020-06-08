@@ -21,7 +21,7 @@ def auth():
     logger.debug(request.headers)
     if request.method == "OPTIONS":
         return
-    if request.path in (url_for("login"), ):
+    if request.path in (url_for("login"),):
         return
     auth = request.headers.get("Authorization")
     if auth:
@@ -49,7 +49,7 @@ def handle_error(error):
 @app.route("/login")
 def login():
     """Login."""
-    if (code := request.args.get("code")):
+    if (code := request.args.get("code")) :
         data = get_userinfo(code)
         token = encrypt(data)
         return redirect(settings.LOGIN_REDIRECT_URL.format(token=token))
@@ -60,7 +60,7 @@ def login():
 @app.route("/logout")
 def logout():
     """Logout."""
-    logger.info(f'Log out: {g.token}')
+    logger.info(f"Log out: {g.token}")
     del AuthToken()[g.token]
     return jsonify({"msg": "ok"})
 
@@ -80,7 +80,7 @@ def afternoontea(col):
         return jsonify(data)
     elif request.method == "POST":
         data = request.json
-        output = {'update_time': datetime.now()}
+        output = {"update_time": datetime.now()}
         data.update(output)
         res = AfternoonTea(col=col, user=g.user).upsert(data=data)
         logger.info(res)
@@ -91,4 +91,8 @@ def afternoontea(col):
 def history():
     """Afternoon order history."""
     from flask import Response
-    return Response('''[{"date":"2020-12-31","orders":[{"date":"2020-12-31","orders":{"item":"香芋啵啵","value":"1","price":"70","sugar":"0sugar","ice":"0Ice","size":"L","options":[]}},{"item":"日安紅歐蕾","value":"2","price":"60","sugar":"7sugar","ice":"3Ice","size":"M","options":["Boba","Grass Jelly"]}]}]''', mimetype="application/json")
+
+    return Response(
+        """[{"date":"2020-12-31","orders":[{"item":"香芋啵啵","value":"1","price":"70","sugar":"0sugar","ice":"0Ice","size":"L","options":[]},{"item":"日安紅歐蕾","value":"2","price":"60","sugar":"7sugar","ice":"3Ice","size":"M","options":["Boba","Grass Jelly"]}]}]""",
+        mimetype="application/json",
+    )
