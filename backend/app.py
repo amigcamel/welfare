@@ -49,7 +49,7 @@ def handle_error(error):
 @app.route("/login")
 def login():
     """Login."""
-    if (code := request.args.get("code")) :
+    if (code := request.args.get("code")):
         data = get_userinfo(code)
         token = encrypt(data)
         return redirect(settings.LOGIN_REDIRECT_URL.format(token=token))
@@ -90,9 +90,4 @@ def afternoontea(col):
 @app.route("/history", methods=["GET"])  # XXX: should it be /afternoontea/history ?
 def history():
     """Afternoon order history."""
-    from flask import Response
-
-    return Response(
-        """[{"date":"2020-12-31","orders":[{"item":"香芋啵啵","value":"1","price":"70","sugar":"0sugar","ice":"0Ice","size":"L","options":[]},{"item":"日安紅歐蕾","value":"2","price":"60","sugar":"7sugar","ice":"3Ice","size":"M","options":["Boba","Grass Jelly"]}]}]""",
-        mimetype="application/json",
-    )
+    return jsonify(list(AfternoonTea(col=None, user=g.user).history()))
