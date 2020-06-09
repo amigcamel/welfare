@@ -86,7 +86,6 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        console.log(this.activatedRoute.snapshot.data, 'init');
         this.formData = this.activatedRoute.snapshot.data.formData;
         setInterval(_ => {
             this.expiration = this.welfareTimeService.countDown(this.formData.expiration);

@@ -4,12 +4,7 @@
     <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="center center">
 
         <div class="hero-text mb-16">
-            <h1>Frequently Asked Questions</h1>
-        </div>
-
-        <div class="search mat-elevation-z7" fxLayout="row" fxLayoutAlign="start center">
-            <mat-icon>search</mat-icon>
-<!--            <input [formControl]="searchInput" placeholder="Search in FAQs..." fxFlex>-->
+            <h1>Your Order History</h1>
         </div>
 
     </div>
@@ -20,15 +15,33 @@
 
         <mat-accordion class="faqs-accordion">
 
-<!--            <mat-expansion-panel *ngFor="let faq of faqsFiltered; let i = index" [expanded]="step === i" (opened)="setStep(i)">-->
-<!--                <mat-expansion-panel-header>-->
-<!--                    <mat-panel-title fxLayout="row" fxLayoutAlign="start center">-->
-<!--                        <mat-icon class="mr-12 s-20 secondary-text">help_outline</mat-icon>-->
-<!--                        {{faq.question}}-->
-<!--                    </mat-panel-title>-->
-<!--                </mat-expansion-panel-header>-->
-<!--                {{faq.answer}}-->
-<!--            </mat-expansion-panel>-->
+            <mat-expansion-panel *ngFor="let history of historyData;">
+                <mat-expansion-panel-header>
+                    <mat-panel-title fxLayout="row" fxLayoutAlign="start center">
+                        {{history.date}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="grid-order">
+                    <div>Item Name:</div>
+                    <div>Ice:</div>
+                    <div>Sugar:</div>
+                    <div>Count:</div>
+                    <div>Price</div>
+                    <ng-container *ngFor="let order of history['orders']">
+                        <div>{{order['item']}}
+                            <div fxLayout="rows">
+                                <div *ngFor="let option of order['options']">
+                                    {{option}}
+                                </div>
+                            </div>
+                        </div>
+                        <div>{{order['ice']}}</div>
+                        <div>{{order['sugar']}}</div>
+                        <div>{{order['value']}}</div>
+                        <div>{{order['price']}}</div>
+                    </ng-container>
+                </div>
+            </mat-expansion-panel>
         </mat-accordion>
     </div>
     <!-- / CONTENT -->

@@ -18,9 +18,11 @@ export class ErrorInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
+            console.log('error interceptors', err)
             if (err.status === 401) {
-                // auto logout if 401 response returned from api
-                this.authenticationService.logout();
+                localStorage.removeItem('user');
+                localStorage.removeItem('token');
+                this.authenticationService.setIsLogin(false);
                 this.router.navigateByUrl('/login');
             } else if (err.status === 404) {
                 this.router.navigateByUrl('/not-found');

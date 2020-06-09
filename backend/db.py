@@ -13,22 +13,23 @@ import exceptions
 class AfternoonTea:
     """Handle AfternoonTea."""
 
-    def __init__(self, *, col: str, user):
+    def __init__(self, *, col: Union[str, None], user: str):
         """Construct Mongo client."""
-        self.collection = MongoClient(**settings.MONGODB)['afternoontea'][col]
+        self.db = MongoClient(**settings.MONGODB)['afternoontea']
+        self.col = col
         self.user = user
 
     def __repr__(self):
         """__repr__ method."""
-        # TODO
+        return f"<Afternoon:{self.user}>"
 
     def get(self, *, return_default: bool = False):
         """Get form."""
         data = None
         try:
-            data = self.collection.find_one({"user": self.user}, {"_id": 0})
+            data = self.db[self.col].find_one({"user": self.user}, {"_id": 0})
             if (data is None) and (return_default is True):
-                data = self.collection.find_one({"user": 'default'}, {"_id": 0})
+                data = self.db[self.col].find_one({"user": 'default'}, {"_id": 0})
             if data:
                 return data
             else:
@@ -42,7 +43,29 @@ class AfternoonTea:
     def upsert(self, *, data: dict):
         """Insert or update a doc."""
         data["user"] = self.user
-        return self.collection.update({"user": self.user}, data, upsert=True)
+        return self.db[self.col].update({"user": self.user}, data, upsert=True)
+
+    def history(self):
+        """Get order history."""
+        collections = self.db.list_collection_names()
+        for col in collections:
+            doc = self.db[col].find_one({"user": self.user}, {"_id": 0})
+            if not doc:
+                break
+            orders = []
+            for form in doc['form']:
+                for item in form['items']:
+                    if int(item["value"]) == 0:  # TODO: fix type inconsistency
+                        continue
+                    orders.append({
+                        "item": item['label'],
+                        "ice": item['iceSelect'],
+                        "sugar": item['sugarSelect'],
+                        "value": item['value'],
+                        "price": item['sizeSelect'],
+                        "size": {i['value']: i['label'] for i in item['size']}[item['sizeSelect']]
+                    })
+            yield {"date": doc["expiration"], "orders": orders}
 
 
 class AuthToken(dict):

@@ -14,7 +14,9 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "bundle-report": "webpack-bundle-analyzer dist/stats.json"
+        "bundle-report": "webpack-bundle-analyzer dist/stats.json",
+        "rmbackend": "docker stack rm welfare",
+        "redeploy:": "docker stack deploy -c docker-stack-test.yml welfare"
     },
     "private": true,
     "dependencies": {

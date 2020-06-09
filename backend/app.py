@@ -21,7 +21,7 @@ def auth():
     logger.debug(request.headers)
     if request.method == "OPTIONS":
         return
-    if request.path in (url_for("login"), ):
+    if request.path in (url_for("login"),):
         return
     auth = request.headers.get("Authorization")
     if auth:
@@ -60,7 +60,7 @@ def login():
 @app.route("/logout")
 def logout():
     """Logout."""
-    logger.info(f'Log out: {g.token}')
+    logger.info(f"Log out: {g.token}")
     del AuthToken()[g.token]
     return jsonify({"msg": "ok"})
 
@@ -80,8 +80,14 @@ def afternoontea(col):
         return jsonify(data)
     elif request.method == "POST":
         data = request.json
-        output = {'update_time': datetime.now()}
+        output = {"update_time": datetime.now()}
         data.update(output)
         res = AfternoonTea(col=col, user=g.user).upsert(data=data)
         logger.info(res)
         return jsonify(output)
+
+
+@app.route("/history", methods=["GET"])  # XXX: should it be /afternoontea/history ?
+def history():
+    """Afternoon order history."""
+    return jsonify(list(AfternoonTea(col=None, user=g.user).history()))
