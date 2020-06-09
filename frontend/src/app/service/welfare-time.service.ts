@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CountDown } from '../model/count-down';
+import { CountDown } from '../interface/count-down';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,5 @@ export class WelfareTimeService {
       const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
       return {days, hours, minutes, seconds};
-
   }
 }

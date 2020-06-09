@@ -25,9 +25,9 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.authenticationService.setIsLogin(false);
                 this.router.navigateByUrl('/login');
             } else if (err.status === 404) {
-                this.router.navigateByUrl('/not-found');
+                this.router.navigateByUrl('error-page/not-found');
             } else if (err.status === 403) {
-                this.router.navigateByUrl('/no-auth');
+                this.router.navigateByUrl('error-page/no-auth');
             }
             const error = err.error.message || err.statusText;
             return throwError(error);

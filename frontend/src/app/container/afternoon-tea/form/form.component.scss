@@ -1,0 +1,58 @@
+.container {
+  background-color: #ffe8b9;
+  padding: 20px;
+  height: calc(100vh - 64px);
+  overflow: scroll;
+  .title-group {
+    padding: 20px 0;
+  }
+  .option-title {
+    margin-right: 20px;
+
+  }
+  .order-item {
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    border: solid #888 1px;
+    overflow: hidden;
+    input {
+      border: 0;
+      background-color: transparent;
+      color: black;
+    }
+    .title-option {
+      cursor: pointer;
+    }
+  }
+  .filter-bar {
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: solid 1px #aaaaaa;
+    input {
+      border: 0;
+      outline: none;
+    }
+  }
+  .count-down-group {
+    .count-down-item {
+      font-size: 20px;
+      margin-right: 12px;
+    }
+  }
+  .vertical-stepper-wrapper::ng-deep {
+    border-radius: 10px;
+    overflow: hidden;
+    .mat-step {
+      .mat-step-header {
+        display: flex;
+        align-items: center;
+        h1 {
+            margin: 0 !important;
+          }
+        }
+      }
+    }
+  }
+

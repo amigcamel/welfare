@@ -1,111 +1,85 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { TranslateModule } from '@ngx-translate/core';
-import 'hammerjs';
-
-import { FuseModule } from '@fuse/fuse.module';
-import { FuseSharedModule } from '@fuse/shared.module';
-import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
-
-import { fuseConfig } from 'app/fuse-config';
-
-import { AppComponent } from 'app/app.component';
-import { LayoutModule } from 'app/layout/layout.module';
-
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { FakeDbService } from './fake-db/fake-db.service';
-import { JwtInterceptor } from './helper/jwt.interceptor';
-import { ErrorInterceptor } from './helper/error.interceptor';
-import { HomeComponent } from './main/home/home.component';
-import { DialogComponent } from './component/dialog/dialog.component';
-import { PhotoDialogComponent } from './component/photo-dialog/photo-dialog.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { CartDialogComponent } from './component/cart-dialog/cart-dialog.component';
-import { ErrorPageModule } from './main/error-page/error-page.module';
+import { LoginComponent } from './container/login/login.component';
+import { RouterModule, Routes } from "@angular/router";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import {ShareModule} from "./share/share.module";
+import {MaterialModule} from "./material/material.module";
+import { ToolBarComponent } from './component/tool-bar/tool-bar.component';
+import { SideBarComponent } from './component/side-bar/side-bar.component';
+import { NavigationBarComponent } from './component/navigation-bar/navigation-bar.component';
+import { WelfareIconDirective } from './directive/welfare-icon.directive';
+import { CartDialogComponent } from "./component/cart-dialog/cart-dialog.component";
+import { PhotoDialogComponent } from "./component/photo-dialog/photo-dialog.component";
+import { DialogComponent } from "./component/dialog/dialog.component";
+import { ErrorInterceptor } from "./helper/error.interceptor";
+import { JwtInterceptor } from "./helper/jwt.interceptor";
+import { HomeComponent } from "./container/home/home.component";
+import { BillboardComponent } from './container/billboard/billboard.component';
+import { AuthGuard } from "./helper/auth.guard";
 
 const appRoutes: Routes = [
-    {
-        path        : 'login',
-        loadChildren: () => import('./main/login/login.module').then(m => m.LoginModule)
-    },
-    {
-        path        : 'sample',
-        loadChildren: () => import('./main/sample/sample.module').then(m => m.SampleModule)
-    },
-    {
-        path        : 'afternoon-tea',
-        loadChildren: () => import('./main/forms/forms.module').then(m => m.UIFormsModule)
-    },
-    {
-        path        : 'home',
-        component   : HomeComponent,
-    },
-    {
-        path        : 'coming-soon',
-        loadChildren: () => import('./main/coming-soon/coming-soon.module').then(m => m.ComingSoonModule)
-    },
-    {
-        path        : 'error-page',
-        loadChildren: () => import('./main/error-page/error-page.module').then(m => m.ErrorPageModule)
-    },
-    {
-        path        : '**',
-        redirectTo  : 'login'
-    }
+  {
+    path        : 'login',
+    component   : LoginComponent
+  },
+  {
+    path        : 'home',
+    component   : HomeComponent
+  },
+  {
+    path        : 'billboard',
+    component   : BillboardComponent,
+    canActivate : [AuthGuard]
+  },
+  {
+    path        : 'afternoon-tea',
+    loadChildren: () => import('./container/afternoon-tea/afternoon-tea.module').then(m => m.AfternoonTeaModule)
+  },
+  {
+    path        : 'error-page',
+    loadChildren: () => import('./container/error-page/error-page.module').then(m => m.ErrorPageModule)
+  },
+  {
+    path        : '**',
+    redirectTo  : 'login'
+  }
 ];
 
+
+
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        DialogComponent,
-        PhotoDialogComponent,
-        CartDialogComponent,
-    ],
-    imports     : [
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        RouterModule.forRoot(appRoutes, { useHash: true}),
-        ErrorPageModule,
-        TranslateModule.forRoot(),
-        InMemoryWebApiModule.forRoot(FakeDbService, {
-            delay             : 0,
-            passThruUnknownUrl: true
-        }),
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    ToolBarComponent,
+    SideBarComponent,
+    NavigationBarComponent,
+    WelfareIconDirective,
+    CartDialogComponent,
+    PhotoDialogComponent,
+    DialogComponent,
+    HomeComponent,
+    BillboardComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
 
-        // Material moment date module
-        MatMomentDateModule,
+    RouterModule.forRoot(appRoutes, { useHash: true }),
 
-        // Material
-        MatButtonModule,
-        MatIconModule,
-        MatToolbarModule,
+    ShareModule,
+    MaterialModule
+  ],
+  providers : [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 
-        // Fuse modules
-        FuseModule.forRoot(fuseConfig),
-        FuseProgressBarModule,
-        FuseSharedModule,
-        FuseSidebarModule,
-        FuseThemeOptionsModule,
-
-        // App modules
-        LayoutModule,
-    ],
-    bootstrap   : [
-        AppComponent
-    ],
-    providers : [
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    ]
 })
-export class AppModule
-{
-}
+export class AppModule { }

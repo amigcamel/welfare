@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CartDialogComponent } from './cart-dialog.component';
+import { MaterialModule } from "../../material/material.module";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 
 describe('CartDialogComponent', () => {
   let component: CartDialogComponent;
@@ -8,7 +10,14 @@ describe('CartDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CartDialogComponent ]
+      declarations: [ CartDialogComponent ],
+      imports: [
+        MaterialModule
+      ],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} }
+      ]
     })
     .compileComponents();
   }));

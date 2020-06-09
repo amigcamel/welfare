@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 300px;
+  background-color: #ffe8b9;
+  .icon {
+    display: block;
+    width: 200px;
+    height: 200px;
+    background: url('/assets/icons/robot.svg') no-repeat;
+    margin-right: 60px;
+  }
+  .slogan {
+    padding-bottom: 80px;
+    font-size: 28px;
+    color: rgba(62, 29, 2, 0.99);
+    line-height: 1.2;
+  }
+}
