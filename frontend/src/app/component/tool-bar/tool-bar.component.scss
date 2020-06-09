@@ -1,0 +1,21 @@
+mat-toolbar {
+  background-color:#fdb358;
+  .icon {
+    cursor: pointer;
+  }
+  .user-info {
+    padding: 10px 10px;
+    .user-photo {
+      padding-right: 10px;
+      img {
+        width: 36px;
+        height: 36px;
+        border-radius: 18px;
+        overflow: hidden;
+      }
+    }
+    .user-name {
+      font-size: 16px;
+    }
+  }
+}

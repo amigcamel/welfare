@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { AfternoonTeaForm } from '../model/afternoon-tea-form';
+import { AfternoonTeaForm } from '../interface/afternoon-tea-form';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { tryCatch } from 'rxjs/internal-compatibility';
