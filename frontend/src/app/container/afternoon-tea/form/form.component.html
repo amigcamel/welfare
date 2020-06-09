@@ -19,18 +19,18 @@
     </div>
   </div>
   <div>
-    <p *ngIf="!!formData.update_time">
-      Last edited: {{formData.update_time}}
+    <p *ngIf="!!formData?.update_time">
+      Last edited: {{formData['update_time']}}
     </p>
     <div class="vertical-stepper-wrapper" fxLayout="column">
       <mat-vertical-stepper [linear]="true">
-        <mat-step *ngFor="let step of formData.form; let i = index">
+        <mat-step *ngFor="let step of formData?.form; let i = index">
           <ng-template matStepLabel>
             <div fxLayout="row" fxLayoutAlign="start center">
               <h1>
-                {{step.stepLabel}}
+                {{step['stepLabel']}}
               </h1>
-              <mat-icon (click)="seeMenu(step.imageSource)" style="width: 24px !important; height: 24px !important;">search</mat-icon>
+              <mat-icon (click)="seeMenu(step['imageSource'])" style="width: 24px !important; height: 24px !important;">search</mat-icon>
             </div>
           </ng-template>
           <div class="filter-bar" fxLayout="row" fxLayoutAlign="starter center">

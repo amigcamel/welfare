@@ -17,6 +17,5 @@ export class WelfareTimeService {
       const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
       return {days, hours, minutes, seconds};
-
   }
 }

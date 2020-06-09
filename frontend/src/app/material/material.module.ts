@@ -27,7 +27,7 @@ import { MatRadioModule } from "@angular/material/radio";
     MatStepperModule,
     MatCheckboxModule,
     MatExpansionModule,
-    MatRadioModule
+    MatRadioModule,
   ],
   exports: [
     MatToolbarModule,

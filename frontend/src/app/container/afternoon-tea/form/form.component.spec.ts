@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormComponent } from './form.component';
+import { HttpClientModule } from "@angular/common/http";
+import { MaterialModule } from "../../../material/material.module";
+import { ActivatedRoute, Router } from "@angular/router";
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe('FormComponent', () => {
   let component: FormComponent;
@@ -8,8 +12,22 @@ describe('FormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormComponent ]
-    })
+      declarations: [ FormComponent ],
+      imports: [
+        HttpClientModule,
+        RouterTestingModule,
+        MaterialModule
+      ],
+      providers: [
+        { provide: ActivatedRoute, useValue: {
+            snapshot: {
+              data: {
+              }
+            }
+          }
+      }],
+    }
+    )
     .compileComponents();
   }));
 

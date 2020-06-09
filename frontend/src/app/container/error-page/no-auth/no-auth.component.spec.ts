@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NoAuthComponent } from './no-auth.component';
+import { Router } from "@angular/router";
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe('NoAuthComponent', () => {
   let component: NoAuthComponent;
@@ -8,7 +10,8 @@ describe('NoAuthComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NoAuthComponent ]
+      imports: [RouterTestingModule],
+      declarations: [ NoAuthComponent ],
     })
     .compileComponents();
   }));

@@ -1,6 +1,6 @@
 export interface AfternoonTeaForm {
     form: any[];
-    update_time: Date;
+    update_time: string;
     budget: string;
     expiration: string;
 }
