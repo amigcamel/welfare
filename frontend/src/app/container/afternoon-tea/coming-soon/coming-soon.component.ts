@@ -26,7 +26,7 @@ export class ComingSoonComponent implements OnInit, OnDestroy {
     }, 1000);
   }
   goBack(): void {
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/billboard');
   }
   ngOnDestroy(): void {
     clearInterval(this.setIn);

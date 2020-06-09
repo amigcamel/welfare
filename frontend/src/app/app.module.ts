@@ -18,6 +18,8 @@ import { DialogComponent } from "./component/dialog/dialog.component";
 import { ErrorInterceptor } from "./helper/error.interceptor";
 import { JwtInterceptor } from "./helper/jwt.interceptor";
 import { HomeComponent } from "./container/home/home.component";
+import { BillboardComponent } from './container/billboard/billboard.component';
+import { AuthGuard } from "./helper/auth.guard";
 
 const appRoutes: Routes = [
   {
@@ -27,6 +29,11 @@ const appRoutes: Routes = [
   {
     path        : 'home',
     component   : HomeComponent
+  },
+  {
+    path        : 'billboard',
+    component   : BillboardComponent,
+    canActivate : [AuthGuard]
   },
   {
     path        : 'afternoon-tea',
@@ -55,7 +62,8 @@ const appRoutes: Routes = [
     CartDialogComponent,
     PhotoDialogComponent,
     DialogComponent,
-    HomeComponent
+    HomeComponent,
+    BillboardComponent
   ],
   imports: [
     BrowserModule,
