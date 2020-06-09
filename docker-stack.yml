@@ -12,6 +12,9 @@ services:
     ports:
       - 4200:80
   backend:
+    depends_on:
+      - mongo
+      - redis
     deploy:
       replicas: 1
       restart_policy:
@@ -22,8 +25,6 @@ services:
     ports:
       - 5000:5000
   redis:
-    depends_on:
-      - backend
     deploy:
       replicas: 1
       restart_policy:
@@ -32,8 +33,6 @@ services:
     networks:
       - welfare
   mongo:
-    depends_on:
-      - backend
     deploy:
       replicas: 1
       restart_policy:
@@ -41,8 +40,15 @@ services:
     image: mongo:4.2.7
     networks:
       - welfare
-    ports:
-      - 27017:27017
+  redis:
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: redis:6.0.4-alpine3.11
+    networks:
+      - welfare
+
 
 networks:
   welfare:
