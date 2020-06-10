@@ -49,7 +49,7 @@ def handle_error(error):
 @app.route("/login")
 def login():
     """Login."""
-    if (code := request.args.get("code")):
+    if (code := request.args.get("code")) :
         data = get_userinfo(code)
         token = encrypt(data)
         return redirect(settings.LOGIN_REDIRECT_URL.format(token=token))

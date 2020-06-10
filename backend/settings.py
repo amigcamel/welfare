@@ -11,7 +11,9 @@ REDIS = {"host": "redis", "port": 6379, "db": 0}
 AUTH_TOKEN_TTL = 120 * 60
 LOGIN_REDIRECT_URL = "http://localhost:4200/#/home?token={token}"
 OAUTH_REDIRECT_URL = "http://welfare.local.com:5000/login"
-OAUTH_CLIENT_ID = "67320997794-5c21iin6ti7o5ihvugic84g03gaqrelj.apps.googleusercontent.com"
+OAUTH_CLIENT_ID = (
+    "67320997794-5c21iin6ti7o5ihvugic84g03gaqrelj.apps.googleusercontent.com"
+)
 OAUTH_BASE_URL = "https://accounts.google.com/o/oauth2/"
 OAUTH_CLIENT_SECRET = "9PMLulb0qUkliNdv70dM3mq8"
 EMAIL_ALLOWED_DOMAINS = ["ffn.com"]
