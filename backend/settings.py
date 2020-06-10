@@ -9,8 +9,8 @@ JWK_KEY = pickle.loads(
 MONGODB = {"host": "mongo", "port": 27017}
 REDIS = {"host": "redis", "port": 6379, "db": 0}
 AUTH_TOKEN_TTL = 120 * 60
-LOGIN_REDIRECT_URL = "http://localhost:4200/#/home?token={token}"
-OAUTH_REDIRECT_URL = "http://welfare.local.com:5000/login"
+LOGIN_REDIRECT_URL = "http://welfare.local.com:4200/#/home?token={token}"
+OAUTH_REDIRECT_URL = "http://welfare.local.com:4200/api/login"
 OAUTH_CLIENT_ID = (
     "67320997794-5c21iin6ti7o5ihvugic84g03gaqrelj.apps.googleusercontent.com"
 )
