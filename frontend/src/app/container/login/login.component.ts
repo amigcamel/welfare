@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   }
   Login(): void {
     this.authService.setIsLogin(true);
-    location.assign('http://welfare.local.com:5000/login');
+    location.assign('/api/login');
   }
 
 }

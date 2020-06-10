@@ -18,7 +18,7 @@ export class HistoryService implements Resolve<any>{
   constructor(private http: HttpClient) { }
 
   getHistory(): Observable<any> {
-      return this.http.get('/history')
+      return this.http.get('/api/history')
   }
 }
 

@@ -21,9 +21,9 @@ export class FormService implements Resolve<AfternoonTeaForm> {
     }
 
     getForm(): Observable<AfternoonTeaForm> {
-        return  this.http.get<AfternoonTeaForm>('/afternoontea/demo_1');
+        return  this.http.get<AfternoonTeaForm>('/api/afternoontea/demo_1');
     }
     sendForm(data: any): Observable<any> {
-        return this.http.post('/afternoontea/demo_1', data);
+        return this.http.post('/api/afternoontea/demo_1', data);
     }
 }
