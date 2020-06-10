@@ -15,7 +15,7 @@ class AfternoonTea:
 
     def __init__(self, *, col: Union[str, None], user: str):
         """Construct Mongo client."""
-        self.db = MongoClient(**settings.MONGODB)['afternoontea']
+        self.db = MongoClient(**settings.MONGODB)["afternoontea"]
         self.col = col
         self.user = user
 
@@ -29,7 +29,7 @@ class AfternoonTea:
         try:
             data = self.db[self.col].find_one({"user": self.user}, {"_id": 0})
             if (data is None) and (return_default is True):
-                data = self.db[self.col].find_one({"user": 'default'}, {"_id": 0})
+                data = self.db[self.col].find_one({"user": "default"}, {"_id": 0})
             if data:
                 return data
             else:
@@ -53,18 +53,29 @@ class AfternoonTea:
             if not doc:
                 break
             orders = []
-            for form in doc['form']:
-                for item in form['items']:
-                    if int(item["value"]) == 0:  # TODO: fix type inconsistency
+            for form in doc["form"]:
+                for item in form["items"]:
+                    if item["value"] == 0:
                         continue
-                    orders.append({
-                        "item": item['label'],
-                        "ice": item['iceSelect'],
-                        "sugar": item['sugarSelect'],
-                        "value": item['value'],
-                        "price": item['sizeSelect'],
-                        "size": {i['value']: i['label'] for i in item['size']}[item['sizeSelect']]
-                    })
+                    orders.append(
+                        {
+                            "item": item["itemLabel"],
+                            "ice": item["selections"]["ice"],
+                            "sugar": item["selections"]["sugar"],
+                            "price": item["selections"]["size"],
+                            "value": item["value"],
+                            "size": {
+                                j["price"]: j["selectionLabel"]
+                                for j in [
+                                    i
+                                    for i in item["options"]
+                                    if i["optionLabel"] == "Size"
+                                ][0]["radioSelections"]
+                            }[
+                                item["selections"]["size"]
+                            ],  # XXX: dirty and slow, should be optimized
+                        }
+                    )
             yield {"date": doc["expiration"], "orders": orders}
 
 
@@ -83,7 +94,7 @@ class AuthToken(dict):
 
     def __getitem__(self, token: str) -> Union[str, None]:
         """Retrieve user data."""
-        if (payload := self.conn.get(token)):
+        if (payload := self.conn.get(token)) :
             self.update_ttl(token)
             return payload
 
@@ -94,4 +105,4 @@ class AuthToken(dict):
     def update_ttl(self, token: str):
         """Set or update TTL of a token."""
         self.conn.expire(token, settings.AUTH_TOKEN_TTL)
-        logger.debug(f'Update TTL: {token}')
+        logger.debug(f"Update TTL: {token}")

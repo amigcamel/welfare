@@ -4,8 +4,8 @@ services:
   backend:
     command: >
       -c "
-      python -c 'import json as j, pymongo as p; p.MongoClient(\"mongo\").afternoontea.demo_1.insert_one(j.load(open(\"/tmp/service/mock.json\")))' &&
-      flask run -h 0.0.0.0
+      python -c 'import json as j, pymongo as p; p.MongoClient(\"mongo\").afternoontea.demo_1.insert_one(j.load(open(\"/tmp/service/mock2.json\")))' &&
+      uwsgi uwsgi.ini
       "
     depends_on:
       - mongo
