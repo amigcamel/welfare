@@ -60,8 +60,8 @@ class AfternoonTea:
                     orders.append(
                         {
                             "item": item["itemLabel"],
-                            "ice": item["selections"]["ice"],
-                            "sugar": item["selections"]["sugar"],
+                            "ice": item["selections"].get("ice"),
+                            "sugar": item["selections"].get("sugar"),
                             "price": item["selections"]["size"],
                             "value": item["value"],
                             "size": {
