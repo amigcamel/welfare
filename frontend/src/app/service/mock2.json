@@ -1,0 +1,209 @@
+{
+  "budget": 200,
+  "expiration": "2020-12-31",
+  "user": "default",
+  "form": [
+    {
+      "menuImage": "https://napteazzz.com/images/index/napteazzz_menu.png",
+      "formLabel": "再睡五分鐘",
+      "formKey": "form1",
+      "isEnd": true,
+      "items": [
+        {
+          "itemLabel": "日安紅歐蕾",
+          "itemKey": "item1",
+          "value": 0,
+          "collapse": false,
+          "selections": {},
+          "options": [
+            {
+              "optionLabel": "Size",
+              "optionKey": "size",
+              "radioSelections": [
+                {
+                  "selectionLabel": "M",
+                  "selectionKey": "selection1",
+                  "price": 60,
+                  "value": 60
+                },
+                {
+                  "selectionLabel": "L",
+                  "selectionKey": "selection2",
+                  "price": 70,
+                  "value": 70
+                }
+              ]
+            },
+            {
+              "optionLabel": "Ice",
+              "optionKey": "ice",
+              "radioSelections": [
+                {
+                  "selectionLabel": "No Ice",
+                  "selectionKey": "selection1",
+                  "value": 0
+                },
+                {
+                  "selectionLabel": "Mini Ice",
+                  "selectionKey": "selection2",
+                  "value": 3
+                },
+                {
+                  "selectionLabel": "Less Ice",
+                  "selectionKey": "selection3",
+                  "value": 7
+                },
+                {
+                  "selectionLabel": "Normal Ice",
+                  "selectionKey": "selection4",
+                  "value": 10
+                }
+              ]
+            },
+            {
+              "optionLabel": "Sugar",
+              "optionKey": "sugar",
+              "radioSelections": [
+                {
+                  "selectionLabel": "No Sugar",
+                  "selectionKey": "selection1",
+                  "value": 0
+                },
+                {
+                  "selectionLabel": "Mini Sugar",
+                  "selectionKey": "selection2",
+                  "value": 3
+                },
+                {
+                  "selectionLabel": "Less Sugar",
+                  "selectionKey": "selection3",
+                  "value": 7
+                },
+                {
+                  "selectionLabel": "Normal Sugar",
+                  "selectionKey": "selection4",
+                  "value": 10
+                }
+              ]
+            },
+            {
+              "optionLabel": "Extra",
+              "optionKey": "extra",
+              "checkBoxOptions": [
+                {
+                  "selectionLabel": "Boba",
+                  "selectionKey": "selection1",
+                  "price": 5,
+                  "choose": false
+                },
+                {
+                  "selectionLabel": "Grass Jelly",
+                  "selectionKey": "selection2",
+                  "price": 5,
+                  "choose": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "itemLabel": "日安紅歐蕾",
+          "itemKey": "item2",
+          "value": 0,
+          "collapse": false,
+          "selections": {},
+          "options": [
+            {
+              "optionLabel": "Size",
+              "optionKey": "size",
+              "radioSelections": [
+                {
+                  "selectionLabel": "M",
+                  "selectionKey": "selection1",
+                  "price": 60,
+                  "value": 60
+                },
+                {
+                  "selectionLabel": "L",
+                  "selectionKey": "selection2",
+                  "price": 70,
+                  "value": 70
+                }
+              ]
+            },
+            {
+              "optionLabel": "Ice",
+              "optionKey": "ice",
+              "radioSelections": [
+                {
+                  "selectionLabel": "No Ice",
+                  "selectionKey": "selection1",
+                  "value": 0
+                },
+                {
+                  "selectionLabel": "Mini Ice",
+                  "selectionKey": "selection2",
+                  "value": 3
+                },
+                {
+                  "selectionLabel": "Less Ice",
+                  "selectionKey": "selection3",
+                  "value": 7
+                },
+                {
+                  "selectionLabel": "Normal Ice",
+                  "selectionKey": "selection4",
+                  "value": 10
+                }
+              ]
+            },
+            {
+              "optionLabel": "Sugar",
+              "optionKey": "sugar",
+              "radioSelections": [
+                {
+                  "selectionLabel": "No Sugar",
+                  "selectionKey": "selection1",
+                  "value": 0
+                },
+                {
+                  "selectionLabel": "Mini Sugar",
+                  "selectionKey": "selection2",
+                  "value": 3
+                },
+                {
+                  "selectionLabel": "Less Sugar",
+                  "selectionKey": "selection3",
+                  "value": 7
+                },
+                {
+                  "selectionLabel": "Normal Sugar",
+                  "selectionKey": "selection4",
+                  "value": 10
+                }
+              ]
+            },
+            {
+              "optionLabel": "Extra",
+              "optionKey": "extra",
+              "checkBoxOptions": [
+                {
+                  "selectionLabel": "Boba",
+                  "selectionKey": "selection1",
+                  "price": 5,
+                  "choose": false
+                },
+                {
+                  "selectionLabel": "Grass Jelly",
+                  "selectionKey": "selection2",
+                  "price": 5,
+                  "choose": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

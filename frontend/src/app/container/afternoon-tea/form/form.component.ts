@@ -12,7 +12,7 @@ import { DialogComponent } from "../../../component/dialog/dialog.component";
 import { CartDialogComponent } from "../../../component/cart-dialog/cart-dialog.component";
 import { switchMap, takeUntil } from "rxjs/operators";
 import { Cart } from "../../../interface/cart";
-
+import * as data from "../../../service/mock2.json";
 @Component({
   selector: 'app-form',
   animations: [
@@ -21,7 +21,7 @@ import { Cart } from "../../../interface/cart";
         height: '*',
       })),
       state('closed', style({
-        height: '30px',
+        height: '70px',
       })),
       transition('open <=> closed', [
         animate('.5s ease-in')
@@ -33,7 +33,6 @@ import { Cart } from "../../../interface/cart";
 })
 export class FormComponent implements OnInit, OnDestroy {
   public sum = 0;
-  public isDark = false;
   public filterTarget = '';
   public expiration: CountDown;
   public formData: AfternoonTeaForm;
@@ -48,10 +47,27 @@ export class FormComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.formData = this.activatedRoute.snapshot.data.formData;
+    // this.formData = this.activatedRoute.snapshot.data.formData;
+    this.formData = data['default'];
+    console.log(this.formData, 'before')
+    this.initialFormData();
     this.setInt = setInterval(_ => {
       this.expiration = this.welfareTimeService.countDown(this.formData.expiration);
     }, 1000);
+  }
+  private initialFormData(){
+    this.formData.form.forEach(form => {
+      form.items.forEach(item => {
+        item.options.forEach(option => {
+          if (!!option.radioSelections && option.radioSelections.length > 0) {
+            const key = option.optionKey
+            item.selections = Object.assign({...item.selections},
+              {[key]: option.radioSelections[0].value})
+          }
+        })
+      })
+    })
+    console.log(this.formData, 'after');
   }
   public filterText(target: string): boolean {
     if (this.filterTarget === '') {
@@ -61,32 +77,31 @@ export class FormComponent implements OnInit, OnDestroy {
       return regexp.test(target);
     }
   }
-  public subOne(step: number, key: string): void {
-    for (const item of this.formData.form[step]['items']) {
-      if (item.key === key) {
+  public subOne(index: number, key: string): void {
+    for (let item of this.formData.form[index].items) {
+      if (item.itemKey === key) {
         if (item.value > 0) {
-          item.value =  parseInt(item.value, 10) - 1;
+          item.value =  item.value - 1;
           this.calculatorSum();
         }
       } else {
-        item['isOpen'] = false;
+        item.collapse = false;
       }
     }
   }
-  public addOne(step: number, key: string): void {
-    for (const item of this.formData.form[step]['items']) {
-      if (item.key === key) {
-        item.value =  parseInt(item.value, 10) + 1;
+  public addOne(index: number, key: string): void {
+    for (let item of this.formData.form[index].items) {
+      if (item.itemKey === key) {
+        item.value =  item.value + 1;
         this.calculatorSum();
-        if (this.sum > parseInt(this.formData.budget, 10)) {
-          item.value =  parseInt(item.value, 10) - 1;
+        if (this.sum > this.formData.budget) {
+          item.value =  item.value - 1;
           this.calculatorSum();
         }
       } else {
-        item['isOpen'] = false;
+        item.collapse = false;
       }
-    }
-
+    };
   }
   public seeMenu(src: string): void {
     this.matDialog.open(PhotoDialogComponent, {
@@ -96,40 +111,43 @@ export class FormComponent implements OnInit, OnDestroy {
       panelClass: 'photo-dialog'
     });
   }
-  public checkedOption(step: number, itemKey: string, optionKey: string): void {
-    for (const item of this.formData.form[step]['items']) {
-      if (item.key === itemKey) {
-        for (const option of item.options) {
-          if (option.key === optionKey) {
-            option['choose'] = !option['choose'];
-            this.calculatorSum();
+  public checkedOption(index: number, itemKey: string, optionKey: string, selectionKey: string): void {
+    for (let item of this.formData.form[index].items) {
+      if (item.itemKey === itemKey) {
+        for (let option of item.options) {
+          if (option.optionKey === optionKey) {
+            if (!!option.checkBoxOptions) {
+              for (let select of option.checkBoxOptions) {
+                if (select.selectionKey === selectionKey) {
+                  console.log(selectionKey)
+                  select.choose = !select.choose
+                }
+              }
+            }
           }
         }
       }
     }
+    this.calculatorSum();
   }
   public calculatorSum(): void {
     this.sum = 0;
-    for (const step of this.formData.form) {
-      for (const item of step['items']) {
-        let options = 0;
-        for (const option of item['options']) {
-          if (option['choose']) {
-            options += parseInt(option['price'], 10);
+    for (let form of this.formData.form) {
+      for (let item of form.items) {
+        let extraValue = 0;
+        for (let option of item.options) {
+          if (!!option.checkBoxOptions){
+            for (let select of option.checkBoxOptions) {
+              if (select.choose) {
+                extraValue += select.price;
+              }
+            }
           }
         }
-        this.sum +=  (options + parseInt(item['sizeSelect'], 10)) * parseInt(item['value'], 10);
+        this.sum += item.value * (item.selections['size'] + extraValue)
       }
     }
-    if (isNaN(this.sum)) {
-      this.matDialog.open(DialogComponent, {
-        data: {
-          title: 'Error Message',
-          errorMessage: 'Please Input correct number'
-        },
-        panelClass: 'form-dialog'
-      });
-    } else if (this.sum > parseInt(this.formData.budget, 10)) {
+    if (this.sum > this.formData.budget) {
       this.matDialog.open(DialogComponent, {
         data: {
           title: 'Warn Message',
@@ -140,9 +158,9 @@ export class FormComponent implements OnInit, OnDestroy {
     }
   }
   public closeAllExpand(): void {
-    for (const step of this.formData.form) {
-      for (const item of step['items']) {
-        item['isOpen'] = false;
+    for (let form of this.formData.form) {
+      for (const item of form.items) {
+        item.collapse = false;
       }
     }
     this.filterTarget = '';
@@ -168,24 +186,28 @@ export class FormComponent implements OnInit, OnDestroy {
   }
   previewCart(): Cart[] {
     const data: Cart[] = [];
-    for (const step of this.formData.form) {
-      for (const item of step['items']) {
+    for (const form of this.formData.form) {
+      for (const item of form.items) {
         if (item['value'] >  0) {
           let price = 0;
-          let options = '';
-          for (const option of item['options']) {
-            if (option['choose']) {
-              price += parseInt(option['price'], 10);
-              options += option['label'] + ' ';
+          let optionList = '';
+          for (const option of item.options) {
+            if (!!option.checkBoxOptions){
+              for (let select of option.checkBoxOptions) {
+                if (select.choose) {
+                  price += select.price;
+                  optionList += select.selectionLabel;
+                }
+              }
             }
           }
-          price += parseInt(item['sizeSelect'], 10);
+          price += item.selections['size']
           data.push({
-              productName: item['label'],
-              subExtra: options,
+              productName: item.itemLabel,
+              subExtra: optionList,
               price: price,
-              count: item['value'],
-              total: parseInt(item['value'], 10) * price,
+              count: item.value,
+              total: item.value * price,
             }
           );
         }
