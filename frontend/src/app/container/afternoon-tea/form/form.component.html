@@ -24,61 +24,55 @@
     </p>
     <div class="vertical-stepper-wrapper" fxLayout="column">
       <mat-vertical-stepper [linear]="true">
-        <mat-step *ngFor="let step of formData?.form; let i = index">
+        <mat-step *ngFor="let form of formData?.form; let i = index">
           <ng-template matStepLabel>
             <div fxLayout="row" fxLayoutAlign="start center">
               <h1>
-                {{step['stepLabel']}}
+                {{form.formLabel}}
               </h1>
-              <mat-icon (click)="seeMenu(step['imageSource'])" style="width: 24px !important; height: 24px !important;">search</mat-icon>
+              <mat-icon (click)="seeMenu(form.menuImage)" style="width: 24px !important; height: 24px !important;">search</mat-icon>
             </div>
           </ng-template>
           <div class="filter-bar" fxLayout="row" fxLayoutAlign="starter center">
             <input placeholder="Search item" type="text" fxFlex [(ngModel)]="filterTarget">
             <mat-icon>search</mat-icon>
           </div>
-          <div *ngFor="let item of step['items']" class="order-item" [@openClose]="item['isOpen'] ? 'open' : 'closed'">
-            <ng-container *ngIf="filterText(item['label'])">
-              <div fxLayout="column">
-                <div class="title" fxLayout="row" fxLayoutAlign="space-between center" (click)="item['isOpen'] = true;">
-                  <h2>{{item.label}}</h2>
+          <div *ngFor="let item of form.items">
+            <ng-container *ngIf="filterText(item.itemLabel)">
+              <div fxLayout="column" class="order-item" [@openClose]="item.collapse ? 'open' : 'closed'">
+                <div class="title" fxLayout="row" fxLayoutAlign="space-between center" (click)="item.collapse = true;">
+                  <h2>{{item.itemLabel}}</h2>
                   <div class="title-option" fxLayout="row" fxLayoutAlign="space-around center" fxFlex="50">
-                    <mat-icon class="button" (click)="subOne(i, item.key);"style="width: 32px; height: 32px">remove</mat-icon>
+                    <mat-icon class="button" (click)="subOne(i, item.itemKey);"style="width: 32px; height: 32px">remove</mat-icon>
                     <input matInput [(ngModel)]="item.value" disabled type="number" style="text-align: center;">
-                    <mat-icon class="button" (click)="addOne(i, item.key); "style="width: 32px; height: 32px">add</mat-icon>
+                    <mat-icon class="button" (click)="addOne(i, item.itemKey); "style="width: 32px; height: 32px">add</mat-icon>
                   </div>
                 </div>
-                <div>
-                  <h2 class="option-title">Ice: </h2>
-                  <mat-radio-group [(ngModel)]="item['iceSelect']" fxLayoutAlign="space-between center" fxFlex="100">
-                    <mat-radio-button  *ngFor="let ice of item['ice']" [value]="ice['value']">{{ice['label']}}</mat-radio-button>
-                  </mat-radio-group>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="start center">
-                  <h2 class="option-title">Sugar: </h2>
-                  <mat-radio-group [(ngModel)]="item['sugarSelect']" fxLayoutAlign="space-between center" fxFlex="100">
-                    <mat-radio-button *ngFor="let sugar of item['sugar']" [value]="sugar['value']">{{sugar['label']}}</mat-radio-button>
-                  </mat-radio-group>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="start center">
-                  <h2 class="option-title">Size: </h2>
-                  <mat-radio-group [(ngModel)]="item['sizeSelect']" fxLayoutAlign="space-between center" fxFlex="100" (change)="calculatorSum()">
-                    <mat-radio-button *ngFor="let size of item['size']" [value]="size['value']">{{size['label']}}</mat-radio-button>
-                  </mat-radio-group>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="start center">
-                  <h2 class="option-title">Extra: </h2>
-                  <div *ngFor="let o of item['options']" fxLayoutAlign="space-between center" fxFlex="100">
-                    <mat-checkbox [checked]="o.choose"  (change)="checkedOption(i, item.key, o.key)">{{o.label}}</mat-checkbox>
-                  </div>
-                </div>
+                <ng-container *ngFor="let option of item.options">
+                  <ng-container *ngIf="!!option.radioSelections && option.radioSelections.length > 0">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                      <div class="option-title">{{option.optionLabel}}:</div>
+                      <mat-radio-group fxLayoutAlign="space-between center" [(ngModel)]="item.selections[option.optionKey]" (change)="calculatorSum()" fxFlex="100">
+                        <mat-radio-button  *ngFor="let select of option.radioSelections" [value]="select.value" >{{select.selectionLabel}}</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="!!option.checkBoxOptions && option.checkBoxOptions.length > 0">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                      <div class="option-title">{{option.optionLabel}}</div>
+                      <div *ngFor="let select of option.checkBoxOptions" fxLayoutAlign="space-between center" fxFlex="100">
+                        <mat-checkbox [checked]="select.choose" (change)="checkedOption(i,item.itemKey, option.optionKey, select.selectionKey )">{{select.selectionLabel}}</mat-checkbox>
+                      </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
               </div>
             </ng-container>
           </div>
           <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
             <button mat-raised-button matStepperPrevious (click)="closeAllExpand()">previous</button>
-            <button *ngIf="!step['isEnd']" mat-raised-button matStepperNext (click)="closeAllExpand()">next</button>
-            <button *ngIf="step['isEnd']" mat-raised-button type="button" color="accent" (click)="finishHorizontalStepper()">
+            <button *ngIf="!form.isEnd" mat-raised-button matStepperNext (click)="closeAllExpand()">next</button>
+            <button *ngIf="form.isEnd" mat-raised-button type="button" color="accent" (click)="finishHorizontalStepper()">
               Finish
             </button>
           </div>
