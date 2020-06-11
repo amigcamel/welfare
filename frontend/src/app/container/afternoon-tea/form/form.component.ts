@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { Subject } from "rxjs";
 import { CountDown } from "../../../interface/count-down";
-import { AfternoonTeaForm } from "../../../interface/afternoon-tea-form";
+import { AfternoonTeaForm, CheckBoxSelection, Form, Item } from "../../../interface/afternoon-tea-form";
 import { FormService } from "../../../service/form.service";
 import { MatDialog } from "@angular/material/dialog";
 import { WelfareTimeService } from "../../../service/welfare-time.service";
@@ -31,6 +31,7 @@ import * as data from "../../../service/mock2.json";
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
+
 export class FormComponent implements OnInit, OnDestroy {
   public sum = 0;
   public filterTarget = '';
@@ -49,7 +50,6 @@ export class FormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this.formData = this.activatedRoute.snapshot.data.formData;
     this.formData = data['default'];
-    console.log(this.formData, 'before')
     if (this.formData.user === 'default') {
       this.initialFormData();
     }
@@ -57,6 +57,7 @@ export class FormComponent implements OnInit, OnDestroy {
       this.expiration = this.welfareTimeService.countDown(this.formData.expiration);
     }, 1000);
   }
+
   private initialFormData(){
     this.formData.form.forEach(form => {
       form.items.forEach(item => {
@@ -69,8 +70,8 @@ export class FormComponent implements OnInit, OnDestroy {
         })
       })
     })
-    console.log(this.formData, 'after');
   }
+
   public filterText(target: string): boolean {
     if (this.filterTarget === '') {
       return true;
@@ -79,32 +80,43 @@ export class FormComponent implements OnInit, OnDestroy {
       return regexp.test(target);
     }
   }
-  public subOne(index: number, key: string): void {
-    for (let item of this.formData.form[index].items) {
-      if (item.itemKey === key) {
-        if (item.value > 0) {
-          item.value =  item.value - 1;
-          this.calculatorSum();
-        }
-      } else {
+
+  public subOnFlow(form: Form, target: Item): void {
+    target = this.subOne(target);
+    this.calculatorSum();
+    target.collapse = target.value !== 0;
+    for (const item of form.items) {
+      if (item.itemKey !== target.itemKey) {
         item.collapse = false;
       }
     }
   }
-  public addOne(index: number, key: string): void {
-    for (let item of this.formData.form[index].items) {
-      if (item.itemKey === key) {
-        item.value =  item.value + 1;
-        this.calculatorSum();
-        if (this.sum > this.formData.budget) {
-          item.value =  item.value - 1;
-          this.calculatorSum();
-        }
-      } else {
+
+  private subOne(item: Item): Item {
+    item.value = item.value > 0 ? item.value - 1 : item.value;
+    return item
+  }
+
+  private addOne(item: Item): Item {
+    item.value = item.value + 1;
+    return item
+  }
+
+  public addOneFlow(form: Form, target: Item): void {
+    target.collapse = true;
+    target = this.addOne(target);
+    this.calculatorSum();
+    if (this.sum > this.formData.budget) {
+      target = this.subOne(target);
+      this.calculatorSum();
+    }
+    for (const item of form.items) {
+      if (item.itemKey !== target.itemKey) {
         item.collapse = false;
       }
-    };
+    }
   }
+
   public seeMenu(src: string): void {
     this.matDialog.open(PhotoDialogComponent, {
       data: {
@@ -113,25 +125,12 @@ export class FormComponent implements OnInit, OnDestroy {
       panelClass: 'photo-dialog'
     });
   }
-  public checkedOption(index: number, itemKey: string, optionKey: string, selectionKey: string): void {
-    for (let item of this.formData.form[index].items) {
-      if (item.itemKey === itemKey) {
-        for (let option of item.options) {
-          if (option.optionKey === optionKey) {
-            if (!!option.checkBoxOptions) {
-              for (let select of option.checkBoxOptions) {
-                if (select.selectionKey === selectionKey) {
-                  console.log(selectionKey)
-                  select.choose = !select.choose
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+
+  public checkedOption(selection: CheckBoxSelection): void {
+    selection.choose = !selection.choose;
     this.calculatorSum();
   }
+
   public calculatorSum(): void {
     this.sum = 0;
     for (let form of this.formData.form) {
@@ -159,6 +158,7 @@ export class FormComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   public closeAllExpand(): void {
     for (let form of this.formData.form) {
       for (const item of form.items) {
@@ -167,6 +167,7 @@ export class FormComponent implements OnInit, OnDestroy {
     }
     this.filterTarget = '';
   }
+
   finishHorizontalStepper(): void
   {
 
@@ -186,6 +187,7 @@ export class FormComponent implements OnInit, OnDestroy {
         this.formData.update_time = data.update_time;
       });
   }
+
   previewCart(): Cart[] {
     const data: Cart[] = [];
     for (const form of this.formData.form) {
