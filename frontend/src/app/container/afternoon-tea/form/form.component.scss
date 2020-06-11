@@ -3,48 +3,55 @@
   padding: 20px;
   height: calc(100vh - 64px);
   overflow: scroll;
-  .title-group {
-    padding: 20px 0;
-  }
-  .option-title {
-    margin-right: 20px;
-
-  }
-  .order-item {
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 20px;
-    border: solid #888 1px;
-    overflow: hidden;
-    &.active {
-      background-color: #fff4df;
-    }
-    input {
-      border: 0;
-      background-color: transparent;
-      color: black;
-    }
-    .title-option {
-      cursor: pointer;
-    }
-  }
-  .filter-bar {
-    padding: 10px 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    border: solid 1px #aaaaaa;
-    input {
-      border: 0;
-      outline: none;
-    }
-  }
   .count-down-group {
     .count-down-item {
       font-size: 20px;
       margin-right: 12px;
     }
   }
-  .vertical-stepper-wrapper::ng-deep {
+  .form {
+    .filter-bar {
+      padding: 10px 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      border: solid 1px #aaaaaa;
+      input {
+        border: 0;
+        outline: none;
+      }
+    }
+    .item {
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 20px;
+      border: solid #888 1px;
+      overflow: hidden;
+      &.active {
+        background-color: #fff4df;
+      }
+      .item-title {
+        padding-bottom: 15px;
+        .item-price-label {
+          padding-top: 6px;
+          padding-left: 10px;
+        }
+        .control-bar {
+          cursor: pointer;
+          .item-value {
+            padding-bottom: 6px;
+          }
+        }
+      }
+      .option {
+        padding: 5px 0;
+        .option-title {
+          font-weight: bold;
+          padding-right: 5px;
+        }
+      }
+    }
+  }
+  .form::ng-deep {
     border-radius: 10px;
     overflow: hidden;
     .mat-step {
@@ -53,9 +60,9 @@
         align-items: center;
         h1 {
             margin: 0 !important;
-          }
         }
       }
     }
   }
+}
 
