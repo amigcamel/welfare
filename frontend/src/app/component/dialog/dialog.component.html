@@ -10,6 +10,6 @@
     </mat-toolbar>
 
     <div mat-dialog-content class="p-24 m-0"  fxFlex="100" fxLayoutAlign="center center">
-        <h2>{{data.errorMessage}}</h2>
+      <h2 [innerHTML]="data.errorMessage"></h2>
     </div>
 </div>

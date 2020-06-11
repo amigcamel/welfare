@@ -151,8 +151,8 @@ export class FormComponent implements OnInit, OnDestroy {
     if (this.sum > this.formData.budget) {
       this.matDialog.open(DialogComponent, {
         data: {
-          title: 'Warn Message',
-          errorMessage: 'Sorry you exceed budget'
+          title: 'Over Budget',
+          errorMessage: `Your Budget: ${this.formData.budget}<br> Current: ${this.sum}`
         },
         panelClass: 'form-dialog'
       });
