@@ -6,7 +6,7 @@
     </div>
     <div>
         <mat-accordion>
-            <mat-expansion-panel *ngFor="let history of historyData;">
+            <mat-expansion-panel *ngFor="let history of historyData;" [expanded]="true">
                 <mat-expansion-panel-header>
                     <mat-panel-title fxLayout="row" fxLayoutAlign="start center">
                         {{history.date}}
