@@ -39,14 +39,14 @@
           </div>
           <div *ngFor="let item of form.items">
             <ng-container *ngIf="filterText(item.itemLabel)">
-              <div fxLayout="column" class="order-item" [@openClose]="item.collapse ? 'open' : 'closed'">
+              <div fxLayout="column" class="order-item" [ngClass]="{'active': item.value > 0}" [@openClose]="item.collapse ? 'open' : 'closed'">
                 <div>
-                <div class="title" fxLayout="row" fxLayoutAlign="space-between center" (click)="item.collapse = true;">
+                <div class="title" fxLayout="row" fxLayoutAlign="space-between center">
                   <h2>{{item.itemLabel}}</h2>
                   <div class="title-option" fxLayout="row" fxLayoutAlign="space-around center" fxFlex="50">
-                    <mat-icon class="button" (click)="subOne(i, item.itemKey);"style="width: 32px; height: 32px">remove</mat-icon>
+                    <mat-icon class="button" (click)="subOnFlow(form, item);" style="width: 32px; height: 32px">remove</mat-icon>
                     <div>{{item.value}}</div>
-                    <mat-icon class="button" (click)="addOne(i, item.itemKey); "style="width: 32px; height: 32px">add</mat-icon>
+                    <mat-icon class="button" (click)="addOneFlow(form, item);" style="width: 32px; height: 32px">add</mat-icon>
                   </div>
                 </div>
                 <ng-container *ngFor="let option of item.options">
@@ -62,7 +62,7 @@
                     <div fxLayout="row" fxLayoutAlign="start center">
                       <div class="option-title">{{option.optionLabel}}</div>
                       <div *ngFor="let select of option.checkBoxOptions" fxLayoutAlign="space-between center" fxFlex="100">
-                        <mat-checkbox [checked]="select.choose" (change)="checkedOption(i,item.itemKey, option.optionKey, select.selectionKey )">{{select.selectionLabel}}</mat-checkbox>
+                        <mat-checkbox [checked]="select.choose" (change)="checkedOption(select)">{{select.selectionLabel}}</mat-checkbox>
                       </div>
                     </div>
                   </ng-container>
