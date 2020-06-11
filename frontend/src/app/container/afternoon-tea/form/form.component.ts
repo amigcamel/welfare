@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from "@angular/animations";
-import { Subject } from "rxjs";
+import { of, Subject } from "rxjs";
 import { CountDown } from "../../../interface/count-down";
 import { AfternoonTeaForm, CheckBoxSelection, Form, Item } from "../../../interface/afternoon-tea-form";
 import { FormService } from "../../../service/form.service";
@@ -21,7 +21,7 @@ import * as data from "../../../service/mock2.json";
         height: '*',
       })),
       state('closed', style({
-        height: '70px',
+        height: '75px',
       })),
       transition('open <=> closed', [
         animate('.5s ease-in')
@@ -180,11 +180,13 @@ export class FormComponent implements OnInit, OnDestroy {
       if (result) {
         return this.formService.sendForm(this.formData);
       } else {
-        return;
+        return of(null);
       }
     }))
       .subscribe(data => {
-        this.formData.update_time = data.update_time;
+        if (!!data) {
+          this.formData.update_time = data.update_time;
+        }
       });
   }
 
@@ -218,6 +220,17 @@ export class FormComponent implements OnInit, OnDestroy {
       }
     }
     return data;
+  }
+  getPriceLabel(item: Item): string {
+    let result = [];
+    for (let option of item.options) {
+      if (option.optionKey === 'size') {
+        for(let selection of option.radioSelections) {
+          result.push(selection.selectionLabel + " : " + selection.price)
+        }
+      }
+    }
+    return result.join(" | ");
   }
 
   ngOnDestroy() {

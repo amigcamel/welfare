@@ -22,7 +22,7 @@
     <p *ngIf="!!formData?.update_time">
       Last edited: {{formData['update_time']}}
     </p>
-    <div class="vertical-stepper-wrapper" fxLayout="column">
+    <div class="form" fxLayout="column">
       <mat-vertical-stepper [linear]="true">
         <mat-step *ngFor="let form of formData?.form; let i = index">
           <ng-template matStepLabel>
@@ -39,19 +39,25 @@
           </div>
           <div *ngFor="let item of form.items">
             <ng-container *ngIf="filterText(item.itemLabel)">
-              <div fxLayout="column" class="order-item" [ngClass]="{'active': item.value > 0}" [@openClose]="item.collapse ? 'open' : 'closed'">
+              <div fxLayout="column" class="item" [ngClass]="{'active': item.value > 0}" [@openClose]="item.collapse ? 'open' : 'closed'">
                 <div>
-                <div class="title" fxLayout="row" fxLayoutAlign="space-between center">
-                  <h2>{{item.itemLabel}}</h2>
-                  <div class="title-option" fxLayout="row" fxLayoutAlign="space-around center" fxFlex="50">
+                <div class="item-title" fxLayout="row" fxLayoutAlign="space-between center">
+                  <div fxLayout="rows" fxLayoutAlign="start start">
+                    <h2>{{item.itemLabel}}</h2>
+                    <span class="item-price-label">(
+                      <span>{{getPriceLabel(item)}}</span>
+                      )</span>
+                  </div>
+
+                  <div class="control-bar" fxLayout="row" fxLayoutAlign="space-around center" fxFlex="50">
                     <mat-icon class="button" (click)="subOnFlow(form, item);" style="width: 32px; height: 32px">remove</mat-icon>
-                    <div>{{item.value}}</div>
+                    <div class="item-value">{{item.value}}</div>
                     <mat-icon class="button" (click)="addOneFlow(form, item);" style="width: 32px; height: 32px">add</mat-icon>
                   </div>
                 </div>
                 <ng-container *ngFor="let option of item.options">
                   <ng-container *ngIf="!!option.radioSelections && option.radioSelections.length > 0">
-                    <div fxLayout="row" fxLayoutAlign="start center">
+                    <div class="option" fxLayout="row" fxLayoutAlign="start center">
                       <div class="option-title">{{option.optionLabel}}:</div>
                       <mat-radio-group fxLayoutAlign="space-between center" [(ngModel)]="item.selections[option.optionKey]" (change)="calculatorSum()" fxFlex="100">
                         <mat-radio-button  *ngFor="let select of option.radioSelections" [value]="select.value" >{{select.selectionLabel}}</mat-radio-button>
@@ -59,8 +65,8 @@
                     </div>
                   </ng-container>
                   <ng-container *ngIf="!!option.checkBoxOptions && option.checkBoxOptions.length > 0">
-                    <div fxLayout="row" fxLayoutAlign="start center">
-                      <div class="option-title">{{option.optionLabel}}</div>
+                    <div class="option" fxLayout="row" fxLayoutAlign="start center">
+                      <div class="option-title">{{option.optionLabel}}:</div>
                       <div *ngFor="let select of option.checkBoxOptions" fxLayoutAlign="space-between center" fxFlex="100">
                         <mat-checkbox [checked]="select.choose" (change)="checkedOption(select)">{{select.selectionLabel}}</mat-checkbox>
                       </div>
