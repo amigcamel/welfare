@@ -7,7 +7,7 @@
       "menuImage":"https://ucarecdn.com/1aff30e5-50da-424b-b2ed-697a2ebc1e40/-/crop/1800x750/0,17/-/format/auto/-/resize/3000x/",
       "formLabel":"Haritts 甜甜圈",
       "formKey":"form1",
-      "isEnd":true,
+      "isEnd":false,
       "items":[
         {
           "itemLabel":"原味",

@@ -40,11 +40,12 @@
           <div *ngFor="let item of form.items">
             <ng-container *ngIf="filterText(item.itemLabel)">
               <div fxLayout="column" class="order-item" [@openClose]="item.collapse ? 'open' : 'closed'">
+                <div>
                 <div class="title" fxLayout="row" fxLayoutAlign="space-between center" (click)="item.collapse = true;">
                   <h2>{{item.itemLabel}}</h2>
                   <div class="title-option" fxLayout="row" fxLayoutAlign="space-around center" fxFlex="50">
                     <mat-icon class="button" (click)="subOne(i, item.itemKey);"style="width: 32px; height: 32px">remove</mat-icon>
-                    <input matInput [(ngModel)]="item.value" disabled type="number" style="text-align: center;">
+                    <div>{{item.value}}</div>
                     <mat-icon class="button" (click)="addOne(i, item.itemKey); "style="width: 32px; height: 32px">add</mat-icon>
                   </div>
                 </div>
@@ -66,6 +67,7 @@
                     </div>
                   </ng-container>
                 </ng-container>
+              </div>
               </div>
             </ng-container>
           </div>

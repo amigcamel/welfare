@@ -50,7 +50,9 @@ export class FormComponent implements OnInit, OnDestroy {
     // this.formData = this.activatedRoute.snapshot.data.formData;
     this.formData = data['default'];
     console.log(this.formData, 'before')
-    this.initialFormData();
+    if (this.formData.user === 'default') {
+      this.initialFormData();
+    }
     this.setInt = setInterval(_ => {
       this.expiration = this.welfareTimeService.countDown(this.formData.expiration);
     }, 1000);
