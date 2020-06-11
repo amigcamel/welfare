@@ -57,23 +57,26 @@ class AfternoonTea:
                 for item in form["items"]:
                     if item["value"] == 0:
                         continue
+                    extras = []
+                    price = item["selections"]["size"]
+                    for i in item["options"]:
+                        if i["optionLabel"] == "Size":
+                            size = {j["price"]: j["selectionLabel"] for j in i["radioSelections"]}[item["selections"]["size"]]  # XXX: dirty and slow, should be optimized
+                        elif i["optionLabel"] == "Extra":
+                            for j in i["checkBoxOptions"]:
+                                if j["choose"]:
+                                    extras.append(j["selectionLabel"])
+                                    price += j["price"]
+
                     orders.append(
                         {
                             "item": item["itemLabel"],
                             "ice": item["selections"].get("ice"),
                             "sugar": item["selections"].get("sugar"),
-                            "price": item["selections"]["size"],
+                            "price": price,
                             "value": item["value"],
-                            "size": {
-                                j["price"]: j["selectionLabel"]
-                                for j in [
-                                    i
-                                    for i in item["options"]
-                                    if i["optionLabel"] == "Size"
-                                ][0]["radioSelections"]
-                            }[
-                                item["selections"]["size"]
-                            ],  # XXX: dirty and slow, should be optimized
+                            "size": size,
+                            "options": extras,
                         }
                     )
             yield {"date": doc["expiration"], "orders": orders}
