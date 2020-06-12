@@ -15,4 +15,4 @@
     <app-navigation-bar fxFlex="100" fxFill></app-navigation-bar>
   </div>
 </div>
-<div class="sidebar-overlay" *ngIf="isOpen"></div>
+<div class="sidebar-overlay" (click)="closeSideBar()" *ngIf="isOpen"></div>
