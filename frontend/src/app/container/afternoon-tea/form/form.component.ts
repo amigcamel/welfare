@@ -81,15 +81,11 @@ export class FormComponent implements OnInit, OnDestroy {
     }
   }
 
-  public subOnFlow(form: Form, target: Item): void {
+  public subOnFlow(form: Form, target: Item, event: Event): void {
+    event.stopPropagation()
     target = this.subOne(target);
     this.calculatorSum();
     target.collapse = target.value !== 0;
-    for (const item of form.items) {
-      if (item.itemKey !== target.itemKey) {
-        item.collapse = false;
-      }
-    }
   }
 
   private subOne(item: Item): Item {
@@ -102,18 +98,14 @@ export class FormComponent implements OnInit, OnDestroy {
     return item
   }
 
-  public addOneFlow(form: Form, target: Item): void {
+  public addOneFlow(form: Form, target: Item, event: Event): void {
+    event.stopPropagation()
     target.collapse = true;
     target = this.addOne(target);
     this.calculatorSum();
     if (this.sum > this.formData.budget) {
       target = this.subOne(target);
       this.calculatorSum();
-    }
-    for (const item of form.items) {
-      if (item.itemKey !== target.itemKey) {
-        item.collapse = false;
-      }
     }
   }
 
@@ -158,17 +150,22 @@ export class FormComponent implements OnInit, OnDestroy {
       });
     }
   }
+  public toggleCollapse(item: Item){
+    if (item.value === 0) {
+      item.collapse = false;
+    } else {
+      item.collapse = !item.collapse;
+    }
+  }
 
-  public closeAllExpand(): void {
-    for (let form of this.formData.form) {
-      for (const item of form.items) {
-        item.collapse = false;
-      }
+  public closeAllCollapse(form: Form): void {
+    for (const item of form.items) {
+      item.collapse = false;
     }
     this.filterTarget = '';
   }
 
-  finishHorizontalStepper(): void
+  finishOrder(): void
   {
 
     this.matDialog.open(CartDialogComponent, {
