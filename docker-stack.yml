@@ -45,7 +45,7 @@ services:
     ports:
       - 27017:27017  # TODO: remove when in prod
     volumes:
-      - ./data:/data
+      - ./data/db:/data/db
   redis:
     deploy:
       replicas: 1
