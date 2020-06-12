@@ -48,8 +48,8 @@ export class FormComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    // this.formData = this.activatedRoute.snapshot.data.formData;
-    this.formData = data['default'];
+    this.formData = this.activatedRoute.snapshot.data.formData;
+    // this.formData = data['default'];
     if (this.formData.user === 'default') {
       this.initialFormData();
     }
@@ -173,7 +173,8 @@ export class FormComponent implements OnInit, OnDestroy {
 
     this.matDialog.open(CartDialogComponent, {
       data: {
-        items: this.previewCart()
+        items: this.previewCart(),
+        total: this.sum
       },
       panelClass: 'cart-dialog'
     }).afterClosed().pipe(takeUntil(this.unSubscribe.asObservable()), switchMap(result => {

@@ -25,7 +25,9 @@
                 <div class="item">{{item['total']}}</div>
             </ng-container>
         </div>
+
     </div>
+  <div class="total"><strong>Total:</strong> {{data.total}}</div>
     <div class="cart-footer" fxLayout="row" fxLayoutAlign="space-around center" >
         <button mat-raised-button color="warn" (click)="close()">Close</button>
         <button mat-raised-button color="accent" (click)="accept()">Finish</button>
