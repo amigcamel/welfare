@@ -10,7 +10,7 @@ services:
     networks:
       - welfare
     ports:
-      - 4200:80
+      - 80:80
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
   backend:
@@ -24,8 +24,6 @@ services:
     image: be:latest
     networks:
       - welfare
-    ports:
-      - 5000:5000
   redis:
     deploy:
       replicas: 1
@@ -42,8 +40,6 @@ services:
     image: mongo:4.2.7
     networks:
       - welfare
-    ports:
-      - 27017:27017  # TODO: remove when in prod
     volumes:
       - ./data/db:/data/db
   redis:
