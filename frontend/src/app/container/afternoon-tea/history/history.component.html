@@ -21,7 +21,7 @@
                     <ng-container *ngFor="let order of history['orders']">
                         <div>{{order['item']}}
                             <div fxLayout="rows">
-                                <div>{{order.options.join(', ')}}</div>
+                                <div>{{showExtra(order['item'])}}</div>
                             </div>
                         </div>
                         <div>{{order['ice']}}</div>

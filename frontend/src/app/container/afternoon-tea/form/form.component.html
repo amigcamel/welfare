@@ -1,27 +1,29 @@
 <div class="container" fxLayout="column">
-  <div class="title-group" fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxLayout="column" fxLayoutAlign="center start">
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon>home</mat-icon>
-        <mat-icon>chevron_right</mat-icon>
-        <span>Afternoon tea</span>
+  <div>
+    <div class="title-group" fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="column" fxLayoutAlign="center start">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>home</mat-icon>
+          <mat-icon>chevron_right</mat-icon>
+          <span>Afternoon tea</span>
+        </div>
+        <div>SLEEP 5 MIN</div>
       </div>
-      <div>SLEEP 5 MIN</div>
-    </div>
-    <div *ngIf="!!expiration" fxLayout="column" fxLayoutAlign="center start" fxFlex="40">
-      <div class="count-down-item">Expiration: </div>
-      <div fxLayout="row" fxLayoutAlign="space-around center">
-        <div class="count-down-item">{{this.expiration.days}} Days </div>
-        <div class="count-down-item">{{this.expiration.hours}} Hours </div>
-        <div class="count-down-item">{{this.expiration.minutes}} Minutes </div>
-        <div class="count-down-item">{{this.expiration.seconds}} Seconds</div>
+      <div *ngIf="!!expiration" fxLayout="column" fxLayoutAlign="center start" fxFlex="40">
+        <div class="count-down-item">Expiration: </div>
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div class="count-down-item">{{this.expiration.days}} Days </div>
+          <div class="count-down-item">{{this.expiration.hours}} Hours </div>
+          <div class="count-down-item">{{this.expiration.minutes}} Minutes </div>
+          <div class="count-down-item">{{this.expiration.seconds}} Seconds</div>
+        </div>
       </div>
     </div>
   </div>
   <div>
-    <p *ngIf="!!formData?.update_time">
+    <div *ngIf="!!formData?.update_time">
       Last edited: {{formData['update_time']}}
-    </p>
+    </div>
     <div class="form" fxLayout="column">
       <mat-vertical-stepper [linear]="true">
         <mat-step *ngFor="let form of formData?.form; let i = index">
@@ -40,8 +42,8 @@
           <div *ngFor="let item of form.items">
             <ng-container *ngIf="filterText(item.itemLabel)">
               <div fxLayout="column" class="item" [ngClass]="{'active': item.value > 0}" [@openClose]="item.collapse ? 'open' : 'closed'">
-                <div (click)="toggleCollapse(item)">
-                <div class="item-title" fxLayout="row" fxLayoutAlign="space-between center">
+                <div>
+                <div class="item-title" fxLayout="row" fxLayoutAlign="space-between center" (click)="toggleCollapse(item)">
                   <div fxLayout="rows" fxLayoutAlign="start start">
                     <h2>{{item.itemLabel}}</h2>
                     <span class="item-price-label">(
