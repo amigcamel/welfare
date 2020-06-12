@@ -9,7 +9,7 @@ JWK_KEY = pickle.loads(
 OAUTH_BASE_URL = "https://accounts.google.com/o/oauth2/"
 OAUTH_CLIENT_SECRET = "9PMLulb0qUkliNdv70dM3mq8"
 EMAIL_ALLOWED_DOMAINS = ["ffn.com"]
-SITE_URL = "http://welfare.local.com"
+SITE_URL = "http://welfare.local.com:4200"
 OAUTH_CLIENT_ID = (
     "67320997794-5c21iin6ti7o5ihvugic84g03gaqrelj.apps.googleusercontent.com"
 )
