@@ -40,7 +40,7 @@
           <div *ngFor="let item of form.items">
             <ng-container *ngIf="filterText(item.itemLabel)">
               <div fxLayout="column" class="item" [ngClass]="{'active': item.value > 0}" [@openClose]="item.collapse ? 'open' : 'closed'">
-                <div>
+                <div (click)="toggleCollapse(item)">
                 <div class="item-title" fxLayout="row" fxLayoutAlign="space-between center">
                   <div fxLayout="rows" fxLayoutAlign="start start">
                     <h2>{{item.itemLabel}}</h2>
@@ -50,9 +50,9 @@
                   </div>
 
                   <div class="control-bar" fxLayout="row" fxLayoutAlign="space-around center" fxFlex="50">
-                    <mat-icon class="button" (click)="subOnFlow(form, item);" style="width: 32px; height: 32px">remove</mat-icon>
+                    <mat-icon class="button" (click)="subOnFlow(form, item, $event);" style="width: 32px; height: 32px">remove</mat-icon>
                     <div class="item-value">{{item.value}}</div>
-                    <mat-icon class="button" (click)="addOneFlow(form, item);" style="width: 32px; height: 32px">add</mat-icon>
+                    <mat-icon class="button" (click)="addOneFlow(form, item, $event);" style="width: 32px; height: 32px">add</mat-icon>
                   </div>
                 </div>
                 <ng-container *ngFor="let option of item.options">
@@ -78,9 +78,9 @@
             </ng-container>
           </div>
           <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
-            <button mat-raised-button matStepperPrevious (click)="closeAllExpand()">previous</button>
-            <button *ngIf="!form.isEnd" mat-raised-button matStepperNext (click)="closeAllExpand()">next</button>
-            <button *ngIf="form.isEnd" mat-raised-button type="button" color="accent" (click)="finishHorizontalStepper()">
+            <button mat-raised-button matStepperPrevious (click)="closeAllCollapse(form)">previous</button>
+            <button *ngIf="!form.isEnd" mat-raised-button matStepperNext (click)="closeAllCollapse(form)">next</button>
+            <button *ngIf="form.isEnd" mat-raised-button type="button" color="accent" (click)="finishOrder()">
               Finish
             </button>
           </div>
