@@ -31,12 +31,12 @@
       }
       .item-title {
         padding-bottom: 15px;
+        cursor: pointer;
         .item-price-label {
           padding-top: 6px;
           padding-left: 10px;
         }
         .control-bar {
-          cursor: pointer;
           .item-value {
             padding-bottom: 6px;
           }

@@ -6,7 +6,7 @@ import { AfternoonTeaForm, CheckBoxSelection, Form, Item } from "../../../interf
 import { FormService } from "../../../service/form.service";
 import { MatDialog } from "@angular/material/dialog";
 import { WelfareTimeService } from "../../../service/welfare-time.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { PhotoDialogComponent } from "../../../component/photo-dialog/photo-dialog.component";
 import { DialogComponent } from "../../../component/dialog/dialog.component";
 import { CartDialogComponent } from "../../../component/cart-dialog/cart-dialog.component";
@@ -44,7 +44,8 @@ export class FormComponent implements OnInit, OnDestroy {
     private formService: FormService,
     private matDialog: MatDialog,
     private welfareTimeService: WelfareTimeService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -184,6 +185,7 @@ export class FormComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         if (!!data) {
           this.formData.update_time = data.update_time;
+          this.router.navigateByUrl('/afternoon-tea/history');
         }
       });
   }
