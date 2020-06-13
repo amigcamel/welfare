@@ -9,7 +9,7 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    image: backup:latest
+    image: amigcamel/backup:latest
     networks:
       - welfare
     volumes:
