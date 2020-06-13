@@ -43,7 +43,7 @@ services:
     networks:
       - welfare
     volumes:
-      - ./data/db:/data/db
+      - mongo-data:/data/db
   redis:
     deploy:
       replicas: 1
@@ -58,4 +58,4 @@ networks:
   welfare:
 
 volumes:
-  db-data:
+  mongo-data:
