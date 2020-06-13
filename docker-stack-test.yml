@@ -15,8 +15,8 @@ services:
       restart_policy:
         condition: on-failure
     entrypoint: /bin/sh
-    environment:
-      - FLASK_ENV=development
+    env_file:
+      - backend.env
     image: be:latest
     networks:
       - welfare

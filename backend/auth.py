@@ -3,7 +3,7 @@ from urllib.parse import urlencode
 import json
 
 from loguru import logger
-from jwcrypto import jwe
+from jwcrypto import jwe, jwk
 from jwcrypto.common import json_encode
 import requests
 
@@ -77,7 +77,7 @@ def encrypt(data: dict) -> str:
     token = jwe.JWE(
         payload.encode("utf-8"), json_encode({"alg": "A256KW", "enc": "A256CBC-HS512"})
     )
-    token.add_recipient(settings.JWK_KEY)
+    token.add_recipient(jwk.JWK(**json.loads(settings.JWK_KEY)))
     token = token.serialize(compact=True)
     AuthToken()[token] = payload
     logger.debug(f"Save user data to cache: {data['email']}")
