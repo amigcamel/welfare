@@ -26,14 +26,6 @@ services:
     image: amigcamel/be:latest
     networks:
       - welfare
-  redis:
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-    image: redis:6.0.4-alpine3.11
-    networks:
-      - welfare
   mongo:
     deploy:
       replicas: 1
