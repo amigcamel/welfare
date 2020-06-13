@@ -6,7 +6,7 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    image: fe:latest
+    image: amigcamel/fe:latest
     networks:
       - welfare
     ports:
@@ -23,7 +23,7 @@ services:
         condition: on-failure
     env_file:
       - backend.env
-    image: be:latest
+    image: amigcamel/be:latest
     networks:
       - welfare
   redis:
