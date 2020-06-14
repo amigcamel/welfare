@@ -1,4 +1,11 @@
-version: "3"
+version: "3.4"
+
+x-logging:
+  &default-logging
+  driver: "json-file"
+  options:
+    max-size: "50m"
+    max-file: "10"
 
 services:
   cron:
@@ -10,6 +17,7 @@ services:
       restart_policy:
         condition: on-failure
     image: amigcamel/backup:latest
+    logging: *default-logging
     networks:
       - welfare
     volumes:
@@ -20,6 +28,7 @@ services:
       restart_policy:
         condition: on-failure
     image: amigcamel/fe:latest
+    logging: *default-logging
     networks:
       - welfare
     ports:
@@ -37,6 +46,7 @@ services:
     env_file:
       - backend.env
     image: amigcamel/be:latest
+    logging: *default-logging
     networks:
       - welfare
   mongo:
@@ -45,6 +55,7 @@ services:
       restart_policy:
         condition: on-failure
     image: mongo:4.2.7
+    logging: *default-logging
     networks:
       - welfare
     volumes:
@@ -55,6 +66,7 @@ services:
       restart_policy:
         condition: on-failure
     image: redis:6.0.4-alpine3.11
+    logging: *default-logging
     networks:
       - welfare
 
