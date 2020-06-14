@@ -209,3 +209,4 @@ data/db/*
 backend/settings_prod.py
 backend.env
 .envrc
+backup/*

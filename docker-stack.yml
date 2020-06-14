@@ -1,6 +1,19 @@
 version: "3"
 
 services:
+  cron:
+    depends_on:
+      - backend
+      - mongo
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: amigcamel/backup:latest
+    networks:
+      - welfare
+    volumes:
+      - $PWD/backup:/backup
   frontend:
     deploy:
       replicas: 1
