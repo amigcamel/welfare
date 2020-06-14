@@ -86,5 +86,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      devide: /srv/welfare/mongo
-
+      device: /srv/welfare/mongo
