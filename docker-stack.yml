@@ -16,7 +16,7 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    image: amigcamel/backup:latest
+    image: ffntea/cron:develop
     logging: *default-logging
     networks:
       - welfare
@@ -29,7 +29,7 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    image: amigcamel/fe:latest
+    image: ffntea/frontend:develop
     logging: *default-logging
     networks:
       - welfare
@@ -50,7 +50,7 @@ services:
         condition: on-failure
     env_file:
       - backend.env
-    image: amigcamel/be:latest
+    image: ffntea/backend:develop
     logging: *default-logging
     networks:
       - welfare
