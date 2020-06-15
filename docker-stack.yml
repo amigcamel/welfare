@@ -59,7 +59,7 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    image: mongo:4.2.7
+    image: ffntea/mongo:develop
     logging: *default-logging
     networks:
       - welfare
@@ -70,7 +70,7 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    image: redis:6.0.4-alpine3.11
+    image: ffntea/redis:develop
     logging: *default-logging
     networks:
       - welfare
