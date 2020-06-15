@@ -1,3 +1,4 @@
 SHELL=/bin/sh
 PATH=/bin:/usr/bin
 0 */6 * * * /backup.sh
+0 2 * * * certbot certonly --email ffntea.1@gmail.com --agree-tos --webroot -w /var/www/certbot -d ffntea.club

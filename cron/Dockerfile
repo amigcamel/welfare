@@ -1,6 +1,6 @@
 FROM alpine:3.11
 WORKDIR /backup
-RUN apk add --no-cache mongodb-tools \
+RUN apk add --no-cache mongodb-tools certbot \
   && cd /usr/bin \
   && ls | grep mongo | grep -v dump | xargs rm -f
 COPY cronjobs /etc/crontabs/root
