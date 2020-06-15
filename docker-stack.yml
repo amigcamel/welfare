@@ -35,6 +35,7 @@ services:
       - welfare
     ports:
       - 80:80
+      - 443:443
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d  # XXX: not consistent with other volume settings
       - certbot:/var/www/certbot
