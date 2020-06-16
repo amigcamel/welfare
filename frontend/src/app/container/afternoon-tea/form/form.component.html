@@ -43,39 +43,54 @@
             <ng-container *ngIf="filterText(item.itemLabel)">
               <div fxLayout="column" class="item" [ngClass]="{'active': item.value > 0}" [@openClose]="item.collapse ? 'open' : 'closed'">
                 <div>
-                <div class="item-title" fxLayout="row" fxLayoutAlign="space-between center" (click)="toggleCollapse(item)">
-                  <div fxLayout="rows" fxLayoutAlign="start start">
-                    <h2>{{item.itemLabel}}</h2>
-                    <span class="item-price-label">(
-                      <span>{{getPriceLabel(item)}}</span>
-                      )</span>
-                  </div>
+                  <div class="item-title" fxLayout="row" (click)="toggleCollapse(item)">
+                    <div class="item-label" fxLayout="rows" fxLayoutAlign.gt-sm="space-between space-between" fxLayoutAlign.xs="space-between center">
+                      <span class="item-title-label">{{item.itemLabel}}</span>
+                      <span class="item-price-label">
+                        ({{getPriceLabel(item)}})
+                      </span>
+                    </div>
 
-                  <div class="control-bar" fxLayout="row" fxLayoutAlign="space-around center" fxFlex="50">
-                    <mat-icon class="button" (click)="subOnFlow(form, item, $event);" style="width: 32px; height: 32px">remove</mat-icon>
-                    <div class="item-value">{{item.value}}</div>
-                    <mat-icon class="button" (click)="addOneFlow(form, item, $event);" style="width: 32px; height: 32px">add</mat-icon>
+                    <div class="control-bar" fxLayout="row" fxLayoutAlign="space-around center">
+                      <mat-icon class="button" (click)="subOnFlow(form, item, $event);" style="width: 32px; height: 32px">remove</mat-icon>
+                      <div class="item-value">{{item.value}}</div>
+                      <mat-icon class="button" (click)="addOneFlow(form, item, $event);" style="width: 32px; height: 32px">add</mat-icon>
+                    </div>
                   </div>
-                </div>
-                <ng-container *ngFor="let option of item.options">
-                  <ng-container *ngIf="!!option.radioSelections && option.radioSelections.length > 0">
-                    <div class="option" fxLayout="row" fxLayoutAlign="start center">
-                      <div class="option-title">{{option.optionLabel}}:</div>
-                      <mat-radio-group fxLayoutAlign="space-between center" [(ngModel)]="item.selections[option.optionKey]" (change)="calculatorSum()" fxFlex="100">
-                        <mat-radio-button  *ngFor="let select of option.radioSelections" [value]="select.value" >{{select.selectionLabel}}</mat-radio-button>
-                      </mat-radio-group>
-                    </div>
-                  </ng-container>
-                  <ng-container *ngIf="!!option.checkBoxOptions && option.checkBoxOptions.length > 0">
-                    <div class="option" fxLayout="row" fxLayoutAlign="start center">
-                      <div class="option-title">{{option.optionLabel}}:</div>
-                      <div *ngFor="let select of option.checkBoxOptions" fxLayoutAlign="space-between center" fxFlex="100">
-                        <mat-checkbox [checked]="select.choose" (change)="checkedOption(select)">{{select.selectionLabel}}</mat-checkbox>
+                  <ng-container *ngFor="let option of item.options">
+                    <ng-container *ngIf="!!option.radioSelections && option.radioSelections.length > 0">
+                      <ng-container *ngIf="layoutConfigService.isDesktop$ | async; else mobile">
+                        <div class="option" fxLayout="row" fxLayoutAlign="start center">
+                          <div class="option-title">{{option.optionLabel}}:</div>
+                          <mat-radio-group fxLayoutAlign="space-between center" [(ngModel)]="item.selections[option.optionKey]" (change)="calculatorSum()" fxFlex="100">
+                            <mat-radio-button  *ngFor="let select of option.radioSelections" [value]="select.value" >{{select.selectionLabel}}</mat-radio-button>
+                          </mat-radio-group>
+                        </div>
+                      </ng-container>
+                      <ng-template #mobile>
+                        <div class="option" fxLayout="row" fxLayoutAlign="start center">
+                          <div class="option-title">{{option.optionLabel}}:</div>
+                          <mat-select [(ngModel)]="item.selections[option.optionKey]" (change)="calculatorSum()">
+                            <mat-option *ngFor="let select of option.radioSelections" [value]="select.value">
+                              {{select.selectionLabel}}
+                            </mat-option>
+                          </mat-select>
+                        </div>
+                      </ng-template>
+                    </ng-container>
+                    <ng-container *ngIf="!!option.checkBoxOptions && option.checkBoxOptions.length > 0">
+                      <div class="option" fxLayout="row" fxLayoutAlign="start center">
+                        <div class="option-title">{{option.optionLabel}}:</div>
+                        <div class="selection">
+                          <div *ngFor="let select of option.checkBoxOptions" fxLayoutAlign="space-between center" fxFlex="100">
+                            <mat-checkbox [checked]="select.choose" (change)="checkedOption(select)">{{select.selectionLabel}}</mat-checkbox>
+                          </div>
+                        </div>
+
                       </div>
-                    </div>
+                    </ng-container>
                   </ng-container>
-                </ng-container>
-              </div>
+                </div>
               </div>
             </ng-container>
           </div>

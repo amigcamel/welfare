@@ -32,11 +32,19 @@
       .item-title {
         padding-bottom: 15px;
         cursor: pointer;
-        .item-price-label {
-          padding-top: 6px;
-          padding-left: 10px;
+        align-items: center;
+        justify-content: space-between;
+        .item-label {
+          .item-title-label {
+            font-size: 18px;
+            font-weight: bold;
+          }
+          .item-price-label {
+            padding-left: 10px;
+          }
         }
         .control-bar {
+          width: 50%;
           .item-value {
             padding-bottom: 6px;
           }
@@ -47,6 +55,9 @@
         .option-title {
           font-weight: bold;
           padding-right: 5px;
+        }
+        mat-checkbox {
+          margin: 0 5px
         }
       }
     }
@@ -60,6 +71,69 @@
         align-items: center;
         h1 {
             margin: 0 !important;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 600px){
+    .count-down-group {
+      .count-down-item {
+        font-size: 20px;
+        margin-right: 12px;
+      }
+    }
+    .form {
+      .filter-bar {
+        padding: 10px 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        border: solid 1px #aaaaaa;
+        input {
+          border: 0;
+          outline: none;
+        }
+      }
+      .item {
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 20px;
+        border: solid #888 1px;
+        overflow: hidden;
+        &.active {
+          background-color: #fff4df;
+        }
+        .item-title {
+          padding-bottom: 15px;
+          cursor: pointer;
+          flex-direction: column !important;
+          .item-label {
+            padding: 5px 0 20px 0;
+            width: 100%;
+            .item-title-label {
+              font-size: 16px;
+              font-weight: bold;
+            }
+            .item-price-label {
+              padding-top: 6px;
+              padding-left: 10px;
+            }
+          }
+          .control-bar {
+            width: 100%;
+            .item-value {
+              padding-bottom: 6px;
+            }
+          }
+        }
+        .option {
+          padding: 5px 0;
+          .option-title {
+            font-weight: bold;
+            padding-right: 5px;
+          }
+          .selection {
+            flex-wrap: wrap;
+          }
         }
       }
     }

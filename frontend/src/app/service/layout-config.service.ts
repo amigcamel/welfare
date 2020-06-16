@@ -7,12 +7,21 @@ import { BehaviorSubject } from "rxjs";
 export class LayoutConfigService {
   private isShowToolBar = new BehaviorSubject<boolean>(true);
   public isShowToolBar$ = this.isShowToolBar.asObservable();
+  private isDesktop = new BehaviorSubject<boolean>(true);
+  public  isDesktop$ = this.isDesktop.asObservable();
   constructor() { }
-  setIsShowToolBar(state: boolean) {
+  public setIsShowToolBar(state: boolean) {
     this.isShowToolBar.next(state);
   }
-  getIsShowToolBar(): boolean {
+  public getIsShowToolBar(): boolean {
     return this.isShowToolBar.getValue();
+  }
+
+  public setIsDesktop(state: boolean) {
+    this.isDesktop.next(state);
+  }
+  public getIsDesktop(): boolean {
+    return this.isDesktop.getValue();
   }
 
 }

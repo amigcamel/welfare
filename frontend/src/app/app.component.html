@@ -1,8 +1,8 @@
-<div class="container" fxFlex="100">
+<div class="container">
   <app-tool-bar *ngIf="layoutConfigService.isShowToolBar$ | async"></app-tool-bar>
   <app-side-bar></app-side-bar>
-  <ng-container *ngIf="true">
+  <div class="content" *ngIf="true">
     <router-outlet></router-outlet>
-  </ng-container>
+  </div>
 </div>
 

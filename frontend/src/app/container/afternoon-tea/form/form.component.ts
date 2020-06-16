@@ -13,6 +13,7 @@ import { CartDialogComponent } from "../../../component/cart-dialog/cart-dialog.
 import { switchMap, takeUntil } from "rxjs/operators";
 import { Cart } from "../../../interface/cart";
 import * as data from "../../../service/mock2.json";
+import { LayoutConfigService } from "../../../service/layout-config.service";
 @Component({
   selector: 'app-form',
   animations: [
@@ -37,6 +38,7 @@ export class FormComponent implements OnInit, OnDestroy {
   public filterTarget = '';
   public expiration: CountDown;
   public formData: AfternoonTeaForm;
+  public isDesktop;
   // Private
   private unSubscribe = new Subject<boolean>();
   private setInt: any;
@@ -45,7 +47,8 @@ export class FormComponent implements OnInit, OnDestroy {
     private matDialog: MatDialog,
     private welfareTimeService: WelfareTimeService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public layoutConfigService: LayoutConfigService
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +60,9 @@ export class FormComponent implements OnInit, OnDestroy {
     this.setInt = setInterval(_ => {
       this.expiration = this.welfareTimeService.countDown(this.formData.expiration);
     }, 1000);
+    this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(state => {
+      this.isDesktop = state;
+    })
   }
 
   private initialFormData(){
@@ -152,7 +158,7 @@ export class FormComponent implements OnInit, OnDestroy {
     }
   }
   public toggleCollapse(item: Item){
-    if (item.value === 0) {
+    if (item.value === 0 && this.isDesktop ) {
       item.collapse = false;
     } else {
       item.collapse = !item.collapse;

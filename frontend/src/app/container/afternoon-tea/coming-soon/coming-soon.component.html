@@ -13,7 +13,7 @@
         <br>
         <br>
       </div>
-      <div *ngIf="!!countdownDate"  class="count-time" fxLayout="row">
+      <div *ngIf="!!countdownDate && layoutConfigService.isDesktop$ | async"  class="count-time" fxLayout="row">
         <div class="circle" fxLayout="column">
           <div class="time-text">{{countdownDate.days}}</div>
           <div class="time-unit">days</div>
