@@ -11,7 +11,7 @@ export class HistoryComponent implements OnInit {
 
     historyData: any;
     constructor(private activatedRoute: ActivatedRoute,
-                private layoutConfigService: LayoutConfigService) {
+                public layoutConfigService: LayoutConfigService) {
       this.layoutConfigService.setIsShowToolBar(true)
     }
 
@@ -19,8 +19,8 @@ export class HistoryComponent implements OnInit {
       this.historyData = this.activatedRoute.snapshot.data.historyData;
       console.log(this.historyData);
   }
-  public showExtra(item): string {
-      if (!!item.options && item.options.length > 0)
-      return item.options.join(', ');
+  public showExtra(options): string {
+      if (!!options && options.length > 0)
+      return options.join(', ');
   }
 }

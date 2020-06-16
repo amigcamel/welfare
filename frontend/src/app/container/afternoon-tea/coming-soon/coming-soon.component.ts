@@ -11,11 +11,12 @@ import { LayoutConfigService } from "../../../service/layout-config.service";
 })
 export class ComingSoonComponent implements OnInit, OnDestroy {
   public countdownDate: CountDown;
+  public isDesktop: boolean = true;
   private setIn: any;
   constructor(
     private router: Router,
     private welfareTimeService: WelfareTimeService,
-    private layoutConfigService: LayoutConfigService
+    public layoutConfigService: LayoutConfigService
   ) {
     this.layoutConfigService.setIsShowToolBar(false);
   }
