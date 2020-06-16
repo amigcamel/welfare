@@ -70,7 +70,9 @@
                       <ng-template #mobile>
                         <div class="option" fxLayout="row" fxLayoutAlign="start center">
                           <div class="option-title">{{option.optionLabel}}:</div>
-                          <mat-select [(ngModel)]="item.selections[option.optionKey]" (change)="calculatorSum()">
+                          <mat-select
+
+                            [(ngModel)]="item.selections[option.optionKey]" (change)="calculatorSum()">
                             <mat-option *ngFor="let select of option.radioSelections" [value]="select.value">
                               {{select.selectionLabel}}
                             </mat-option>
@@ -105,11 +107,11 @@
             <div></div>
             <div fxLayout="row">
               <mat-icon>attach_money</mat-icon>
-              <div>Total: {{sum}}</div>
             </div>
           </div>
         </mat-step>
       </mat-vertical-stepper>
     </div>
   </div>
+  <div class="total">Total: $ {{sum}}</div>
 </div>

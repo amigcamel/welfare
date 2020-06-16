@@ -2,7 +2,8 @@
   background-color: #ffe8b9;
   padding: 20px;
   height: calc(100vh - 64px);
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   .count-down-group {
     .count-down-item {
       font-size: 20px;
@@ -137,6 +138,15 @@
         }
       }
     }
+  }
+  .total {
+    padding: 20px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #333333;
+    color: white;
+    border-radius: 5px 0 0 0 ;
   }
 }
 
