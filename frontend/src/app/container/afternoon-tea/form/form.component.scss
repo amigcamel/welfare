@@ -1,7 +1,7 @@
 .container {
   background-color: #ffe8b9;
   padding: 20px;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 60px);
   overflow-y: scroll;
   overflow-x: hidden;
   .count-down-group {
@@ -140,10 +140,10 @@
     }
   }
   .total {
-    padding: 20px;
+    padding: 10px 20px;
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 0px;
+    right: 0px;
     background-color: #333333;
     color: white;
     border-radius: 5px 0 0 0 ;
