@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { of, Subject } from "rxjs";
-import { CountDown } from "../../../interface/count-down";
+import { CountDown, CountExpiration } from "../../../interface/count-down";
 import { AfternoonTeaForm, CheckBoxSelection, Form, Item } from "../../../interface/afternoon-tea-form";
 import { FormService } from "../../../service/form.service";
 import { MatDialog } from "@angular/material/dialog";
@@ -36,7 +36,7 @@ import { LayoutConfigService } from "../../../service/layout-config.service";
 export class FormComponent implements OnInit, OnDestroy {
   public sum = 0;
   public filterTarget = '';
-  public expiration: CountDown;
+  public expiration: CountExpiration;
   public formData: AfternoonTeaForm;
   public isDesktop;
   // Private
@@ -58,7 +58,7 @@ export class FormComponent implements OnInit, OnDestroy {
       this.initialFormData();
     }
     this.setInt = setInterval(_ => {
-      this.expiration = this.welfareTimeService.countDown(this.formData.expiration);
+      this.expiration = this.welfareTimeService.countExpiration(this.formData.expiration);
     }, 1000);
     this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(state => {
       this.isDesktop = state;
@@ -174,7 +174,9 @@ export class FormComponent implements OnInit, OnDestroy {
 
   finishOrder(): void
   {
-
+    for (const form of this.formData.form) {
+      this.closeAllCollapse(form);
+    }
     this.matDialog.open(CartDialogComponent, {
       data: {
         items: this.previewCart(),

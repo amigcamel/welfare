@@ -4,3 +4,7 @@ export interface CountDown {
     minutes: number;
     seconds: number;
 }
+export interface CountExpiration {
+  unit: string;
+  value: number;
+}

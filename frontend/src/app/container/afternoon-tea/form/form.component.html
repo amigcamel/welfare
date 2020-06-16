@@ -1,28 +1,13 @@
 <div class="container" fxLayout="column">
-  <div>
-    <div class="title-group" fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxLayout="column" fxLayoutAlign="center start">
-        <div fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon>home</mat-icon>
-          <mat-icon>chevron_right</mat-icon>
-          <span>Afternoon tea</span>
-        </div>
-        <div>SLEEP 5 MIN</div>
-      </div>
-      <div *ngIf="!!expiration" fxLayout="column" fxLayoutAlign="center start" fxFlex="40">
-        <div class="count-down-item">Expiration: </div>
-        <div fxLayout="row" fxLayoutAlign="space-around center">
-          <div class="count-down-item">{{this.expiration.days}} Days </div>
-          <div class="count-down-item">{{this.expiration.hours}} Hours </div>
-          <div class="count-down-item">{{this.expiration.minutes}} Minutes </div>
-          <div class="count-down-item">{{this.expiration.seconds}} Seconds</div>
-        </div>
-      </div>
+  <div *ngIf="!!expiration" fxLayout="column" fxLayoutAlign="center start" fxFlex="40">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <div class="count-down-item">Expiration After: </div>
+      <div class="count-down-item"> <span style="color: #173f68">{{this.expiration.value}}</span> {{expiration.unit}}</div>
     </div>
   </div>
   <div>
-    <div *ngIf="!!formData?.update_time">
-      Last edited: {{formData['update_time']}}
+    <div *ngIf="!!formData?.update_time" style="color: #555; margin-left: 5px">
+      Last edited: {{formData['update_time'] | date: 'medium'}}
     </div>
     <div class="form" fxLayout="column">
       <mat-vertical-stepper [linear]="true">
@@ -102,8 +87,6 @@
             <button *ngIf="form.isEnd" mat-raised-button type="button" color="accent" (click)="finishOrder()">
               Finish
             </button>
-          </div>
-          <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
           </div>
         </mat-step>
       </mat-vertical-stepper>
