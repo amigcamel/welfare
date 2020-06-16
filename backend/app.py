@@ -19,6 +19,10 @@ app.config["SECRET_KEY"] = settings.APP_SECRET
 def auth():
     """Authenticate."""
     logger.debug(request.headers)
+    if settings.FAKE_LOGIN:
+        g.token = "test_token"
+        g.user = settings.FAKE_USER_DATA["email"]
+        return
     if request.method == "OPTIONS":
         return
     if request.path in (url_for("login"),):
@@ -49,6 +53,8 @@ def handle_error(error):
 @app.route("/login")
 def login():
     """Login."""
+    if settings.FAKE_LOGIN:
+        return redirect(settings.LOGIN_REDIRECT_URL.format(token=settings.FAKE_TOKEN))
     if (code := request.args.get("code")) :
         data = get_userinfo(code)
         token = encrypt(data)
@@ -68,6 +74,8 @@ def logout():
 @app.route("/user")
 def user():
     """User info."""
+    if settings.FAKE_LOGIN:
+        return jsonify(settings.FAKE_USER_DATA)
     data = get_userinfo_from_token(g.token)
     return jsonify(data)
 

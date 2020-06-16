@@ -2,11 +2,7 @@ version: "3"
 
 services:
   backend:
-    command: >
-      -c "
-      python -c 'import json as j, pymongo as p; p.MongoClient(\"mongo\").afternoontea.demo_1.insert_one(j.load(open(\"/tmp/service/mock2.json\")))' &&
-      uwsgi uwsgi.ini
-      "
+    command: --ini uwsgi.ini --py-autoreload 1
     depends_on:
       - mongo
       - redis
@@ -14,17 +10,23 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    entrypoint: /bin/sh
-    env_file:
-      - backend.env
-    image: be:latest
+    environment:
+      - DEBUG=True
+      - FAKE_LOGIN=True
+      - APP_SECRET=aji
+      - SITE_URL=http://localhost:4200
+      - JWK_KEY={}
+      - OAUTH_BASE_URL=
+      - OAUTH_CLIENT_SECRET=
+      - EMAIL_ALLOWED_DOMAINS=
+      - OAUTH_CLIENT_ID=
+    image: ffntea/backend:develop
     networks:
       - welfare
     ports:
       - 5000:5000
     volumes:
       - ./backend:/backend 
-      - ./frontend/src/app/service:/tmp/service
   mongo:
     deploy:
       replicas: 1
@@ -40,7 +42,7 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    image: redis:6.0.4-alpine3.11
+    image: ffntea/redis:develop
     networks:
       - welfare
     ports:
