@@ -1,0 +1,13 @@
+<div class="container">
+  <mat-icon style="position: absolute; top: 0px; right:0px; cursor:pointer" (click)="closeDialog()">close</mat-icon>
+  <div class="profile" fxlayout="row" fxLayoutAlign="start center">
+    <div class="profile-photo">
+      <img class="profile-img" [attr.src]="data.picture" alt="">
+    </div>
+    <div class="profile-info">
+      <div class="profile-sid">{{data.sid}}</div>
+      <div class="profile-name">{{data.name}}</div>
+      <div class="profile-email">{{data.email}}</div>
+    </div>
+  </div>
+</div>

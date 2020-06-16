@@ -20,6 +20,7 @@ import { JwtInterceptor } from "./helper/jwt.interceptor";
 import { HomeComponent } from "./container/home/home.component";
 import { BillboardComponent } from './container/billboard/billboard.component';
 import { AuthGuard } from "./helper/auth.guard";
+import { ProfileDialogComponent } from './component/profile-dialog/profile-dialog.component';
 
 const appRoutes: Routes = [
   {
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
     PhotoDialogComponent,
     DialogComponent,
     HomeComponent,
-    BillboardComponent
+    BillboardComponent,
+    ProfileDialogComponent
   ],
   imports: [
     BrowserModule,

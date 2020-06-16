@@ -8,4 +8,5 @@ export interface UserInfo {
     name: string;
     picture: string;
     verified_email: boolean;
+    sid?: string;
 }
