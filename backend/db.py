@@ -10,6 +10,20 @@ import settings
 import exceptions
 
 
+class Staff:
+    """Handle staff profile."""
+
+    def __init__(self, email: str):
+        """Construct Mongo client."""
+        self.email = email
+        self.db = MongoClient(**settings.MONGODB)
+
+    @property
+    def profile(self):
+        """Get user profile."""
+        return self.db.staff.profile.find_one({"email": self.email}, {"_id": 0})
+
+
 class AfternoonTea:
     """Handle AfternoonTea."""
 

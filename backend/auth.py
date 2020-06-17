@@ -8,7 +8,7 @@ from jwcrypto.common import json_encode
 import requests
 
 
-from db import AuthToken
+from db import AuthToken, Staff
 import exceptions
 import settings
 
@@ -58,7 +58,9 @@ def get_userinfo(code):
     r = requests.get(
         "https://www.googleapis.com/oauth2/v2/userinfo", headers=authorization_header
     )
-    return r.json()
+    data = r.json()
+    data.update(Staff(data["email"]).profile or {})
+    return data
 
 
 def decrypt(token: str) -> str:

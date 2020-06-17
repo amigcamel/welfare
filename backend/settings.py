@@ -5,9 +5,16 @@ DEBUG = os.environ.get("DEBUG", False)
 FAKE_LOGIN = DEBUG and os.environ.get("FAKE_LOGIN", False)
 FAKE_USER_DATA = {
     "email": "aji@ffn.com",
-    "english_name": "Aji Liu",
+    "family_name": "Liu",
+    "given_name": "Aji",
+    "hd": "ffn.com",
+    "locale": "en",
+    "name": "Aji Liu",
+    "picture": "/assets/icons/gandalf.svg",
+    "verified_email": True,
     "chinese_name": "劉阿吉",
-    "picture": "/assets/icons/gandalf.svg"
+    "english_name": "Aji Liu",
+    "sid": "0666",
 }
 FAKE_TOKEN = "test_token"
 
