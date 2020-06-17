@@ -14,7 +14,7 @@ services:
       - DEBUG=True
       - FAKE_LOGIN=True
       - APP_SECRET=aji
-      - SITE_URL=http://localhost:4200
+      - SITE_URL=http://foo.bar:4200
       - JWK_KEY={}
       - OAUTH_BASE_URL=
       - OAUTH_CLIENT_SECRET=
