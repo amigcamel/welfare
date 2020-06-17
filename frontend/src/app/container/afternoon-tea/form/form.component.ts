@@ -254,7 +254,7 @@ export class FormComponent implements OnInit, OnDestroy {
     for (let option of item.options) {
       if (option.optionKey === 'size') {
         for(let selection of option.radioSelections) {
-          result.push(selection.selectionLabel + " : " + selection.price)
+          result.push((option.radioSelections.length > 1 ? `${selection.selectionLabel} :` : "") + selection.price)
         }
       }
     }
