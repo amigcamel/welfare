@@ -75,7 +75,12 @@ class AfternoonTea:
                     price = item["selections"]["size"]
                     for i in item["options"]:
                         if i["optionLabel"] == "Size":
-                            size = {j["price"]: j["selectionLabel"] for j in i["radioSelections"]}[item["selections"]["size"]]  # XXX: dirty and slow, should be optimized
+                            size = {
+                                j["price"]: j["selectionLabel"]
+                                for j in i["radioSelections"]
+                            }[
+                                item["selections"]["size"]
+                            ]  # XXX: dirty and slow, should be optimized
                         elif i["optionLabel"] == "Extra":
                             for j in i["checkBoxOptions"]:
                                 if j["choose"]:

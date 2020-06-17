@@ -27,7 +27,8 @@ def gen_login_url():
     }
 
     r = requests.get(
-        settings.OAUTH_BASE_URL + "auth?%s" % urlencode(authorization_code_req), allow_redirects=False
+        settings.OAUTH_BASE_URL + "auth?%s" % urlencode(authorization_code_req),
+        allow_redirects=False,
     )
     url = r.headers.get("location")
     return url
@@ -74,7 +75,7 @@ def decrypt(token: str) -> str:
 def encrypt(data: dict) -> str:
     """Encrypt to JWE token."""
     if data["email"].split("@")[-1] not in settings.EMAIL_ALLOWED_DOMAINS:
-        raise exceptions.DomainNotAllowedError(data['email'])
+        raise exceptions.DomainNotAllowedError(data["email"])
     payload = json.dumps(data)
     token = jwe.JWE(
         payload.encode("utf-8"), json_encode({"alg": "A256KW", "enc": "A256CBC-HS512"})
@@ -88,14 +89,14 @@ def encrypt(data: dict) -> str:
 
 def get_userinfo_from_token(token: str) -> dict:
     """Get user info from a JWE token."""
-    if (payload := AuthToken()[token]):
+    if (payload := AuthToken()[token]) :
         data = json.loads(payload)
         logger.debug(f"Retrieve from cache: {data['email']}")
         return data
     else:
         payload = decrypt(token)
         data = json.loads(payload)
-        if (user := data.get('email')):
+        if (user := data.get("email")) :
             # XXX: If a token can be decrypted, I assume it was issued by me,
             # and why it couldn't be found is that it was expired.
             # There's no plan for storing issued tokens, so this is the best
