@@ -10,6 +10,9 @@ import { Router } from "@angular/router";
 export class AuthService {
     private isLogin = new BehaviorSubject<boolean>(false);
     private currentUser = new BehaviorSubject<UserInfo>({
+        chinese_name: "",
+        english_name: "",
+        sid: "",
         email: '',
         family_name: '',
         given_name: '',
