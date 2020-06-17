@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { of, Subject } from "rxjs";
 import { CountDown, CountExpiration } from "../../../interface/count-down";
@@ -14,6 +14,7 @@ import { switchMap, takeUntil } from "rxjs/operators";
 import { Cart } from "../../../interface/cart";
 import * as data from "../../../service/mock2.json";
 import { LayoutConfigService } from "../../../service/layout-config.service";
+import { ViewportScroller } from "@angular/common";
 @Component({
   selector: 'app-form',
   animations: [
@@ -34,11 +35,13 @@ import { LayoutConfigService } from "../../../service/layout-config.service";
 })
 
 export class FormComponent implements OnInit, OnDestroy {
+  @ViewChild('container', {static: true}) container: ElementRef;
   public sum = 0;
   public filterTarget = '';
   public expiration: CountExpiration;
   public formData: AfternoonTeaForm;
   public isDesktop;
+  public currentForm = 0;
   // Private
   private unSubscribe = new Subject<boolean>();
   private setInt: any;
@@ -48,6 +51,7 @@ export class FormComponent implements OnInit, OnDestroy {
     private welfareTimeService: WelfareTimeService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private viewportScroller: ViewportScroller,
     public layoutConfigService: LayoutConfigService
   ) { }
 
@@ -63,8 +67,24 @@ export class FormComponent implements OnInit, OnDestroy {
     this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(state => {
       this.isDesktop = state;
     })
+    this.calculatorSum();
   }
+  nextPage() {
+    this.closeAllCollapse(this.formData.form[this.currentForm]);
+    if (this.currentForm + 1 < this.formData.form.length) {
+      this.container.nativeElement.scrollTop = 0
+    }
+    this.currentForm = this.currentForm + 1 < this.formData.form.length ? this.currentForm + 1 : this.currentForm;
 
+  }
+  previousPage() {
+    this.closeAllCollapse(this.formData.form[this.currentForm]);
+    if (this.currentForm - 1 >= 0) {
+      this.container.nativeElement.scrollTop = 0
+    }
+    this.currentForm = this.currentForm - 1 < 0 ? this.currentForm : this.currentForm -1;
+
+  }
   private initialFormData(){
     this.formData.form.forEach(form => {
       form.items.forEach(item => {

@@ -10,6 +10,20 @@ import settings
 import exceptions
 
 
+class Staff:
+    """Handle staff profile."""
+
+    def __init__(self, email: str):
+        """Construct Mongo client."""
+        self.email = email
+        self.db = MongoClient(**settings.MONGODB)
+
+    @property
+    def profile(self):
+        """Get user profile."""
+        return self.db.staff.profile.find_one({"email": self.email}, {"_id": 0})
+
+
 class AfternoonTea:
     """Handle AfternoonTea."""
 
@@ -61,7 +75,12 @@ class AfternoonTea:
                     price = item["selections"]["size"]
                     for i in item["options"]:
                         if i["optionLabel"] == "Size":
-                            size = {j["price"]: j["selectionLabel"] for j in i["radioSelections"]}[item["selections"]["size"]]  # XXX: dirty and slow, should be optimized
+                            size = {
+                                j["price"]: j["selectionLabel"]
+                                for j in i["radioSelections"]
+                            }[
+                                item["selections"]["size"]
+                            ]  # XXX: dirty and slow, should be optimized
                         elif i["optionLabel"] == "Extra":
                             for j in i["checkBoxOptions"]:
                                 if j["choose"]:

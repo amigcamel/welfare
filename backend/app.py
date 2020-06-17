@@ -6,6 +6,7 @@ from loguru import logger
 
 from auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
 from db import AfternoonTea, AuthToken
+from utils import gzip_jsonify
 import settings
 import exceptions
 
@@ -85,7 +86,8 @@ def afternoontea(col):
     """Afternoon Tea."""
     if request.method == "GET":
         data = AfternoonTea(col=col, user=g.user).get(return_default=True)
-        return jsonify(data)
+        return gzip_jsonify(data)
+
     elif request.method == "POST":
         data = request.json
         output = {"update_time": datetime.now()}
