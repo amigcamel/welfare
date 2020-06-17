@@ -11,8 +11,18 @@ OS X & Linux:
 
 ## Development setup
 
-    (cd backend && docker build -t be:latest .)
+Backend:
+
     docker stack deploy -c docker-stack-test.yml welfare
+
+Frontend:
+
+    cd frontend
+    ng serve --proxy-config proxy.conf.json --host 0.0.0.0 --disable-host-check
+
+Insert test data to DB:
+
+    CON=$(docker ps --filter name=welfare_mongo -q) && docker cp data/afternoontea.tgz $CON:/ && docker exec -t $CON mongorestore -d afternoontea --gzip --drop --archive=/afternoontea.tgz
 
 
 ## Deploy

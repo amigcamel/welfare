@@ -1,7 +1,16 @@
 """Settings."""
 import os
 
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = os.environ.get("DEBUG", False)
+FAKE_LOGIN = DEBUG and os.environ.get("FAKE_LOGIN", False)
+FAKE_USER_DATA = {
+    "email": "aji@ffn.com",
+    "english_name": "Aji Liu",
+    "chinese_name": "劉阿吉",
+    "picture": "/assets/icons/gandalf.svg"
+}
+FAKE_TOKEN = "test_token"
+
 APP_SECRET = os.environ["APP_SECRET"]
 JWK_KEY = os.environ["JWK_KEY"]
 OAUTH_BASE_URL = os.environ["OAUTH_BASE_URL"]
