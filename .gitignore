@@ -204,8 +204,6 @@ tags
 .vim
 
 # End of https://www.gitignore.io/api/vim,linux,macos,python,angular
-!data/db/.gitkeep
-data/db/*
 backend/settings_prod.py
 backend.env
 .envrc
