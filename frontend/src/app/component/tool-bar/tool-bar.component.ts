@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 import { CartDialogComponent } from "../cart-dialog/cart-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 import { ProfileDialogComponent } from "../profile-dialog/profile-dialog.component";
+import { LayoutConfigService } from "../../service/layout-config.service";
 
 @Component({
   selector: 'app-tool-bar',
@@ -21,7 +22,8 @@ export class ToolBarComponent implements OnInit, OnDestroy {
   constructor(private sideBarService: SideBarService,
               private authService: AuthService,
               private router: Router,
-              private matDialog: MatDialog) { }
+              private matDialog: MatDialog,
+              public layoutConfigService: LayoutConfigService) { }
 
   ngOnInit(): void {
     this.authService.currentUser$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(

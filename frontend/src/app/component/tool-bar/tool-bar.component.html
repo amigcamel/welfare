@@ -2,7 +2,7 @@
   <div fxLayout="rows" fxFlex="100" fxLayoutAlign="space-between center">
     <div fxLayout="rows">
       <mat-icon class="icon" (click)="openSideBar()">dehaze</mat-icon>
-      <div class="logo-title">FFn <span class="bold">Welfare</span></div>
+      <div *ngIf="layoutConfigService.isDesktop$ | async" class="logo-title">FFn <span class="bold">Welfare</span></div>
     </div>
     <div class="user-info" fxLayout="rows" fxLayoutAlign="space-around center" [matMenuTriggerFor]="userMenu">
       <div class="user-photo" fxLayoutAlign="center center">
