@@ -50,7 +50,7 @@
                       <div class="option-title">{{option.optionLabel}}:</div>
                       <mat-select
 
-                        [(ngModel)]="item.selections[option.optionKey]" (change)="calculatorSum()">
+                        [(ngModel)]="item.selections[option.optionKey]" (selectionChange)="calculatorSum()">
                         <mat-option *ngFor="let select of option.radioSelections" [value]="select.value">
                           {{select.selectionLabel}}
                         </mat-option>
