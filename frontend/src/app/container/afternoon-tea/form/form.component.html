@@ -49,7 +49,6 @@
                     <div class="option" fxLayout="row" fxLayoutAlign="start center">
                       <div class="option-title">{{option.optionLabel}}:</div>
                       <mat-select
-
                         [(ngModel)]="item.selections[option.optionKey]" (selectionChange)="calculatorSum()">
                         <mat-option *ngFor="let select of option.radioSelections" [value]="select.value">
                           {{select.selectionLabel}}
@@ -85,7 +84,7 @@
       </ng-container>
     </div>
   </div>
-  <div class="total">Total: $ {{sum}}</div>
+  <div class="total">Total: $ <span [ngClass]="{'exceed': this.sum > this.formData.budget}">{{sum}}</span></div>
   <div class="last-edited" *ngIf="!!formData?.update_time" style="color: #555; margin-left: 5px">
     Last edited: {{formData['update_time'] | date: 'yyyy/MM/dd HH:mm': 'UTC'}}
   </div>

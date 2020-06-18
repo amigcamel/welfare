@@ -194,6 +194,26 @@ export class FormComponent implements OnInit, OnDestroy {
 
   finishOrder(): void
   {
+    if (this.sum > this.formData.budget) {
+      this.matDialog.open(DialogComponent, {
+        data: {
+          title: 'Over Budget',
+          errorMessage: `Your Budget: ${this.formData.budget}<br> Current: ${this.sum}`
+        },
+        panelClass: 'form-dialog'
+      });
+      return;
+    } else if (this.sum === 0) {
+      this.matDialog.open(DialogComponent, {
+        data: {
+          title: 'No choose',
+          errorMessage: `Your Order is empty`
+        },
+        panelClass: 'form-dialog'
+      });
+      return;
+    }
+
     for (const form of this.formData.form) {
       this.closeAllCollapse(form);
     }
