@@ -206,8 +206,8 @@ export class FormComponent implements OnInit, OnDestroy {
     } else if (this.sum === 0) {
       this.matDialog.open(DialogComponent, {
         data: {
-          title: 'No choose',
-          errorMessage: `Your Order is empty`
+          title: 'Warning',
+          errorMessage: `Your order is empty!`
         },
         panelClass: 'form-dialog'
       });
