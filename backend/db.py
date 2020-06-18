@@ -1,4 +1,5 @@
 """Database."""
+from datetime import datetime
 from typing import Union
 
 from bson.errors import InvalidId
@@ -57,6 +58,7 @@ class AfternoonTea:
     def upsert(self, *, data: dict):
         """Insert or update a doc."""
         data["user"] = self.user
+        data["update_time"] = datetime.now()
         return self.db[self.col].update({"user": self.user}, data, upsert=True)
 
     def history(self):

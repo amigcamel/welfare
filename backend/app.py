@@ -93,11 +93,9 @@ def afternoontea(col):
 
     elif request.method == "POST":
         data = request.json
-        output = {"update_time": datetime.now()}
-        data.update(output)
         res = AfternoonTea(col=col, user=g.user).upsert(data=data)
         logger.info(res)
-        return jsonify(output)
+        return jsonify({"update_time": datetime.now()})
 
 
 @app.route("/history", methods=["GET"])  # XXX: should it be /afternoontea/history ?
