@@ -25,6 +25,7 @@ OAUTH_CLIENT_SECRET = os.environ["OAUTH_CLIENT_SECRET"]
 EMAIL_ALLOWED_DOMAINS = os.environ["EMAIL_ALLOWED_DOMAINS"].split(",")
 SITE_URL = os.environ["SITE_URL"]
 OAUTH_CLIENT_ID = os.environ["OAUTH_CLIENT_ID"]
+QR_SECRET = os.environ["QR_SECRET"]
 
 MONGODB = {"host": "mongo", "port": 27017}
 REDIS = {"host": "redis", "port": 6379, "db": 0}
