@@ -1,5 +1,5 @@
 <div class="container" #container fxLayout="column">
-  <div *ngIf="!!expiration" fxLayout="column" fxLayoutAlign="center start" fxFlex="40" class="expiration">
+  <div *ngIf="!!expiration" fxLayout="column" fxLayoutAlign="center start" class="expiration">
     <div fxLayout="row" fxLayoutAlign="space-around center">
       <div class="count-down-item">Expiration: {{formData.expiration}}</div>
       <div class="count-down-item"> <span style="color: #173f68">({{this.expiration.value}}</span> {{expiration.unit}} left)</div>
@@ -85,7 +85,7 @@
     </div>
   </div>
   <div class="total">Total: $ <span [ngClass]="{'exceed': this.sum > this.formData.budget}">{{sum}}</span></div>
-  <div class="last-edited" *ngIf="!!formData?.update_time" style="color: #555; margin-left: 5px">
+  <div class="last-edited" *ngIf="!!formData?.update_time">
     Last edited: {{formData['update_time'] | date: 'yyyy/MM/dd HH:mm': 'UTC'}}
   </div>
 </div>

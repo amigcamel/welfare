@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { of, Subject } from "rxjs";
-import { CountDown, CountExpiration } from "../../../interface/count-down";
+import { CountExpiration } from "../../../interface/count-down";
 import { AfternoonTeaForm, CheckBoxSelection, Form, Item } from "../../../interface/afternoon-tea-form";
 import { FormService } from "../../../service/form.service";
 import { MatDialog } from "@angular/material/dialog";

@@ -1,6 +1,6 @@
 .coming-soon {
   width: 100%;
-  background: url('/assets/background/coming-soon.jpg') no-repeat;
+  background: url('/assets/background/coming-soon-wallpaper.jpg') no-repeat;
   background-size: cover;
   height: 100%;
   .shadow-cover {
@@ -9,7 +9,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0,0,0, .4);
+    background-color: rgba(0,0,0, .7);
     .title {
       color: white;
       font-size: 32px;
@@ -43,7 +43,7 @@
         font-size: 40px;
         line-height: 1.1;
         font-weight: 300;
-        opacity: .7;
+        opacity: .9;
       }
       .time-unit {
         font-size: 16px;
