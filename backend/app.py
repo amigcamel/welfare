@@ -81,9 +81,12 @@ def user():
     return jsonify(data)
 
 
+@app.route("/afternoontea", defaults={"col": None}, methods=["GET", "POST"])
 @app.route("/afternoontea/<col>", methods=["GET", "POST"])
 def afternoontea(col):
     """Afternoon Tea."""
+    if not col:
+        col = "demo_1"  # XXX: do not hardcode this
     if request.method == "GET":
         data = AfternoonTea(col=col, user=g.user).get(return_default=True)
         return gzip_jsonify(data)
