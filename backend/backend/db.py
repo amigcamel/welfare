@@ -9,6 +9,7 @@ from redis import StrictRedis
 
 from . import settings
 from . import exceptions
+from .qr import QR
 
 
 # XXX: add DBMixin?
@@ -33,8 +34,10 @@ class AfternoonTea:
 
     def __init__(self, *, col: Union[str, None], user: Union[str, None]):
         """Construct Mongo client."""
-        self.db = MongoClient(**settings.MONGODB)["afternoontea"]
-        self.col = col
+        self.__dbname = "afternoontea"
+        self.__colname = col
+        self.db = MongoClient(**settings.MONGODB)[self.__dbname]
+        self.col = self.__colname
         self.user = user
 
     def __repr__(self):
@@ -61,6 +64,8 @@ class AfternoonTea:
     def upsert(self, *, data: dict):
         """Insert or update a doc."""
         data["user"] = self.user
+        pat = f"{self.__dbname}|{self.__colname}|{self.user}"
+        data["qr"] = QR.encrypt(pat)
         data["update_time"] = datetime.now()
         Order(self.user, self.col).transform_and_save(data)
         return self.db[self.col].update({"user": self.user}, data, upsert=True)
