@@ -11,6 +11,9 @@ import settings
 import exceptions
 
 
+# XXX: add DBMixin?
+
+
 class Staff:
     """Handle staff profile."""
 
@@ -59,48 +62,62 @@ class AfternoonTea:
         """Insert or update a doc."""
         data["user"] = self.user
         data["update_time"] = datetime.now()
+        Order(self.user, self.col).transform_and_save(data)
         return self.db[self.col].update({"user": self.user}, data, upsert=True)
 
-    def history(self):
-        """Get order history."""
-        collections = self.db.list_collection_names()
-        for col in collections:
-            doc = self.db[col].find_one({"user": self.user}, {"_id": 0})
-            if not doc:
-                break
-            orders = []
-            for form in doc["form"]:
-                for item in form["items"]:
-                    if item["value"] == 0:
-                        continue
-                    extras = []
-                    price = item["selections"]["size"]
-                    for i in item["options"]:
-                        if i["optionLabel"] == "Size":
-                            size = {
-                                j["price"]: j["selectionLabel"]
-                                for j in i["radioSelections"]
-                            }[
-                                item["selections"]["size"]
-                            ]  # XXX: dirty and slow, should be optimized
-                        elif i["optionLabel"] == "Extra":
-                            for j in i["checkBoxOptions"]:
-                                if j["choose"]:
-                                    extras.append(j["selectionLabel"])
-                                    price += j["price"]
 
-                    orders.append(
-                        {
-                            "item": item["itemLabel"],
-                            "ice": item["selections"].get("ice"),
-                            "sugar": item["selections"].get("sugar"),
-                            "price": price,
-                            "value": item["value"],
-                            "size": size,
-                            "options": extras,
-                        }
-                    )
-            yield {"date": doc["expiration"], "orders": orders}
+class Order:
+    """Handle afternoontea tea result."""
+
+    def __init__(self, user: str, col: Union[str, None] = None):
+        """Construct order object."""
+        self.db = MongoClient(**settings.MONGODB)["order"]
+        self.col = col
+        self.user = user
+
+    def __iter__(self):
+        """Get order history."""
+        for col in self.db.list_collection_names():
+            if (doc := self.db[col].find_one({"user": self.user}, {"_id": 0})) :
+                yield doc
+
+    def transform_and_save(self, data: dict):
+        """Transform data to order format and save to db."""
+        orders = []
+        for form in data["form"]:
+            for item in form["items"]:
+                if item["value"] == 0:
+                    continue
+                extras = []
+                price = item["selections"]["size"]
+                for i in item["options"]:
+                    if i["optionLabel"] == "Size":
+                        size = {
+                            j["price"]: j["selectionLabel"]
+                            for j in i["radioSelections"]
+                        }[
+                            item["selections"]["size"]
+                        ]  # XXX: dirty and slow, should be optimized
+                    elif i["optionLabel"] == "Extra":
+                        for j in i["checkBoxOptions"]:
+                            if j["choose"]:
+                                extras.append(j["selectionLabel"])
+                                price += j["price"]
+
+                orders.append(
+                    {
+                        "item": item["itemLabel"],
+                        "ice": item["selections"].get("ice"),
+                        "sugar": item["selections"].get("sugar"),
+                        "price": price,
+                        "value": item["value"],
+                        "size": size,
+                        "options": extras,
+                    }
+                )
+        res = {"user": self.user, "date": data["expiration"], "orders": orders}
+        stat = self.db[self.col].update({"user": self.user}, res, upsert=True)
+        logger.info(stat)
 
 
 class AuthToken(dict):

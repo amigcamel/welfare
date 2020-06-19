@@ -5,7 +5,7 @@ from flask import Flask, request, redirect, jsonify, url_for, g
 from loguru import logger
 
 from auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
-from db import AfternoonTea, AuthToken
+from db import AfternoonTea, AuthToken, Order
 from utils import gzip_jsonify
 import settings
 import exceptions
@@ -101,4 +101,4 @@ def afternoontea(col):
 @app.route("/history", methods=["GET"])  # XXX: should it be /afternoontea/history ?
 def history():
     """Afternoon order history."""
-    return jsonify(list(AfternoonTea(col=None, user=g.user).history()))
+    return jsonify(list(Order(g.user)))
