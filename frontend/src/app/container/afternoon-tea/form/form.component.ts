@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { of, Subject } from "rxjs";
-import { CountDown, CountExpiration } from "../../../interface/count-down";
+import { CountExpiration } from "../../../interface/count-down";
 import { AfternoonTeaForm, CheckBoxSelection, Form, Item } from "../../../interface/afternoon-tea-form";
 import { FormService } from "../../../service/form.service";
 import { MatDialog } from "@angular/material/dialog";
@@ -194,6 +194,26 @@ export class FormComponent implements OnInit, OnDestroy {
 
   finishOrder(): void
   {
+    if (this.sum > this.formData.budget) {
+      this.matDialog.open(DialogComponent, {
+        data: {
+          title: 'Over Budget',
+          errorMessage: `Your Budget: ${this.formData.budget}<br> Current: ${this.sum}`
+        },
+        panelClass: 'form-dialog'
+      });
+      return;
+    } else if (this.sum === 0) {
+      this.matDialog.open(DialogComponent, {
+        data: {
+          title: 'Warning',
+          errorMessage: `Your order is empty!`
+        },
+        panelClass: 'form-dialog'
+      });
+      return;
+    }
+
     for (const form of this.formData.form) {
       this.closeAllCollapse(form);
     }
@@ -254,7 +274,7 @@ export class FormComponent implements OnInit, OnDestroy {
     for (let option of item.options) {
       if (option.optionKey === 'size') {
         for(let selection of option.radioSelections) {
-          result.push(selection.selectionLabel + " : " + selection.price)
+          result.push((option.radioSelections.length > 1 ? `${selection.selectionLabel} :` : "") + selection.price)
         }
       }
     }

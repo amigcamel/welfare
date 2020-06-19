@@ -1,21 +1,31 @@
 .container {
-  background-color: #ffe8b9;
-  padding: 40px 20px;
+  background-color: #f8f8f8;
+  padding: 40px 20px 20px;
   height: calc(100vh - 64px);
   overflow-y: scroll;
   overflow-x: hidden;
   box-sizing: border-box;
+  .expiration {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+  }
   .count-down-item {
     font-size: 16px;
     margin: 0 0 6px 5px;
   }
   .form {
     background-color: white;
-    padding: 10px;
+    box-shadow: 2px 3px 6px rgba(28,28,28,.5);
+    padding: 20px;
+    max-width: 1280px;
+    margin: 0 auto;
+    box-sizing: border-box;
     .form-label {
+      padding: 20px 0 20px 0;
       margin-bottom: 10px;
       .form-label-text {
-        font-size: 20px;
+        font-size: 30px;
       }
     }
     .filter-bar {
@@ -148,6 +158,9 @@
     background-color: #333333;
     color: white;
     border-radius: 5px 0 0 0 ;
+    .exceed {
+      color: red;
+    }
   }
   .page-btn {
     border-radius: 10px;
@@ -157,6 +170,7 @@
     font-size: 14px;
     outline: none;
     color: #1773a1;
+    cursor: pointer;
   }
   .finish-btn {
     border-radius: 10px;
@@ -166,9 +180,17 @@
     font-size: 14px;
     outline: none;
     color: white;
+    cursor: pointer;
   }
-  .finish-btn:active {
-    background: red;
+  .expiration {
+    padding-bottom: 15px;
+  }
+  .last-edited {
+    max-width: 1280px;
+    width: 100%;
+    margin: 20px auto 0 auto;
+    color: #555;
+
   }
 }
 
