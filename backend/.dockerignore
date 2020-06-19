@@ -1,0 +1,7 @@
+.git
+.tox
+**/__pycache__
+venv
+Dockerfile
+docker-compose.yml
+docker-stack.yml

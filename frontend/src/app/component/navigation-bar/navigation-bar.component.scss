@@ -1,0 +1,16 @@
+.container {
+  padding-top: 50px;
+  background-color: #555555;
+  .navigate-group {
+    color: #ddd;
+    padding-left: 24px;
+  }
+  .navigate-item {
+    padding: 10px 24px;
+    color: white;
+    cursor: pointer;
+    .item-text {
+      padding-left: 12px;
+    }
+  }
+}

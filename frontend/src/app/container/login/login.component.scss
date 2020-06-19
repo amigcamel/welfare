@@ -1,0 +1,69 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  .login-form {
+    width: 360px;
+    min-width: 360px;
+    height: 100vh;
+    background-color: #081816;
+    .login-title {
+      width: 199px;
+      height: 44px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 35px;
+      line-height: 0.71;
+      color: #4184c5;
+      margin: 0 auto;
+      padding-top: 80px;
+      .bold {
+        font-weight: bold;
+      }
+    }
+    .login-sub-title {
+      width: 214px;
+      height: 20px;
+      letter-spacing: 1px;
+      font-family: 'Arial', sans-serif;
+      font-size: 18px;
+      line-height: 1.17;
+      text-align: left;
+      margin: 0 auto;
+      color: #4184c5;
+      .bold {
+        font-weight: bold;
+      }
+    }
+    .login-btn {
+      margin: 170px auto 0 auto;
+      width: 279px;
+      height: 42px;
+      background-color: #4184c5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+  }
+  .wall-paper {
+    width: 100%;
+    background: url('/assets/background/login-wallpapper.jpg') no-repeat 45% 0;
+    background-size: cover;
+  }
+}
+@media screen and (max-width: 600px){
+  .container {
+    .login-form{
+      width: 100%;
+    }
+    .wall-paper {
+      display: none;
+    }
+  }
+}
+
+

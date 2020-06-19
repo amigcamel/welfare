@@ -1,0 +1,106 @@
+version: "3.4"
+
+x-logging:
+  &default-logging
+  driver: "json-file"
+  options:
+    max-size: "50m"
+    max-file: "10"
+
+services:
+  cron:
+    depends_on:
+      - backend
+      - mongo
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: ffntea/cron:develop
+    logging: *default-logging
+    networks:
+      - welfare
+    volumes:
+      - backup:/backup
+      - certbot:/var/www/certbot
+      - letsencrypt:/etc/letsencrypt
+  frontend:
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: ffntea/frontend:develop
+    logging: *default-logging
+    networks:
+      - welfare
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d  # XXX: not consistent with other volume settings
+      - certbot:/var/www/certbot
+      - letsencrypt:/etc/letsencrypt
+  backend:
+    depends_on:
+      - mongo
+      - redis
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - backend.env
+    image: ffntea/backend:develop
+    logging: *default-logging
+    networks:
+      - welfare
+  mongo:
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: ffntea/mongo:develop
+    logging: *default-logging
+    networks:
+      - welfare
+    volumes:
+      - mongo:/data/db
+  redis:
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: ffntea/redis:develop
+    logging: *default-logging
+    networks:
+      - welfare
+
+
+networks:
+  welfare:
+
+volumes:
+  backup:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /srv/welfare/backup
+  certbot:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /srv/welfare/certbot
+  letsencrypt:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /srv/welfare/letsencrypt
+  mongo:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /srv/welfare/mongo

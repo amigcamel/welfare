@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+  backend:
+    command: --ini uwsgi.ini --py-autoreload 1
+    depends_on:
+      - mongo
+      - redis
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    environment:
+      - DEBUG=True
+      - FAKE_LOGIN=True
+      - APP_SECRET=aji
+      - SITE_URL=
+      - JWK_KEY={}
+      - OAUTH_BASE_URL=
+      - OAUTH_CLIENT_SECRET=
+      - EMAIL_ALLOWED_DOMAINS=
+      - OAUTH_CLIENT_ID=
+    image: ffntea/backend:develop
+    networks:
+      - welfare
+    ports:
+      - 5000:5000
+    volumes:
+      - ./backend:/backend 
+  mongo:
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: mongo:4.2.7
+    networks:
+      - welfare
+    ports:
+      - 27017:27017
+  redis:
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    image: ffntea/redis:develop
+    networks:
+      - welfare
+    ports:
+      - 6379:6379
+
+
+networks:
+  welfare:
+
+volumes:
+  db-data:

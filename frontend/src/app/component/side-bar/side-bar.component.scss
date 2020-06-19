@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 1000;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+  background-color: #333;
+  .top-nav {
+    padding: 10px 5px;
+    color: white;
+    .icon {
+      cursor: pointer;
+    }
+  }
+  .scroll-bar {
+    position: relative;
+    .user-navy {
+      padding-bottom: 60px;
+      padding-top: 25px;
+      .user-name {
+        font-size: 18px;
+        color: white;
+      }
+      .user-email {
+        color: #aaa;
+        font-size: 13px;
+        margin-top: 5px;
+      }
+      .user-photo {
+        position: absolute;
+        top: 92px;
+        .user-img {
+          padding: 10px;
+          border-radius: 50%;
+          overflow: hidden;
+          width: 72px;
+          height: 72px;
+          background-color: #555;
+        }
+      }
+    }
+  }
+
+}
+.sidebar-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.6);
+  z-index: 999;
+}

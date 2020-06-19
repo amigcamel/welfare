@@ -1,0 +1,63 @@
+.coming-soon {
+  width: 100%;
+  background: url('/assets/background/coming-soon-wallpaper.jpg') no-repeat;
+  background-size: cover;
+  height: 100%;
+  .shadow-cover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0, .7);
+    .title {
+      color: white;
+      font-size: 32px;
+      font-weight: 300;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+    .subtitle {
+      color: white;
+      padding: 0 40px;
+      box-sizing: border-box;
+    }
+    .message {
+      color: white;
+      padding: 0 40px;
+      box-sizing: border-box;
+    }
+    .circle {
+      width: 120px;
+      height: 120px;
+      padding: 20px;
+      border-radius: 50%;
+      border: solid white 2px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      margin: 10px 10px;
+      .time-text {
+        font-size: 40px;
+        line-height: 1.1;
+        font-weight: 300;
+        opacity: .9;
+      }
+      .time-unit {
+        font-size: 16px;
+        font-weight: 300;
+        opacity: .7;
+      }
+    }
+    .go-back {
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 10px 20px;
+      color: white;
+      border: solid white 1px;
+      cursor: pointer;
+    }
+  }
+}

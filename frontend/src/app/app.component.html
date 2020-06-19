@@ -1,0 +1,8 @@
+<div class="container">
+  <app-tool-bar *ngIf="layoutConfigService.isShowToolBar$ | async"></app-tool-bar>
+  <app-side-bar></app-side-bar>
+  <div class="content" *ngIf="true">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

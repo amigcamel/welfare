@@ -1,0 +1,196 @@
+.container {
+  background-color: #f8f8f8;
+  padding: 40px 20px 20px;
+  height: calc(100vh - 64px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  .expiration {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .count-down-item {
+    font-size: 16px;
+    margin: 0 0 6px 5px;
+  }
+  .form {
+    background-color: white;
+    box-shadow: 2px 3px 6px rgba(28,28,28,.5);
+    padding: 20px;
+    max-width: 1280px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    .form-label {
+      padding: 20px 0 20px 0;
+      margin-bottom: 10px;
+      .form-label-text {
+        font-size: 30px;
+      }
+    }
+    .filter-bar {
+      padding: 10px 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      border: solid 1px #aaaaaa;
+      input {
+        border: 0;
+        outline: none;
+      }
+    }
+    .item {
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 20px;
+      border: solid #888 1px;
+      overflow: hidden;
+      &.active {
+        background-color: #fff4df;
+      }
+      .item-title {
+        padding-bottom: 15px;
+        cursor: pointer;
+        align-items: center;
+        justify-content: space-between;
+        .item-label {
+          .item-title-label {
+            font-size: 18px;
+            font-weight: bold;
+          }
+          .item-price-label {
+            padding-left: 10px;
+          }
+        }
+        .control-bar {
+          width: 50%;
+          .item-value {
+            padding-bottom: 6px;
+          }
+        }
+      }
+      .option {
+        padding: 5px 0;
+        .option-title {
+          font-weight: bold;
+          padding-right: 5px;
+        }
+        mat-checkbox {
+          margin: 0 5px
+        }
+      }
+    }
+  }
+  .form::ng-deep {
+    border-radius: 10px;
+    overflow: hidden;
+    .mat-step {
+      .mat-step-header {
+        display: flex;
+        align-items: center;
+        h1 {
+            margin: 0 !important;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 600px){
+    .form {
+      .filter-bar {
+        padding: 10px 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        border: solid 1px #aaaaaa;
+        input {
+          border: 0;
+          outline: none;
+        }
+      }
+      .item {
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 20px;
+        border: solid #888 1px;
+        overflow: hidden;
+        &.active {
+          background-color: #fff4df;
+        }
+        .item-title {
+          padding-bottom: 15px;
+          cursor: pointer;
+          flex-direction: column !important;
+          .item-label {
+            padding: 5px 0 20px 0;
+            width: 100%;
+            .item-title-label {
+              font-size: 16px;
+              font-weight: bold;
+            }
+            .item-price-label {
+              padding-top: 6px;
+              padding-left: 10px;
+            }
+          }
+          .control-bar {
+            width: 100%;
+            .item-value {
+              padding-bottom: 6px;
+            }
+          }
+        }
+        .option {
+          padding: 5px 0;
+          .option-title {
+            font-weight: bold;
+            padding-right: 5px;
+          }
+          .selection {
+            flex-wrap: wrap;
+          }
+        }
+      }
+    }
+  }
+  .total {
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    background-color: #333333;
+    color: white;
+    border-radius: 5px 0 0 0 ;
+    .exceed {
+      color: red;
+    }
+  }
+  .page-btn {
+    border-radius: 10px;
+    background: white;
+    padding: 10px 20px;
+    border: 1px solid  #1773a1;
+    font-size: 14px;
+    outline: none;
+    color: #1773a1;
+    cursor: pointer;
+  }
+  .finish-btn {
+    border-radius: 10px;
+    background: #1773a1;
+    padding: 10px 20px;
+    border: 1px solid white;
+    font-size: 14px;
+    outline: none;
+    color: white;
+    cursor: pointer;
+  }
+  .expiration {
+    padding-bottom: 15px;
+  }
+  .last-edited {
+    max-width: 1280px;
+    width: 100%;
+    margin: 20px auto 0 auto;
+    color: #555;
+
+  }
+}
+
