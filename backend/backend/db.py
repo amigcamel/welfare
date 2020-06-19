@@ -120,7 +120,12 @@ class Order:
                         "options": extras,
                     }
                 )
-        res = {"user": self.user, "date": data["expiration"], "orders": orders}
+        res = {
+            "user": self.user,
+            "date": data["expiration"],
+            "orders": orders,
+            "qr": data["qr"],
+        }
         stat = self.db[self.col].update({"user": self.user}, res, upsert=True)
         logger.info(stat)
 
