@@ -1,7 +1,7 @@
 <div class="container" #container fxLayout="column">
   <div *ngIf="!!expiration" fxLayout="column" fxLayoutAlign="center start" class="expiration">
     <div fxLayout="row" fxLayoutAlign="space-around center">
-      <div class="count-down-item">Expiration: {{formData.expiration}}</div>
+      <div class="count-down-item">Due Date: {{formData.expiration}}</div>
       <div class="count-down-item"> <span style="color: #173f68">({{this.expiration.value}}</span> {{expiration.unit}} left)</div>
     </div>
   </div>
