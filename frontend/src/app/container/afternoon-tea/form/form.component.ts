@@ -42,7 +42,6 @@ export class FormComponent implements OnInit, OnDestroy {
   public currentForm = 0;
   // Private
   private unSubscribe = new Subject<boolean>();
-  private setInt: any;
   constructor(
     private formService: FormService,
     private matDialog: MatDialog,
@@ -59,9 +58,7 @@ export class FormComponent implements OnInit, OnDestroy {
     if (this.formData.user === 'default') {
       this.initialFormData();
     }
-    this.setInt = setInterval(_ => {
-      this.expiration = this.welfareTimeService.countExpiration(this.formData.expiration);
-    }, 1000);
+
     this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(state => {
       this.isDesktop = state;
     })
@@ -295,7 +292,6 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    clearInterval(this.setInt);
     this.unSubscribe.next(true);
     this.unSubscribe.complete();
   }
