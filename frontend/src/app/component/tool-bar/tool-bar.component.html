@@ -1,7 +1,7 @@
 <mat-toolbar>
   <div class="container" fxLayout="rows" fxLayoutAlign="space-between center">
     <div fxLayout="rows">
-      <mat-icon class="icon" (click)="openSideBar()">dehaze</mat-icon>
+      <fa-icon class="icon" (click)="openSideBar()" [icon]="faBars"></fa-icon>
       <div *ngIf="layoutConfigService.isDesktop$ | async" class="logo-title">FFn <span class="bold">Welfare</span></div>
     </div>
     <div class="user-info" fxLayout="rows" fxLayoutAlign="space-around center">

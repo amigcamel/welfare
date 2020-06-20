@@ -9,7 +9,7 @@ mat-toolbar {
   .logo-title {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 30px;
-    line-height: 0.71;
+    line-height: 0.8;
     color: #277fd3;
     display: inline-block;
     padding-left: 10px;
@@ -20,6 +20,7 @@ mat-toolbar {
   .icon {
     color: #4184c5;
     cursor: pointer;
+    margin-bottom: 1;
   }
   .user-info {
     padding: 10px 10px;

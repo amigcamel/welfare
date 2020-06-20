@@ -7,6 +7,7 @@ import { UserInfo } from "../../interface/userinfo";
 import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { LayoutConfigService } from "../../service/layout-config.service";
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-tool-bar',
@@ -14,6 +15,7 @@ import { LayoutConfigService } from "../../service/layout-config.service";
   styleUrls: ['./tool-bar.component.scss']
 })
 export class ToolBarComponent implements OnInit, OnDestroy {
+  faBars = faBars;
   unSubscribe = new Subject<boolean>()
   userInfo: UserInfo;
   mat

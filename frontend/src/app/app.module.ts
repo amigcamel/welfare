@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from './container/login/login.component';
 import { RouterModule, Routes } from "@angular/router";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
@@ -65,6 +66,7 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FontAwesomeModule,
 
     RouterModule.forRoot(appRoutes, { useHash: true }),
 
