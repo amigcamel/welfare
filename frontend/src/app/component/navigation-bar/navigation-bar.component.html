@@ -2,6 +2,7 @@
   <div class="navigate-item" fxLayout="rows" fxLayoutAlign="start center"
        (click)="navigateTo('afternoon-tea/form')">
     <span class="item-text">Food & Drink</span>
+    <mat-icon>flash_on</mat-icon>
   </div>
   <div class="navigate-item" fxLayout="rows"  fxLayoutAlign="start center"
        (click)="navigateTo('afternoon-tea/history')">
@@ -10,6 +11,12 @@
   <div class="navigate-item" fxLayout="rows" fxLayoutAlign="start center"
        (click)="navigateTo('afternoon-tea/coming-soon')">
     <span class="item-text">Coming Soon</span>
+  </div>
+  <div class="navigate-group">System</div>
+  <div class="navigate-item" fxLayout="rows" fxLayoutAlign="start center"
+       (click)="navigateTo('admin')">
+    <mat-icon>security</mat-icon>
+    <span class="item-text">Admin</span>
   </div>
   <div class="navigate-item" fxLayout="rows" fxLayoutAlign="start center"
        (click)="logOut()">

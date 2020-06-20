@@ -46,6 +46,10 @@ const appRoutes: Routes = [
     loadChildren: () => import('./container/error-page/error-page.module').then(m => m.ErrorPageModule)
   },
   {
+    path        : 'admin',
+    loadChildren: () => import('./container/admin/admin.module').then(m => m.AdminModule)
+  },
+  {
     path        : '**',
     redirectTo  : 'login'
   }
@@ -60,7 +64,6 @@ const appRoutes: Routes = [
     ToolBarComponent,
     SideBarComponent,
     NavigationBarComponent,
-    WelfareIconDirective,
     DialogComponent,
     HomeComponent,
     BillboardComponent,
@@ -79,9 +82,9 @@ const appRoutes: Routes = [
     MaterialModule,
     AngularSvgIconModule
   ],
-  providers : [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
 
