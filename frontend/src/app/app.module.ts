@@ -22,6 +22,8 @@ import { AuthGuard } from './helper/auth.guard';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { LogoComponent } from './component/logo/logo.component';
 import { CartComponent } from './component/cart/cart.component';
+import { QrcodeDialogComponent } from './component/qrcode-dialog/qrcode-dialog.component';
+import { QRCodeModule } from "angularx-qrcode";
 
 const appRoutes: Routes = [
   {
@@ -69,6 +71,7 @@ const appRoutes: Routes = [
     BillboardComponent,
     LogoComponent,
     CartComponent,
+    QrcodeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +84,7 @@ const appRoutes: Routes = [
     ShareModule,
     MaterialModule,
     AngularSvgIconModule
+    QRCodeModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

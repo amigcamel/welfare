@@ -19,6 +19,9 @@
     <div *ngSwitchCase="'cart'" style="width: 100%">
       <ng-container *ngTemplateOutlet="cart"></ng-container>
     </div>
+    <div *ngSwitchCase="'qr'">
+      <ng-container *ngTemplateOutlet="qr"></ng-container>
+    </div>
   </div>
   <div [ngSwitch]="data.dialogType">
     <div *ngSwitchCase="'tipDialog'">
@@ -60,6 +63,12 @@
     <div class="title">Total</div>
     <div class="item">{{totalValue}}</div>
     <div class="item">{{totalPrice}}</div>
+  </div>
+</ng-template>
+
+<ng-template #qr>
+  <div>
+    <qrcode [qrdata]="data.qr" [errorCorrectionLevel]="'L'"></qrcode>
   </div>
 </ng-template>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import { DialogComponent } from "../../component/dialog/dialog.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-admin',
@@ -9,7 +10,7 @@ import { DialogComponent } from "../../component/dialog/dialog.component";
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private matDialog: MatDialog) { }
+  constructor(private matDialog: MatDialog, private router: Router) { }
   orders = [
     {
       sid: 410,
@@ -60,15 +61,15 @@ export class AdminComponent implements OnInit {
     }
   ]
   showOrder = [];
-  selectTab = 'Not Get'
+  selectTab = 'All'
   ngOnInit(): void {
-    this.onSelectTab('Get');
+    this.onSelectTab('All');
   }
-  onSelectTab(tab: string) {
+  public onSelectTab(tab: string) {
     this.selectTab = tab;
     this.filterOrder(tab);
   }
-  filterOrder(type) {
+  public filterOrder(type) {
     if (type === 'Not Get'){
       this.showOrder = this.orders.filter(v => !v.status)
     } else if (type === 'Get') {
@@ -77,7 +78,7 @@ export class AdminComponent implements OnInit {
       this.showOrder = this.orders;
     }
   }
-  handleStatus(target) {
+  public handleStatus(target) {
     this.matDialog.open(DialogComponent, {
       data: {
         contentType: 'warning',
@@ -98,6 +99,9 @@ export class AdminComponent implements OnInit {
       }
       this.filterOrder(this.selectTab)
     })
+  }
+  public qrScanner() {
+    this.router.navigateByUrl('/admin/qr-scanner');
   }
 
 }

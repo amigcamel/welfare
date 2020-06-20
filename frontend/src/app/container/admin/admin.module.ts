@@ -4,19 +4,24 @@ import { AdminComponent } from './admin.component';
 import { ShareModule } from "../../share/share.module";
 import { MaterialModule } from "../../material/material.module";
 import { RouterModule, Routes } from "@angular/router";
-import { AppModule } from "../../app.module";
+import { QrcodeScannerComponent } from "./qrcode-scanner/qrcode-scanner.component";
 
 
 const routes: Routes = [
   {
-    path     : '',
+    path     : 'main',
     component: AdminComponent
+  },
+  {
+    path     : 'qr-scanner',
+    component: QrcodeScannerComponent
   }
 ];
 
 @NgModule({
   declarations: [
-    AdminComponent
+    AdminComponent,
+    QrcodeScannerComponent
   ],
   imports: [
     CommonModule,

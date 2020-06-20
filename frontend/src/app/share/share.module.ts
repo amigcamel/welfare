@@ -4,8 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HistoryCalculatorPipe } from '../pipe/history-calculator.pipe';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { WelfareIconDirective } from "../directive/welfare-icon.directive";
-
 
 
 @NgModule({
@@ -19,6 +19,7 @@ import { WelfareIconDirective } from "../directive/welfare-icon.directive";
     ReactiveFormsModule,
     FlexLayoutModule,
     AngularSvgIconModule.forRoot(),
+    ZXingScannerModule,
   ],
   exports: [
     CommonModule,
@@ -27,6 +28,7 @@ import { WelfareIconDirective } from "../directive/welfare-icon.directive";
     FlexLayoutModule,
     AngularSvgIconModule,
     HistoryCalculatorPipe
+    ZXingScannerModule,
     WelfareIconDirective,
   ]
 })
