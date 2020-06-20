@@ -1,11 +1,16 @@
 mat-toolbar {
   background-color: white;
   border-bottom: 1px solid rgba(176,176,176,.5);
+  .container {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+  }
   .logo-title {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 30px;
     line-height: 0.71;
-    color: #4184c5;
+    color: #277fd3;
     display: inline-block;
     padding-left: 10px;
     .bold {
@@ -25,6 +30,7 @@ mat-toolbar {
         width: 36px;
         height: 36px;
         border-radius: 18px;
+        border: solid 1px rgba(176,176,176,.5);
         overflow: hidden;
       }
     }

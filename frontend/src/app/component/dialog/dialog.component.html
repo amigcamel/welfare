@@ -1,15 +1,75 @@
-<div class="dialog-content-wrapper" fxLayout="column">
-
-    <mat-toolbar matDialogTitle class="mat-accent m-0">
-        <mat-toolbar-row>
-            <div class="title dialog-title" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
-                <div>{{data.title}}</div>
-                <mat-icon (click)="matDialogRef.close()"> close</mat-icon>
-            </div>
-        </mat-toolbar-row>
-    </mat-toolbar>
-
-    <div mat-dialog-content class="p-24 m-0"  fxFlex="100" fxLayoutAlign="center center">
-      <h2 [innerHTML]="data.errorMessage"></h2>
+<div class="container" fxLayout="column">
+  <div class="header">
+    <div class="title" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
+      <div><strong>{{data.title}}</strong></div>
+      <mat-icon class="icon" (click)="onNegative()">close</mat-icon>
     </div>
+  </div>
+
+  <div class="content" [ngSwitch]="data.contentType">
+    <div *ngSwitchCase="'warning'">
+      <ng-container *ngTemplateOutlet="warning"></ng-container>
+    </div>
+    <div *ngSwitchCase="'image'">
+      <ng-container *ngTemplateOutlet="image"></ng-container>
+    </div>
+    <div *ngSwitchCase="'cart'">
+      <ng-container *ngTemplateOutlet="cart"></ng-container>
+    </div>
+  </div>
+  <div [ngSwitch]="data.dialogType">
+    <div *ngSwitchCase="'tipDialog'">
+      <ng-container *ngTemplateOutlet="tipDialog"></ng-container>
+    </div>
+    <div *ngSwitchCase="'checkDialog'">
+      <ng-container *ngTemplateOutlet="checkDialog"></ng-container>
+    </div>
+  </div>
 </div>
+
+
+<!--Content Dialog template-->
+<ng-template #warning>
+  <div class="message">{{data['errorMessage']}}</div>
+</ng-template>
+
+<ng-template #image>
+  <div style="width: 100%; height: 100%; overflow: auto" >
+    <img [attr.src]="data['imageSource']" style="max-width: 1280px" alt="">
+  </div>
+</ng-template>
+
+<ng-template #cart>
+  <div class="cart-grid">
+    <div class="title">Product Name</div>
+    <div class="title">Price</div>
+    <div class="title">Count</div>
+    <div class="title">Total</div>
+    <ng-container *ngFor="let item of data['items']">
+      <div class="item">
+        <div>{{item['productName']}}</div>
+        <div class="item-sub">{{item['subExtra']}}</div>
+      </div>
+      <div class="item">{{item['price']}}</div>
+      <div class="item">{{item['count']}}</div>
+      <div class="item">{{item['total']}}</div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<!--Footer Dialog template -->
+
+<ng-template #tipDialog>
+  <div class="footer">
+    <div class="footer-text" (click)="matDialogRef.close()">
+      {{data.positiveBtn}}
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #checkDialog>
+  <div class="footer" type='checkDialog'>
+    <button class="check-btn" (click)="onNegative()"> {{data.negativeBtn}}</button>
+    <button class="check-btn" (click)="onPositive()"> {{data.positiveBtn}}</button>
+  </div>
+</ng-template>

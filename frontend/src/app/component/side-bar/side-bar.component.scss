@@ -1,6 +1,4 @@
 .container {
-  display: flex;
-  flex-direction: column;
   flex: 1 1 auto;
   position: absolute;
   top: 0;
@@ -11,41 +9,64 @@
   z-index: 1000;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
   background-color: #333;
-  .top-nav {
-    padding: 10px 5px;
-    color: white;
-    .icon {
-      cursor: pointer;
+  .content {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .top-nav {
+      padding: 10px 20px;
+      margin: 0 auto;
+      width: 280px;
+      color: white;
+      box-sizing: border-box;
+      em {
+        margin-right: 40px;
+      }
+      .logo-title {
+        font-size: 16px;
+        margin-right: 40px;
+      }
+      .icon {
+        cursor: pointer;
+      }
     }
-  }
-  .scroll-bar {
-    position: relative;
-    .user-navy {
-      padding-bottom: 60px;
-      padding-top: 25px;
-      .user-name {
-        font-size: 18px;
-        color: white;
-      }
-      .user-email {
-        color: #aaa;
-        font-size: 13px;
-        margin-top: 5px;
-      }
-      .user-photo {
-        position: absolute;
-        top: 92px;
-        .user-img {
-          padding: 10px;
-          border-radius: 50%;
-          overflow: hidden;
-          width: 72px;
-          height: 72px;
-          background-color: #555;
+    .scroll-bar {
+      position: relative;
+      .user-navy {
+        padding: 25px 20px 20px 25px;
+        background-color: #3b3b3b;
+        .user-name {
+          font-size: 18px;
+          color: white;
+        }
+        .user-sid {
+          font-size: 12px;
+          padding: 3px 5px 2px 5px;
+          margin-bottom: 10px;
+          background-color: #4184c5;
+          border-radius: 3px;
+          display: inline-block;
+          color: white;
+        }
+        .user-email {
+          color: #aaa;
+          font-size: 13px;
+          margin-top: 10px;
+        }
+        .user-photo {
+          padding-right: 40px;
+          .user-img {
+            border-radius: 50%;
+            overflow: hidden;
+            width: 72px;
+            height: 72px;
+          }
         }
       }
     }
   }
+
 
 }
 .sidebar-overlay {

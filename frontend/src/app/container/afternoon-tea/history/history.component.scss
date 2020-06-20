@@ -2,23 +2,29 @@
   background-color: #f8f8f8;
   height: calc(100vh - 64px);
   overflow-y: scroll;
+  .page-title {
+    padding: 20px;
+  }
   .grid-content {
     max-width: 1280px;
     margin: 0 auto;
-    .grid-order {
-      display: grid;
-      grid-template-columns: 4fr 1fr 1fr 1fr 1fr;
-      grid-row-gap: 10px;
-      max-width: 1280px;
+    .header {
+      font-size: 16px;
+      font-weight: bold;
     }
-  }
-
-
-  @media screen and (max-width: 599px) {
     .grid-order {
+      font-size: 16px;
       display: grid;
       grid-template-columns: 3fr 1fr 1fr;
       grid-row-gap: 10px;
+      max-width: 1280px;
+      .title{
+        font-weight: 500;
+      }
+      .extra-text {
+        font-size: 10px;
+        color: #888888;
+      }
     }
   }
 }

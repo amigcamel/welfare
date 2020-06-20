@@ -7,9 +7,7 @@ import { FormService } from "../../../service/form.service";
 import { MatDialog } from "@angular/material/dialog";
 import { WelfareTimeService } from "../../../service/welfare-time.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { PhotoDialogComponent } from "../../../component/photo-dialog/photo-dialog.component";
 import { DialogComponent } from "../../../component/dialog/dialog.component";
-import { CartDialogComponent } from "../../../component/cart-dialog/cart-dialog.component";
 import { switchMap, takeUntil } from "rxjs/operators";
 import { Cart } from "../../../interface/cart";
 import * as data from "../../../service/mock2.json";
@@ -127,18 +125,20 @@ export class FormComponent implements OnInit, OnDestroy {
 
   public addOneFlow(form: Form, target: Item, event: Event): void {
     event.stopPropagation()
-    target.collapse = true;
     target = this.addOne(target);
     this.calculatorSum();
     if (this.sum > this.formData.budget) {
       target = this.subOne(target);
       this.calculatorSum();
+      return;
     }
+    target.collapse = true;
   }
 
   public seeMenu(src: string): void {
-    this.matDialog.open(PhotoDialogComponent, {
+    this.matDialog.open(DialogComponent, {
       data: {
+        contentType: 'image',
         imageSource: src
       },
       panelClass: 'photo-dialog'
@@ -170,8 +170,11 @@ export class FormComponent implements OnInit, OnDestroy {
     if (this.sum > this.formData.budget) {
       this.matDialog.open(DialogComponent, {
         data: {
+          contentType: 'warning',
+          dialogType: 'tipDialog',
           title: 'Over Budget',
-          errorMessage: `Your Budget: ${this.formData.budget}<br> Current: ${this.sum}`
+          errorMessage: 'Sorry, but you have to modify your order.',
+          positiveBtn: 'Ok'
         },
         panelClass: 'form-dialog'
       });
@@ -197,8 +200,11 @@ export class FormComponent implements OnInit, OnDestroy {
     if (this.sum > this.formData.budget) {
       this.matDialog.open(DialogComponent, {
         data: {
+          contentType: 'warning',
+          dialogType: 'tipDialog',
           title: 'Over Budget',
-          errorMessage: `Your Budget: ${this.formData.budget}<br> Current: ${this.sum}`
+          errorMessage: 'Sorry, but you have to modify your order.',
+          positiveBtn: 'Ok'
         },
         panelClass: 'form-dialog'
       });
@@ -206,8 +212,11 @@ export class FormComponent implements OnInit, OnDestroy {
     } else if (this.sum === 0) {
       this.matDialog.open(DialogComponent, {
         data: {
+          contentType: 'warning',
+          dialogType: 'tipDialog',
           title: 'Warning',
-          errorMessage: `Your order is empty!`
+          errorMessage: "You don't have choose any item.",
+          positiveBtn: "Ok"
         },
         panelClass: 'form-dialog'
       });
@@ -217,10 +226,14 @@ export class FormComponent implements OnInit, OnDestroy {
     for (const form of this.formData.form) {
       this.closeAllCollapse(form);
     }
-    this.matDialog.open(CartDialogComponent, {
+    this.matDialog.open(DialogComponent, {
       data: {
+        contentType: 'cart',
+        dialogType: 'checkDialog',
+        title: 'Cart',
+        positiveBtn: 'Accept',
+        negativeBtn: 'Cancel',
         items: this.previewCart(),
-        total: this.sum
       },
       panelClass: 'cart-dialog'
     }).afterClosed().pipe(takeUntil(this.unSubscribe.asObservable()), switchMap(result => {

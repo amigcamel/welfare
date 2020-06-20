@@ -12,15 +12,12 @@ import { ToolBarComponent } from './component/tool-bar/tool-bar.component';
 import { SideBarComponent } from './component/side-bar/side-bar.component';
 import { NavigationBarComponent } from './component/navigation-bar/navigation-bar.component';
 import { WelfareIconDirective } from './directive/welfare-icon.directive';
-import { CartDialogComponent } from "./component/cart-dialog/cart-dialog.component";
-import { PhotoDialogComponent } from "./component/photo-dialog/photo-dialog.component";
 import { DialogComponent } from "./component/dialog/dialog.component";
 import { ErrorInterceptor } from "./helper/error.interceptor";
 import { JwtInterceptor } from "./helper/jwt.interceptor";
 import { HomeComponent } from "./container/home/home.component";
 import { BillboardComponent } from './container/billboard/billboard.component';
 import { AuthGuard } from "./helper/auth.guard";
-import { ProfileDialogComponent } from './component/profile-dialog/profile-dialog.component';
 
 const appRoutes: Routes = [
   {
@@ -60,12 +57,9 @@ const appRoutes: Routes = [
     SideBarComponent,
     NavigationBarComponent,
     WelfareIconDirective,
-    CartDialogComponent,
-    PhotoDialogComponent,
     DialogComponent,
     HomeComponent,
     BillboardComponent,
-    ProfileDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -5,9 +5,7 @@ import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { UserInfo } from "../../interface/userinfo";
 import { Router } from "@angular/router";
-import { CartDialogComponent } from "../cart-dialog/cart-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
-import { ProfileDialogComponent } from "../profile-dialog/profile-dialog.component";
 import { LayoutConfigService } from "../../service/layout-config.service";
 
 @Component({
@@ -43,14 +41,6 @@ export class ToolBarComponent implements OnInit, OnDestroy {
     },error => {
       console.log("log out error:", error)
     });
-  }
-  public openProfile() {
-    this.matDialog.open(ProfileDialogComponent, {
-      data: {
-        ...this.userInfo
-      },
-      panelClass: 'profile-dialog'
-    })
   }
   ngOnDestroy() {
     this.unSubscribe.next(true);

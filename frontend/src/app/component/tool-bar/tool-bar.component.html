@@ -1,29 +1,16 @@
 <mat-toolbar>
-  <div fxLayout="rows" fxFlex="100" fxLayoutAlign="space-between center">
+  <div class="container" fxLayout="rows" fxLayoutAlign="space-between center">
     <div fxLayout="rows">
       <mat-icon class="icon" (click)="openSideBar()">dehaze</mat-icon>
       <div *ngIf="layoutConfigService.isDesktop$ | async" class="logo-title">FFn <span class="bold">Welfare</span></div>
     </div>
-    <div class="user-info" fxLayout="rows" fxLayoutAlign="space-around center" [matMenuTriggerFor]="userMenu">
+    <div class="user-info" fxLayout="rows" fxLayoutAlign="space-around center">
       <div class="user-photo" fxLayoutAlign="center center">
         <img [src]="userInfo.picture" alt="">
       </div>
       <div class="user-name">{{userInfo.name}}</div>
-      <mat-icon>arrow_drop_down</mat-icon>
+<!--      <mat-icon>arrow_drop_down</mat-icon>-->
     </div>
   </div>
-
 </mat-toolbar>
-<mat-menu #userMenu="matMenu" [overlapTrigger]="false">
 
-  <button mat-menu-item (click)="openProfile()">
-    <mat-icon>account_circle</mat-icon>
-    <span>My Profile</span>
-  </button>
-
-  <button mat-menu-item (click)="logOut()">
-    <mat-icon>exit_to_app</mat-icon>
-    <span>Logout</span>
-  </button>
-
-</mat-menu>

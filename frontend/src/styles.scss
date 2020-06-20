@@ -51,7 +51,7 @@ table {
 .form-dialog .mat-dialog-container {
   padding: 0;
   width: 350px;
-  height: 227px;
+  box-sizing: border-box;
   border-radius: 20px;
 }
 
@@ -63,7 +63,7 @@ table {
 
 .photo-dialog .mat-dialog-container {
   border-radius: 20px;
-  padding: 20px;
+  padding: 0px;
 }
 
 .profile-dialog .mat-dialog-container {
