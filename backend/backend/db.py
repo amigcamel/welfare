@@ -7,8 +7,8 @@ from loguru import logger
 from pymongo import MongoClient
 from redis import StrictRedis
 
-import settings
-import exceptions
+from . import settings
+from . import exceptions
 
 
 # XXX: add DBMixin?

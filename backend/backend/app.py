@@ -4,11 +4,11 @@ from datetime import datetime
 from flask import Flask, request, redirect, jsonify, url_for, g
 from loguru import logger
 
-from auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
-from db import AfternoonTea, AuthToken, Order
-from utils import gzip_jsonify
-import settings
-import exceptions
+from .auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
+from .db import AfternoonTea, AuthToken, Order
+from .utils import gzip_jsonify
+from . import settings
+from . import exceptions
 
 app = Flask(__name__)
 app.debug = settings.DEBUG
