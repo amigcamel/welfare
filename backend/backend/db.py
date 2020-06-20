@@ -31,7 +31,7 @@ class Staff:
 class AfternoonTea:
     """Handle AfternoonTea."""
 
-    def __init__(self, *, col: Union[str, None], user: str):
+    def __init__(self, *, col: Union[str, None], user: Union[str, None]):
         """Construct Mongo client."""
         self.db = MongoClient(**settings.MONGODB)["afternoontea"]
         self.col = col

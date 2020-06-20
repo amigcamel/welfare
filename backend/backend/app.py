@@ -7,8 +7,11 @@ from loguru import logger
 from .auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
 from .db import AfternoonTea, AuthToken, Order
 from .utils import gzip_jsonify
-from . import settings
-from . import exceptions
+from . import (
+    settings,
+    exceptions,
+    get_default_form,
+)
 
 app = Flask(__name__)
 app.debug = settings.DEBUG
@@ -88,7 +91,7 @@ def afternoontea(col):
     if not col:
         col = "demo_1"  # XXX: do not hardcode this
     if request.method == "GET":
-        data = AfternoonTea(col=col, user=g.user).get(return_default=True)
+        data = get_default_form(col=col)
         return gzip_jsonify(data)
 
     elif request.method == "POST":
