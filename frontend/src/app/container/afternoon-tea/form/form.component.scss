@@ -25,6 +25,12 @@
     .form-label {
       padding: 20px 0 20px 0;
       margin-bottom: 10px;
+      .menu {
+        cursor: pointer;
+        text-decoration: underline;
+        padding-left: 10px;
+        height: 10px;
+      }
       .form-label-text {
         font-size: 30px;
       }
