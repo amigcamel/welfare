@@ -12,7 +12,6 @@ import { DialogComponent } from "../../../component/dialog/dialog.component";
 import { CartDialogComponent } from "../../../component/cart-dialog/cart-dialog.component";
 import { switchMap, takeUntil } from "rxjs/operators";
 import { Cart } from "../../../interface/cart";
-import * as data from "../../../service/mock2.json";
 import { LayoutConfigService } from "../../../service/layout-config.service";
 import { ViewportScroller } from "@angular/common";
 @Component({
