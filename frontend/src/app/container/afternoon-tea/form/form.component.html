@@ -37,9 +37,9 @@
               <ng-container *ngFor="let option of item.options">
                 <ng-container *ngIf="!!option.radioSelections && option.radioSelections.length > 0">
                   <ng-container *ngIf="layoutConfigService.isDesktop$ | async; else mobile">
-                    <div class="option" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="option" fxLayout="column" fxLayoutAlign="start start">
                       <div class="option-title">{{option.optionLabel}}:</div>
-                      <mat-radio-group fxLayoutAlign="space-between center" [(ngModel)]="item.selections[option.optionKey]" (change)="calculatorSum()" fxFlex="100">
+                      <mat-radio-group [(ngModel)]="item.selections[option.optionKey]" (change)="calculatorSum()" fxLayoutAlign="space-between center" fxFlex="100">
                         <mat-radio-button  *ngFor="let select of option.radioSelections" [value]="select.value" >{{select.selectionLabel}}</mat-radio-button>
                       </mat-radio-group>
                     </div>
@@ -57,10 +57,10 @@
                   </ng-template>
                 </ng-container>
                 <ng-container *ngIf="!!option.checkBoxOptions && option.checkBoxOptions.length > 0">
-                  <div class="option" fxLayout="row" fxLayoutAlign="start center">
+                  <div class="option" fxLayout="column" fxLayoutAlign="start start">
                     <div class="option-title">{{option.optionLabel}}:</div>
                     <div class="selection">
-                      <div *ngFor="let select of option.checkBoxOptions" fxLayoutAlign="space-between center" fxFlex="100">
+                      <div *ngFor="let select of option.checkBoxOptions" fxLayout="column" fxLayoutAlign="space-between center" fxFlex="100">
                         <mat-checkbox [checked]="select.choose" (change)="checkedOption(select)">{{select.selectionLabel}}</mat-checkbox>
                       </div>
                     </div>

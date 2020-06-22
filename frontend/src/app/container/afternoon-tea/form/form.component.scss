@@ -83,6 +83,16 @@
         mat-checkbox {
           margin: 0 5px
         }
+
+        // XXX: clear not the best practice, need a more reliable and elegant way to do this
+        mat-radio-button, mat-checkbox {
+          width: 150px;
+        }
+        .selection {
+          margin-left: 2px;
+          width: 150px;
+        }
+
       }
     }
   }
