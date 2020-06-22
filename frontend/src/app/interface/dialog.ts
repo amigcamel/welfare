@@ -3,6 +3,7 @@ export interface DialogConfig {
   dialogType: string;
   negativeBtn?: string;
   positiveBtn: string;
+  faIcon?: string;
   title: string;
   items?: any;
 }

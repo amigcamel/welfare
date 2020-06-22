@@ -1,5 +1,5 @@
 .container {
-  background-color: #f8f8f8;
+  background-color: #fdf8f6;
   padding: 40px 20px 20px;
   height: calc(100vh - 64px);
   overflow-y: scroll;
@@ -13,6 +13,7 @@
   .count-down-item {
     font-size: 16px;
     margin: 0 0 6px 5px;
+    color: #444;
   }
   .form {
     background-color: white;
@@ -42,10 +43,10 @@
       padding: 20px;
       margin-bottom: 15px;
       border-radius: 20px;
-      border: solid #888 1px;
+      border: solid #694026 1px;
       overflow: hidden;
       &.active {
-        background-color: #fff4df;
+        background-color: #ddd;
       }
       .item-title {
         padding-bottom: 15px;
@@ -55,13 +56,13 @@
         .item-label {
           .item-title-label {
             font-size: 18px;
-            font-weight: bold;
           }
           .item-price-label {
             padding-left: 10px;
           }
         }
         .control-bar {
+          color: #694026;
           width: 50%;
           .item-value {
             padding-bottom: 6px;
@@ -71,7 +72,6 @@
       .option {
         padding: 5px 0;
         .option-title {
-          font-weight: bold;
           padding-right: 5px;
         }
         mat-checkbox {
@@ -109,10 +109,10 @@
         padding: 20px;
         margin-bottom: 15px;
         border-radius: 20px;
-        border: solid #888 1px;
+        border: solid #694026 1px;
         overflow: hidden;
         &.active {
-          background-color: #fff4df;
+          background-color: #ddd;
         }
         .item-title {
           padding-bottom: 15px;
@@ -123,7 +123,6 @@
             width: 100%;
             .item-title-label {
               font-size: 16px;
-              font-weight: bold;
             }
             .item-price-label {
               padding-top: 6px;
@@ -140,12 +139,12 @@
         .option {
           padding: 5px 0;
           .option-title {
-            font-weight: bold;
             padding-right: 5px;
           }
           .selection {
             flex-wrap: wrap;
           }
+
         }
       }
     }
@@ -166,15 +165,15 @@
     border-radius: 10px;
     background: white;
     padding: 10px 20px;
-    border: 1px solid  #4184c5;
+    border: 1px solid  #DE8C4D;
     font-size: 14px;
     outline: none;
-    color: #4184c5;
+    color: #DE8C4D;
     cursor: pointer;
   }
   .finish-btn {
     border-radius: 10px;
-    background: #4184c5;
+    background: #DE8C4D;
     padding: 10px 20px;
     border: 1px solid white;
     font-size: 14px;
@@ -187,4 +186,3 @@
     color: #555555;
   }
 }
-

@@ -1,12 +1,15 @@
 <div class="container" fxLayout="column">
   <div class="header">
     <div class="title" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
-      <div><strong>{{data.title}}</strong></div>
+      <div>
+        <fa-icon class="icon" [icon]="data.faIcon" *ngIf="data.faIcon"></fa-icon>
+        {{data.title}}
+      </div>
       <mat-icon class="icon" (click)="onNegative()">close</mat-icon>
     </div>
   </div>
 
-  <div class="content" [ngSwitch]="data.contentType">
+  <div class="content" [ngSwitch]="data.contentType" fxLayoutAlign="space-between center">
     <div *ngSwitchCase="'warning'">
       <ng-container *ngTemplateOutlet="warning"></ng-container>
     </div>
@@ -41,7 +44,7 @@
 
 <ng-template #cart>
   <div class="cart-grid">
-    <div class="title">Product Name</div>
+    <div class="title">Item</div>
     <div class="title">Price</div>
     <div class="title">Count</div>
     <div class="title">Total</div>

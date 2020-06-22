@@ -13,6 +13,7 @@ import { Cart } from "../../../interface/cart";
 import * as data from "../../../service/mock2.json";
 import { LayoutConfigService } from "../../../service/layout-config.service";
 import { ViewportScroller } from "@angular/common";
+import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-form',
   animations: [
@@ -169,6 +170,7 @@ export class FormComponent implements OnInit, OnDestroy {
         data: {
           contentType: 'warning',
           dialogType: 'tipDialog',
+          faIcon: faExclamationTriangle,
           title: 'Over Budget',
           errorMessage: 'Sorry, but you have to modify your order.',
           positiveBtn: 'Ok'
@@ -199,9 +201,10 @@ export class FormComponent implements OnInit, OnDestroy {
         data: {
           contentType: 'warning',
           dialogType: 'tipDialog',
+          faIcon: faExclamationTriangle,
           title: 'Over Budget',
           errorMessage: 'Sorry, but you have to modify your order.',
-          positiveBtn: 'Ok'
+          positiveBtn: 'Got it'
         },
         panelClass: 'form-dialog'
       });
@@ -211,9 +214,10 @@ export class FormComponent implements OnInit, OnDestroy {
         data: {
           contentType: 'warning',
           dialogType: 'tipDialog',
-          title: 'Warning',
-          errorMessage: "You don't have choose any item.",
-          positiveBtn: "Ok"
+          faIcon: faExclamationTriangle,
+          title: 'Nothing selected',
+          errorMessage: 'Please at least select an item.',
+          positiveBtn: 'Got it'
         },
         panelClass: 'form-dialog'
       });
@@ -227,8 +231,9 @@ export class FormComponent implements OnInit, OnDestroy {
       data: {
         contentType: 'cart',
         dialogType: 'checkDialog',
-        title: 'Cart',
-        positiveBtn: 'Accept',
+        faIcon: faShoppingBag,
+        title: 'Order',
+        positiveBtn: 'Confirm',
         negativeBtn: 'Cancel',
         items: this.previewCart(),
       },

@@ -1,11 +1,17 @@
 .container {
+  color: #694026;
   .header {
     padding: 20px 20px 10px;
+    background-color: #fdf8f6;
+    color: #694026;
     .title {
       font-size: 20px;
+      .icon {
+        padding-right: 5px;
+      }
     }
     .icon {
-      color: #3185d5;
+
       cursor: pointer;
     }
   }
@@ -16,7 +22,7 @@
     box-sizing: border-box;
     .cart-grid {
       display: grid;
-      grid-template-columns: 4fr 1fr 1fr 1fr;
+      grid-template-columns: 100fr 40fr 40fr 10fr;
       grid-row-gap: 10px;
       width: 100%;
       .item {
@@ -41,12 +47,12 @@
     .footer-text {
       font-size: 20px;
       font-weight: 500;
-      color: #4184c5;
+      color: #694026;
       cursor: pointer;
       padding: 10px 0 15px 0;
     }
     &[type='checkDialog'] {
-      border-top: 1px solid #d8d8d8;
+      border-top: 1px solid #fdf8f6;
       display: flex;
       width: 100%;
       .check-btn {
@@ -56,11 +62,11 @@
         background-color: transparent;
         border: 0;
         outline: none;
-        color: #4184c5;
+        color: #694026;
         font-size: 16px;
         cursor: pointer;
         &:last-child {
-          border-left: solid 1px #d8d8d8;
+          border-left: solid 1px #fdf8f6;
         }
       }
     }

@@ -1,6 +1,5 @@
 mat-toolbar {
   background-color: white;
-  border-bottom: 1px solid rgba(176,176,176,.5);
   .container {
     max-width: 1280px;
     width: 100%;
@@ -10,7 +9,7 @@ mat-toolbar {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 30px;
     line-height: 0.8;
-    color: #277fd3;
+    color: #009A90;
     display: inline-block;
     padding-left: 10px;
     .bold {
@@ -18,13 +17,12 @@ mat-toolbar {
     }
   }
   .icon {
-    color: #4184c5;
+    color: #009A90;
     cursor: pointer;
     margin-bottom: 1;
   }
   .user-info {
     padding: 10px 10px;
-    cursor: pointer;
     .user-photo {
       padding-right: 10px;
       img {
@@ -37,6 +35,7 @@ mat-toolbar {
     }
     .user-name {
       font-size: 16px;
+      color: #444;
     }
   }
 }
