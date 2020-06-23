@@ -91,7 +91,10 @@ def afternoontea(col):
     if not col:
         col = "demo_1"  # XXX: do not hardcode this
     if request.method == "GET":
-        data = get_default_form(col=col)
+        try:
+            data = AfternoonTea(col=col, user=g.user).get()
+        except exceptions.NoAfternoonTeaFound:
+            data = get_default_form(col=col)
         return gzip_jsonify(data)
 
     elif request.method == "POST":
