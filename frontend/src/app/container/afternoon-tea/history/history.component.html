@@ -1,6 +1,6 @@
 <div class="container">
     <div fxLayout="column" fxLayoutAlign="center center">
-        <div>
+        <div class="page-title">
             <h1>Your Order History</h1>
         </div>
     </div>
@@ -8,24 +8,20 @@
         <mat-accordion>
             <mat-expansion-panel *ngFor="let history of historyData;" [expanded]="true">
                 <mat-expansion-panel-header>
-                    <mat-panel-title fxLayout="row" fxLayoutAlign="start center">
+                    <mat-panel-title class="header" fxLayout="row" fxLayoutAlign="start center">
                         {{history.date}}
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="grid-order">
-                    <div>Item Name</div>
-                    <div *ngIf="layoutConfigService.isDesktop$ | async">Ice</div>
-                    <div *ngIf="layoutConfigService.isDesktop$ | async">Sugar</div>
-                    <div>Count</div>
-                    <div>Price</div>
+                    <div class="title">Item Name</div>
+                    <div class="title">Count</div>
+                    <div class="title">Price</div>
                     <ng-container *ngFor="let order of history['orders']">
                         <div>{{order['item']}}
                             <div fxLayout="rows">
-                                <div>{{showExtra(order['options'])}}</div>
+                                <div class="extra-text" >{{showExtra(order)}}</div>
                             </div>
                         </div>
-                        <div *ngIf="layoutConfigService.isDesktop$ | async">{{order['ice']}}</div>
-                        <div *ngIf="layoutConfigService.isDesktop$ | async">{{order['sugar']}}</div>
                         <div>{{order['value']}}</div>
                         <div>{{order['price']}}</div>
                     </ng-container>

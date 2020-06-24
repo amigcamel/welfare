@@ -1,8 +1,7 @@
 <div class="container" #container fxLayout="column">
-  <div *ngIf="!!expiration" fxLayout="column" fxLayoutAlign="center start" class="expiration">
+  <div fxLayout="column" fxLayoutAlign="center end" class="expiration">
     <div fxLayout="row" fxLayoutAlign="space-around center">
-      <div class="count-down-item">Expiration: {{formData.expiration}}</div>
-      <div class="count-down-item"> <span style="color: #173f68">({{this.expiration.value}}</span> {{expiration.unit}} left)</div>
+      <div class="count-down-item">Due Date: {{formData.expiration}}</div>
     </div>
   </div>
   <div>
@@ -11,7 +10,7 @@
         <div class="form-label-text">
           {{formData.form[currentForm].formLabel}}
         </div>
-        <mat-icon (click)="seeMenu(formData.form[currentForm].menuImage)" style="cursor: pointer; padding-left: 10px; width: 24px !important; height: 24px !important;">restaurant_menu</mat-icon>
+        <div class="menu" (click)="seeMenu(formData.form[currentForm].menuImage)">Menu</div>
       </div>
       <div class="filter-bar" fxLayout="row" fxLayoutAlign="starter center">
         <input placeholder="Search item" type="text" fxFlex [(ngModel)]="filterTarget">
@@ -38,9 +37,9 @@
               <ng-container *ngFor="let option of item.options">
                 <ng-container *ngIf="!!option.radioSelections && option.radioSelections.length > 0">
                   <ng-container *ngIf="layoutConfigService.isDesktop$ | async; else mobile">
-                    <div class="option" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="option" fxLayout="column" fxLayoutAlign="start start">
                       <div class="option-title">{{option.optionLabel}}:</div>
-                      <mat-radio-group fxLayoutAlign="space-between center" [(ngModel)]="item.selections[option.optionKey]" (change)="calculatorSum()" fxFlex="100">
+                      <mat-radio-group [(ngModel)]="item.selections[option.optionKey]" (change)="calculatorSum()" fxLayoutAlign="space-between center" fxFlex="100">
                         <mat-radio-button  *ngFor="let select of option.radioSelections" [value]="select.value" >{{select.selectionLabel}}</mat-radio-button>
                       </mat-radio-group>
                     </div>
@@ -58,10 +57,10 @@
                   </ng-template>
                 </ng-container>
                 <ng-container *ngIf="!!option.checkBoxOptions && option.checkBoxOptions.length > 0">
-                  <div class="option" fxLayout="row" fxLayoutAlign="start center">
+                  <div class="option" fxLayout="column" fxLayoutAlign="start start">
                     <div class="option-title">{{option.optionLabel}}:</div>
                     <div class="selection">
-                      <div *ngFor="let select of option.checkBoxOptions" fxLayoutAlign="space-between center" fxFlex="100">
+                      <div *ngFor="let select of option.checkBoxOptions" fxLayout="column" fxLayoutAlign="space-between center" fxFlex="100">
                         <mat-checkbox [checked]="select.choose" (change)="checkedOption(select)">{{select.selectionLabel}}</mat-checkbox>
                       </div>
                     </div>
@@ -75,8 +74,8 @@
       </div>
       <ng-container *ngIf="true">
         <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
-          <button class="page-btn"  (click)="previousPage()">previous</button>
-          <button class="finish-btn" *ngIf="!formData.form[currentForm].isEnd" (click)="nextPage()">next</button>
+          <button class="page-btn"  (click)="previousPage()">Previous</button>
+          <button class="finish-btn" *ngIf="!formData.form[currentForm].isEnd" (click)="nextPage()">Next</button>
           <button class="finish-btn"  *ngIf="formData.form[currentForm].isEnd" type="button" color="accent" (click)="finishOrder()">
             Finish
           </button>
@@ -85,7 +84,4 @@
     </div>
   </div>
   <div class="total">Total: $ <span [ngClass]="{'exceed': this.sum > this.formData.budget}">{{sum}}</span></div>
-  <div class="last-edited" *ngIf="!!formData?.update_time">
-    Last edited: {{formData['update_time'] | date: 'yyyy/MM/dd HH:mm': 'UTC'}}
-  </div>
 </div>

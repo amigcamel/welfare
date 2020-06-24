@@ -18,7 +18,7 @@ export class ComingSoonComponent implements OnInit, OnDestroy {
     private welfareTimeService: WelfareTimeService,
     public layoutConfigService: LayoutConfigService
   ) {
-    this.layoutConfigService.setIsShowToolBar(false);
+    this.layoutConfigService.setIsShowToolBar(true);
   }
 
   ngOnInit(): void {

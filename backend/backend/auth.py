@@ -8,9 +8,9 @@ from jwcrypto.common import json_encode
 import requests
 
 
-from db import AuthToken, Staff
-import exceptions
-import settings
+from .db import AuthToken, Staff
+from . import exceptions
+from . import settings
 
 
 def gen_login_url():

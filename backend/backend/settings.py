@@ -28,6 +28,7 @@ OAUTH_CLIENT_ID = os.environ["OAUTH_CLIENT_ID"]
 
 MONGODB = {"host": "mongo", "port": 27017}
 REDIS = {"host": "redis", "port": 6379, "db": 0}
+CACHE = {"host": "redis", "port": 6379, "db": 1}
 AUTH_TOKEN_TTL = 120 * 60
 LOGIN_REDIRECT_URL = f"{SITE_URL}/#/home?token={{token}}"
 OAUTH_REDIRECT_URL = f"{SITE_URL}/api/login"

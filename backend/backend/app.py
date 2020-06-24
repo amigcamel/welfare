@@ -4,11 +4,14 @@ from datetime import datetime
 from flask import Flask, request, redirect, jsonify, url_for, g
 from loguru import logger
 
-from auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
-from db import AfternoonTea, AuthToken
-from utils import gzip_jsonify
-import settings
-import exceptions
+from .auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
+from .db import AfternoonTea, AuthToken, Order
+from .utils import gzip_jsonify
+from . import (
+    settings,
+    exceptions,
+    get_default_form,
+)
 
 app = Flask(__name__)
 app.debug = settings.DEBUG
@@ -81,23 +84,27 @@ def user():
     return jsonify(data)
 
 
+@app.route("/afternoontea", defaults={"col": None}, methods=["GET", "POST"])
 @app.route("/afternoontea/<col>", methods=["GET", "POST"])
 def afternoontea(col):
     """Afternoon Tea."""
+    if not col:
+        col = "demo_1"  # XXX: do not hardcode this
     if request.method == "GET":
-        data = AfternoonTea(col=col, user=g.user).get(return_default=True)
+        try:
+            data = AfternoonTea(col=col, user=g.user).get()
+        except exceptions.NoAfternoonTeaFound:
+            data = get_default_form(col=col)
         return gzip_jsonify(data)
 
     elif request.method == "POST":
         data = request.json
-        output = {"update_time": datetime.now()}
-        data.update(output)
         res = AfternoonTea(col=col, user=g.user).upsert(data=data)
         logger.info(res)
-        return jsonify(output)
+        return jsonify({"update_time": datetime.now()})
 
 
 @app.route("/history", methods=["GET"])  # XXX: should it be /afternoontea/history ?
 def history():
     """Afternoon order history."""
-    return jsonify(list(AfternoonTea(col=None, user=g.user).history()))
+    return jsonify(list(Order(g.user)))
