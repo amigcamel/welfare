@@ -2,8 +2,8 @@
   <div class="navigate-group">Afternoon Tea</div>
   <div class="navigate-item" fxLayout="rows" fxLayoutAlign="start center"
        (click)="navigateTo('afternoon-tea/form')">
-    <mat-icon>flash_on</mat-icon>
-    <span class="item-text">Current</span>
+    <mat-icon>emoji_food_beverage</mat-icon>
+    <span class="item-text">Food & Drink</span>
   </div>
   <div class="navigate-item" fxLayout="rows"  fxLayoutAlign="start center"
        (click)="navigateTo('afternoon-tea/history')">
@@ -14,5 +14,10 @@
        (click)="navigateTo('afternoon-tea/coming-soon')">
     <mat-icon>event_note</mat-icon>
     <span class="item-text">Coming Soon</span>
+  </div>
+  <div class="navigate-item" fxLayout="rows" fxLayoutAlign="start center"
+       (click)="logOut()">
+    <mat-icon>exit_to_app</mat-icon>
+    <span class="item-text">Logout</span>
   </div>
 </div>

@@ -1,11 +1,15 @@
 mat-toolbar {
   background-color: white;
-  border-bottom: 1px solid rgba(176,176,176,.5);
+  .container {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+  }
   .logo-title {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 30px;
-    line-height: 0.71;
-    color: #4184c5;
+    line-height: 0.8;
+    color: #009A90;
     display: inline-block;
     padding-left: 10px;
     .bold {
@@ -13,23 +17,25 @@ mat-toolbar {
     }
   }
   .icon {
-    color: #4184c5;
+    color: #009A90;
     cursor: pointer;
+    margin-bottom: 1;
   }
   .user-info {
     padding: 10px 10px;
-    cursor: pointer;
     .user-photo {
       padding-right: 10px;
       img {
         width: 36px;
         height: 36px;
         border-radius: 18px;
+        border: solid 1px rgba(176,176,176,.5);
         overflow: hidden;
       }
     }
     .user-name {
       font-size: 16px;
+      color: #444;
     }
   }
 }

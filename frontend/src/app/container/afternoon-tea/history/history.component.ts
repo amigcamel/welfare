@@ -19,8 +19,8 @@ export class HistoryComponent implements OnInit {
       this.historyData = this.activatedRoute.snapshot.data.historyData;
       console.log(this.historyData);
   }
-  public showExtra(options): string {
-      if (!!options && options.length > 0)
-      return options.join(', ');
+  public showExtra(order): string {
+      if (!!order['options'] && order['options'].length > 0)
+      return order['sugar'] + ' Sugar, ' + order['ice'] + ' Ice, ' +order['options'].join(', ');
   }
 }

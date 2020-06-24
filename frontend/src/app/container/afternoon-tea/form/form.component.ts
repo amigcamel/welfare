@@ -7,13 +7,12 @@ import { FormService } from "../../../service/form.service";
 import { MatDialog } from "@angular/material/dialog";
 import { WelfareTimeService } from "../../../service/welfare-time.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { PhotoDialogComponent } from "../../../component/photo-dialog/photo-dialog.component";
 import { DialogComponent } from "../../../component/dialog/dialog.component";
-import { CartDialogComponent } from "../../../component/cart-dialog/cart-dialog.component";
 import { switchMap, takeUntil } from "rxjs/operators";
 import { Cart } from "../../../interface/cart";
 import { LayoutConfigService } from "../../../service/layout-config.service";
 import { ViewportScroller } from "@angular/common";
+import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-form',
   animations: [
@@ -43,7 +42,6 @@ export class FormComponent implements OnInit, OnDestroy {
   public currentForm = 0;
   // Private
   private unSubscribe = new Subject<boolean>();
-  private setInt: any;
   constructor(
     private formService: FormService,
     private matDialog: MatDialog,
@@ -60,9 +58,7 @@ export class FormComponent implements OnInit, OnDestroy {
     if (this.formData.user === 'default') {
       this.initialFormData();
     }
-    this.setInt = setInterval(_ => {
-      this.expiration = this.welfareTimeService.countExpiration(this.formData.expiration);
-    }, 1000);
+
     this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(state => {
       this.isDesktop = state;
     })
@@ -126,18 +122,20 @@ export class FormComponent implements OnInit, OnDestroy {
 
   public addOneFlow(form: Form, target: Item, event: Event): void {
     event.stopPropagation()
-    target.collapse = true;
     target = this.addOne(target);
     this.calculatorSum();
     if (this.sum > this.formData.budget) {
       target = this.subOne(target);
       this.calculatorSum();
+      return;
     }
+    target.collapse = true;
   }
 
   public seeMenu(src: string): void {
-    this.matDialog.open(PhotoDialogComponent, {
+    this.matDialog.open(DialogComponent, {
       data: {
+        contentType: 'image',
         imageSource: src
       },
       panelClass: 'photo-dialog'
@@ -169,8 +167,12 @@ export class FormComponent implements OnInit, OnDestroy {
     if (this.sum > this.formData.budget) {
       this.matDialog.open(DialogComponent, {
         data: {
+          contentType: 'warning',
+          dialogType: 'tipDialog',
+          faIcon: faExclamationTriangle,
           title: 'Over Budget',
-          errorMessage: `Your Budget: ${this.formData.budget}<br> Current: ${this.sum}`
+          errorMessage: 'Sorry, but you have to modify your order.',
+          positiveBtn: 'Ok'
         },
         panelClass: 'form-dialog'
       });
@@ -196,8 +198,12 @@ export class FormComponent implements OnInit, OnDestroy {
     if (this.sum > this.formData.budget) {
       this.matDialog.open(DialogComponent, {
         data: {
+          contentType: 'warning',
+          dialogType: 'tipDialog',
+          faIcon: faExclamationTriangle,
           title: 'Over Budget',
-          errorMessage: `Your Budget: ${this.formData.budget}<br> Current: ${this.sum}`
+          errorMessage: 'Sorry, but you have to modify your order.',
+          positiveBtn: 'Got it'
         },
         panelClass: 'form-dialog'
       });
@@ -205,8 +211,12 @@ export class FormComponent implements OnInit, OnDestroy {
     } else if (this.sum === 0) {
       this.matDialog.open(DialogComponent, {
         data: {
-          title: 'Warning',
-          errorMessage: `Your order is empty!`
+          contentType: 'warning',
+          dialogType: 'tipDialog',
+          faIcon: faExclamationTriangle,
+          title: 'Nothing selected',
+          errorMessage: 'Please at least select an item.',
+          positiveBtn: 'Got it'
         },
         panelClass: 'form-dialog'
       });
@@ -216,10 +226,15 @@ export class FormComponent implements OnInit, OnDestroy {
     for (const form of this.formData.form) {
       this.closeAllCollapse(form);
     }
-    this.matDialog.open(CartDialogComponent, {
+    this.matDialog.open(DialogComponent, {
       data: {
+        contentType: 'cart',
+        dialogType: 'checkDialog',
+        faIcon: faShoppingBag,
+        title: 'Order',
+        positiveBtn: 'Confirm',
+        negativeBtn: 'Cancel',
         items: this.previewCart(),
-        total: this.sum
       },
       panelClass: 'cart-dialog'
     }).afterClosed().pipe(takeUntil(this.unSubscribe.asObservable()), switchMap(result => {
@@ -281,7 +296,6 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    clearInterval(this.setInt);
     this.unSubscribe.next(true);
     this.unSubscribe.complete();
   }

@@ -1,6 +1,6 @@
 <div class="coming-soon">
   <div class="shadow-cover">
-    <div class="coming-group" fxLayoutAlign="center center" fxFlex="100" fxLayout="column">
+    <div *ngIf="!!countdownDate && layoutConfigService.isDesktop$ | async" class="coming-group" fxLayoutAlign="center center" fxFlex="100" fxLayout="column">
       <div class="title">We're coming soon
         <br>
         <br>
@@ -13,7 +13,7 @@
         <br>
         <br>
       </div>
-      <div *ngIf="!!countdownDate && layoutConfigService.isDesktop$ | async"  class="count-time" fxLayout="row">
+      <div class="count-time" fxLayout="row">
         <div class="circle" fxLayout="column">
           <div class="time-text">{{countdownDate.days}}</div>
           <div class="time-unit">days</div>
