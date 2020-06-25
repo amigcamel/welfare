@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogComponent } from './dialog.component';
-import { MaterialModule } from "../../material/material.module";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { MaterialModule } from '../../material/material.module';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 describe('DialogComponent', () => {
   let component: DialogComponent;

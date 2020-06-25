@@ -13,6 +13,7 @@ import { Cart } from "../../../interface/cart";
 import { LayoutConfigService } from "../../../service/layout-config.service";
 import { ViewportScroller } from "@angular/common";
 import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-form',
   animations: [
@@ -38,10 +39,11 @@ export class FormComponent implements OnInit, OnDestroy {
   public filterTarget = '';
   public expiration: CountExpiration;
   public formData: AfternoonTeaForm;
-  public isDesktop;
+  public isDesktop: boolean;
   public currentForm = 0;
   // Private
   private unSubscribe = new Subject<boolean>();
+
   constructor(
     private formService: FormService,
     private matDialog: MatDialog,
@@ -50,7 +52,8 @@ export class FormComponent implements OnInit, OnDestroy {
     private router: Router,
     private viewportScroller: ViewportScroller,
     public layoutConfigService: LayoutConfigService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.formData = this.activatedRoute.snapshot.data.formData;
@@ -59,11 +62,12 @@ export class FormComponent implements OnInit, OnDestroy {
       this.initialFormData();
     }
 
-    this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(state => {
-      this.isDesktop = state;
-    })
+    this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(isDesktop => {
+      this.isDesktop = isDesktop;
+    });
     this.calculatorSum();
   }
+
   nextPage() {
     this.closeAllCollapse(this.formData.form[this.currentForm]);
     if (this.currentForm + 1 < this.formData.form.length) {
@@ -72,26 +76,14 @@ export class FormComponent implements OnInit, OnDestroy {
     this.currentForm = this.currentForm + 1 < this.formData.form.length ? this.currentForm + 1 : this.currentForm;
 
   }
+
   previousPage() {
     this.closeAllCollapse(this.formData.form[this.currentForm]);
     if (this.currentForm - 1 >= 0) {
       this.container.nativeElement.scrollTop = 0
     }
-    this.currentForm = this.currentForm - 1 < 0 ? this.currentForm : this.currentForm -1;
+    this.currentForm = this.currentForm - 1 < 0 ? this.currentForm : this.currentForm - 1;
 
-  }
-  private initialFormData(){
-    this.formData.form.forEach(form => {
-      form.items.forEach(item => {
-        item.options.forEach(option => {
-          if (!!option.radioSelections && option.radioSelections.length > 0) {
-            const key = option.optionKey
-            item.selections = Object.assign({...item.selections},
-              {[key]: option.radioSelections[0].value})
-          }
-        })
-      })
-    })
   }
 
   public filterText(target: string): boolean {
@@ -108,16 +100,6 @@ export class FormComponent implements OnInit, OnDestroy {
     target = this.subOne(target);
     this.calculatorSum();
     target.collapse = target.value !== 0;
-  }
-
-  private subOne(item: Item): Item {
-    item.value = item.value > 0 ? item.value - 1 : item.value;
-    return item
-  }
-
-  private addOne(item: Item): Item {
-    item.value = item.value + 1;
-    return item
   }
 
   public addOneFlow(form: Form, target: Item, event: Event): void {
@@ -153,7 +135,7 @@ export class FormComponent implements OnInit, OnDestroy {
       for (let item of form.items) {
         let extraValue = 0;
         for (let option of item.options) {
-          if (!!option.checkBoxOptions){
+          if (!!option.checkBoxOptions) {
             for (let select of option.checkBoxOptions) {
               if (select.choose) {
                 extraValue += select.price;
@@ -178,8 +160,9 @@ export class FormComponent implements OnInit, OnDestroy {
       });
     }
   }
-  public toggleCollapse(item: Item){
-    if (item.value === 0 && this.isDesktop ) {
+
+  public toggleCollapse(item: Item) {
+    if (item.value === 0 && this.isDesktop) {
       item.collapse = false;
     } else {
       item.collapse = !item.collapse;
@@ -193,8 +176,7 @@ export class FormComponent implements OnInit, OnDestroy {
     this.filterTarget = '';
   }
 
-  finishOrder(): void
-  {
+  finishOrder(): void {
     if (this.sum > this.formData.budget) {
       this.matDialog.open(DialogComponent, {
         data: {
@@ -256,11 +238,11 @@ export class FormComponent implements OnInit, OnDestroy {
     const data: Cart[] = [];
     for (const form of this.formData.form) {
       for (const item of form.items) {
-        if (item['value'] >  0) {
+        if (item['value'] > 0) {
           let price = 0;
           let optionList = '';
           for (const option of item.options) {
-            if (!!option.checkBoxOptions){
+            if (!!option.checkBoxOptions) {
               for (let select of option.checkBoxOptions) {
                 if (select.choose) {
                   price += select.price;
@@ -283,11 +265,12 @@ export class FormComponent implements OnInit, OnDestroy {
     }
     return data;
   }
+
   getPriceLabel(item: Item): string {
     let result = [];
     for (let option of item.options) {
       if (option.optionKey === 'size') {
-        for(let selection of option.radioSelections) {
+        for (let selection of option.radioSelections) {
           result.push((option.radioSelections.length > 1 ? `${selection.selectionLabel} :` : "") + selection.price)
         }
       }
@@ -298,5 +281,29 @@ export class FormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unSubscribe.next(true);
     this.unSubscribe.complete();
+  }
+
+  private initialFormData() {
+    this.formData.form.forEach(form => {
+      form.items.forEach(item => {
+        item.options.forEach(option => {
+          if (!!option.radioSelections && option.radioSelections.length > 0) {
+            const key = option.optionKey
+            item.selections = Object.assign({...item.selections},
+              {[key]: option.radioSelections[0].value})
+          }
+        })
+      })
+    })
+  }
+
+  private subOne(item: Item): Item {
+    item.value = item.value > 0 ? item.value - 1 : item.value;
+    return item
+  }
+
+  private addOne(item: Item): Item {
+    item.value = item.value + 1;
+    return item
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { LayoutConfigService } from "../../../service/layout-config.service";
+import { Router } from '@angular/router';
+import { LayoutConfigService } from '../../../service/layout-config.service';
 
 @Component({
   selector: 'app-no-auth',

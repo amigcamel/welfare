@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { animate, state, style, transition, trigger } from "@angular/animations";
-import { SideBarService } from "../../service/side-bar.service";
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
-import { AuthService } from "../../service/auth.service";
-import { UserInfo } from "../../interface/userinfo";
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { SideBarService } from '../../service/side-bar.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { AuthService } from '../../service/auth.service';
+import { UserInfo } from '../../interface/userinfo';
 
 @Component({
   selector: 'app-side-bar',
@@ -37,12 +37,12 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.sideBarService.isShow$.pipe(takeUntil(this.UnSubscribe.asObservable())).subscribe(state => {
-      this.isOpen = state;
-    })
-    this.authService.currentUser$.pipe(takeUntil(this.UnSubscribe.asObservable())).subscribe(user=> {
+    this.sideBarService.isShow$.pipe(takeUntil(this.UnSubscribe.asObservable())).subscribe(showSideBar => {
+      this.isOpen = showSideBar;
+    });
+    this.authService.currentUser$.pipe(takeUntil(this.UnSubscribe.asObservable())).subscribe(user => {
       this.userInfo = user;
-    })
+    });
   }
   public closeSideBar() {
     this.sideBarService.setIsShow(false);

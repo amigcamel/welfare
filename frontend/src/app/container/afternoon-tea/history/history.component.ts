@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { LayoutConfigService } from "../../../service/layout-config.service";
+import { ActivatedRoute } from '@angular/router';
+import { LayoutConfigService } from '../../../service/layout-config.service';
 
 @Component({
   selector: 'app-history',
@@ -12,7 +12,7 @@ export class HistoryComponent implements OnInit {
     historyData: any;
     constructor(private activatedRoute: ActivatedRoute,
                 public layoutConfigService: LayoutConfigService) {
-      this.layoutConfigService.setIsShowToolBar(true)
+      this.layoutConfigService.setIsShowToolBar(true);
     }
 
   ngOnInit(): void {
@@ -20,7 +20,8 @@ export class HistoryComponent implements OnInit {
       console.log(this.historyData);
   }
   public showExtra(order): string {
-      if (!!order['options'] && order['options'].length > 0)
-      return order['sugar'] + ' Sugar, ' + order['ice'] + ' Ice, ' +order['options'].join(', ');
+      if (!!order.options && order.options.length > 0) {
+      return order.sugar + ' Sugar, ' + order.ice + ' Ice, ' + order.options.join(', ');
+      }
   }
 }

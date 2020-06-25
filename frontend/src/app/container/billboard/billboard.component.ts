@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LayoutConfigService } from "../../service/layout-config.service";
+import { LayoutConfigService } from '../../service/layout-config.service';
 
 @Component({
   selector: 'app-billboard',

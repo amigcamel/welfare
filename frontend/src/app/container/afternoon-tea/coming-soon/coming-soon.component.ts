@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { WelfareTimeService } from "../../../service/welfare-time.service";
-import { CountDown } from "../../../interface/count-down";
-import { LayoutConfigService } from "../../../service/layout-config.service";
+import { Router } from '@angular/router';
+import { WelfareTimeService } from '../../../service/welfare-time.service';
+import { CountDown } from '../../../interface/count-down';
+import { LayoutConfigService } from '../../../service/layout-config.service';
 
 @Component({
   selector: 'app-coming-soon',
@@ -11,7 +11,7 @@ import { LayoutConfigService } from "../../../service/layout-config.service";
 })
 export class ComingSoonComponent implements OnInit, OnDestroy {
   public countdownDate: CountDown;
-  public isDesktop: boolean = true;
+  public isDesktop = true;
   private setIn: any;
   constructor(
     private router: Router,
