@@ -40,6 +40,7 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d  # XXX: not consistent with other volume settings
       - certbot:/var/www/certbot
       - letsencrypt:/etc/letsencrypt
+      - uwsgi:/uwsgi
   backend:
     depends_on:
       - mongo
@@ -54,6 +55,8 @@ services:
     logging: *default-logging
     networks:
       - welfare
+    volumes:
+      - uwsgi:/uwsgi
   mongo:
     deploy:
       replicas: 1
@@ -104,3 +107,9 @@ volumes:
       type: none
       o: bind
       device: /srv/welfare/mongo
+  uwsgi:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /srv/welfare/uwsgi

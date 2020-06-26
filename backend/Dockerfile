@@ -10,4 +10,5 @@ RUN apk update \
   && echo $TZ > /etc/timezone
 EXPOSE 5000
 ENTRYPOINT ["uwsgi"]
+VOLUME ["/uwsgi"]
 CMD ["uwsgi.ini"]
