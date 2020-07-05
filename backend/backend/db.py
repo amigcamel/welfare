@@ -86,6 +86,38 @@ class Order:
             if (doc := self.db[col].find_one({"user": self.user}, {"_id": 0})) :
                 yield doc
 
+    def get(self):
+        """Get order(s)."""
+        if self.user is None:
+            cond = {}
+        else:
+            cond = {"user": self.user}
+        docs = self.db[self.col].find(cond, {"_id": 0, "user": 1, "collected": 1})
+        staff = (
+            Staff()
+            .db["profile"]
+            .find({}, {"_id": 0, "email": 1, "english_name": 1, "sid": 1})
+        )
+        staff_dic = {i["email"]: i for i in staff}
+        con = []
+        for doc in docs:
+            user = doc["user"]
+            con.append(
+                {
+                    "name": staff_dic[user]["english_name"],
+                    "sid": staff_dic[user]["sid"],
+                    "collected": doc["collected"],
+                }
+            )
+        return con
+
+    def update(self, data: dict):
+        """Update order."""
+        stat = self.db[self.col].update(
+            {"user": self.user}, {"$set": data}, upsert=False
+        )
+        return stat
+
     def transform_and_save(self, data: dict):
         """Transform data to order format and save to db."""
         orders = []
@@ -125,6 +157,7 @@ class Order:
             "date": data["expiration"],
             "orders": orders,
             "qr": data["qr"],
+            "collected": False,
         }
         stat = self.db[self.col].update({"user": self.user}, res, upsert=True)
         logger.info(stat)
