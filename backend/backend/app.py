@@ -7,6 +7,7 @@ from loguru import logger
 
 from .auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
 from .db import AfternoonTea, AuthToken, Order
+from .utils import send_action
 from . import (
     settings,
     exceptions,
@@ -108,3 +109,29 @@ def afternoontea(col):
 def history():
     """Afternoon order history."""
     return jsonify(list(Order(g.user)))
+
+
+@app.route("/order/<col>", methods=["GET", "POST"])
+def order(col):
+    """CRUD order."""
+    if not Staff(g.user).is_admin:
+        raise exceptions.UnauthorizedError(f"No admin permission: {g.user}")
+    if request.method == "GET":
+        return jsonify(Order(user=None, col=col).get())
+    elif request.method == "POST":
+        if (user := request.args.get("user")) and (data := request.get_json()):
+            stat = Order(user=user, col=col).update(data)
+            logger.info(stat)
+            if stat["updatedExisting"]:
+                send_action(action="update", token=g.token)
+                return jsonify({"msg": "ok"})
+            else:
+                return jsonify({"msg": "update failed"}), 400  # TODO: make it clear
+        else:
+            return jsonify({"msg": "not ok"}), 400  # TODO: make it clear
+
+
+@app.route("/token_info")
+def token_info():  # XXX: requested by the internal only?
+    """Show token status."""
+    return jsonify(get_userinfo_from_token(g.token))
