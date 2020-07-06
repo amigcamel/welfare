@@ -3,18 +3,30 @@ from urllib.parse import urlparse, parse_qs
 import asyncio
 
 from loguru import logger
+import requests
 import websockets
 
 USERS = set()
 
 
 def _validate_token(token):
-    if token == "test":
-        logger.info(f"Valid token: {token}")
-        return True
-    else:
-        logger.info(f"Invalid token: {token}")
+    headers = {"Authorization": f"Bearer {token}"}
+    resp = requests.get(
+        "http://backend:5000/api/token_info", headers=headers
+    )  # TODO: Add timeout
+    if resp.status_code == 200:
+        user_info = resp.json()
+        if user_info.get("level") == 300:  # TODO: DRY
+            logger.info(f"is admin: {user_info['email']}")
+            return True
+        else:
+            logger.info(f"is Not admin: {user_info['email']}")
+            return False
+    elif resp.status_code == 401:
+        logger.info(resp.json())
         return False
+    else:
+        pass  # TODO: add handling
 
 
 async def register(websocket):
