@@ -1,12 +1,13 @@
 """App."""
 from datetime import datetime
+import re
 import traceback
 
 from flask import Flask, request, redirect, jsonify, url_for, g
 from loguru import logger
 
 from .auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
-from .db import AfternoonTea, AuthToken, Order
+from .db import AfternoonTea, AuthToken, Order, Staff
 from .utils import send_action
 from . import (
     settings,
@@ -30,15 +31,17 @@ def auth():
         return
     if request.method == "OPTIONS":
         return
-    if request.path in (url_for("login"),):
-        return
+    for route in (url_for("login"),):
+        if re.search(request.path, route):
+            return
     auth = request.headers.get("Authorization")
     if auth:
         token = request.headers["Authorization"].split("Bearer")[-1].strip()
         data = get_userinfo_from_token(token)
         g.token = token
         g.user = data["email"]
-        return
+    else:
+        raise exceptions.UnauthorizedError("Unauthorized")
 
 
 @app.errorhandler(Exception)
