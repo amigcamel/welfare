@@ -15,6 +15,7 @@ FAKE_USER_DATA = {
     "chinese_name": "劉阿吉",
     "english_name": "Aji Liu",
     "sid": "0666",
+    "level": 300,
 }
 FAKE_TOKEN = "test_token"
 
