@@ -38,6 +38,12 @@ class UnauthorizedError(AuthError):
     errcode = 403
 
 
+class InvalidTokenError(AuthError):
+    """Handle unauthorized request."""
+
+    errcode = 401
+
+
 class DomainNotAllowedError(AuthError):
     """Handle invalid loging domain."""
 
