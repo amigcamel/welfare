@@ -20,6 +20,8 @@ app.debug = settings.DEBUG
 app.config["JSON_AS_ASCII"] = False
 app.config["SECRET_KEY"] = settings.APP_SECRET
 
+_DEFAULT_COL = "demo_1"  # TODO: DRY
+
 
 @app.before_request
 def auth():
@@ -88,12 +90,10 @@ def user():
     return jsonify(data)
 
 
-@app.route("/afternoontea", defaults={"col": None}, methods=["GET", "POST"])
+@app.route("/afternoontea", defaults={"col": _DEFAULT_COLt}, methods=["GET", "POST"])
 @app.route("/afternoontea/<col>", methods=["GET", "POST"])
 def afternoontea(col):
     """Afternoon Tea."""
-    if not col:
-        col = "demo_1"  # XXX: do not hardcode this
     if request.method == "GET":
         try:
             data = AfternoonTea(col=col, user=g.user).get()
@@ -114,6 +114,7 @@ def history():
     return jsonify(list(Order(g.user)))
 
 
+@app.route("/order", defaults={"col": _DEFAULT_COL}, methods=["GET", "POST"])
 @app.route("/order/<col>", methods=["GET", "POST"])
 def order(col):
     """CRUD order."""
