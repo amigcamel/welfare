@@ -48,6 +48,19 @@ services:
       - welfare
     ports:
       - 6379:6379
+  websocket:
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    environment:
+      - DEBUG=True
+      - WEBSOCKET_PREFIX=/ws
+    image: ffntea/websocket:develop
+    networks:
+      - welfare
+    ports:
+      - 6789:6789
 
 
 networks:
