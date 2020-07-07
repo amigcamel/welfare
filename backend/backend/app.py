@@ -1,5 +1,6 @@
 """App."""
 from datetime import datetime
+import traceback
 
 from flask import Flask, request, redirect, jsonify, url_for, g
 from loguru import logger
@@ -50,7 +51,7 @@ def handle_error(error):
         response.status_code = error.args[1]
         return response
     else:
-        logger.critical(error)
+        logger.critical(traceback.format_exc())
         return "Internal Server Error", 500
 
 
