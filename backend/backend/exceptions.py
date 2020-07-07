@@ -35,7 +35,7 @@ class TokenExpiredError(AuthError):
 class UnauthorizedError(AuthError):
     """Handle unauthorized request."""
 
-    errcode = 403
+    errcode = 401
 
 
 class InvalidTokenError(AuthError):
