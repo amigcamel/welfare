@@ -1,8 +1,9 @@
 """Settings."""
+from distutils.util import strtobool
 import os
 
-DEBUG = os.environ.get("DEBUG", False)
-FAKE_LOGIN = DEBUG and os.environ.get("FAKE_LOGIN", False)
+DEBUG = strtobool(os.environ.get("DEBUG", "False"))
+FAKE_LOGIN = DEBUG and strtobool(os.environ.get("FAKE_LOGIN", "Flase"))
 FAKE_USER_DATA = {
     "email": "aji@ffn.com",
     "family_name": "Liu",
