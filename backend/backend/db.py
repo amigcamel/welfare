@@ -28,6 +28,15 @@ class Staff:
         """Get user profile."""
         return self.db.profile.find_one({"email": self.email}, {"_id": 0})
 
+    @property
+    def is_admin(self):
+        """Check if user has admin permission."""
+        doc = self.db.profile.find_one({"email": self.email}, {"_id": 0, "level": 1})
+        if doc.get("level") == 300:
+            return True
+        else:
+            return False
+
 
 class AfternoonTea:
     """Handle AfternoonTea."""
