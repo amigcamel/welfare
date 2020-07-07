@@ -3,7 +3,7 @@ from distutils.util import strtobool
 import os
 
 DEBUG = strtobool(os.environ.get("DEBUG", "False"))
-FAKE_LOGIN = DEBUG and strtobool(os.environ.get("FAKE_LOGIN", "Flase"))
+FAKE_LOGIN = DEBUG and strtobool(os.environ.get("FAKE_LOGIN", "False"))
 FAKE_USER_DATA = {
     "email": "aji@ffn.com",
     "family_name": "Liu",
