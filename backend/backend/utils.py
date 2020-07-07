@@ -5,6 +5,7 @@ from flask import json, make_response
 
 
 def gzip_jsonify(data: dict):
+    """Gzip json response."""
     content = gzip.compress(json.dumps(data).encode("utf-8"), 6)
     response = make_response(content)
     response.headers["Content-Type"] = "application/json"
