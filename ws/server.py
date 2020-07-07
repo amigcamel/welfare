@@ -1,16 +1,21 @@
 """Websocket server."""
 from urllib.parse import urlparse, parse_qs
 import asyncio
+import os
 
 from loguru import logger
 import requests
 import websockets
 
 USERS = set()
+PREFIX = os.environ.get("WEBSOCKET_PREFIX", "")
 
 
 def _validate_token(token):
     headers = {"Authorization": f"Bearer {token}"}
+    if os.environ.get("DEBUG") and token == "test_token":
+        logger.debug("DEBUG Mode")
+        return True
     resp = requests.get(
         "http://backend:5000/api/token_info", headers=headers
     )  # TODO: Add timeout
@@ -45,7 +50,7 @@ async def notifier(websocket, path):
     """Notify clients what to do after receiving commands."""
     logger.debug(f"path: {path}")
     res = urlparse(path)
-    if res.path == "/":
+    if res.path.replace(PREFIX, "") == "/":
         if token := parse_qs(res.query).get("token"):
             if not _validate_token(token[0]):
                 return
@@ -53,7 +58,7 @@ async def notifier(websocket, path):
             logger.info("No token")
             return
     else:
-        logger.info("Wrong path: {res.path}")
+        logger.info(f"Wrong path: {res.path}")
         return
     await register(websocket)
 
@@ -69,7 +74,8 @@ async def notifier(websocket, path):
         await unregister(websocket)
 
 
-start_server = websockets.serve(notifier, "welfare.local.com", 6789)
+if __name__ == "__main__":
+    start_server = websockets.serve(notifier, "0.0.0.0", 6789)
 
-asyncio.get_event_loop().run_until_complete(start_server)
-asyncio.get_event_loop().run_forever()
+    asyncio.get_event_loop().run_until_complete(start_server)
+    asyncio.get_event_loop().run_forever()
