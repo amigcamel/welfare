@@ -18,15 +18,15 @@ from .qr import QR
 class Staff:
     """Handle staff profile."""
 
-    def __init__(self, email: str):
+    def __init__(self, email: Union[str, None] = None):
         """Construct Mongo client."""
         self.email = email
-        self.db = MongoClient(**settings.MONGODB)
+        self.db = MongoClient(**settings.MONGODB)["staff"]
 
     @property
     def profile(self):
         """Get user profile."""
-        return self.db.staff.profile.find_one({"email": self.email}, {"_id": 0})
+        return self.db.profile.find_one({"email": self.email}, {"_id": 0})
 
 
 class AfternoonTea:
@@ -37,7 +37,7 @@ class AfternoonTea:
         self.__dbname = "afternoontea"
         self.__colname = col
         self.db = MongoClient(**settings.MONGODB)[self.__dbname]
-        self.col = self.__colname
+        self.col = self.__colname  # FIXME
         self.user = user
 
     def __repr__(self):
@@ -80,6 +80,10 @@ class Order:
         self.col = col
         self.user = user
 
+    def __repr__(self):
+        """__repr__ method."""
+        return f"<Order: user={self.user} col={self.col}>"
+
     def __iter__(self):
         """Get order history."""
         for col in self.db.list_collection_names():
@@ -105,6 +109,7 @@ class Order:
             con.append(
                 {
                     "name": staff_dic[user]["english_name"],
+                    "email": staff_dic[user]["email"],
                     "sid": staff_dic[user]["sid"],
                     "collected": doc["collected"],
                 }
