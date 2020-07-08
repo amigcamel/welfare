@@ -1,17 +1,17 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { animate, state, style, transition, trigger } from "@angular/animations";
-import { of, Subject } from "rxjs";
-import { CountExpiration } from "../../../interface/count-down";
-import { AfternoonTeaForm, CheckBoxSelection, Form, Item } from "../../../interface/afternoon-tea-form";
-import { FormService } from "../../../service/form.service";
-import { MatDialog } from "@angular/material/dialog";
-import { WelfareTimeService } from "../../../service/welfare-time.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { DialogComponent } from "../../../component/dialog/dialog.component";
-import { switchMap, takeUntil } from "rxjs/operators";
-import { Cart } from "../../../interface/cart";
-import { LayoutConfigService } from "../../../service/layout-config.service";
-import { ViewportScroller } from "@angular/common";
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { of, Subject } from 'rxjs';
+import { CountExpiration } from '../../../interface/count-down';
+import { AfternoonTeaForm, CheckBoxSelection, Form, Item } from '../../../interface/afternoon-tea-form';
+import { FormService } from '../../../service/form.service';
+import { MatDialog } from '@angular/material/dialog';
+import { WelfareTimeService } from '../../../service/welfare-time.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DialogComponent } from '../../../component/dialog/dialog.component';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { Cart } from '../../../interface/cart';
+import { LayoutConfigService } from '../../../service/layout-config.service';
+import { ViewportScroller } from '@angular/common';
 import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-form',
@@ -50,7 +50,11 @@ export class FormComponent implements OnInit, OnDestroy {
     private router: Router,
     private viewportScroller: ViewportScroller,
     public layoutConfigService: LayoutConfigService
-  ) { }
+  ) {
+    this.layoutConfigService.setShowCartInfo(true);
+    this.layoutConfigService.setShowToolBarBottom(true);
+    this.layoutConfigService.setIsShowToolBar(true);
+  }
 
   ngOnInit(): void {
     this.formData = this.activatedRoute.snapshot.data.formData;
@@ -59,15 +63,18 @@ export class FormComponent implements OnInit, OnDestroy {
       this.initialFormData();
     }
 
-    this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(state => {
-      this.isDesktop = state;
-    })
+    this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(check => {
+      this.isDesktop = check;
+    });
     this.calculatorSum();
+    this.formService.cartDialog$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(
+      _ => this.openPreview()
+    );
   }
   nextPage() {
     this.closeAllCollapse(this.formData.form[this.currentForm]);
     if (this.currentForm + 1 < this.formData.form.length) {
-      this.container.nativeElement.scrollTop = 0
+      this.container.nativeElement.scrollTop = 0;
     }
     this.currentForm = this.currentForm + 1 < this.formData.form.length ? this.currentForm + 1 : this.currentForm;
 
@@ -75,9 +82,9 @@ export class FormComponent implements OnInit, OnDestroy {
   previousPage() {
     this.closeAllCollapse(this.formData.form[this.currentForm]);
     if (this.currentForm - 1 >= 0) {
-      this.container.nativeElement.scrollTop = 0
+      this.container.nativeElement.scrollTop = 0;
     }
-    this.currentForm = this.currentForm - 1 < 0 ? this.currentForm : this.currentForm -1;
+    this.currentForm = this.currentForm - 1 < 0 ? this.currentForm : this.currentForm - 1;
 
   }
   private initialFormData(){
@@ -85,13 +92,13 @@ export class FormComponent implements OnInit, OnDestroy {
       form.items.forEach(item => {
         item.options.forEach(option => {
           if (!!option.radioSelections && option.radioSelections.length > 0) {
-            const key = option.optionKey
+            const key = option.optionKey;
             item.selections = Object.assign({...item.selections},
-              {[key]: option.radioSelections[0].value})
+              {[key]: option.radioSelections[0].value});
           }
-        })
-      })
-    })
+        });
+      });
+    });
   }
 
   public filterText(target: string): boolean {
@@ -104,7 +111,7 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   public subOnFlow(form: Form, target: Item, event: Event): void {
-    event.stopPropagation()
+    event.stopPropagation();
     target = this.subOne(target);
     this.calculatorSum();
     target.collapse = target.value !== 0;
@@ -112,16 +119,16 @@ export class FormComponent implements OnInit, OnDestroy {
 
   private subOne(item: Item): Item {
     item.value = item.value > 0 ? item.value - 1 : item.value;
-    return item
+    return item;
   }
 
   private addOne(item: Item): Item {
     item.value = item.value + 1;
-    return item
+    return item;
   }
 
   public addOneFlow(form: Form, target: Item, event: Event): void {
-    event.stopPropagation()
+    event.stopPropagation();
     target = this.addOne(target);
     this.calculatorSum();
     if (this.sum > this.formData.budget) {
@@ -149,19 +156,19 @@ export class FormComponent implements OnInit, OnDestroy {
 
   public calculatorSum(): void {
     this.sum = 0;
-    for (let form of this.formData.form) {
-      for (let item of form.items) {
+    for (const form of this.formData.form) {
+      for (const item of form.items) {
         let extraValue = 0;
-        for (let option of item.options) {
+        for (const option of item.options) {
           if (!!option.checkBoxOptions){
-            for (let select of option.checkBoxOptions) {
+            for (const select of option.checkBoxOptions) {
               if (select.choose) {
                 extraValue += select.price;
               }
             }
           }
         }
-        this.sum += item.value * (item.selections['size'] + extraValue)
+        this.sum += item.value * (item.selections.size + extraValue);
       }
     }
     if (this.sum > this.formData.budget) {
@@ -177,6 +184,10 @@ export class FormComponent implements OnInit, OnDestroy {
         panelClass: 'form-dialog'
       });
     }
+    this.formService.setCartInfo({
+      budget: this.formData.budget,
+      sum: this.sum
+    });
   }
   public toggleCollapse(item: Item){
     if (item.value === 0 && this.isDesktop ) {
@@ -256,12 +267,12 @@ export class FormComponent implements OnInit, OnDestroy {
     const data: Cart[] = [];
     for (const form of this.formData.form) {
       for (const item of form.items) {
-        if (item['value'] >  0) {
+        if (item.value >  0) {
           let price = 0;
           let optionList = '';
           for (const option of item.options) {
             if (!!option.checkBoxOptions){
-              for (let select of option.checkBoxOptions) {
+              for (const select of option.checkBoxOptions) {
                 if (select.choose) {
                   price += select.price;
                   optionList += select.selectionLabel;
@@ -269,11 +280,11 @@ export class FormComponent implements OnInit, OnDestroy {
               }
             }
           }
-          price += item.selections['size']
+          price += item.selections.size;
           data.push({
               productName: item.itemLabel,
               subExtra: optionList,
-              price: price,
+              price,
               count: item.value,
               total: item.value * price,
             }
@@ -283,16 +294,29 @@ export class FormComponent implements OnInit, OnDestroy {
     }
     return data;
   }
+  openPreview() {
+    this.matDialog.open(DialogComponent, {
+      data: {
+        contentType: 'cart',
+        dialogType: 'tipDialog',
+        faIcon: faShoppingBag,
+        title: 'Order',
+        positiveBtn: 'Confirm',
+        items: this.previewCart(),
+      },
+      panelClass: 'cart-dialog'
+    });
+  }
   getPriceLabel(item: Item): string {
-    let result = [];
-    for (let option of item.options) {
+    const result = [];
+    for (const option of item.options) {
       if (option.optionKey === 'size') {
-        for(let selection of option.radioSelections) {
-          result.push((option.radioSelections.length > 1 ? `${selection.selectionLabel} :` : "") + selection.price)
+        for (const selection of option.radioSelections) {
+          result.push((option.radioSelections.length > 1 ? `${selection.selectionLabel} :` : '') + selection.price);
         }
       }
     }
-    return result.join(" | ");
+    return result.join(' | ');
   }
 
   ngOnDestroy() {

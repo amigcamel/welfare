@@ -1,23 +1,18 @@
-<div class="container" fxFlex="100" fxLayout="column">
-  <div class="navigate-group">Afternoon Tea</div>
+<div class="container" fxLayout="column" fxLayoutAlign="start center">
   <div class="navigate-item" fxLayout="rows" fxLayoutAlign="start center"
        (click)="navigateTo('afternoon-tea/form')">
-    <mat-icon>emoji_food_beverage</mat-icon>
     <span class="item-text">Food & Drink</span>
   </div>
   <div class="navigate-item" fxLayout="rows"  fxLayoutAlign="start center"
        (click)="navigateTo('afternoon-tea/history')">
-    <mat-icon>history</mat-icon>
     <span class="item-text">History</span>
   </div>
   <div class="navigate-item" fxLayout="rows" fxLayoutAlign="start center"
        (click)="navigateTo('afternoon-tea/coming-soon')">
-    <mat-icon>event_note</mat-icon>
     <span class="item-text">Coming Soon</span>
   </div>
   <div class="navigate-item" fxLayout="rows" fxLayoutAlign="start center"
        (click)="logOut()">
-    <mat-icon>exit_to_app</mat-icon>
     <span class="item-text">Logout</span>
   </div>
 </div>

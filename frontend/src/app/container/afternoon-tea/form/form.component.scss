@@ -1,7 +1,7 @@
 .container {
-  background-color: #fdf8f6;
+  background-color: white;
   padding: 40px 20px 20px;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 90px);
   overflow-y: scroll;
   overflow-x: hidden;
   box-sizing: border-box;
@@ -11,20 +11,19 @@
     margin: 0 auto;
   }
   .count-down-item {
-    font-size: 16px;
-    margin: 0 0 6px 5px;
+    font-size: 12px;
     color: #444;
   }
   .form {
     background-color: white;
-    box-shadow: 2px 3px 6px rgba(28,28,28,.5);
-    padding: 20px;
-    max-width: 1280px;
+    max-width: 750px;
     margin: 0 auto;
+    padding: 20px 0;
     box-sizing: border-box;
     .form-label {
-      padding: 20px 0 20px 0;
       margin-bottom: 10px;
+      justify-content: space-between;
+      align-items: baseline;
       .menu {
         cursor: pointer;
         text-decoration: underline;
@@ -49,10 +48,10 @@
       padding: 20px;
       margin-bottom: 15px;
       border-radius: 20px;
-      border: solid #694026 1px;
+      border: solid #f2a202 1px;
       overflow: hidden;
       &.active {
-        background-color: #ddd;
+        background-color: #fffbf2;
       }
       .item-title {
         padding-bottom: 15px;
@@ -166,36 +165,52 @@
     }
   }
   .total {
-    padding: 10px 20px;
+    width: 160px;
+    height: 60px;
     position: fixed;
-    bottom: 0px;
-    right: 0px;
-    background-color: #333333;
-    color: white;
-    border-radius: 5px 0 0 0 ;
+    bottom: 40px;
+    right: 60px;
+    background-color: #f2a202;
+    color: black;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     .exceed {
       color: red;
     }
   }
   .page-btn {
-    border-radius: 10px;
-    background: white;
-    padding: 10px 20px;
-    border: 1px solid  #DE8C4D;
-    font-size: 14px;
-    outline: none;
-    color: #DE8C4D;
-    cursor: pointer;
-  }
-  .finish-btn {
-    border-radius: 10px;
-    background: #DE8C4D;
-    padding: 10px 20px;
-    border: 1px solid white;
+    width: 140px;
+    height: 52px;
+    border-radius: 26px;
+    background: black;
     font-size: 14px;
     outline: none;
     color: white;
     cursor: pointer;
+    border: 0;
+    margin-right: 18px;
+    &:hover {
+      background-color: #f2a202;
+      color: black;
+    }
+  }
+  .finish-btn {
+    width: 140px;
+    height: 52px;
+    border-radius: 26px;
+    background: black;
+    font-size: 14px;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    border: 0;
+    &:hover {
+      background-color: #f2a202;
+      color: black;
+    }
   }
   .expiration {
     padding-bottom: 15px;

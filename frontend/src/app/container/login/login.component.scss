@@ -2,53 +2,36 @@
   width: 100%;
   height: 100%;
   display: flex;
-  background-image: url('/assets/background/login-wallpapper.jpg');
-  background-position: center bottom;
-
+  background: white;
+  align-items: center;
+  justify-content: center;
   .login-form {
-    width: 100%;
-    height: 100%;
     margin: 0;
-    // background-color: #081816;
-    .login-title {
-      width: 199px;
-      height: 44px;
-      font-family: 'Source Sans Pro', sans-serif;
-      font-size: 35px;
-      line-height: 0.71;
-      color: #009A90;
-      margin: 0 auto;
-      padding-top: 160px;
-      .bold {
-        font-weight: bold;
-      }
-    }
-    .login-sub-title {
-      width: 214px;
-      height: 45px;
-      letter-spacing: 1px;
-      font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    .sub-text {
       font-size: 18px;
-      line-height: 1.17;
-      text-align: left;
+      font-weight: bold;
+      padding: 24px 0;
       margin: 0 auto;
-      color: #009A90;
-      .bold {
-        font-weight: bold;
-      }
     }
     .login-btn {
-      margin: 60px auto 0 auto;
-      width: 279px;
-      height: 42px;
-      background-color: #DE8C4D;
+      width: 250px;
+      height: 51px;
+      padding: 5px 24px;
+      border: solid 1px #e6e6e6;
+      border-radius: 10px;
       display: flex;
+      font-size: 18px;
+      font-weight: bold;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 18px;
-      border-radius: 5px;
       cursor: pointer;
+      .login-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+      }
     }
 
   }

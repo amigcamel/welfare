@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SideBarService } from "../../service/side-bar.service";
-import { AuthService } from "../../service/auth.service";
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
-import { UserInfo } from "../../interface/userinfo";
-import { Router } from "@angular/router";
-import { MatDialog } from "@angular/material/dialog";
-import { LayoutConfigService } from "../../service/layout-config.service";
+import { SideBarService } from '../../service/side-bar.service';
+import { AuthService } from '../../service/auth.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { UserInfo } from '../../interface/userinfo';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { LayoutConfigService } from '../../service/layout-config.service';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -16,9 +16,9 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 })
 export class ToolBarComponent implements OnInit, OnDestroy {
   faBars = faBars;
-  unSubscribe = new Subject<boolean>()
+  unSubscribe = new Subject<boolean>();
   userInfo: UserInfo;
-  mat
+  isShowBottom: boolean;
   constructor(private sideBarService: SideBarService,
               private authService: AuthService,
               private router: Router,
@@ -26,11 +26,14 @@ export class ToolBarComponent implements OnInit, OnDestroy {
               public layoutConfigService: LayoutConfigService) { }
 
   ngOnInit(): void {
+    this.layoutConfigService.showToolBarBottom$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(
+      hide => this.isShowBottom = hide
+    );
     this.authService.currentUser$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(
       user => {
         this.userInfo = user;
       }
-    )
+    );
   }
   public openSideBar(): void {
     this.sideBarService.setIsShow(true);
@@ -40,8 +43,8 @@ export class ToolBarComponent implements OnInit, OnDestroy {
       localStorage.removeItem('token');
       this.authService.setIsLogin(false);
       this.router.navigateByUrl('/login');
-    },error => {
-      console.log("log out error:", error)
+    }, error => {
+      console.log('log out error:', error);
     });
   }
   ngOnDestroy() {

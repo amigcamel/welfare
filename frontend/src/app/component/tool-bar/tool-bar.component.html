@@ -1,16 +1,14 @@
-<mat-toolbar>
-  <div class="container" fxLayout="rows" fxLayoutAlign="space-between center">
-    <div fxLayout="rows">
-      <fa-icon class="icon" (click)="openSideBar()" [icon]="faBars"></fa-icon>
-      <div *ngIf="layoutConfigService.isDesktop$ | async" class="logo-title">FFn <span class="bold">Welfare</span></div>
+<div class="container" fxLayout="rows" [ngClass]="{'hide-bottom': !isShowBottom}">
+  <div class="content">
+    <div class="icon-outside" (click)="openSideBar()">
+      <img src="assets/icons/menu.svg" class="icon">
     </div>
-    <div class="user-info" fxLayout="rows" fxLayoutAlign="space-around center">
-      <div class="user-photo" fxLayoutAlign="center center">
-        <img [src]="userInfo.picture" alt="">
-      </div>
-      <div class="user-name">{{userInfo.name}}</div>
-<!--      <mat-icon>arrow_drop_down</mat-icon>-->
+    <div></div>
+    <app-logo></app-logo>
+    <div>
+      <app-cart *ngIf="layoutConfigService.showCartInfo$ | async"></app-cart>
     </div>
   </div>
-</mat-toolbar>
+
+</div>
 

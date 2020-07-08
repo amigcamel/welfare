@@ -4,7 +4,7 @@ import { AuthService } from '../../service/auth.service';
 import { UserService } from '../../service/user.service';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { Observable, of, Subject } from 'rxjs';
-import { LayoutConfigService } from "../../service/layout-config.service";
+import { LayoutConfigService } from '../../service/layout-config.service';
 
 @Component({
   selector: 'app-home',
@@ -31,12 +31,13 @@ export class HomeComponent implements OnInit, OnDestroy {
               return this.userService.getUser();
           } else {
               this.router.navigateByUrl('/login');
-              return of(null)
+              return of(null);
           }
       })).subscribe(
           user => {
               if (user !== null) {
                   this.authService.setUser(user);
+                  this.router.navigateByUrl('/billboard');
               }
           }, error => {
               console.log('login error', error);

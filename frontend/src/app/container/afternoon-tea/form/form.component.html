@@ -1,16 +1,19 @@
 <div class="container" #container fxLayout="column">
   <div fxLayout="column" fxLayoutAlign="center end" class="expiration">
     <div fxLayout="row" fxLayoutAlign="space-around center">
-      <div class="count-down-item">Due Date: {{formData.expiration}}</div>
+
     </div>
   </div>
   <div>
     <div class="form" fxLayout="column">
-      <div class="form-label" fxLayout="row" fxLayoutAlign="start center">
-        <div class="form-label-text">
-          {{formData.form[currentForm].formLabel}}
+      <div class="form-label" fxLayout="row">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="form-label-text">
+            {{formData.form[currentForm].formLabel}}
+          </div>
+          <div class="menu" (click)="seeMenu(formData.form[currentForm].menuImage)">Menu</div>
         </div>
-        <div class="menu" (click)="seeMenu(formData.form[currentForm].menuImage)">Menu</div>
+        <div class="count-down-item">Due Date: {{formData.expiration}}</div>
       </div>
       <div class="filter-bar" fxLayout="row" fxLayoutAlign="starter center">
         <input placeholder="Search item" type="text" fxFlex [(ngModel)]="filterTarget">
@@ -73,7 +76,7 @@
         </ng-container>
       </div>
       <ng-container *ngIf="true">
-        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="center center">
           <button class="page-btn"  (click)="previousPage()">Previous</button>
           <button class="finish-btn" *ngIf="!formData.form[currentForm].isEnd" (click)="nextPage()">Next</button>
           <button class="finish-btn"  *ngIf="formData.form[currentForm].isEnd" type="button" color="accent" (click)="finishOrder()">
@@ -83,5 +86,4 @@
       </ng-container>
     </div>
   </div>
-  <div class="total">Total: $ <span [ngClass]="{'exceed': this.sum > this.formData.budget}">{{sum}}</span></div>
 </div>

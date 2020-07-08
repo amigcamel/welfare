@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 
 
@@ -11,12 +12,14 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    AngularSvgIconModule.forRoot(),
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    AngularSvgIconModule
   ]
 })
 export class ShareModule { }

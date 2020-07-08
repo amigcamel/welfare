@@ -1,5 +1,4 @@
 .container {
-  flex: 1 1 auto;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -7,62 +6,71 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   z-index: 1000;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
-  background-color: #444;
+  background-color: #f2a202;
   .content {
-    width: 280px;
+    width: 450px;
     display: flex;
     flex-direction: column;
     height: 100%;
+    position: relative;
     .top-nav {
-      padding: 10px 20px;
-      margin: 0 auto;
-      width: 280px;
-      color: white;
-      box-sizing: border-box;
-      em {
-        margin-right: 40px;
-      }
-      .logo-title {
-        font-size: 16px;
-        margin-right: 65px;
-      }
-      .icon {
+      position: relative;
+      min-height: 90px;
+      .close-icon {
+        width: 30px;
+        height: 30px;
+        padding: 10px;
+        left       : 36px;
+        top        : 40px;
+        position   : absolute;
+        transform: rotate(0deg);
+        transition: all 300ms ease-out;
         cursor: pointer;
+        &:hover {
+          width: 40px;
+          height: 40px;
+          transform: rotate(180deg);
+        }
       }
     }
     .scroll-bar {
       position: relative;
       .user-navy {
-        padding: 25px 20px 20px 25px;
-        background-color: #444;
+        background-color: transparent;
         .user-name {
-          font-size: 18px;
-          color: white;
+          font-size: 20px;
+          color: black;
+          margin-bottom: 17px;
+          text-align: center;
         }
         .user-sid {
-          font-size: 12px;
-          padding: 3px 5px 2px 5px;
+          font-size: 14px;
+          padding: 6px 12px;
           margin-bottom: 10px;
-          background-color: #DE8C4D;
+          background-color: black;
           border-radius: 3px;
           display: inline-block;
-          color: white;
+          color: #f2a202;
         }
         .user-email {
-          color: #aaa;
-          font-size: 13px;
-          margin-top: 10px;
+          color: black;
+          font-size: 14px;
         }
         .user-photo {
-          padding-right: 40px;
           .user-img {
             border-radius: 50%;
             overflow: hidden;
-            width: 72px;
-            height: 72px;
+            width: 116px;
+            height: 116px;
+            border: solid 1px black;
           }
+          margin-bottom: 15px;
         }
+      }
+      .line {
+        width: 80%;
+        border-bottom: solid black 1px;
+        height: 34px;
       }
     }
   }

@@ -1,0 +1,10 @@
+.total {
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  .exceed {
+    color: red;
+  }
+}

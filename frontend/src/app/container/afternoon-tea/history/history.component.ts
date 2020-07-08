@@ -12,12 +12,13 @@ export class HistoryComponent implements OnInit {
     historyData: any;
     constructor(private activatedRoute: ActivatedRoute,
                 public layoutConfigService: LayoutConfigService) {
-      this.layoutConfigService.setIsShowToolBar(true)
+      this.layoutConfigService.setIsShowToolBar(true);
+      this.layoutConfigService.setShowToolBarBottom(true);
+      this.layoutConfigService.setShowCartInfo(false);
     }
 
   ngOnInit(): void {
       this.historyData = this.activatedRoute.snapshot.data.historyData;
-      console.log(this.historyData);
   }
   public showExtra(order): string {
       if (!!order['options'] && order['options'].length > 0)
