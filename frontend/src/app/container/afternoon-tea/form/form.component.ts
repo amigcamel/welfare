@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { of, Subject } from 'rxjs';
 import { CountExpiration } from '../../../interface/count-down';
@@ -21,7 +21,18 @@ import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-sv
         height: '*',
       })),
       state('closed', style({
-        height: '75px',
+        height: '{{minHeight}}',
+      }), {params: {minHeight: '75px'}}),
+      transition('open <=> closed', [
+        animate('.5s ease-in')
+      ]),
+    ]),
+    trigger('subOpenClose', [
+      state('open', style({
+        height: '*',
+      })),
+      state('closed', style({
+        height: '45px'
       })),
       transition('open <=> closed', [
         animate('.5s ease-in')
@@ -32,14 +43,15 @@ import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-sv
   styleUrls: ['./form.component.scss']
 })
 
-export class FormComponent implements OnInit, OnDestroy {
+export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
   @ViewChild('container', {static: true}) container: ElementRef;
-  public sum = 0;
+  public sum: number;
   public filterTarget = '';
   public expiration: CountExpiration;
   public formData: AfternoonTeaForm;
   public isDesktop;
   public currentForm = 0;
+  public minHeight: string;
   // Private
   private unSubscribe = new Subject<boolean>();
   constructor(
@@ -65,12 +77,19 @@ export class FormComponent implements OnInit, OnDestroy {
 
     this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(check => {
       this.isDesktop = check;
+      this.minHeight = this.isDesktop ? '75px' : '47px';
     });
-    this.calculatorSum();
     this.formService.cartDialog$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(
       _ => this.openPreview()
     );
   }
+  ngAfterViewInit() {
+
+  }
+  ngAfterContentInit() {
+    this.calculatorSum();
+  }
+
   nextPage() {
     this.closeAllCollapse(this.formData.form[this.currentForm]);
     if (this.currentForm + 1 < this.formData.form.length) {
@@ -100,7 +119,9 @@ export class FormComponent implements OnInit, OnDestroy {
       });
     });
   }
-
+  public handleFilterTarget(target) {
+    this.filterTarget = target;
+  }
   public filterText(target: string): boolean {
     if (this.filterTarget === '') {
       return true;
@@ -110,33 +131,15 @@ export class FormComponent implements OnInit, OnDestroy {
     }
   }
 
-  public subOnFlow(form: Form, target: Item, event: Event): void {
-    event.stopPropagation();
-    target = this.subOne(target);
-    this.calculatorSum();
-    target.collapse = target.value !== 0;
-  }
-
-  private subOne(item: Item): Item {
-    item.value = item.value > 0 ? item.value - 1 : item.value;
-    return item;
-  }
-
-  private addOne(item: Item): Item {
-    item.value = item.value + 1;
-    return item;
-  }
-
-  public addOneFlow(form: Form, target: Item, event: Event): void {
-    event.stopPropagation();
-    target = this.addOne(target);
+  public handleItem(item, newItem) {
+    item = newItem;
     this.calculatorSum();
     if (this.sum > this.formData.budget) {
-      target = this.subOne(target);
+      item.value -= 1;
       this.calculatorSum();
       return;
     }
-    target.collapse = true;
+    item.collapse = item.value !== 0;
   }
 
   public seeMenu(src: string): void {
@@ -184,12 +187,15 @@ export class FormComponent implements OnInit, OnDestroy {
         panelClass: 'form-dialog'
       });
     }
-    this.formService.setCartInfo({
-      budget: this.formData.budget,
-      sum: this.sum
-    });
+    setTimeout(() => {
+      this.formService.setCartInfo({
+        budget: this.formData.budget,
+        sum: this.sum
+      });
+    }, 100);
   }
   public toggleCollapse(item: Item){
+    console.log('toggle');
     if (item.value === 0 && this.isDesktop ) {
       item.collapse = false;
     } else {
@@ -307,20 +313,11 @@ export class FormComponent implements OnInit, OnDestroy {
       panelClass: 'cart-dialog'
     });
   }
-  getPriceLabel(item: Item): string {
-    const result = [];
-    for (const option of item.options) {
-      if (option.optionKey === 'size') {
-        for (const selection of option.radioSelections) {
-          result.push((option.radioSelections.length > 1 ? `${selection.selectionLabel} :` : '') + selection.price);
-        }
-      }
-    }
-    return result.join(' | ');
-  }
-
   ngOnDestroy() {
     this.unSubscribe.next(true);
     this.unSubscribe.complete();
+  }
+  print(e) {
+    console.log(e);
   }
 }

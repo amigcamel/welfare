@@ -3,12 +3,13 @@
     <div class="icon-outside" (click)="openSideBar()">
       <img src="assets/icons/menu.svg" class="icon">
     </div>
-    <div></div>
-    <app-logo></app-logo>
     <div>
+
+    </div>
+    <app-logo></app-logo>
+    <div class="mobile-hide">
       <app-cart *ngIf="layoutConfigService.showCartInfo$ | async"></app-cart>
     </div>
   </div>
-
 </div>
 

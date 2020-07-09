@@ -46,7 +46,7 @@ export class AuthService {
         return this.isLogin.next(state);
     }
 
-    public logout(): Observable<Object> {
+    public logout(): Observable<object> {
         return this.http.get('/api/logout');
 
     }

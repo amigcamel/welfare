@@ -15,7 +15,7 @@
     box-sizing: border-box;
   }
   .subtitle, .message {
-    color: #8a8a8a;
+    color: #aaaaaa;
     padding: 0 40px;
     box-sizing: border-box;
   }
@@ -64,6 +64,29 @@
       svg-icon {
         position: relative;
         top: -70px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 376px){
+  .subtitle, .message {
+    color: #aaaaaa;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  .coming-soon{
+    .circle {
+      width: 70px;
+      height: 70px;
+      .time-text {
+        font-size: 30px;
+        line-height: 1.1;
+        font-weight: 300;
+        opacity: .9;
+      }
+      .time-unit {
+        font-size: 12px;
+        font-weight: 300;
       }
     }
   }

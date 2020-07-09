@@ -26,6 +26,11 @@
                         <div>{{order['price']}}</div>
                     </ng-container>
                 </div>
+                <div class="total-grid">
+                  <div class="title">Total</div>
+                  <div class="title">{{ (history | historyCalculator).count }}</div>
+                  <div class="title">{{ (history | historyCalculator).sum }}</div>
+                </div>
             </mat-expansion-panel>
         </mat-accordion>
     </div>

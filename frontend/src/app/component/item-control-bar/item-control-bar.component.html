@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="item-title" fxLayout="row" fxLayout.xs="column" (click)="handleCollapse()">
+    <div class="item-label" fxLayout="rows" fxLayoutAlign.gt-sm="space-between space-between" fxLayoutAlign.xs="space-between center">
+      <span class="item-title-label">{{item.itemLabel}}</span>
+      <span class="item-price-label">{{itemPriceLabel}}</span>
+    </div>
+    <div class="control-bar" fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-icon class="button" (click)="subOne($event)" style="width: 32px; height: 32px">remove</mat-icon>
+      <div class="item-value">{{item.value}}</div>
+      <mat-icon class="button" (click)="addOne($event)" style="width: 32px; height: 32px">add</mat-icon>
+    </div>
+  </div>
+</div>

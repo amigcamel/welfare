@@ -1,0 +1,26 @@
+.container {
+  .item-title {
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    .item-label {
+      .item-title-label {
+        font-size: 18px;
+      }
+      .item-price-label {
+        padding-left: 10px;
+      }
+    }
+    .control-bar {
+      color: #694026;
+      width: 50%;
+      min-width: 190px;
+      .item-value {
+
+      }
+      .button {
+        margin-top: 5px;
+      }
+    }
+  }
+}

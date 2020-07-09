@@ -43,3 +43,20 @@
     }
   }
 }
+
+@media screen and (max-width: 376px){
+  .container {
+    max-width: 375px;
+    .content {
+      max-width: 310px;
+      .icon-outside {
+        position: inherit;
+        transform: translate(0,0);
+      }
+      .mobile-hide {
+        display: none;
+      }
+    }
+
+  }
+}

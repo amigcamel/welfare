@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { LayoutConfigService } from "./service/layout-config.service";
-import { NavigationEnd, Router } from "@angular/router";
-import { fromEvent, Observable } from "rxjs";
-import { debounceTime } from "rxjs/operators";
+import { LayoutConfigService } from './service/layout-config.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { fromEvent, Observable } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { WelfareSpinnerService } from './service/welfare-spinner.service';
 
 declare let gtag: Function;
@@ -28,7 +28,7 @@ export class AppComponent {
     });
     window.innerWidth < 600 ? this.layoutConfigService.setIsDesktop(false) : this.layoutConfigService.setIsDesktop(true);
     this.resize$.pipe(debounceTime(200)).subscribe(e => {
-      e['target']['innerWidth'] < 600 ?
+      e.target['innerWidth']< 376 ?
         this.layoutConfigService.setIsDesktop(false) : this.layoutConfigService.setIsDesktop(true);
     });
   }

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { WelfareTimeService } from "../../../service/welfare-time.service";
-import { CountDown } from "../../../interface/count-down";
-import { LayoutConfigService } from "../../../service/layout-config.service";
+import { Router } from '@angular/router';
+import { WelfareTimeService } from '../../../service/welfare-time.service';
+import { CountDown } from '../../../interface/count-down';
+import { LayoutConfigService } from '../../../service/layout-config.service';
 import { WelfareSpinnerService } from '../../../service/welfare-spinner.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { WelfareSpinnerService } from '../../../service/welfare-spinner.service'
 })
 export class ComingSoonComponent implements OnInit, OnDestroy {
   public countdownDate: CountDown;
-  public isDesktop: boolean = true;
+  public isDesktop = true;
   private setIn: any;
   constructor(
     private router: Router,
@@ -21,6 +21,7 @@ export class ComingSoonComponent implements OnInit, OnDestroy {
     private welfareSpinnerService: WelfareSpinnerService
   ) {
     this.layoutConfigService.setIsShowToolBar(true);
+    this.layoutConfigService.setShowToolBarBottom(false);
   }
 
   ngOnInit(): void {

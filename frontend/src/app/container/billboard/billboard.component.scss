@@ -41,8 +41,7 @@
           }
           .news-message {
             margin-top: 15px;
-            font-width: bold
-          ;
+            font-weight: bold;
           }
         }
       }
@@ -94,4 +93,31 @@
       }
     }
   }
+}
+
+@media screen and (max-width: 376px) {
+  .container {
+    max-width: 375px;
+    .content {
+      max-width: 375px;
+      .photo-wrapper {
+        max-width: 320px;
+        max-height: 395px;
+        .photo-list {
+          left: -320px;
+          .photo-content {
+            min-width: 320px;
+            min-height: 395px;
+          }
+        }
+      }
+      .left-slide {
+        display: none;
+      }
+      .right-slide {
+        display: none;
+      }
+    }
+  }
+
 }

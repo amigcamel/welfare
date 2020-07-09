@@ -86,3 +86,16 @@
   background: rgba(0,0,0,.6);
   z-index: 999;
 }
+
+@media screen and (max-width: 376px){
+  .sidebar-overlay {
+    display: none;
+  }
+  .container {
+    max-width: 375px;
+    .content {
+      max-width: 375px;
+    }
+  }
+
+}
