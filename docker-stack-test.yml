@@ -2,7 +2,7 @@ version: "3"
 
 services:
   backend:
-    command: --ini uwsgi.ini --py-autoreload 1
+    command: --ini uwsgi-test.ini
     depends_on:
       - mongo
       - redis
