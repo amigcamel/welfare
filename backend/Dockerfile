@@ -8,7 +8,6 @@ RUN apk update \
   && pipenv install --system \
   && ln -sfn /usr/share/zoneinfo/$TZ /etc/localtime \
   && echo $TZ > /etc/timezone
-EXPOSE 5000
 ENTRYPOINT ["uwsgi"]
 VOLUME ["/uwsgi"]
 CMD ["uwsgi.ini"]
