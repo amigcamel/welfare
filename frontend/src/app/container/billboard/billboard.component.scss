@@ -1,3 +1,4 @@
+@import "src/styles/global-varible";
 .container {
   width: 100%;
   background-color: white;
@@ -95,11 +96,11 @@
   }
 }
 
-@media screen and (max-width: 376px) {
+@media screen and (max-width: $mobile-width) {
   .container {
-    max-width: 375px;
+    max-width: $mobile-width;
     .content {
-      max-width: 375px;
+      max-width: $mobile-width;
       .photo-wrapper {
         max-width: 320px;
         max-height: 395px;

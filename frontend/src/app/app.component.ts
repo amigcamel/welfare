@@ -26,9 +26,9 @@ export class AppComponent {
         );
       }
     });
-    window.innerWidth < 600 ? this.layoutConfigService.setIsDesktop(false) : this.layoutConfigService.setIsDesktop(true);
+    window.innerWidth <= 420 ? this.layoutConfigService.setIsDesktop(false) : this.layoutConfigService.setIsDesktop(true);
     this.resize$.pipe(debounceTime(200)).subscribe(e => {
-      e.target['innerWidth']< 376 ?
+      e.target['innerWidth'] <= 420 ?
         this.layoutConfigService.setIsDesktop(false) : this.layoutConfigService.setIsDesktop(true);
     });
   }

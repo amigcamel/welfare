@@ -1,7 +1,13 @@
 <div class="container" fxLayout="rows" [ngClass]="{'hide-bottom': !isShowBottom}">
   <div class="content">
-    <div class="icon-outside" (click)="openSideBar()">
-      <img src="assets/icons/menu.svg" class="icon">
+    <div fxLayout="row">
+      <div class="icon-outside" (click)="openSideBar()">
+        <img src="assets/icons/menu.svg" class="icon">
+      </div>
+      <div class="desktop-hide">
+        <app-cart *ngIf="layoutConfigService.showCartInfo$ | async"></app-cart>
+      </div>
+
     </div>
     <div>
 

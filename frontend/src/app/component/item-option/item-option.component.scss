@@ -1,3 +1,4 @@
+@import "src/styles/global-varible";
 .container {
   .option {
     display: flex;
@@ -16,7 +17,7 @@
   }
 }
 
-@media screen and (max-width: 376px){
+@media screen and (max-width: $mobile-width){
   .container {
     width: 100%;
     border-top: #e6e6e6 1px solid;

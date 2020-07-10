@@ -1,3 +1,4 @@
+@import "src/styles/global-varible";
 .container {
   max-width: 1280px;
   width: 100%;
@@ -14,13 +15,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .desktop-hide {
+      display: none;
+    }
   }
   &.hide-bottom {
     border-bottom: 0;
   }
   .icon-outside {
     position: absolute;
-    left: 0px;
+    left: 0;
+    top: 0;
     border-radius: 50%;
     background-color: #f2a202;
     transform: translate(-50px, 0);
@@ -44,14 +49,19 @@
   }
 }
 
-@media screen and (max-width: 376px){
+@media screen and (max-width: $mobile-width){
   .container {
-    max-width: 375px;
+    max-width: $mobile-width;
+    width: 100%;
     .content {
       max-width: 310px;
       .icon-outside {
         position: inherit;
         transform: translate(0,0);
+      }
+      .desktop-hide {
+        display: block;
+        margin-left: 14px;
       }
       .mobile-hide {
         display: none;

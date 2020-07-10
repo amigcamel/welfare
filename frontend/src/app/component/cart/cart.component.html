@@ -1,5 +1,13 @@
-<div class="total" (click)="openPreview()">
-  <span>Total $ </span>
-  <span [ngClass]="{'exceed': sum > budget}">{{sum}}</span>
-  <img src="assets/icons/bucket.svg" style="width: 24px; height: 24px; margin-left: 13px;" alt="">
-</div>
+<ng-container *ngIf="(layoutConfigService.isDesktop$ | async); else mobile">
+  <div class="total" (click)="openPreview()">
+    <span>Total $ </span>
+    <span [ngClass]="{'exceed': sum > budget}">{{sum}}</span>
+    <img src="assets/icons/bucket.svg" alt="">
+  </div>
+
+</ng-container>
+<ng-template #mobile>
+  <div class="mobile-icon" (click)="openPreview()">
+    <img src="assets/icons/bucket.svg" alt="">
+  </div>
+</ng-template>

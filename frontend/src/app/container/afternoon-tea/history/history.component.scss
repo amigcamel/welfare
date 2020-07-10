@@ -1,3 +1,4 @@
+@import "src/styles/global-varible";
 .container {
   // TODO: This is a temporary solution, please use angular theme
   .mat-expansion-panel-header-title,.mat-expansion-panel {
@@ -42,7 +43,7 @@
     padding: 12px 0;
   }
 }
-@media screen and (max-width: 376px) {
+@media screen and (max-width: $mobile-width) {
   .container {
     .grid-content {
       max-width: 350px;

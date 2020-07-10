@@ -1,3 +1,4 @@
+@import "src/styles/global-varible";
 .container {
   position: absolute;
   top: 0;
@@ -87,14 +88,14 @@
   z-index: 999;
 }
 
-@media screen and (max-width: 376px){
+@media screen and (max-width: $mobile-width){
   .sidebar-overlay {
     display: none;
   }
   .container {
-    max-width: 375px;
+    max-width: $mobile-width;
     .content {
-      max-width: 375px;
+      max-width: $mobile-width;
     }
   }
 

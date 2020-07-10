@@ -22,6 +22,7 @@ export class ComingSoonComponent implements OnInit, OnDestroy {
   ) {
     this.layoutConfigService.setIsShowToolBar(true);
     this.layoutConfigService.setShowToolBarBottom(false);
+    this.layoutConfigService.setShowCartInfo(false);
   }
 
   ngOnInit(): void {
