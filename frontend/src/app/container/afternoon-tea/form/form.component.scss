@@ -35,32 +35,20 @@
       }
     }
     .item {
-      padding: 20px;
+      padding: 6px 10px;
       margin-bottom: 15px;
-      border-radius: 20px;
-      border: solid #f2a202 1px;
+      border-radius: 10px;
+      border: solid #e6e6e6 1px;
       overflow: hidden;
       &.active {
         background-color: #fffbf2;
+        border: solid #f2a202 1px;
       }
 
       .option {
         padding: 5px 0;
         .option-title {
 
-        }
-      }
-    }
-  }
-  .form::ng-deep {
-    border-radius: 10px;
-    overflow: hidden;
-    .mat-step {
-      .mat-step-header {
-        display: flex;
-        align-items: center;
-        h1 {
-            margin: 0 !important;
         }
       }
     }
@@ -121,8 +109,10 @@
 @media screen and (max-width: 376px){
   .container {
     padding: 24px 20px 20px;
+
     .form {
       padding: 0;
+
       .form-label {
         .form-label-text {
           font-size: 20px;
@@ -133,76 +123,21 @@
           padding-left: 5px;
         }
       }
+
       .count-down-item {
         font-family: 'Lato', sans-serif;
         font-weight: bold;
       }
+
       .item {
         padding: 0;
         margin-bottom: 15px;
         border-radius: 10px;
         border: solid #e6e6e6 1px;
         overflow: hidden;
-        .item-title {
-          display: flex;
-          flex-direction: column;
-          .item-label {
-            width: 100%;
-            padding: 15px 10px;
-            border-bottom: #e6e6e6 1px solid;
-          }
-        }
-
         &.active {
           background-color: #fffbf2;
           border: solid #f2a202 1px;
-          .item-title {
-            .item-label {
-              padding: 15px 10px;
-              border-bottom: #ffe6b5 1px solid;
-            }
-          }
-          .option {
-
-            .option-title {
-            }
-            .selection {
-              width: 100%;
-              mat-checkbox {
-                border-top: solid #ffe6b5 1px;
-              }
-            }
-
-          }
-
-        }
-        .option {
-          width: 100%;
-          overflow: hidden;
-          height: 40px;
-          .option-content {
-            width: 100%;
-            .option-title {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              width: 100%;
-              svg-icon {
-                margin-top: 5px;
-              }
-            }
-          }
-
-          .selection {
-            width: 100%;
-            mat-checkbox {
-              width: 100%;
-              border-top: solid #e6e6e6 1px;
-              padding: 10px 12px;
-              box-sizing: border-box;
-            }
-          }
-
         }
       }
     }

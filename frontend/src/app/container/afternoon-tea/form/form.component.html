@@ -18,47 +18,8 @@
             <div>
               <app-item-control-bar [item]="item" (toggleCollapse)="toggleCollapse(item)" (updateItem)="handleItem(item, $event)"></app-item-control-bar>
               <ng-container *ngFor="let option of item.options">
-                <ng-container *ngIf="!!option.radioSelections && option.radioSelections.length > 0">
-                  <ng-container *ngIf="layoutConfigService.isDesktop$ | async; else mobile">
-                    <div class="option" fxLayout="column" fxLayoutAlign="start start">
-                      <div class="option-title">{{option.optionLabel}}:</div>
-                      <mat-radio-group [(ngModel)]="item.selections[option.optionKey]" (change)="calculatorSum()" fxLayoutAlign="space-between center" fxFlex="100">
-                        <mat-radio-button  *ngFor="let select of option.radioSelections" [value]="select.value" >{{select.selectionLabel}}</mat-radio-button>
-                      </mat-radio-group>
-                    </div>
-                  </ng-container>
-                  <ng-template #mobile>
-                    <div class="option" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center">
-                      <div class="option-title">{{option.optionLabel}}:</div>
-<!--                      <mat-select-->
-<!--                        [(ngModel)]="item.selections[option.optionKey]" (selectionChange)="calculatorSum()">-->
-<!--                        <mat-option *ngFor="let select of option.radioSelections" [value]="select.value">-->
-<!--                          {{select.selectionLabel}}-->
-<!--                        </mat-option>-->
-<!--                      </mat-select>-->
-                      <select [(ngModel)]="item.selections[option.optionKey]" (change)="print(item.selections)">
-                        <option *ngFor="let select of option.radioSelections" [ngValue]="select.value">
-                          {{select.selectionLabel}}
-                        </option>
-                      </select>
-                    </div>
-                  </ng-template>
-                </ng-container>
-                <ng-container *ngIf="!!option.checkBoxOptions && option.checkBoxOptions.length > 0">
-                  <div class="option" fxLayout="column" fxLayoutAlign="start start">
-                    <div class="option-content">
-                      <div class="option-title">
-                        <div>{{option.optionLabel}}</div>
-                        <svg-icon src="/assets/icons/arrow.svg"></svg-icon>
-                      </div>
-                      <div class="selection" fxLayout.xs="column">
-                        <div *ngFor="let select of option.checkBoxOptions" fxLayout="column" fxLayoutAlign="space-between center" fxFlex="100">
-                          <mat-checkbox [checked]="select.choose" (change)="checkedOption(select)">{{select.selectionLabel}}</mat-checkbox>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </ng-container>
+                <app-item-option [isActive]="item.value > 0" [options]="option" [item]="item" (optionEmitter)="updateItem($event, item)"></app-item-option>
+                <app-item-checkbox [isActive]="item.value > 0" [options]="option" [item]="item" (optionEmitter)="updateItem($event, item)"></app-item-checkbox>
               </ng-container>
             </div>
           </div>

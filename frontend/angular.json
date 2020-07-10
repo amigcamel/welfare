@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "rwelfare"
+  "defaultProject": "rwelfare",
+  "cli": {
+    "analytics": false
+  }
 }

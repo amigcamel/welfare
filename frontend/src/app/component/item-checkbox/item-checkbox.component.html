@@ -1,1 +1,15 @@
-<p>item-checkbox works!</p>
+<ng-container *ngIf="!!options.checkBoxOptions && options.checkBoxOptions.length > 0">
+  <div class="container" [ngClass]="{ 'active': isActive }" [@openClose]="collapse ? 'open' : 'closed'">
+    <div class="option">
+      <div class="option-title" (click)="toggleItem()">
+        <div>{{options.optionLabel}} <span *ngIf="(layoutConfigService.isDesktop$ | async)">:</span></div>
+        <svg-icon *ngIf="!(layoutConfigService.isDesktop$ | async)" src="/assets/icons/arrow.svg"></svg-icon>
+      </div>
+      <div class="selection">
+        <div *ngFor="let select of options.checkBoxOptions" class="select">
+          <mat-checkbox [checked]="select.choose" (change)="updateItem(select)">{{select.selectionLabel}}</mat-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

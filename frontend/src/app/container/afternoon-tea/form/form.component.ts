@@ -22,18 +22,7 @@ import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-sv
       })),
       state('closed', style({
         height: '{{minHeight}}',
-      }), {params: {minHeight: '75px'}}),
-      transition('open <=> closed', [
-        animate('.5s ease-in')
-      ]),
-    ]),
-    trigger('subOpenClose', [
-      state('open', style({
-        height: '*',
-      })),
-      state('closed', style({
-        height: '45px'
-      })),
+      }), {params: {minHeight: '36px'}}),
       transition('open <=> closed', [
         animate('.5s ease-in')
       ]),
@@ -77,7 +66,7 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
 
     this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(check => {
       this.isDesktop = check;
-      this.minHeight = this.isDesktop ? '75px' : '47px';
+      this.minHeight = this.isDesktop ? '45px' : '47px';
     });
     this.formService.cartDialog$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(
       _ => this.openPreview()
@@ -150,6 +139,11 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
       },
       panelClass: 'photo-dialog'
     });
+  }
+  updateItem(newItem, oldItem) {
+    console.log(newItem, oldItem);
+    oldItem = newItem;
+    this.calculatorSum();
   }
 
   public checkedOption(selection: CheckBoxSelection): void {
