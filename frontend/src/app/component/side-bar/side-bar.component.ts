@@ -5,13 +5,14 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../service/auth.service';
 import { UserInfo } from '../../interface/userinfo';
+import { LayoutConfigService } from '../../service/layout-config.service';
 
 @Component({
   selector: 'app-side-bar',
   animations: [
     trigger('openClose', [
       state('open', style({
-        width: '450px',
+        width: '*',
         opacity: 1
       })),
       state('closed', style({
@@ -32,7 +33,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
   UnSubscribe = new Subject<boolean>();
   userInfo: UserInfo;
   constructor(private sideBarService: SideBarService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private layoutConfigService: LayoutConfigService) {
 
   }
 
@@ -43,6 +45,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
     this.authService.currentUser$.pipe(takeUntil(this.UnSubscribe.asObservable())).subscribe(user => {
       this.userInfo = user;
     });
+
   }
   public closeSideBar() {
     this.sideBarService.setIsShow(false);

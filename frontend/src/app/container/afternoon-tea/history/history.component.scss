@@ -9,6 +9,7 @@
   overflow-y: scroll;
   .page-title {
     padding: 20px;
+    text-align: center;
   }
   .grid-content {
     max-width: 750px;
@@ -47,6 +48,8 @@
   .container {
     .grid-content {
       max-width: 350px;
+      margin: 0 10px;
+      box-sizing: border-box;
     }
   }
 

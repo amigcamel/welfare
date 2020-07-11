@@ -5,7 +5,6 @@
   bottom: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
   z-index: 1000;
   background-color: #f2a202;
   .content {
@@ -21,8 +20,8 @@
         width: 30px;
         height: 30px;
         padding: 10px;
-        left       : 36px;
-        top        : 40px;
+        left       : 40px;
+        top        : 30px;
         position   : absolute;
         transform: rotate(0deg);
         transition: all 300ms ease-out;
@@ -38,26 +37,9 @@
       position: relative;
       .user-navy {
         background-color: transparent;
-        .user-name {
-          font-size: 20px;
-          color: black;
-          margin-bottom: 17px;
-          text-align: center;
-        }
-        .user-sid {
-          font-size: 14px;
-          padding: 6px 12px;
-          margin-bottom: 10px;
-          background-color: black;
-          border-radius: 3px;
-          display: inline-block;
-          color: #f2a202;
-        }
-        .user-email {
-          color: black;
-          font-size: 14px;
-        }
+        width: 100%;
         .user-photo {
+          text-align: center;
           .user-img {
             border-radius: 50%;
             overflow: hidden;
@@ -67,11 +49,34 @@
           }
           margin-bottom: 15px;
         }
+        .user-group {
+          text-align: center;
+          .user-name {
+            font-size: 20px;
+            color: black;
+            margin-bottom: 17px;
+            text-align: center;
+          }
+          .user-sid {
+            font-size: 14px;
+            padding: 6px 12px;
+            margin-bottom: 10px;
+            background-color: black;
+            border-radius: 3px;
+            display: inline-block;
+            color: #f2a202;
+          }
+          .user-email {
+            color: black;
+            font-size: 14px;
+          }
+        }
       }
       .line {
         width: 80%;
         border-bottom: solid black 1px;
         height: 34px;
+        margin: 0 auto;
       }
     }
   }
@@ -89,14 +94,13 @@
 }
 
 @media screen and (max-width: $mobile-width){
-  .sidebar-overlay {
-    display: none;
-  }
   .container {
-    max-width: $mobile-width;
     .content {
       max-width: $mobile-width;
+      width: 100vw;
+    }
+    .scroll-bar {
+
     }
   }
-
 }

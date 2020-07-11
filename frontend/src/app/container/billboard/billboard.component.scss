@@ -1,6 +1,8 @@
 @import "src/styles/global-varible";
 .container {
   width: 100%;
+  height: 100%;
+  overflow-y: scroll;
   background-color: white;
   text-align: center;
   .content {
@@ -101,6 +103,9 @@
     max-width: $mobile-width;
     .content {
       max-width: $mobile-width;
+      margin-top: 10px;
+      padding: 0 15px;
+      box-sizing: border-box;
       .photo-wrapper {
         max-width: 320px;
         max-height: 395px;

@@ -3,12 +3,13 @@
   width: 100%;
   background: white;
   background-size: cover;
-  height: calc(100vh - 90px);
+  height: 100%;
   overflow-y: scroll;
   padding-top: 50px;
   display: flex;
   flex-direction: column;
   .title {
+    text-align: center;
     color: black;
     font-size: 30px;
     font-weight: bold;
@@ -19,29 +20,35 @@
     color: #aaaaaa;
     padding: 0 40px;
     box-sizing: border-box;
+    text-align: center;
   }
-  .circle {
-    width: 144px;
-    height: 144px;
-    padding: 20px;
-    border-radius: 50%;
-    border: solid white 2px;
-    box-sizing: border-box;
+  .count-time {
+    margin: 0 auto;
     display: flex;
     justify-content: center;
-    align-items: center;
-    color: white;
-    margin: 10px 10px;
-    background-color: black;
-    .time-text {
-      font-size: 50px;
-      line-height: 1.1;
-      font-weight: 300;
-      opacity: .9;
-    }
-    .time-unit {
-      font-size: 16px;
-      font-weight: 300;
+    .circle {
+      width: 144px;
+      height: 144px;
+      padding: 20px;
+      border-radius: 50%;
+      border: solid white 2px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      margin: 10px 10px;
+      background-color: black;
+      .time-text {
+        font-size: 50px;
+        line-height: 1.1;
+        font-weight: 300;
+        opacity: .9;
+      }
+      .time-unit {
+        font-size: 16px;
+        font-weight: 300;
+      }
     }
   }
   .go-back {
@@ -54,7 +61,7 @@
   }
   .footer {
     width: 100%;
-    height: 340px;
+    height: 330px;
     background-color: #f2a202;
     position: relative;
     .black-board {
@@ -76,18 +83,20 @@
     text-align: center;
   }
   .coming-soon{
-    .circle {
-      width: 70px;
-      height: 70px;
-      .time-text {
-        font-size: 30px;
-        line-height: 1.1;
-        font-weight: 300;
-        opacity: .9;
-      }
-      .time-unit {
-        font-size: 12px;
-        font-weight: 300;
+    .count-time {
+      .circle {
+        width: 60px;
+        height: 60px;
+        .time-text {
+          font-size: 24px;
+          line-height: 1.1;
+          font-weight: 300;
+          opacity: .9;
+        }
+        .time-unit {
+          font-size: 10px;
+          font-weight: 300;
+        }
       }
     }
   }
