@@ -7,7 +7,6 @@ from loguru import logger
 
 from .auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
 from .db import AfternoonTea, AuthToken, Order
-from .utils import gzip_jsonify
 from . import (
     settings,
     exceptions,
@@ -96,7 +95,7 @@ def afternoontea(col):
             data = AfternoonTea(col=col, user=g.user).get()
         except exceptions.NoAfternoonTeaFound:
             data = get_default_form(col=col)
-        return gzip_jsonify(data)
+        return jsonify(data)
 
     elif request.method == "POST":
         data = request.json
