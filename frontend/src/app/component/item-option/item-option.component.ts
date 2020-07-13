@@ -31,8 +31,7 @@ export class ItemOptionComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  updateChoose(e) {
-    e.stopPropagation();
+  updateChoose() {
     this.optionEmitter.emit(this.item);
   }
   toggleItem() {
