@@ -137,10 +137,14 @@ def order(col):
             return jsonify({"msg": "not ok"}), 400  # TODO: make it clear
 
 
-@app.route("/qr/<token>", methods=["POST"])
+@app.route("/qr", methods=["POST"])
 def qr(token):
     """Handle QR hash."""
-    _, col, user = QR.decrypt(token)
+    qr = request.json.get("qr")
+    if qr is None:
+        return 'No QR token', 400
+
+    _, col, user = QR.decrypt(qr)
 
     # TODO: DRY - same as /order?user=<user>
     send_action(action="update", token=g.token)
