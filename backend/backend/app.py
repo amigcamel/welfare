@@ -8,6 +8,7 @@ from loguru import logger
 
 from .auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
 from .db import AfternoonTea, AuthToken, Order, Staff
+from .qr import QR
 from .utils import send_action
 from . import (
     settings,
@@ -121,7 +122,8 @@ def order(col):
     if not Staff(g.user).is_admin:
         raise exceptions.UnauthorizedError(f"No admin permission: {g.user}")
     if request.method == "GET":
-        return jsonify(Order(user=None, col=col).get())
+        user = request.args.get("user", None)  # TODO: DRY - request.args.get("user")
+        return jsonify(Order(user=user, col=col).get())
     elif request.method == "POST":
         if (user := request.args.get("user")) and (data := request.get_json()):
             stat = Order(user=user, col=col).update(data)
@@ -133,6 +135,16 @@ def order(col):
                 return jsonify({"msg": "update failed"}), 400  # TODO: make it clear
         else:
             return jsonify({"msg": "not ok"}), 400  # TODO: make it clear
+
+
+@app.route("/qr/<token>", methods=["POST"])
+def qr(token):
+    """Handle QR hash."""
+    _, col, user = QR.decrypt(token)
+
+    # TODO: DRY - same as /order?user=<user>
+    send_action(action="update", token=g.token)
+    return jsonify(Order(user=user, col=col).get())
 
 
 @app.route("/token_info")
