@@ -5,6 +5,7 @@ import { fromEvent, Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { WelfareSpinnerService } from './service/welfare-spinner.service';
 
+// tslint:disable-next-line:ban-types
 declare let gtag: Function;
 
 @Component({

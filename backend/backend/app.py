@@ -1,12 +1,12 @@
 """App."""
 from datetime import datetime
+import traceback
 
 from flask import Flask, request, redirect, jsonify, url_for, g
 from loguru import logger
 
 from .auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
 from .db import AfternoonTea, AuthToken, Order
-from .utils import gzip_jsonify
 from . import (
     settings,
     exceptions,
@@ -50,7 +50,7 @@ def handle_error(error):
         response.status_code = error.args[1]
         return response
     else:
-        logger.critical(error)
+        logger.critical(traceback.format_exc())
         return "Internal Server Error", 500
 
 
@@ -95,7 +95,7 @@ def afternoontea(col):
             data = AfternoonTea(col=col, user=g.user).get()
         except exceptions.NoAfternoonTeaFound:
             data = get_default_form(col=col)
-        return gzip_jsonify(data)
+        return jsonify(data)
 
     elif request.method == "POST":
         data = request.json

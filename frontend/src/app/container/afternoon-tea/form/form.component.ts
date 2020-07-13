@@ -13,6 +13,7 @@ import { Cart } from '../../../interface/cart';
 import { LayoutConfigService } from '../../../service/layout-config.service';
 import { ViewportScroller } from '@angular/common';
 import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-form',
   animations: [
@@ -38,11 +39,12 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
   public filterTarget = '';
   public expiration: CountExpiration;
   public formData: AfternoonTeaForm;
-  public isDesktop;
+  public isDesktop: boolean;
   public currentForm = 0;
   public minHeight: string;
   // Private
   private unSubscribe = new Subject<boolean>();
+
   constructor(
     private formService: FormService,
     private matDialog: MatDialog,
@@ -87,6 +89,7 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
     this.currentForm = this.currentForm + 1 < this.formData.form.length ? this.currentForm + 1 : this.currentForm;
 
   }
+
   previousPage() {
     this.closeAllCollapse(this.formData.form[this.currentForm]);
     if (this.currentForm - 1 >= 0) {
@@ -204,8 +207,7 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
     this.filterTarget = '';
   }
 
-  finishOrder(): void
-  {
+  finishOrder(): void {
     if (this.sum > this.formData.budget) {
       this.matDialog.open(DialogComponent, {
         data: {

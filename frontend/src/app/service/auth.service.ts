@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserInfo } from '../interface/userinfo';
-import { HttpClient } from "@angular/common/http";
-import { Router } from "@angular/router";
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,9 @@ import { Router } from "@angular/router";
 export class AuthService {
     private isLogin = new BehaviorSubject<boolean>(false);
     private currentUser = new BehaviorSubject<UserInfo>({
-        chinese_name: "",
-        english_name: "",
-        sid: "",
+        chinese_name: '',
+        english_name: '',
+        sid: '',
         email: '',
         family_name: '',
         given_name: '',
@@ -26,11 +26,11 @@ export class AuthService {
     public currentUser$ = this.currentUser.asObservable();
     public redirectURL: string;
 
-    constructor(private http: HttpClient,private router: Router) {
+    constructor(private http: HttpClient, private router: Router) {
         if (localStorage.getItem('token') !== null && localStorage.getItem('user') !== null) {
             this.setIsLogin(true);
             this.setUser(JSON.parse(localStorage.getItem('user')));
-            if(this.redirectURL) {
+            if (this.redirectURL) {
                 this.router.navigate([this.redirectURL]);
             }
         } else {

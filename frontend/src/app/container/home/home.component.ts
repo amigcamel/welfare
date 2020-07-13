@@ -25,8 +25,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
       this.activatedRoute.queryParams.pipe(takeUntil(this.unSub.asObservable()), switchMap(params => {
-          if (params && params['token'] !== undefined) {
-              localStorage.setItem('token', params['token']);
+          if (params && params.token !== undefined) {
+              localStorage.setItem('token', params.token);
               this.authService.setIsLogin(true);
               return this.userService.getUser();
           } else {

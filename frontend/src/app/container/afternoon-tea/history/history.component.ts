@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { LayoutConfigService } from "../../../service/layout-config.service";
+import { ActivatedRoute } from '@angular/router';
+import { LayoutConfigService } from '../../../service/layout-config.service';
 
 @Component({
   selector: 'app-history',
@@ -21,7 +21,8 @@ export class HistoryComponent implements OnInit {
       this.historyData = this.activatedRoute.snapshot.data.historyData;
   }
   public showExtra(order): string {
-      if (!!order['options'] && order['options'].length > 0)
-      return order['sugar'] + ' Sugar, ' + order['ice'] + ' Ice, ' +order['options'].join(', ');
+      if (!!order.options && order.options.length > 0) {
+      return order.sugar + ' Sugar, ' + order.ice + ' Ice, ' + order.options.join(', ');
+      }
   }
 }
