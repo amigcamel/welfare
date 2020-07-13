@@ -90,7 +90,7 @@ def user():
     return jsonify(data)
 
 
-@app.route("/afternoontea", defaults={"col": _DEFAULT_COLt}, methods=["GET", "POST"])
+@app.route("/afternoontea", defaults={"col": _DEFAULT_COL}, methods=["GET", "POST"])
 @app.route("/afternoontea/<col>", methods=["GET", "POST"])
 def afternoontea(col):
     """Afternoon Tea."""

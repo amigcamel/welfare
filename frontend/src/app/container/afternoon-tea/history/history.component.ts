@@ -4,7 +4,6 @@ import { LayoutConfigService } from '../../../service/layout-config.service';
 import { MatDialog } from "@angular/material/dialog";
 import { QrcodeDialogComponent } from "../../../component/qrcode-dialog/qrcode-dialog.component";
 import { DialogComponent } from "../../../component/dialog/dialog.component";
->>>>>>> make admin layout page and qrcode scanner and qr code generate
 
 @Component({
   selector: 'app-history',

@@ -10,7 +10,7 @@ import { WelfareIconDirective } from "../directive/welfare-icon.directive";
 
 @NgModule({
   declarations: [
-    HistoryCalculatorPipe
+    HistoryCalculatorPipe,
     WelfareIconDirective,
   ],
   imports: [
@@ -27,7 +27,7 @@ import { WelfareIconDirective } from "../directive/welfare-icon.directive";
     ReactiveFormsModule,
     FlexLayoutModule,
     AngularSvgIconModule,
-    HistoryCalculatorPipe
+    HistoryCalculatorPipe,
     ZXingScannerModule,
     WelfareIconDirective,
   ]

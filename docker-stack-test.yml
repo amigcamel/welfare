@@ -21,7 +21,7 @@ services:
       - OAUTH_CLIENT_SECRET=
       - EMAIL_ALLOWED_DOMAINS=
       - OAUTH_CLIENT_ID=
-    image: ffntea/backend:develop
+    image: ffntea/backend:test
     networks:
       - welfare
     ports:

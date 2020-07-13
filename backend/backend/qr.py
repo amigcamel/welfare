@@ -3,7 +3,7 @@ from cryptography.fernet import Fernet
 from loguru import logger
 import re
 
-import settings
+from . import settings
 
 
 class QR:

@@ -83,7 +83,7 @@ const appRoutes: Routes = [
 
     ShareModule,
     MaterialModule,
-    AngularSvgIconModule
+    AngularSvgIconModule,
     QRCodeModule
   ],
   providers: [
