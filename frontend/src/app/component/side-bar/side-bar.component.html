@@ -1,22 +1,21 @@
 <div class="container" [@openClose]="isOpen ? 'open' : 'closed'">
   <div class="content">
-    <div class="top-nav" fxLayoutAlign="end center" fxLayout="rows">
-      <!-- <em appWelfareIcon iconName="welfare"></em> -->
-      <span class="logo-title">FFN Welfare</span>
-      <mat-icon class="icon" (click)="closeSideBar()">arrow_back</mat-icon>
+    <div class="top-nav">
+      <img (click)="closeSideBar()" class="close-icon" src="assets/icons/cross.svg" alt="">
     </div>
-    <div class="scroll-bar" fxFlex="100" fxLayout="column">
-      <div class="user-navy" fxLayout="row">
+    <div class="scroll-bar">
+      <div class="user-navy">
         <div class="user-photo">
           <img class="user-img" [attr.src]="userInfo.picture" alt="User photo">
         </div>
-        <div>
-          <div class="user-sid">No.{{userInfo.sid}}</div>
+        <div class="user-group">
           <div class="user-name">{{userInfo.name}} </div>
+          <div class="user-sid">No.{{userInfo.sid}}</div>
           <div class="user-email">{{userInfo.email}}</div>
         </div>
+        <div class="line"></div>
       </div>
-      <app-navigation-bar (closeSideBar)="closeSideBar()" fxFlex="100" fxFill></app-navigation-bar>
+      <app-navigation-bar (closeSideBar)="closeSideBar()"></app-navigation-bar>
     </div>
   </div>
 </div>

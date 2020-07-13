@@ -1,17 +1,17 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { animate, state, style, transition, trigger } from "@angular/animations";
-import { of, Subject } from "rxjs";
-import { CountExpiration } from "../../../interface/count-down";
-import { AfternoonTeaForm, CheckBoxSelection, Form, Item } from "../../../interface/afternoon-tea-form";
-import { FormService } from "../../../service/form.service";
-import { MatDialog } from "@angular/material/dialog";
-import { WelfareTimeService } from "../../../service/welfare-time.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { DialogComponent } from "../../../component/dialog/dialog.component";
-import { switchMap, takeUntil } from "rxjs/operators";
-import { Cart } from "../../../interface/cart";
-import { LayoutConfigService } from "../../../service/layout-config.service";
-import { ViewportScroller } from "@angular/common";
+import { AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { of, Subject } from 'rxjs';
+import { CountExpiration } from '../../../interface/count-down';
+import { AfternoonTeaForm, CheckBoxSelection, Form, Item } from '../../../interface/afternoon-tea-form';
+import { FormService } from '../../../service/form.service';
+import { MatDialog } from '@angular/material/dialog';
+import { WelfareTimeService } from '../../../service/welfare-time.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DialogComponent } from '../../../component/dialog/dialog.component';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { Cart } from '../../../interface/cart';
+import { LayoutConfigService } from '../../../service/layout-config.service';
+import { ViewportScroller } from '@angular/common';
 import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -22,8 +22,8 @@ import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-sv
         height: '*',
       })),
       state('closed', style({
-        height: '75px',
-      })),
+        height: '{{minHeight}}',
+      }), {params: {minHeight: '36px'}}),
       transition('open <=> closed', [
         animate('.5s ease-in')
       ]),
@@ -33,14 +33,15 @@ import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-sv
   styleUrls: ['./form.component.scss']
 })
 
-export class FormComponent implements OnInit, OnDestroy {
+export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
   @ViewChild('container', {static: true}) container: ElementRef;
-  public sum = 0;
+  public sum: number;
   public filterTarget = '';
   public expiration: CountExpiration;
   public formData: AfternoonTeaForm;
   public isDesktop: boolean;
   public currentForm = 0;
+  public minHeight: string;
   // Private
   private unSubscribe = new Subject<boolean>();
 
@@ -53,6 +54,9 @@ export class FormComponent implements OnInit, OnDestroy {
     private viewportScroller: ViewportScroller,
     public layoutConfigService: LayoutConfigService
   ) {
+    this.layoutConfigService.setShowCartInfo(true);
+    this.layoutConfigService.setShowToolBarBottom(true);
+    this.layoutConfigService.setIsShowToolBar(true);
   }
 
   ngOnInit(): void {
@@ -62,16 +66,25 @@ export class FormComponent implements OnInit, OnDestroy {
       this.initialFormData();
     }
 
-    this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(isDesktop => {
-      this.isDesktop = isDesktop;
+    this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(check => {
+      this.isDesktop = check;
+      this.minHeight = this.isDesktop ? '45px' : '47px';
     });
+    this.formService.cartDialog$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(
+      _ => this.openPreview()
+    );
+  }
+  ngAfterViewInit() {
+
+  }
+  ngAfterContentInit() {
     this.calculatorSum();
   }
 
   nextPage() {
     this.closeAllCollapse(this.formData.form[this.currentForm]);
     if (this.currentForm + 1 < this.formData.form.length) {
-      this.container.nativeElement.scrollTop = 0
+      this.container.nativeElement.scrollTop = 0;
     }
     this.currentForm = this.currentForm + 1 < this.formData.form.length ? this.currentForm + 1 : this.currentForm;
 
@@ -80,12 +93,27 @@ export class FormComponent implements OnInit, OnDestroy {
   previousPage() {
     this.closeAllCollapse(this.formData.form[this.currentForm]);
     if (this.currentForm - 1 >= 0) {
-      this.container.nativeElement.scrollTop = 0
+      this.container.nativeElement.scrollTop = 0;
     }
     this.currentForm = this.currentForm - 1 < 0 ? this.currentForm : this.currentForm - 1;
 
   }
-
+  private initialFormData(){
+    this.formData.form.forEach(form => {
+      form.items.forEach(item => {
+        item.options.forEach(option => {
+          if (!!option.radioSelections && option.radioSelections.length > 0) {
+            const key = option.optionKey;
+            item.selections = Object.assign({...item.selections},
+              {[key]: option.radioSelections[0].value});
+          }
+        });
+      });
+    });
+  }
+  public handleFilterTarget(target) {
+    this.filterTarget = target;
+  }
   public filterText(target: string): boolean {
     if (this.filterTarget === '') {
       return true;
@@ -95,23 +123,15 @@ export class FormComponent implements OnInit, OnDestroy {
     }
   }
 
-  public subOnFlow(form: Form, target: Item, event: Event): void {
-    event.stopPropagation()
-    target = this.subOne(target);
-    this.calculatorSum();
-    target.collapse = target.value !== 0;
-  }
-
-  public addOneFlow(form: Form, target: Item, event: Event): void {
-    event.stopPropagation()
-    target = this.addOne(target);
+  public handleItem(item, newItem) {
+    item = newItem;
     this.calculatorSum();
     if (this.sum > this.formData.budget) {
-      target = this.subOne(target);
+      item.value -= 1;
       this.calculatorSum();
       return;
     }
-    target.collapse = true;
+    item.collapse = item.value !== 0;
   }
 
   public seeMenu(src: string): void {
@@ -123,6 +143,11 @@ export class FormComponent implements OnInit, OnDestroy {
       panelClass: 'photo-dialog'
     });
   }
+  updateItem(newItem, oldItem) {
+    console.log(newItem, oldItem);
+    oldItem = newItem;
+    this.calculatorSum();
+  }
 
   public checkedOption(selection: CheckBoxSelection): void {
     selection.choose = !selection.choose;
@@ -131,19 +156,19 @@ export class FormComponent implements OnInit, OnDestroy {
 
   public calculatorSum(): void {
     this.sum = 0;
-    for (let form of this.formData.form) {
-      for (let item of form.items) {
+    for (const form of this.formData.form) {
+      for (const item of form.items) {
         let extraValue = 0;
-        for (let option of item.options) {
-          if (!!option.checkBoxOptions) {
-            for (let select of option.checkBoxOptions) {
+        for (const option of item.options) {
+          if (!!option.checkBoxOptions){
+            for (const select of option.checkBoxOptions) {
               if (select.choose) {
                 extraValue += select.price;
               }
             }
           }
         }
-        this.sum += item.value * (item.selections['size'] + extraValue)
+        this.sum += item.value * (item.selections.size + extraValue);
       }
     }
     if (this.sum > this.formData.budget) {
@@ -159,10 +184,16 @@ export class FormComponent implements OnInit, OnDestroy {
         panelClass: 'form-dialog'
       });
     }
+    setTimeout(() => {
+      this.formService.setCartInfo({
+        budget: this.formData.budget,
+        sum: this.sum
+      });
+    }, 100);
   }
-
-  public toggleCollapse(item: Item) {
-    if (item.value === 0 && this.isDesktop) {
+  public toggleCollapse(item: Item){
+    console.log('toggle');
+    if (item.value === 0 && this.isDesktop ) {
       item.collapse = false;
     } else {
       item.collapse = !item.collapse;
@@ -238,12 +269,12 @@ export class FormComponent implements OnInit, OnDestroy {
     const data: Cart[] = [];
     for (const form of this.formData.form) {
       for (const item of form.items) {
-        if (item['value'] > 0) {
+        if (item.value >  0) {
           let price = 0;
           let optionList = '';
           for (const option of item.options) {
-            if (!!option.checkBoxOptions) {
-              for (let select of option.checkBoxOptions) {
+            if (!!option.checkBoxOptions){
+              for (const select of option.checkBoxOptions) {
                 if (select.choose) {
                   price += select.price;
                   optionList += select.selectionLabel;
@@ -251,11 +282,11 @@ export class FormComponent implements OnInit, OnDestroy {
               }
             }
           }
-          price += item.selections['size']
+          price += item.selections.size;
           data.push({
               productName: item.itemLabel,
               subExtra: optionList,
-              price: price,
+              price,
               count: item.value,
               total: item.value * price,
             }
@@ -265,45 +296,24 @@ export class FormComponent implements OnInit, OnDestroy {
     }
     return data;
   }
-
-  getPriceLabel(item: Item): string {
-    let result = [];
-    for (let option of item.options) {
-      if (option.optionKey === 'size') {
-        for (let selection of option.radioSelections) {
-          result.push((option.radioSelections.length > 1 ? `${selection.selectionLabel} :` : "") + selection.price)
-        }
-      }
-    }
-    return result.join(" | ");
+  openPreview() {
+    this.matDialog.open(DialogComponent, {
+      data: {
+        contentType: 'cart',
+        dialogType: 'tipDialog',
+        faIcon: faShoppingBag,
+        title: 'Order',
+        positiveBtn: 'Confirm',
+        items: this.previewCart(),
+      },
+      panelClass: 'cart-dialog'
+    });
   }
-
   ngOnDestroy() {
     this.unSubscribe.next(true);
     this.unSubscribe.complete();
   }
-
-  private initialFormData() {
-    this.formData.form.forEach(form => {
-      form.items.forEach(item => {
-        item.options.forEach(option => {
-          if (!!option.radioSelections && option.radioSelections.length > 0) {
-            const key = option.optionKey
-            item.selections = Object.assign({...item.selections},
-              {[key]: option.radioSelections[0].value})
-          }
-        })
-      })
-    })
-  }
-
-  private subOne(item: Item): Item {
-    item.value = item.value > 0 ? item.value - 1 : item.value;
-    return item
-  }
-
-  private addOne(item: Item): Item {
-    item.value = item.value + 1;
-    return item
+  print(e) {
+    console.log(e);
   }
 }

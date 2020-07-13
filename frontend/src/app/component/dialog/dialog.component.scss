@@ -1,9 +1,9 @@
 .container {
-  color: #694026;
+  color: black;
   .header {
     padding: 20px 20px 10px;
-    background-color: #fdf8f6;
-    color: #694026;
+    color: black;
+    background-color: #f2a202;
     .title {
       font-size: 20px;
       .icon {
@@ -22,9 +22,14 @@
     box-sizing: border-box;
     .cart-grid {
       display: grid;
-      grid-template-columns: 100fr 40fr 40fr 10fr;
+      grid-template-columns: 3fr 1fr 1fr;
       grid-row-gap: 10px;
       width: 100%;
+      padding-bottom: 20px;
+      &.upper-line {
+        border-top: 1px solid #aaa;
+        padding-top: 20px;
+      }
       .item {
         justify-self: start;
         .item-sub {
@@ -42,12 +47,13 @@
   .footer {
     width: 100%;
     text-align: center;
-    padding: 0 10px 0 10px;
+    padding: 10px 10px 0 10px;
     box-sizing: border-box;
+    border-top: #ededed 1px solid;
     .footer-text {
       font-size: 20px;
       font-weight: 500;
-      color: #694026;
+      color: black;
       cursor: pointer;
       padding: 10px 0 15px 0;
     }
@@ -62,7 +68,7 @@
         background-color: transparent;
         border: 0;
         outline: none;
-        color: #694026;
+        color: black;
         font-size: 16px;
         cursor: pointer;
         &:last-child {

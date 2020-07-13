@@ -1,35 +1,34 @@
+@import "src/styles/global-varible";
 .coming-soon {
   width: 100%;
-  background: url('/assets/background/coming-soon-wallpaper.jpg') no-repeat;
+  background: white;
   background-size: cover;
   height: 100%;
-  .shadow-cover {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0,0,0, .7);
-    .title {
-      color: white;
-      font-size: 32px;
-      font-weight: 300;
-      padding: 0 20px;
-      box-sizing: border-box;
-    }
-    .subtitle {
-      color: white;
-      padding: 0 40px;
-      box-sizing: border-box;
-    }
-    .message {
-      color: white;
-      padding: 0 40px;
-      box-sizing: border-box;
-    }
+  overflow-y: scroll;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  .title {
+    text-align: center;
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  .subtitle, .message {
+    color: #aaaaaa;
+    padding: 0 40px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  .count-time {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
     .circle {
-      width: 120px;
-      height: 120px;
+      width: 144px;
+      height: 144px;
       padding: 20px;
       border-radius: 50%;
       border: solid white 2px;
@@ -39,8 +38,9 @@
       align-items: center;
       color: white;
       margin: 10px 10px;
+      background-color: black;
       .time-text {
-        font-size: 40px;
+        font-size: 50px;
         line-height: 1.1;
         font-weight: 300;
         opacity: .9;
@@ -48,16 +48,56 @@
       .time-unit {
         font-size: 16px;
         font-weight: 300;
-        opacity: .7;
       }
     }
-    .go-back {
-      background-color: transparent;
-      border-radius: 5px;
-      padding: 10px 20px;
-      color: white;
-      border: solid white 1px;
+  }
+  .go-back {
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+    border: solid white 1px;
+    cursor: pointer;
+  }
+  .footer {
+    width: 100%;
+    height: 330px;
+    background-color: #f2a202;
+    position: relative;
+    .black-board {
+      position: relative;
+      margin: 0 auto;
+      width: 210px;
       cursor: pointer;
+      svg-icon {
+        position: relative;
+        top: -70px;
+      }
+    }
+  }
+}
+@media screen and (max-width: $mobile-width){
+  .subtitle, .message {
+    color: #aaaaaa;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  .coming-soon{
+    .count-time {
+      .circle {
+        width: 60px;
+        height: 60px;
+        .time-text {
+          font-size: 24px;
+          line-height: 1.1;
+          font-weight: 300;
+          opacity: .9;
+        }
+        .time-unit {
+          font-size: 10px;
+          font-weight: 300;
+        }
+      }
     }
   }
 }

@@ -28,8 +28,8 @@ export class NavigationBarComponent implements OnInit, OnDestroy{
       localStorage.removeItem('token');
       this.authService.setIsLogin(false);
       this.router.navigateByUrl('/login');
-    }, err => {
-      console.log('log out error:', err);
+    }, error => {
+      console.log('log out error:', error);
     });
   }
   ngOnDestroy() {

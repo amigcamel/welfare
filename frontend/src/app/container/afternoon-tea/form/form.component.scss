@@ -1,7 +1,8 @@
+@import "src/styles/global-varible";
 .container {
-  background-color: #fdf8f6;
+  background-color: white;
   padding: 40px 20px 20px;
-  height: calc(100vh - 64px);
+  height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
   box-sizing: border-box;
@@ -11,20 +12,19 @@
     margin: 0 auto;
   }
   .count-down-item {
-    font-size: 16px;
-    margin: 0 0 6px 5px;
+    font-size: 12px;
     color: #444;
   }
   .form {
     background-color: white;
-    box-shadow: 2px 3px 6px rgba(28,28,28,.5);
-    padding: 20px;
-    max-width: 1280px;
+    max-width: 750px;
     margin: 0 auto;
+    padding: 20px 0;
     box-sizing: border-box;
     .form-label {
-      padding: 20px 0 20px 0;
       margin-bottom: 10px;
+      justify-content: space-between;
+      align-items: baseline;
       .menu {
         cursor: pointer;
         text-decoration: underline;
@@ -35,170 +35,112 @@
         font-size: 30px;
       }
     }
-    .filter-bar {
-      padding: 10px 10px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      border: solid 1px #aaaaaa;
-      input {
-        border: 0;
-        outline: none;
-      }
-    }
     .item {
-      padding: 20px;
+      padding: 6px 10px;
       margin-bottom: 15px;
-      border-radius: 20px;
-      border: solid #694026 1px;
+      border-radius: 10px;
+      border: solid #e6e6e6 1px;
       overflow: hidden;
       &.active {
-        background-color: #ddd;
+        background-color: #fffbf2;
+        border: solid #f2a202 1px;
       }
-      .item-title {
-        padding-bottom: 15px;
-        cursor: pointer;
-        align-items: center;
-        justify-content: space-between;
-        .item-label {
-          .item-title-label {
-            font-size: 18px;
-          }
-          .item-price-label {
-            padding-left: 10px;
-          }
-        }
-        .control-bar {
-          color: #694026;
-          width: 50%;
-          .item-value {
-            padding-bottom: 6px;
-          }
-        }
-      }
+
       .option {
         padding: 5px 0;
         .option-title {
-          padding-right: 5px;
-        }
-        mat-checkbox {
-          margin: 0 5px
-        }
-
-        // XXX: clear not the best practice, need a more reliable and elegant way to do this
-        mat-radio-button, mat-checkbox {
-          width: 150px;
-        }
-        .selection {
-          margin-left: 2px;
-          width: 150px;
-        }
-
-      }
-    }
-  }
-  .form::ng-deep {
-    border-radius: 10px;
-    overflow: hidden;
-    .mat-step {
-      .mat-step-header {
-        display: flex;
-        align-items: center;
-        h1 {
-            margin: 0 !important;
-        }
-      }
-    }
-  }
-  @media screen and (max-width: 600px){
-    .form {
-      .filter-bar {
-        padding: 10px 10px;
-        margin-bottom: 10px;
-        border-radius: 10px;
-        border: solid 1px #aaaaaa;
-        input {
-          border: 0;
-          outline: none;
-        }
-      }
-      .item {
-        padding: 20px;
-        margin-bottom: 15px;
-        border-radius: 20px;
-        border: solid #694026 1px;
-        overflow: hidden;
-        &.active {
-          background-color: #ddd;
-        }
-        .item-title {
-          padding-bottom: 15px;
-          cursor: pointer;
-          flex-direction: column !important;
-          .item-label {
-            padding: 5px 0 20px 0;
-            width: 100%;
-            .item-title-label {
-              font-size: 16px;
-            }
-            .item-price-label {
-              padding-top: 6px;
-              padding-left: 10px;
-            }
-          }
-          .control-bar {
-            width: 100%;
-            .item-value {
-              padding-bottom: 6px;
-            }
-          }
-        }
-        .option {
-          padding: 5px 0;
-          .option-title {
-            padding-right: 5px;
-          }
-          .selection {
-            flex-wrap: wrap;
-          }
 
         }
       }
     }
   }
   .total {
-    padding: 10px 20px;
+    width: 160px;
+    height: 60px;
     position: fixed;
-    bottom: 0px;
-    right: 0px;
-    background-color: #333333;
-    color: white;
-    border-radius: 5px 0 0 0 ;
+    bottom: 40px;
+    right: 60px;
+    background-color: #f2a202;
+    color: black;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     .exceed {
       color: red;
     }
   }
   .page-btn {
-    border-radius: 10px;
-    background: white;
-    padding: 10px 20px;
-    border: 1px solid  #DE8C4D;
-    font-size: 14px;
-    outline: none;
-    color: #DE8C4D;
-    cursor: pointer;
-  }
-  .finish-btn {
-    border-radius: 10px;
-    background: #DE8C4D;
-    padding: 10px 20px;
-    border: 1px solid white;
+    width: 140px;
+    height: 52px;
+    border-radius: 26px;
+    background: black;
     font-size: 14px;
     outline: none;
     color: white;
     cursor: pointer;
+    border: 0;
+    margin-right: 18px;
+    &:hover {
+      background-color: #f2a202;
+      color: black;
+    }
+  }
+  .finish-btn {
+    width: 140px;
+    height: 52px;
+    border-radius: 26px;
+    background: black;
+    font-size: 14px;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    border: 0;
+    &:hover {
+      background-color: #f2a202;
+      color: black;
+    }
   }
   .expiration {
     padding-bottom: 15px;
     color: #555555;
+  }
+}
+@media screen and (max-width: $mobile-width){
+  .container {
+    padding: 24px 20px 20px;
+
+    .form {
+      padding: 0;
+
+      .form-label {
+        .form-label-text {
+          font-size: 20px;
+        }
+
+        .menu {
+          font-size: 12px;
+          padding-left: 5px;
+        }
+      }
+
+      .count-down-item {
+        font-family: 'Lato', sans-serif;
+        font-weight: bold;
+      }
+
+      .item {
+        padding: 0;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        border: solid #e6e6e6 1px;
+        overflow: hidden;
+        &.active {
+          background-color: #fffbf2;
+          border: solid #f2a202 1px;
+        }
+      }
+    }
   }
 }

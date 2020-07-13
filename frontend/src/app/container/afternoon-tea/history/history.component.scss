@@ -1,16 +1,18 @@
+@import "src/styles/global-varible";
 .container {
   // TODO: This is a temporary solution, please use angular theme
   .mat-expansion-panel-header-title,.mat-expansion-panel {
-    color: #694026;
+    color: black;
   }
-  background-color: #fdf8f6;
-  height: calc(100vh - 64px);
+  background-color: white;
+  height: calc(100vh - 90px);
   overflow-y: scroll;
   .page-title {
     padding: 20px;
+    text-align: center;
   }
   .grid-content {
-    max-width: 1280px;
+    max-width: 750px;
     margin: 0 auto;
     .header {
       font-size: 16px;
@@ -18,17 +20,38 @@
     .grid-order {
       font-size: 16px;
       display: grid;
-      grid-template-columns: 3fr 1fr 1fr;
+      grid-template-columns: minmax(100px, 130px) 1fr 1fr;
       grid-row-gap: 10px;
-      max-width: 1280px;
+      max-width: 750px;
       .title{
         font-weight: 500;
       }
       .extra-text {
         font-size: 10px;
-        color: #694026;
+        color: black;
       }
     }
   }
+  .total-grid {
+    display: grid;
+    grid-template-columns: minmax(100px, 130px) 1fr 1fr;
+    max-width: 750px;
+    margin: 20px auto 0 auto;
+    border-top: 1px solid #aaaaaa;
+    .title {
+      font-weight: 500;
+    }
+    padding: 12px 0;
+  }
+}
+@media screen and (max-width: $mobile-width) {
+  .container {
+    .grid-content {
+      max-width: 350px;
+      margin: 0 10px;
+      box-sizing: border-box;
+    }
+  }
+
 }
 

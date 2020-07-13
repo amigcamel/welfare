@@ -12,6 +12,8 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
               private layoutConfigService: LayoutConfigService) {
     this.layoutConfigService.setIsShowToolBar(false);
+    this.layoutConfigService.setShowToolBarBottom(false);
+    this.layoutConfigService.setShowCartInfo(false);
   }
 
   ngOnInit(): void {

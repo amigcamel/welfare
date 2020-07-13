@@ -12,6 +12,8 @@ export class NoAuthComponent implements OnInit {
   constructor(private layoutConfigService: LayoutConfigService,
               private router: Router) {
     this.layoutConfigService.setIsShowToolBar(false);
+    this.layoutConfigService.setShowToolBarBottom(true);
+    this.layoutConfigService.setShowCartInfo(false);
 
   }
 

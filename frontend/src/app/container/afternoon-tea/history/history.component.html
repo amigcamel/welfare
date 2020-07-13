@@ -1,5 +1,5 @@
 <div class="container">
-    <div fxLayout="column" fxLayoutAlign="center center">
+    <div>
         <div class="page-title">
             <h1>Your Order History</h1>
         </div>
@@ -25,6 +25,11 @@
                         <div>{{order['value']}}</div>
                         <div>{{order['price']}}</div>
                     </ng-container>
+                </div>
+                <div class="total-grid">
+                  <div class="title">Total</div>
+                  <div class="title">{{ (history | historyCalculator).count }}</div>
+                  <div class="title">{{ (history | historyCalculator).sum }}</div>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

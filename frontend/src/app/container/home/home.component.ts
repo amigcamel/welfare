@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           user => {
               if (user !== null) {
                   this.authService.setUser(user);
+                  this.router.navigateByUrl('/billboard');
               }
           }, error => {
               console.log('login error', error);

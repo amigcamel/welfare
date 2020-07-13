@@ -3,6 +3,7 @@ import { LayoutConfigService } from './service/layout-config.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { fromEvent, Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { WelfareSpinnerService } from './service/welfare-spinner.service';
 
 // tslint:disable-next-line:ban-types
 declare let gtag: Function;
@@ -26,10 +27,9 @@ export class AppComponent {
         );
       }
     });
-    window.innerWidth < 600 ? this.layoutConfigService.setIsDesktop(false) : this.layoutConfigService.setIsDesktop(true);
+    window.innerWidth <= 420 ? this.layoutConfigService.setIsDesktop(false) : this.layoutConfigService.setIsDesktop(true);
     this.resize$.pipe(debounceTime(200)).subscribe(e => {
-      // @ts-ignore
-      e.target.innerWidth < 600 ?
+      e.target['innerWidth'] <= 420 ?
         this.layoutConfigService.setIsDesktop(false) : this.layoutConfigService.setIsDesktop(true);
     });
   }

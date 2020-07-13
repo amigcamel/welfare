@@ -1,15 +1,22 @@
 .container {
-  .navigate-group {
-    color: #ddd;
-    padding: 10px 20px;
-    font-size: 20px;
+  &:first-child {
+    margin-top: 60px;
   }
   .navigate-item {
-    padding: 10px 20px;
+    padding: 0;
     color: white;
     cursor: pointer;
+    margin-bottom: 50px;
     .item-text {
-      padding-left: 12px;
+      font-size: 20px;
+      color: black;
     }
+  }
+  .navigate-logout {
+    font-size: 20px;
+    margin-top: 50px;
+    color: black;
+    cursor: pointer;
+    padding-bottom: 30px;
   }
 }

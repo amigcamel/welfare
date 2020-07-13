@@ -1,0 +1,30 @@
+@import "src/styles/global-varible";
+.total {
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  img {
+    width: 24px;
+    height: 24px;
+    margin-left: 13px;
+  }
+  .exceed {
+    color: red;
+  }
+}
+.mobile-icon {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  img {
+    width: 24px;
+    height: 24px;
+  }
+}

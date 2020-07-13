@@ -1,0 +1,14 @@
+<ng-container *ngIf="!!options.radioSelections && options.radioSelections.length > 0">
+  <div class="container" [ngClass]="{ 'active': isActive }" [@openClose]="collapse ? 'open' : 'closed'">
+    <div class="option">
+      <div class="option-title" (click)="toggleItem()">
+        <div>{{options.optionLabel}} <span *ngIf="(layoutConfigService.isDesktop$ | async)">:</span></div>
+        <svg-icon *ngIf="!(layoutConfigService.isDesktop$ | async)" src="/assets/icons/arrow.svg"></svg-icon>
+      </div>
+      <mat-radio-group [(ngModel)]="item.selections[options.optionKey]" (change)="updateChoose($event)">
+        <mat-radio-button *ngFor="let select of options.radioSelections" [value]="select.value">{{select.selectionLabel}}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+</ng-container>
+

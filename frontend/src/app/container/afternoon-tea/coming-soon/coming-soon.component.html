@@ -1,39 +1,43 @@
 <div class="coming-soon">
-  <div class="shadow-cover">
-    <div *ngIf="!!countdownDate && layoutConfigService.isDesktop$ | async" class="coming-group" fxLayoutAlign="center center" fxFlex="100" fxLayout="column">
-      <div class="title">We're coming soon
-        <br>
-        <br>
-      </div>
-      <div class="subtitle">It’s not quite ready yet, but we are working hard and it will be ready in
-        approximately:
-      </div>
-      <div class="message">
-        If you would like to be notified when the app is ready, you can subscribe to our e-mail list.
-        <br>
-        <br>
-      </div>
-      <div class="count-time" fxLayout="row">
-        <div class="circle" fxLayout="column">
-          <div class="time-text">{{countdownDate.days}}</div>
-          <div class="time-unit">days</div>
-        </div>
-        <div class="circle" fxLayout="column">
-          <div class="time-text">{{countdownDate.hours}}</div>
-          <div class="time-unit">hours</div>
-        </div>
-        <div class="circle" fxLayout="column">
-          <div class="time-text">{{countdownDate.minutes}}</div>
-          <div class="time-unit">minutes</div>
-        </div>
-        <div class="circle" fxLayout="column">
-          <div class="time-text">{{countdownDate.seconds}}</div>
-          <div class="time-unit">seconds</div>
-        </div>
-      </div>
+  <div *ngIf="!!countdownDate" class="coming-group">
+    <div class="title">We're coming soon
       <br>
       <br>
-      <button class="go-back" (click)="goBack()">Go back</button>
+    </div>
+    <div class="subtitle">It’s not quite ready yet, but we are working hard and it will be ready in
+      approximately:
+    </div>
+    <div class="message">
+      If you would like to be notified when the app is ready, you can subscribe to our e-mail list.
+      <br>
+      <br>
+    </div>
+    <div class="count-time">
+      <div class="circle" fxLayout="column">
+        <div class="time-text">{{countdownDate.days}}</div>
+        <div class="time-unit">Days</div>
+      </div>
+      <div class="circle" fxLayout="column">
+        <div class="time-text">{{countdownDate.hours}}</div>
+        <div class="time-unit">Hours</div>
+      </div>
+      <div class="circle" fxLayout="column">
+        <div class="time-text">{{countdownDate.minutes}}</div>
+        <div class="time-unit">Minutes</div>
+      </div>
+      <div class="circle" fxLayout="column">
+        <div class="time-text">{{countdownDate.seconds}}</div>
+        <div class="time-unit">Seconds</div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <button class="go-back" (click)="goBack()">Go back</button>
+  </div>
+  <div class="footer">
+    <div class="black-board" (click)="goBack()">
+      <svg-icon class="icon" [src]="'/assets/images/Aback.svg'"></svg-icon>
     </div>
   </div>
 </div>
+

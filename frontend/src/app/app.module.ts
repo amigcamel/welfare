@@ -7,8 +7,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from './container/login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import {ShareModule} from './share/share.module';
-import {MaterialModule} from './material/material.module';
+import { ShareModule } from './share/share.module';
+import { MaterialModule } from './material/material.module';
 import { ToolBarComponent } from './component/tool-bar/tool-bar.component';
 import { SideBarComponent } from './component/side-bar/side-bar.component';
 import { NavigationBarComponent } from './component/navigation-bar/navigation-bar.component';
@@ -19,6 +19,9 @@ import { JwtInterceptor } from './helper/jwt.interceptor';
 import { HomeComponent } from './container/home/home.component';
 import { BillboardComponent } from './container/billboard/billboard.component';
 import { AuthGuard } from './helper/auth.guard';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { LogoComponent } from './component/logo/logo.component';
+import { CartComponent } from './component/cart/cart.component';
 
 const appRoutes: Routes = [
   {
@@ -61,6 +64,8 @@ const appRoutes: Routes = [
     DialogComponent,
     HomeComponent,
     BillboardComponent,
+    LogoComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,10 +73,11 @@ const appRoutes: Routes = [
     HttpClientModule,
     FontAwesomeModule,
 
-    RouterModule.forRoot(appRoutes, { useHash: true }),
+    RouterModule.forRoot(appRoutes, {useHash: true}),
 
     ShareModule,
-    MaterialModule
+    MaterialModule,
+    AngularSvgIconModule
   ],
   providers : [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

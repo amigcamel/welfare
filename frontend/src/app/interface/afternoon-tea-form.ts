@@ -20,7 +20,9 @@ export interface Item {
   itemKey: string;
   value: number;
   collapse: boolean;
-  selections: Object;
+  selections: {
+    size?: number
+  };
   options: Options[];
 }
 export interface RadioSelection {

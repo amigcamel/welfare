@@ -1,0 +1,40 @@
+@import "src/styles/global-varible";
+.container {
+  .item-title {
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    .item-label {
+      .item-title-label {
+        font-size: 16px;
+      }
+      .item-price-label {
+        padding-left: 12px;
+      }
+    }
+    .control-bar {
+      color: black;
+      width: 50%;
+      min-width: 190px;
+      .item-value {
+        font-size: 16px;
+        font-family: 'Lato', sans-serif;
+        font-weight: bold;
+      }
+      .button {
+        margin-top: 5px;
+      }
+    }
+  }
+}
+@media screen and (max-width: $mobile-width){
+  .container {
+    .item-title {
+      .item-label {
+        width: 100%;
+        padding: 10px;
+      }
+    }
+  }
+
+}

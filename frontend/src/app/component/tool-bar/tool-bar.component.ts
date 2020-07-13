@@ -18,7 +18,7 @@ export class ToolBarComponent implements OnInit, OnDestroy {
   faBars = faBars;
   unSubscribe = new Subject<boolean>();
   userInfo: UserInfo;
-  mat;
+  isShowBottom: boolean;
   constructor(private sideBarService: SideBarService,
               private authService: AuthService,
               private router: Router,
@@ -26,6 +26,9 @@ export class ToolBarComponent implements OnInit, OnDestroy {
               public layoutConfigService: LayoutConfigService) { }
 
   ngOnInit(): void {
+    this.layoutConfigService.showToolBarBottom$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(
+      hide => this.isShowBottom = hide
+    );
     this.authService.currentUser$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(
       user => {
         this.userInfo = user;

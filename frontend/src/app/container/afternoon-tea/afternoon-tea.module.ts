@@ -10,6 +10,10 @@ import { MaterialModule } from '../../material/material.module';
 import { ShareModule } from '../../share/share.module';
 import { MatIconModule } from '@angular/material/icon';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
+import { ItemCheckboxComponent } from '../../component/item-checkbox/item-checkbox.component';
+import { ItemOptionComponent } from '../../component/item-option/item-option.component';
+import { FilterBarComponent } from '../../component/filter-bar/filter-bar.component';
+import { ItemControlBarComponent } from '../../component/item-control-bar/item-control-bar.component';
 
 const routes: Routes = [
   {
@@ -38,7 +42,11 @@ const routes: Routes = [
   declarations: [
     HistoryComponent,
     FormComponent,
-    ComingSoonComponent
+    ComingSoonComponent,
+    ItemCheckboxComponent,
+    ItemOptionComponent,
+    FilterBarComponent,
+    ItemControlBarComponent,
   ],
   imports: [
     CommonModule,

@@ -11,6 +11,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 
 
@@ -28,6 +30,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatCheckboxModule,
     MatExpansionModule,
     MatRadioModule,
+    MatProgressSpinnerModule,
+    OverlayModule
   ],
   exports: [
     MatToolbarModule,
@@ -41,7 +45,9 @@ import { MatRadioModule } from '@angular/material/radio';
     MatStepperModule,
     MatCheckboxModule,
     MatExpansionModule,
-    MatRadioModule
+    MatRadioModule,
+    MatProgressSpinnerModule,
+    OverlayModule
   ]
 })
 export class MaterialModule { }
