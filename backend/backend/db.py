@@ -15,6 +15,14 @@ from .qr import QR
 # XXX: add DBMixin?
 
 
+class App:
+    """App model."""
+
+    def __init__(self):
+        """__init__ method."""
+        self.db = MongoClient(**settings.MONGODB)["app"]
+
+
 class Staff:
     """Handle staff profile."""
 
