@@ -3,6 +3,7 @@ set -e
 
 dbs=(
   afternoontea
+  app
   staff
 )
 
