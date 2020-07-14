@@ -33,3 +33,11 @@ def get_billboard():
         .limit(1)
         .next()
     )
+
+
+@naive_cache(ttl=3600, extend=True)
+def get_default_col():
+    """Get default collection name."""
+    return App().db.defaults.find_one({}, {"_id": -1, "afternoontea_collection": 1})[
+        "afternoontea_collection"
+    ]

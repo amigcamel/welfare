@@ -16,14 +16,13 @@ from . import (
     get_default_form,
     get_billboard,
     get_coming_soon,
+    get_default_col,
 )
 
 app = Flask(__name__)
 app.debug = settings.DEBUG
 app.config["JSON_AS_ASCII"] = False
 app.config["SECRET_KEY"] = settings.APP_SECRET
-
-_DEFAULT_COL = "demo_1"  # TODO: DRY
 
 
 @app.before_request
@@ -93,10 +92,12 @@ def user():
     return jsonify(data)
 
 
-@app.route("/afternoontea", defaults={"col": _DEFAULT_COL}, methods=["GET", "POST"])
+@app.route("/afternoontea", defaults={"col": None}, methods=["GET", "POST"])
 @app.route("/afternoontea/<col>", methods=["GET", "POST"])
 def afternoontea(col):
     """Afternoon Tea."""
+    if col is None:
+        col = get_default_col()
     if request.method == "GET":
         try:
             data = AfternoonTea(col=col, user=g.user).get()
@@ -117,10 +118,12 @@ def history():
     return jsonify(list(Order(g.user)))
 
 
-@app.route("/order", defaults={"col": _DEFAULT_COL}, methods=["GET", "POST"])
+@app.route("/order", defaults={"col": None}, methods=["GET", "POST"])
 @app.route("/order/<col>", methods=["GET", "POST"])
 def order(col):
     """CRUD order."""
+    if col is None:
+        col = get_default_col()
     if not Staff(g.user).is_admin:
         raise exceptions.UnauthorizedError(f"No admin permission: {g.user}")
     if request.method == "GET":
