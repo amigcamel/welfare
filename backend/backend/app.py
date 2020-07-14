@@ -14,6 +14,8 @@ from . import (
     settings,
     exceptions,
     get_default_form,
+    get_billboard,
+    get_coming_soon,
 )
 
 app = Flask(__name__)
@@ -163,3 +165,15 @@ def qr():
 def token_info():  # XXX: requested by the internal only?
     """Show token status."""
     return jsonify(get_userinfo_from_token(g.token))
+
+
+@app.route("/billboard", methods=["GET"])
+def billboard():
+    """Billboard endpoint."""
+    return jsonify(get_billboard())
+
+
+@app.route("/coming_soon", methods=["GET"])
+def coming_soon():
+    """Coming Soon endpoint."""
+    return jsonify(get_coming_soon())

@@ -11,6 +11,7 @@
     justify-content: center;
     margin-top: 50px;
     .photo-wrapper {
+      cursor: pointer;
       height: 430px;
       width: 650px;
       border-radius: 150px;
@@ -28,7 +29,7 @@
         .photo-content {
           min-height: 430px;
           min-width: 650px;
-          background-position: center;
+          background-size: cover;
           display: flex;
           align-items: center;
           justify-content: center;

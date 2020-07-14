@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { CountDown, CountExpiration } from '../interface/count-down';
+import { ComingSoonInfo, CountDown, CountExpiration } from '../interface/count-down';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WelfareTimeService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
   countDown(dueDate: string): CountDown {
       const now = new Date().getTime();
       const timeLeft = new Date(dueDate).getTime() - now;
@@ -30,6 +32,9 @@ export class WelfareTimeService {
     } else if (timeLeft >= 1000 * 60){
       return { unit: 'Minutes', value: Math.floor(timeLeft % (1000 * 60) / 1000 )}
     }
-    return { unit: 'Time is Over', value: 0 }
+    return { unit: 'Time is Over', value: 0 };
+  }
+  getInfo(): Observable<ComingSoonInfo> {
+    return this.http.get<ComingSoonInfo>('api/coming_soon');
   }
 }

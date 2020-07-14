@@ -2,6 +2,9 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, Ren
 import { LayoutConfigService } from '../../service/layout-config.service';
 import { of, Subject } from 'rxjs';
 import { delay, distinctUntilChanged, take, takeUntil, tap } from 'rxjs/operators';
+import { BillboardService } from '../../service/billboard.service';
+import { Billboard } from '../../interface/billboard';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-billboard',
@@ -9,36 +12,20 @@ import { delay, distinctUntilChanged, take, takeUntil, tap } from 'rxjs/operator
   styleUrls: ['./billboard.component.scss']
 })
 export class BillboardComponent implements OnInit, AfterViewInit, OnDestroy {
-  images = [
-    {
-      img: '/assets/images/shop.jpg',
-      uid: '3',
-    },
-    {
-      img: '/assets/images/shop.jpg',
-      uid: '1',
-    },
-    {
-      img: '/assets/images/shop.jpg',
-      uid: '2',
-    },
-    {
-      img: '/assets/images/shop.jpg',
-      uid: '3',
-    },
-    {
-      img: '/assets/images/shop.jpg',
-      uid: '1',
-    },
-  ];
-  @ViewChild('photoList', {static: true}) itemList: ElementRef;
+
+  @ViewChild('photoList', {static: false}) itemList: ElementRef;
   private unSub = new Subject<boolean>();
   private canNext = true;
   private canPre = true;
   public currentShop = 1;
   public isDesktop = true;
   public photoWidth = 650;
+  public billBoardInfo: Billboard;
+  public dotList = [];
+  public shopName = '';
   constructor(private layoutConfigService: LayoutConfigService,
+              private billboardService: BillboardService,
+              private router: Router,
               private renderer: Renderer2) {
     this.layoutConfigService.setIsShowToolBar(true);
     this.layoutConfigService.setShowToolBarBottom(false);
@@ -50,20 +37,39 @@ export class BillboardComponent implements OnInit, AfterViewInit, OnDestroy {
       distinctUntilChanged()).subscribe(status => {
       this.isDesktop = status;
       this.photoWidth = status ? 650 : 320;
-      this.itemList.nativeElement.style.left = status ?  -this.photoWidth + 'px' : -this.photoWidth + 'px';
+      if (!!this.itemList) {
+        this.itemList.nativeElement.style.left = status ?  -this.photoWidth + 'px' : -this.photoWidth + 'px';
+      }
     });
+    this.billboardService.getInfo().pipe(takeUntil(this.unSub.asObservable())).subscribe(data => {
+      this.initData(data);
+    });
+
   }
   ngAfterViewInit() {
     console.log(this.itemList);
   }
+  private initData(data: Billboard) {
+    this.shopName = data.items[0].name;
+    this.dotList = ([...Array(data.items.length).keys()]).map(x => x + 1);
+    const firstChild = data.items[0];
+    const lastChild = data.items[data.items.length - 1];
+    this.billBoardInfo = data;
+    this.billBoardInfo.items = [lastChild, ...data.items, firstChild];
+    if (!!this.itemList){
+      this.itemList.nativeElement.style.left = status ?  -this.photoWidth + 'px' : -this.photoWidth + 'px';
+    }
+  }
+
   public next() {
     if (this.canNext) {
-      this.currentShop = (this.currentShop + 1) % (this.images.length - 2)  === 0 ?
-        (this.images.length - 2) : (this.currentShop + 1) % (this.images.length - 2);
+      this.currentShop = (this.currentShop + 1) % (this.billBoardInfo.items.length - 2)  === 0 ?
+        (this.billBoardInfo.items .length - 2) : (this.currentShop + 1) % (this.billBoardInfo.items.length - 2);
+      this.shopName = this.billBoardInfo.items[this.currentShop].name;
       this.canNext = false;
       this.itemList.nativeElement.style.left = this.itemList.nativeElement.offsetLeft - this.photoWidth + 'px';
       of(true).pipe(delay(500), tap(() => {
-        if (this.itemList.nativeElement.offsetLeft <= (-this.photoWidth * (this.images.length - 1))) {
+        if (this.itemList.nativeElement.offsetLeft <= (-this.photoWidth * (this.billBoardInfo.items.length - 1))) {
           this.renderer.removeClass(this.itemList.nativeElement, 'shift');
           this.itemList.nativeElement.style.left = -this.photoWidth + 'px';
         }
@@ -76,14 +82,15 @@ export class BillboardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   public pre() {
     if (this.canPre) {
-      this.currentShop = (this.currentShop - 1 % (this.images.length - 2) ) === 0 ?
-        (this.images.length - 2) : this.currentShop - 1;
+      this.currentShop = (this.currentShop - 1 % (this.billBoardInfo.items.length - 2) ) === 0 ?
+        (this.billBoardInfo.items.length - 2) : this.currentShop - 1;
+      this.shopName = this.billBoardInfo.items[this.currentShop].name;
       this.canPre = false;
       this.itemList.nativeElement.style.left = this.itemList.nativeElement.offsetLeft + this.photoWidth + 'px';
       of(true).pipe(delay(500), tap(() => {
         if (this.itemList.nativeElement.offsetLeft >= 0) {
           this.renderer.removeClass(this.itemList.nativeElement, 'shift');
-          this.itemList.nativeElement.style.left = -this.photoWidth * (this.images.length - 2) + 'px';
+          this.itemList.nativeElement.style.left = -this.photoWidth * (this.billBoardInfo.items.length - 2) + 'px';
         }
       }), delay(200), tap(() => {
         this.renderer.addClass(this.itemList.nativeElement, 'shift');
@@ -93,8 +100,13 @@ export class BillboardComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   public dotSwitch(index) {
+    console.log(this.itemList);
     this.currentShop = index;
     this.itemList.nativeElement.style.left = -this.photoWidth * index + 'px';
+    this.shopName = this.billBoardInfo.items[this.currentShop].name;
+  }
+  public navigateForm() {
+    this.router.navigateByUrl('/afternoon-tea/form');
   }
   ngOnDestroy() {
     this.unSub.next(true);

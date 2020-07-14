@@ -16,10 +16,17 @@
     }
   }
   .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 10px 20px 10px 20px;
     font-size: 16px;
     min-height: 90px;
     box-sizing: border-box;
+    &.qr {
+      padding: 0;
+      justify-content: center;
+    }
     .cart-grid {
       display: grid;
       grid-template-columns: 3fr 1fr 1fr;

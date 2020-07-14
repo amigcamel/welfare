@@ -15,10 +15,14 @@
     font-weight: bold;
     padding: 0 20px;
     box-sizing: border-box;
+    line-height: 1.2;
   }
   .subtitle, .message {
     color: #aaaaaa;
     padding: 0 40px;
+    max-width: 600px;
+    margin: 0 auto;
+    white-space: pre-wrap;
     box-sizing: border-box;
     text-align: center;
   }

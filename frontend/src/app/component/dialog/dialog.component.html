@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div class="content" [ngSwitch]="data.contentType" fxLayoutAlign="space-between center">
+  <div class="content" [ngSwitch]="data.contentType" [ngClass]="{'qr': data.contentType === 'qr'}">
     <div *ngSwitchCase="'warning'">
       <ng-container *ngTemplateOutlet="warning"></ng-container>
     </div>
@@ -22,7 +22,7 @@
     <div *ngSwitchCase="'qr'">
       <ng-container *ngTemplateOutlet="qr"></ng-container>
     </div>
-    <div *ngSwitchCase="'oderCollected'" style="width: 100%">
+    <div *ngSwitchCase="'oderCollected'" style="width: 100%; margin: 0 auto">
       <ng-container *ngTemplateOutlet="oderCollected"></ng-container>
     </div>
   </div>
