@@ -15,6 +15,7 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.handlePreviewCart();
+    console.log(this.data);
   }
   onPositive(): void {
     this.matDialogRef.close(true);
@@ -28,6 +29,11 @@ export class DialogComponent implements OnInit {
         this.totalValue += item.count;
         this.totalPrice += item.total;
       }
+    }
+  }
+  showExtra(order) {
+    if (!!order.options && order.options.length > 0) {
+      return order.sugar + ' Sugar, ' + order.ice + ' Ice, ' + order.options.join(', ');
     }
   }
 

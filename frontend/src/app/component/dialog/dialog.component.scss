@@ -43,6 +43,21 @@
         font-weight: 500;
       }
     }
+    .grid-order {
+      width: 100%;
+      font-size: 16px;
+      display: grid;
+      grid-template-columns: minmax(100px, 130px) 1fr 1fr;
+      grid-row-gap: 10px;
+      max-width: 750px;
+      .title{
+        font-weight: 500;
+      }
+      .extra-text {
+        font-size: 10px;
+        color: black;
+      }
+    }
   }
   .footer {
     width: 100%;

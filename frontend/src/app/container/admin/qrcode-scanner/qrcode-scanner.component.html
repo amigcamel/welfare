@@ -3,7 +3,7 @@
     <div class="title">QR Scanner</div>
     <div class="scanner-group">
       <div class="scanner">
-        <zxing-scanner class="scanner-content" (scanSuccess)="print($event)"></zxing-scanner>
+        <zxing-scanner class="scanner-content" (scanSuccess)="showOrderDetail($event)"></zxing-scanner>
       </div>
       <div class="info">
         Result: {{info}}

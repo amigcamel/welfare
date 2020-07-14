@@ -21,10 +21,10 @@
         <div class="item" [ngClass]="{'even': i % 2 === 0 }">{{i+1}}</div>
         <div class="item" [ngClass]="{'even': i % 2 === 0 }">{{order.sid}}</div>
         <div class="item" [ngClass]="{'even': i % 2 === 0 }">{{order.name}}</div>
-        <div class="item pointer" [ngClass]="{'even': i % 2 === 0 }">Click me</div>
+        <div class="item pointer" [ngClass]="{'even': i % 2 === 0 }" (click)="showOrderDetail(order.email)">Click me</div>
         <div class="item pointer" [ngClass]="{'even': i % 2 === 0 }" (click)="handleStatus(order)">
-          <img *ngIf="order.status" src="/assets/icons/correct.svg" style="width: 24px">
-          <img *ngIf="!order.status" src="/assets/icons/criss-cross.svg" style="width: 24px">
+          <img *ngIf="order.collected" src="/assets/icons/correct.svg" style="width: 24px">
+          <img *ngIf="!order.collected" src="/assets/icons/criss-cross.svg" style="width: 24px">
         </div>
       </ng-container>
     </div>
