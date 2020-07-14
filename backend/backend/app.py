@@ -123,7 +123,7 @@ def order(col):
         raise exceptions.UnauthorizedError(f"No admin permission: {g.user}")
     if request.method == "GET":
         user = request.args.get("user", None)  # TODO: DRY - request.args.get("user")
-        return jsonify(Order(user=user, col=col).get())
+        return jsonify(list(Order(user=user, col=col)))
     elif request.method == "POST":
         if (user := request.args.get("user")) and (data := request.get_json()):
             stat = Order(user=user, col=col).update(data)
@@ -142,13 +142,13 @@ def qr(token):
     """Handle QR hash."""
     qr = request.json.get("qr")
     if qr is None:
-        return 'No QR token', 400
+        return "No QR token", 400
 
     _, col, user = QR.decrypt(qr)
 
     # TODO: DRY - same as /order?user=<user>
     send_action(action="update", token=g.token)
-    return jsonify(Order(user=user, col=col).get())
+    return jsonify(list(Order(user=user, col=col)))
 
 
 @app.route("/token_info")
