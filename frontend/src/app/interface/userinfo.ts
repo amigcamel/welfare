@@ -5,6 +5,7 @@ export interface UserInfo {
     hd: string;
     id: string;
     locale: string;
+    level: number;
     name: string;
     picture: string;
     verified_email: boolean;

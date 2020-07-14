@@ -8,7 +8,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class FilterBarComponent implements OnInit {
 
   constructor() { }
-  public filterText: string;
   @Output() public filterEmitter = new EventEmitter<string>();
   ngOnInit(): void {
   }

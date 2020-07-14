@@ -22,7 +22,6 @@ export class ToolBarComponent implements OnInit, OnDestroy {
   constructor(private sideBarService: SideBarService,
               private authService: AuthService,
               private router: Router,
-              private matDialog: MatDialog,
               public layoutConfigService: LayoutConfigService) { }
 
   ngOnInit(): void {

@@ -61,7 +61,6 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
 
   ngOnInit(): void {
     this.formData = this.activatedRoute.snapshot.data.formData;
-    // this.formData = data['default'];
     if (this.formData.user === 'default') {
       this.initialFormData();
     }
@@ -146,11 +145,6 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
   updateItem(newItem, oldItem) {
     console.log(newItem, oldItem);
     oldItem = newItem;
-    this.calculatorSum();
-  }
-
-  public checkedOption(selection: CheckBoxSelection): void {
-    selection.choose = !selection.choose;
     this.calculatorSum();
   }
 
@@ -312,8 +306,5 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
   ngOnDestroy() {
     this.unSubscribe.next(true);
     this.unSubscribe.complete();
-  }
-  print(e) {
-    console.log(e);
   }
 }

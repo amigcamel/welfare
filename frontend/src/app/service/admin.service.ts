@@ -16,9 +16,7 @@ export class AdminService {
   updateOrder(user, collected) {
     console.log(collected);
     return this.http.post(`/api/order?user=${user}`, {
-      data: {
         collected: !collected
-      }
     });
   }
   updateByQr(hash) {

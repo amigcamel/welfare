@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LayoutConfigService } from '../../../service/layout-config.service';
-import { MatDialog } from "@angular/material/dialog";
-import { QrcodeDialogComponent } from "../../../component/qrcode-dialog/qrcode-dialog.component";
-import { DialogComponent } from "../../../component/dialog/dialog.component";
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../../component/dialog/dialog.component';
+import { Orders } from '../../../interface/history';
 
 @Component({
   selector: 'app-history',
@@ -12,7 +12,7 @@ import { DialogComponent } from "../../../component/dialog/dialog.component";
 })
 export class HistoryComponent implements OnInit {
 
-  historyData: any;
+  historyData: Orders[];
   constructor(private activatedRoute: ActivatedRoute,
               private matDialog: MatDialog,
               public layoutConfigService: LayoutConfigService) {

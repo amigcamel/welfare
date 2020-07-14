@@ -46,6 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
       this.unSub.next(true);
+      this.unSub.complete();
   }
 
 }

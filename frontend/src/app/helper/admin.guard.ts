@@ -6,13 +6,13 @@ import { AuthService } from '../service/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(private auth: AuthService, private router: Router) {
   }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.auth.getIsLogin()) {
+    if (this.auth.getCurrentUser().level >= 300) {
       return true;
     }
     this.auth.redirectURL = state.url;

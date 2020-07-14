@@ -15,7 +15,6 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.handlePreviewCart();
-    console.log(this.data);
   }
   onPositive(): void {
     this.matDialogRef.close(true);

@@ -4,11 +4,12 @@ import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { AfternoonTeaForm } from '../interface/afternoon-tea-form';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { catchError } from 'rxjs/operators';
+import { CartBudget } from '../interface/cart';
 @Injectable({
   providedIn: 'root'
 })
 export class FormService implements Resolve<AfternoonTeaForm> {
-  private cartInfo = new BehaviorSubject<object>({
+  private cartInfo = new BehaviorSubject<CartBudget>({
     budget: 200,
     sum: 0,
   });

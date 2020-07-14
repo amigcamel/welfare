@@ -28,7 +28,9 @@ export class AdminComponent implements OnInit {
     );
     this.welfareWebsocketService.setWSEndpoint(localStorage.getItem('token'));
     this.welfareWebsocketService.getNewWebSocket().pipe(
-      switchMap(_ => this.adminService.getAllOrder())
+      switchMap( action => {
+       return this.adminService.getAllOrder();
+      })
     ).subscribe(data => {
       this.orders = data;
       this.filterOrder(this.selectTab);
@@ -44,6 +46,7 @@ export class AdminComponent implements OnInit {
     } else if (type === 'Get') {
       this.showOrder = this.orders.filter(v => v.status);
     } else if (type === 'All') {
+      console.log('get all', this.orders);
       this.showOrder = this.orders;
     }
   }

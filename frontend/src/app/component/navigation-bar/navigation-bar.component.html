@@ -11,7 +11,7 @@
        (click)="navigateTo('afternoon-tea/coming-soon')">
     <span class="item-text">Coming Soon</span>
   </div>
-  <div class="navigate-item" fxLayout="rows" fxLayoutAlign="start center"
+  <div *ngIf="(authService.currentUser$ | async)['level'] >= 300" class="navigate-item" fxLayout="rows" fxLayoutAlign="start center"
        (click)="navigateTo('admin/main')">
     <span class="item-text">Admin</span>
   </div>
