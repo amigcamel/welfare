@@ -19,6 +19,9 @@
   .subtitle, .message {
     color: #aaaaaa;
     padding: 0 40px;
+    max-width: 600px;
+    margin: 0 auto;
+    white-space: pre-wrap;
     box-sizing: border-box;
     text-align: center;
   }

@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { WelfareTimeService } from '../../../service/welfare-time.service';
-import { CountDown } from '../../../interface/count-down';
+import { ComingSoonInfo, CountDown } from '../../../interface/count-down';
 import { LayoutConfigService } from '../../../service/layout-config.service';
 import { WelfareSpinnerService } from '../../../service/welfare-spinner.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-coming-soon',
@@ -12,7 +13,7 @@ import { WelfareSpinnerService } from '../../../service/welfare-spinner.service'
 })
 export class ComingSoonComponent implements OnInit, OnDestroy {
   public countdownDate: CountDown;
-  public isDesktop = true;
+  public comingSoonInfo: ComingSoonInfo;
   private setIn: any;
   constructor(
     private router: Router,
@@ -27,12 +28,16 @@ export class ComingSoonComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.welfareSpinnerService.showSpinner();
-    this.setIn = setInterval(_ => {
-      this.countdownDate = this.welfareTimeService.countDown('2020-07-22');
-      if (this.setIn) {
-        this.welfareSpinnerService.stopSpinner();
-      }
-    }, 1000);
+    this.welfareTimeService.getInfo().pipe(take(1)).subscribe(data => {
+      this.comingSoonInfo = data;
+      this.setIn = setInterval(_ => {
+        this.countdownDate = this.welfareTimeService.countDown(this.comingSoonInfo.date);
+        if (this.setIn) {
+          this.welfareSpinnerService.stopSpinner();
+        }
+      }, 1000);
+    });
+
   }
   goBack(): void {
     this.router.navigateByUrl('/billboard');
