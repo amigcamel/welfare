@@ -123,7 +123,12 @@ def order(col):
         raise exceptions.UnauthorizedError(f"No admin permission: {g.user}")
     if request.method == "GET":
         user = request.args.get("user", None)  # TODO: DRY - request.args.get("user")
-        return jsonify(list(Order(user=user, col=col)))
+
+        # TODO: refactor - separate endpoints
+        if user:
+            return jsonify(list(Order(user=user, col=col)))
+        else:
+            return jsonify(Order(user=user, col=col).get())
     elif request.method == "POST":
         if (user := request.args.get("user")) and (data := request.get_json()):
             stat = Order(user=user, col=col).update(data)
