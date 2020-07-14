@@ -12,7 +12,7 @@ def get_default_form(col: str):
 
 
 @naive_cache(ttl=3600, extend=True)
-def get_coming_soon(self):
+def get_coming_soon():
     """Latest Coming Soon info."""
     return (
         App()
@@ -24,7 +24,7 @@ def get_coming_soon(self):
 
 
 @naive_cache(ttl=3600, extend=True)
-def get_billboard(self):
+def get_billboard():
     """Latest billboard info."""
     return (
         App()
