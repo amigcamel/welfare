@@ -1,6 +1,7 @@
 """Websocket server."""
 from urllib.parse import urlparse, parse_qs
 import asyncio
+import json
 import os
 
 from loguru import logger
@@ -65,8 +66,9 @@ async def notifier(websocket, path):
     try:
         async for message in websocket:
             if message == "update":
+                output = json.dumps({"action": message})
                 logger.info(f"action: {message}")
-                await asyncio.wait([user.send(message) for user in USERS])
+                await asyncio.wait([user.send(output) for user in USERS])
             else:
                 logger.error(f"Unknown action: {message}")
 
