@@ -115,7 +115,7 @@ def history():
     return jsonify(list(Order(g.user)))
 
 
-@app.route("/orders", defaults={"col": _DEFAULT_COL}, methods=["GET", "POST"])
+@app.route("/order", defaults={"col": _DEFAULT_COL}, methods=["GET", "POST"])
 @app.route("/order/<col>", methods=["GET", "POST"])
 def order(col):
     """CRUD order."""
