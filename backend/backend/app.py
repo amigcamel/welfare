@@ -143,7 +143,7 @@ def order(col):
 
 
 @app.route("/qr", methods=["POST"])
-def qr(token):
+def qr():
     """Handle QR hash."""
     qr = request.json.get("qr")
     if qr is None:
@@ -152,6 +152,9 @@ def qr(token):
     _, col, user = QR.decrypt(qr)
 
     # TODO: DRY - same as /order?user=<user>
+    # TODO: add error handling
+    stat = Order(user=user, col=col).update({"user": user, "collected": True})
+    logger.info(stat)
     send_action(action="update", token=g.token)
     return jsonify(list(Order(user=user, col=col)))
 
