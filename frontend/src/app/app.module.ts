@@ -22,6 +22,8 @@ import { AuthGuard } from './helper/auth.guard';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { LogoComponent } from './component/logo/logo.component';
 import { CartComponent } from './component/cart/cart.component';
+import { QrcodeDialogComponent } from './component/qrcode-dialog/qrcode-dialog.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 const appRoutes: Routes = [
   {
@@ -46,6 +48,10 @@ const appRoutes: Routes = [
     loadChildren: () => import('./container/error-page/error-page.module').then(m => m.ErrorPageModule)
   },
   {
+    path        : 'admin',
+    loadChildren: () => import('./container/admin/admin.module').then(m => m.AdminModule)
+  },
+  {
     path        : '**',
     redirectTo  : 'login'
   }
@@ -60,12 +66,12 @@ const appRoutes: Routes = [
     ToolBarComponent,
     SideBarComponent,
     NavigationBarComponent,
-    WelfareIconDirective,
     DialogComponent,
     HomeComponent,
     BillboardComponent,
     LogoComponent,
     CartComponent,
+    QrcodeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -77,11 +83,12 @@ const appRoutes: Routes = [
 
     ShareModule,
     MaterialModule,
-    AngularSvgIconModule
+    AngularSvgIconModule,
+    QRCodeModule
   ],
-  providers : [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
 

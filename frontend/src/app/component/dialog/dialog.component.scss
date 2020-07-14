@@ -16,7 +16,7 @@
     }
   }
   .content {
-    padding: 10px 20px 20px 20px;
+    padding: 10px 20px 10px 20px;
     font-size: 16px;
     min-height: 90px;
     box-sizing: border-box;
@@ -43,6 +43,21 @@
         font-weight: 500;
       }
     }
+    .grid-order {
+      width: 100%;
+      font-size: 16px;
+      display: grid;
+      grid-template-columns: minmax(100px, 130px) 1fr 1fr;
+      grid-row-gap: 10px;
+      max-width: 750px;
+      .title{
+        font-weight: 500;
+      }
+      .extra-text {
+        font-size: 10px;
+        color: black;
+      }
+    }
   }
   .footer {
     width: 100%;
@@ -55,7 +70,7 @@
       font-weight: 500;
       color: black;
       cursor: pointer;
-      padding: 10px 0 15px 0;
+      padding: 10px 0 20px 0;
     }
     &[type='checkDialog'] {
       border-top: 1px solid #fdf8f6;
@@ -75,6 +90,12 @@
           border-left: solid 1px #fdf8f6;
         }
       }
+    }
+  }
+  qrcode::ng-deep {
+    canvas {
+      margin: 0 auto;
+      display: block;
     }
   }
 }

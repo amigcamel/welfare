@@ -18,7 +18,6 @@ export class ItemControlBarComponent implements OnInit {
   }
 
   public handleCollapse() {
-    console.log('click');
     this.toggleCollapse.emit();
   }
 

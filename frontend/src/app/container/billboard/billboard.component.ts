@@ -1,14 +1,14 @@
-import { AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChild } from '@angular/core';
 import { LayoutConfigService } from '../../service/layout-config.service';
-import { of } from 'rxjs';
-import { delay, distinctUntilChanged, take, tap } from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
+import { delay, distinctUntilChanged, take, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-billboard',
   templateUrl: './billboard.component.html',
   styleUrls: ['./billboard.component.scss']
 })
-export class BillboardComponent implements OnInit, AfterViewInit {
+export class BillboardComponent implements OnInit, AfterViewInit, OnDestroy {
   images = [
     {
       img: '/assets/images/shop.jpg',
@@ -32,6 +32,7 @@ export class BillboardComponent implements OnInit, AfterViewInit {
     },
   ];
   @ViewChild('photoList', {static: true}) itemList: ElementRef;
+  private unSub = new Subject<boolean>();
   private canNext = true;
   private canPre = true;
   public currentShop = 1;
@@ -45,7 +46,8 @@ export class BillboardComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.layoutConfigService.isDesktop$.pipe(distinctUntilChanged()).subscribe(status => {
+    this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSub.asObservable()),
+      distinctUntilChanged()).subscribe(status => {
       this.isDesktop = status;
       this.photoWidth = status ? 650 : 320;
       this.itemList.nativeElement.style.left = status ?  -this.photoWidth + 'px' : -this.photoWidth + 'px';
@@ -54,7 +56,7 @@ export class BillboardComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     console.log(this.itemList);
   }
-  next() {
+  public next() {
     if (this.canNext) {
       this.currentShop = (this.currentShop + 1) % (this.images.length - 2)  === 0 ?
         (this.images.length - 2) : (this.currentShop + 1) % (this.images.length - 2);
@@ -72,7 +74,7 @@ export class BillboardComponent implements OnInit, AfterViewInit {
       });
     }
   }
-  pre() {
+  public pre() {
     if (this.canPre) {
       this.currentShop = (this.currentShop - 1 % (this.images.length - 2) ) === 0 ?
         (this.images.length - 2) : this.currentShop - 1;
@@ -90,9 +92,13 @@ export class BillboardComponent implements OnInit, AfterViewInit {
       });
     }
   }
-  dotSwitch(index) {
+  public dotSwitch(index) {
     this.currentShop = index;
     this.itemList.nativeElement.style.left = -this.photoWidth * index + 'px';
+  }
+  ngOnDestroy() {
+    this.unSub.next(true);
+    this.unSub.complete();
   }
 
 }

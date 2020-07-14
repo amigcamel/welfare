@@ -25,6 +25,7 @@
       margin-bottom: 10px;
       justify-content: space-between;
       align-items: baseline;
+      display: flex;
       .menu {
         cursor: pointer;
         text-decoration: underline;
@@ -115,6 +116,7 @@
       padding: 0;
 
       .form-label {
+        flex-direction: column;
         .form-label-text {
           font-size: 20px;
         }

@@ -4,12 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HistoryCalculatorPipe } from '../pipe/history-calculator.pipe';
-
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { WelfareIconDirective } from "../directive/welfare-icon.directive";
 
 
 @NgModule({
   declarations: [
-    HistoryCalculatorPipe
+    HistoryCalculatorPipe,
+    WelfareIconDirective,
   ],
   imports: [
     CommonModule,
@@ -17,6 +19,7 @@ import { HistoryCalculatorPipe } from '../pipe/history-calculator.pipe';
     ReactiveFormsModule,
     FlexLayoutModule,
     AngularSvgIconModule.forRoot(),
+    ZXingScannerModule,
   ],
   exports: [
     CommonModule,
@@ -24,7 +27,9 @@ import { HistoryCalculatorPipe } from '../pipe/history-calculator.pipe';
     ReactiveFormsModule,
     FlexLayoutModule,
     AngularSvgIconModule,
-    HistoryCalculatorPipe
+    HistoryCalculatorPipe,
+    ZXingScannerModule,
+    WelfareIconDirective,
   ]
 })
 export class ShareModule { }

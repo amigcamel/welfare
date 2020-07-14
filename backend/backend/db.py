@@ -9,6 +9,7 @@ from redis import StrictRedis
 
 from . import settings
 from . import exceptions
+from .qr import QR
 
 
 # XXX: add DBMixin?
@@ -17,15 +18,24 @@ from . import exceptions
 class Staff:
     """Handle staff profile."""
 
-    def __init__(self, email: str):
+    def __init__(self, email: Union[str, None] = None):
         """Construct Mongo client."""
         self.email = email
-        self.db = MongoClient(**settings.MONGODB)
+        self.db = MongoClient(**settings.MONGODB)["staff"]
 
     @property
     def profile(self):
         """Get user profile."""
-        return self.db.staff.profile.find_one({"email": self.email}, {"_id": 0})
+        return self.db.profile.find_one({"email": self.email}, {"_id": 0})
+
+    @property
+    def is_admin(self):
+        """Check if user has admin permission."""
+        doc = self.db.profile.find_one({"email": self.email}, {"_id": 0, "level": 1})
+        if doc.get("level") == 300:
+            return True
+        else:
+            return False
 
 
 class AfternoonTea:
@@ -33,8 +43,10 @@ class AfternoonTea:
 
     def __init__(self, *, col: Union[str, None], user: Union[str, None]):
         """Construct Mongo client."""
-        self.db = MongoClient(**settings.MONGODB)["afternoontea"]
-        self.col = col
+        self.__dbname = "afternoontea"
+        self.__colname = col
+        self.db = MongoClient(**settings.MONGODB)[self.__dbname]
+        self.col = self.__colname  # FIXME
         self.user = user
 
     def __repr__(self):
@@ -61,6 +73,8 @@ class AfternoonTea:
     def upsert(self, *, data: dict):
         """Insert or update a doc."""
         data["user"] = self.user
+        pat = f"{self.__dbname}|{self.__colname}|{self.user}"
+        data["qr"] = QR.encrypt(pat)
         data["update_time"] = datetime.now()
         Order(self.user, self.col).transform_and_save(data)
         return self.db[self.col].update({"user": self.user}, data, upsert=True)
@@ -75,11 +89,48 @@ class Order:
         self.col = col
         self.user = user
 
+    def __repr__(self):
+        """__repr__ method."""
+        return f"<Order: user={self.user} col={self.col}>"
+
     def __iter__(self):
         """Get order history."""
         for col in self.db.list_collection_names():
             if (doc := self.db[col].find_one({"user": self.user}, {"_id": 0})) :
                 yield doc
+
+    def get(self):
+        """Get order(s)."""
+        if self.user is None:
+            cond = {}
+        else:
+            cond = {"user": self.user}
+        docs = self.db[self.col].find(cond, {"_id": 0, "user": 1, "collected": 1})
+        staff = (
+            Staff()
+            .db["profile"]
+            .find({}, {"_id": 0, "email": 1, "english_name": 1, "sid": 1})
+        )
+        staff_dic = {i["email"]: i for i in staff}
+        con = []
+        for doc in docs:
+            user = doc["user"]
+            con.append(
+                {
+                    "name": staff_dic[user]["english_name"],
+                    "email": staff_dic[user]["email"],
+                    "sid": staff_dic[user]["sid"],
+                    "collected": doc["collected"],
+                }
+            )
+        return con
+
+    def update(self, data: dict):
+        """Update order."""
+        stat = self.db[self.col].update(
+            {"user": self.user}, {"$set": data}, upsert=False
+        )
+        return stat
 
     def transform_and_save(self, data: dict):
         """Transform data to order format and save to db."""
@@ -115,7 +166,13 @@ class Order:
                         "options": extras,
                     }
                 )
-        res = {"user": self.user, "date": data["expiration"], "orders": orders}
+        res = {
+            "user": self.user,
+            "date": data["expiration"],
+            "orders": orders,
+            "qr": data["qr"],
+            "collected": False,
+        }
         stat = self.db[self.col].update({"user": self.user}, res, upsert=True)
         logger.info(stat)
 

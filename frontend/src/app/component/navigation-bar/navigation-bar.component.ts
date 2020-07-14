@@ -14,7 +14,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy{
   private unSubscribe = new Subject<boolean>();
   constructor(private router: Router,
               private sideBarService: SideBarService,
-              private authService: AuthService) { }
+              public authService: AuthService) { }
   @Output() private closeSideBar: EventEmitter<boolean> = new EventEmitter();
   ngOnInit(): void {
   }

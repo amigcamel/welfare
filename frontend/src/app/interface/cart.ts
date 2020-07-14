@@ -5,3 +5,7 @@ export interface Cart {
     count: number;
     total: number;
 }
+export interface CartBudget {
+  sum: number;
+  budget: number;
+}

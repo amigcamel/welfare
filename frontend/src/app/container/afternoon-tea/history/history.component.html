@@ -10,20 +10,21 @@
                 <mat-expansion-panel-header>
                     <mat-panel-title class="header" fxLayout="row" fxLayoutAlign="start center">
                         {{history.date}}
+                      <mat-icon (click)="showQRCode($event, history.qr)">center_focus_strong</mat-icon>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="grid-order">
                     <div class="title">Item Name</div>
                     <div class="title">Count</div>
                     <div class="title">Price</div>
-                    <ng-container *ngFor="let order of history['orders']">
-                        <div>{{order['item']}}
+                    <ng-container *ngFor="let order of history.orders">
+                        <div>{{order.item}}
                             <div fxLayout="rows">
                                 <div class="extra-text" >{{showExtra(order)}}</div>
                             </div>
                         </div>
-                        <div>{{order['value']}}</div>
-                        <div>{{order['price']}}</div>
+                        <div>{{order.value}}</div>
+                        <div>{{order.price}}</div>
                     </ng-container>
                 </div>
                 <div class="total-grid">

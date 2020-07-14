@@ -1,0 +1,33 @@
+<div class="container">
+  <div>
+    <div class="tab-group">
+      <div class="tab" [class.selected]="tab === selectTab"
+           *ngFor="let tab of ['Not Get', 'Get', 'All']"
+           (click)="onSelectTab(tab)"
+      >{{tab}}</div>
+      <img src="/assets/icons/qr-code.svg"
+           style="width: 24px; margin: 0 0 20px auto; cursor: pointer" alt=""
+           (click)="qrScanner()">
+    </div>
+  </div>
+  <div>
+    <div class="order-list">
+      <div class="title">No</div>
+      <div class="title">Sid</div>
+      <div class="title">Name</div>
+      <div class="title">Detail</div>
+      <div class="title">Status</div>
+      <ng-container *ngFor="let order of showOrder; let i = index">
+        <div class="item" [ngClass]="{'even': i % 2 === 0 }">{{i+1}}</div>
+        <div class="item" [ngClass]="{'even': i % 2 === 0 }">{{order.sid}}</div>
+        <div class="item" [ngClass]="{'even': i % 2 === 0 }">{{order.name}}</div>
+        <div class="item pointer" [ngClass]="{'even': i % 2 === 0 }" (click)="showOrderDetail(order.email)">Click me</div>
+        <div class="item pointer" [ngClass]="{'even': i % 2 === 0 }" (click)="handleStatus(order)">
+          <img *ngIf="order.collected" src="/assets/icons/correct.svg" style="width: 24px">
+          <img *ngIf="!order.collected" src="/assets/icons/criss-cross.svg" style="width: 24px">
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+</div>

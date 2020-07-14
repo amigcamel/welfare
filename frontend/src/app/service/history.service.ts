@@ -3,11 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { catchError } from 'rxjs/operators';
+import { Orders } from '../interface/history';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HistoryService implements Resolve<any>{
+export class HistoryService implements Resolve<Orders[]>{
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
         return this.getHistory().pipe(catchError((err) => {
             console.log('load history error:', err);

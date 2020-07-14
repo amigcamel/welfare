@@ -30,6 +30,11 @@ export class DialogComponent implements OnInit {
       }
     }
   }
+  showExtra(order) {
+    if (!!order.options && order.options.length > 0) {
+      return order.sugar + ' Sugar, ' + order.ice + ' Ice, ' + order.options.join(', ');
+    }
+  }
 
 
 }

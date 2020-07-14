@@ -66,10 +66,14 @@ def get_userinfo(code):
 
 def decrypt(token: str) -> str:
     """Decrypt JWE token."""
-    jwetoken = jwe.JWE()
-    jwetoken.deserialize(token)
-    jwetoken.decrypt(settings.JWK_KEY)
-    return jwetoken.payload
+    try:
+        jwetoken = jwe.JWE()
+        jwetoken.deserialize(token)
+        jwetoken.decrypt(settings.JWK_KEY)
+        return jwetoken.payload
+    except Exception as err:
+        logger.debug(err)
+        raise exceptions.InvalidTokenError(token)
 
 
 def encrypt(data: dict) -> str:

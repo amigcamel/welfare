@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LayoutConfigService } from '../../../service/layout-config.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../../component/dialog/dialog.component';
+import { Orders } from '../../../interface/history';
 
 @Component({
   selector: 'app-history',
@@ -9,20 +12,34 @@ import { LayoutConfigService } from '../../../service/layout-config.service';
 })
 export class HistoryComponent implements OnInit {
 
-    historyData: any;
-    constructor(private activatedRoute: ActivatedRoute,
-                public layoutConfigService: LayoutConfigService) {
-      this.layoutConfigService.setIsShowToolBar(true);
-      this.layoutConfigService.setShowToolBarBottom(true);
-      this.layoutConfigService.setShowCartInfo(false);
-    }
+  historyData: Orders[];
+  constructor(private activatedRoute: ActivatedRoute,
+              private matDialog: MatDialog,
+              public layoutConfigService: LayoutConfigService) {
+    this.layoutConfigService.setIsShowToolBar(true);
+    this.layoutConfigService.setShowToolBarBottom(true);
+    this.layoutConfigService.setShowCartInfo(false);
+  }
 
   ngOnInit(): void {
-      this.historyData = this.activatedRoute.snapshot.data.historyData;
+    this.historyData = this.activatedRoute.snapshot.data.historyData;
   }
   public showExtra(order): string {
-      if (!!order.options && order.options.length > 0) {
+    if (!!order.options && order.options.length > 0) {
       return order.sugar + ' Sugar, ' + order.ice + ' Ice, ' + order.options.join(', ');
-      }
+    }
+  }
+  showQRCode(e, qr) {
+    e.stopPropagation();
+    this.matDialog.open(DialogComponent, {
+      data: {
+        contentType: 'qr',
+        dialogType: 'tipDialog',
+        title: 'QrCode',
+        qr,
+        positiveBtn: 'Ok'
+      },
+      panelClass: 'form-dialog'
+    });
   }
 }

@@ -28,7 +28,7 @@ export class ComingSoonComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.welfareSpinnerService.showSpinner();
     this.setIn = setInterval(_ => {
-      this.countdownDate = this.welfareTimeService.countDown('2020-06-30');
+      this.countdownDate = this.welfareTimeService.countDown('2020-07-22');
       if (this.setIn) {
         this.welfareSpinnerService.stopSpinner();
       }
