@@ -5,13 +5,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HistoryCalculatorPipe } from '../pipe/history-calculator.pipe';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
-import { WelfareIconDirective } from "../directive/welfare-icon.directive";
+import { WelfareIconDirective } from '../directive/welfare-icon.directive';
+import { FooterComponent } from '../component/footer/footer.component';
 
 
 @NgModule({
   declarations: [
     HistoryCalculatorPipe,
     WelfareIconDirective,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import { WelfareIconDirective } from "../directive/welfare-icon.directive";
     HistoryCalculatorPipe,
     ZXingScannerModule,
     WelfareIconDirective,
+    FooterComponent
   ]
 })
 export class ShareModule { }
