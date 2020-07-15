@@ -12,7 +12,6 @@ import { MaterialModule } from './material/material.module';
 import { ToolBarComponent } from './component/tool-bar/tool-bar.component';
 import { SideBarComponent } from './component/side-bar/side-bar.component';
 import { NavigationBarComponent } from './component/navigation-bar/navigation-bar.component';
-import { WelfareIconDirective } from './directive/welfare-icon.directive';
 import { DialogComponent } from './component/dialog/dialog.component';
 import { ErrorInterceptor } from './helper/error.interceptor';
 import { JwtInterceptor } from './helper/jwt.interceptor';
@@ -71,7 +70,7 @@ const appRoutes: Routes = [
     BillboardComponent,
     LogoComponent,
     CartComponent,
-    QrcodeDialogComponent
+    QrcodeDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,5 +91,7 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent],
 
+  exports: [
+  ]
 })
 export class AppModule { }
