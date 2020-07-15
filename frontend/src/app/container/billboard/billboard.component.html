@@ -9,7 +9,6 @@
         <div class="photo-list shift" #photoList>
           <ng-container *ngIf="!!billBoardInfo">
             <div *ngFor="let item of billBoardInfo.items" [style.backgroundImage]="'url('+item.img+')'" class="photo-content">
-              <div class="emotion">👀</div>
               <div class="news-message" style="color: white; font-size: 24px;">{{item.content}}</div>
             </div>
           </ng-container>
