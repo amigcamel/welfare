@@ -4,68 +4,71 @@
   background: white;
   background-size: cover;
   height: 100%;
-  overflow-y: scroll;
   padding-top: 50px;
   display: flex;
   flex-direction: column;
-  .title {
-    text-align: center;
-    color: black;
-    font-size: 30px;
-    font-weight: bold;
-    padding: 0 20px;
-    box-sizing: border-box;
-    line-height: 1.2;
-  }
-  .subtitle, .message {
-    color: #aaaaaa;
-    padding: 0 40px;
-    max-width: 600px;
-    margin: 0 auto;
-    white-space: pre-wrap;
-    box-sizing: border-box;
-    text-align: center;
-  }
-  .count-time {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    .circle {
-      width: 120px;
-      height: 120px;
-      padding: 20px;
-      border-radius: 50%;
-      border: solid white 2px;
+  .coming-group {
+    flex: 1;
+    .title {
+      text-align: center;
+      color: black;
+      font-size: 30px;
+      font-weight: bold;
+      padding: 0 20px;
       box-sizing: border-box;
+      line-height: 1.2;
+    }
+    .subtitle, .message {
+      color: #aaaaaa;
+      padding: 0 40px;
+      max-width: 600px;
+      margin: 0 auto;
+      white-space: pre-wrap;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .count-time {
+      margin: 0 auto;
       display: flex;
       justify-content: center;
-      align-items: center;
-      color: white;
-      margin: 10px 10px;
-      background-color: black;
-      .time-text {
-        font-size: 50px;
-        line-height: 1.1;
-        font-weight: 300;
-        opacity: .9;
-      }
-      .time-unit {
-        font-size: 16px;
-        font-weight: 300;
+      .circle {
+        width: 120px;
+        height: 120px;
+        padding: 20px;
+        border-radius: 50%;
+        border: solid white 2px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        margin: 10px 10px;
+        background-color: black;
+        .time-text {
+          font-size: 50px;
+          line-height: 1.1;
+          font-weight: 300;
+          opacity: .9;
+        }
+        .time-unit {
+          font-size: 16px;
+          font-weight: 300;
+        }
       }
     }
+    .go-back {
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 10px 20px;
+      color: white;
+      border: solid white 1px;
+      cursor: pointer;
+    }
   }
-  .go-back {
-    background-color: transparent;
-    border-radius: 5px;
-    padding: 10px 20px;
-    color: white;
-    border: solid white 1px;
-    cursor: pointer;
-  }
+
   .footer {
     width: 100%;
-    min-height: 330px;
+    min-height: 10px;
     background-color: #f2a202;
     position: relative;
     .black-board {
@@ -87,19 +90,21 @@
     text-align: center;
   }
   .coming-soon{
-    .count-time {
-      .circle {
-        width: 60px;
-        height: 60px;
-        .time-text {
-          font-size: 24px;
-          line-height: 1.1;
-          font-weight: 300;
-          opacity: .9;
-        }
-        .time-unit {
-          font-size: 10px;
-          font-weight: 300;
+    .coming-group {
+      .count-time {
+        .circle {
+          width: 60px;
+          height: 60px;
+          .time-text {
+            font-size: 24px;
+            line-height: 1.1;
+            font-weight: 300;
+            opacity: .9;
+          }
+          .time-unit {
+            font-size: 10px;
+            font-weight: 300;
+          }
         }
       }
     }
