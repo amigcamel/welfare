@@ -5,7 +5,7 @@
       <div class="left-slide" (click)="pre()">
         <svg-icon src="/assets/icons/left-arrow.svg"></svg-icon>
       </div>
-      <div class="photo-wrapper" (click)="navigateForm()">
+      <div class="photo-wrapper" (swipeleft)="next()" (swiperight)="pre()" (click)="navigateForm()">
         <div class="photo-list shift" #photoList>
           <ng-container *ngIf="!!billBoardInfo">
             <div *ngFor="let item of billBoardInfo.items" [style.backgroundImage]="'url('+item.img+')'" class="photo-content">

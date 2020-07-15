@@ -7,6 +7,7 @@ import { HistoryCalculatorPipe } from '../pipe/history-calculator.pipe';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { WelfareIconDirective } from '../directive/welfare-icon.directive';
 import { FooterComponent } from '../component/footer/footer.component';
+import { HammerModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { FooterComponent } from '../component/footer/footer.component';
     FlexLayoutModule,
     AngularSvgIconModule.forRoot(),
     ZXingScannerModule,
+    HammerModule
   ],
   exports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { FooterComponent } from '../component/footer/footer.component';
     HistoryCalculatorPipe,
     ZXingScannerModule,
     WelfareIconDirective,
-    FooterComponent
+    FooterComponent,
+    HammerModule
   ]
 })
 export class ShareModule { }

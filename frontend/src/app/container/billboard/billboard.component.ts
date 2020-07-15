@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-billboard',
   templateUrl: './billboard.component.html',
-  styleUrls: ['./billboard.component.scss']
+  styleUrls: ['./billboard.component.scss'],
 })
 export class BillboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
