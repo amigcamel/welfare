@@ -10,6 +10,7 @@ import websockets
 
 USERS = set()
 PREFIX = os.environ.get("WEBSOCKET_PREFIX", "")
+BACKEND_HOST = os.environ.get("BACKEND_HOST", "http://backend:5000")
 
 
 def _validate_token(token):
@@ -18,8 +19,8 @@ def _validate_token(token):
         logger.debug("DEBUG Mode")
         return True
     resp = requests.get(
-        "http://backend:5000/api/token_info", headers=headers
-    )  # TODO: Add timeout
+        f"{BACKEND_HOST}/api/token_info", headers=headers
+    )  # TODO: Add timeout;
     if resp.status_code == 200:
         user_info = resp.json()
         if user_info.get("level") == 300:  # TODO: DRY
