@@ -3,6 +3,7 @@ import { WebSocketSubject } from 'rxjs/internal-compatibility';
 import { EMPTY, Subject } from 'rxjs';
 import { catchError, switchAll, tap } from 'rxjs/operators';
 import { webSocket } from 'rxjs/webSocket';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,6 @@ export class WelfareWebsocketService {
     return webSocket(this.WS_ENDPOINT);
   }
   setWSEndpoint(token) {
-    this.WS_ENDPOINT = `wss://welfare.local.com:4200/ws/?token=${token}`;
+    this.WS_ENDPOINT = `wss://${environment.websocketEndpoint}/ws/?token=${token}`;
   }
 }

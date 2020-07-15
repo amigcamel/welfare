@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: ''
+  apiUrl: '',
+  websocketEndpoint: 'welfare.local.com:4200'
 };
 
 /*
