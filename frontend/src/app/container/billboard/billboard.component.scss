@@ -108,28 +108,36 @@
 @media screen and (max-width: $mobile-width) {
   .container {
     max-width: $mobile-width;
-    .content {
-      max-width: $mobile-width;
-      margin-top: 10px;
-      padding: 0 15px;
-      box-sizing: border-box;
-      .photo-wrapper {
-        max-width: 320px;
-        max-height: 395px;
-        .photo-list {
-          left: -320px;
-          .photo-content {
-            min-width: 320px;
-            min-height: 395px;
+    .inner-padding {
+      .content {
+        max-width: $mobile-width;
+        margin-top: 10px;
+        padding: 20px 15px;
+        box-sizing: border-box;
+        overflow-y: auto;
+
+        .photo-wrapper {
+          max-width: 320px;
+          max-height: 395px;
+          touch-action: pan-y !important;
+          .photo-list {
+            left: -320px;
+            .photo-content {
+              min-width: 320px;
+              min-height: 395px;
+            }
           }
         }
+        .left-slide {
+          display: none;
+        }
+        .right-slide {
+          display: none;
+        }
       }
-      .left-slide {
-        display: none;
-      }
-      .right-slide {
-        display: none;
-      }
+    }
+    app-footer {
+      position: relative;
     }
   }
 
