@@ -13,6 +13,7 @@ services:
     environment:
       - DEBUG=True
       - FAKE_LOGIN=True
+      - ENABLE_CACHE=False
       - APP_SECRET=aji
       - QR_SECRET=DmM6CYfjU4Mm7jKqG4bPmZgKQAh_RhLVA8YcW0ieClo=
       - SITE_URL=

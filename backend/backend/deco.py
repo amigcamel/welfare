@@ -16,6 +16,17 @@ def naive_cache(ttl: int, extend: bool):
 
     Reference: https://stackoverflow.com/a/10220908
     """
+    if not settings.ENABLE_CACHE:
+        logger.debug("Cache is disabled.")
+
+        def _(func):
+            def __(*args, **kwargs):
+                return func(*args, **kwargs)
+
+            return __
+
+        return _
+
     conn = StrictRedis(**settings.CACHE)
 
     def _decorator(func):

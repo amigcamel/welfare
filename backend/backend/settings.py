@@ -4,6 +4,7 @@ import os
 
 DEBUG = strtobool(os.environ.get("DEBUG", "False"))
 FAKE_LOGIN = DEBUG and strtobool(os.environ.get("FAKE_LOGIN", "False"))
+ENABLE_CACHE = strtobool(os.environ.get("ENABLE_CACHE", "True"))
 FAKE_USER_DATA = {
     "email": "aji@ffn.com",
     "family_name": "Liu",
