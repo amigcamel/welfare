@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LayoutConfigService } from '../../../service/layout-config.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../../component/dialog/dialog.component';
@@ -15,6 +15,7 @@ export class HistoryComponent implements OnInit {
   historyData: Orders[];
   constructor(private activatedRoute: ActivatedRoute,
               private matDialog: MatDialog,
+              private router: Router,
               public layoutConfigService: LayoutConfigService) {
     this.layoutConfigService.setIsShowToolBar(true);
     this.layoutConfigService.setShowToolBarBottom(true);
@@ -41,5 +42,8 @@ export class HistoryComponent implements OnInit {
       },
       panelClass: 'form-dialog'
     });
+  }
+  navigateForm() {
+    this.router.navigateByUrl('/afternoon-tea/form');
   }
 }

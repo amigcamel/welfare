@@ -34,6 +34,22 @@
         color: black;
       }
     }
+    .resubmit-btn {
+      background-color: black;
+      color: white;
+      border-radius: 18px;
+      width: 96px;
+      height: 36px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 40px auto 0 auto;
+      &:hover {
+        background-color: #f2a202;
+        color: black;
+      }
+    }
   }
   .total-grid {
     display: grid;
