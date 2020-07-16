@@ -5,11 +5,13 @@
   overflow-y: scroll;
   background-color: white;
   text-align: center;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 60px;
   .inner-padding {
+    width: 100%;
+    max-width: 100vw;
     position: relative;
-    flex: 1;
+    display: block;
     .content {
       display: flex;
       align-items: center;
@@ -103,26 +105,29 @@
       }
     }
   }
-  .marquee {
-    position: fixed;
-    bottom: 40px;
+  .footer {
     width: 100%;
-    overflow: hidden;
-    background-color: black;
-    color: white;
-    span {
-      display: inline-block;
-      white-space: nowrap;
-      padding-left: 100%;
-      -webkit-animation: marquee 10s linear infinite;
-      animation: marquee 10s linear infinite;
+    max-width: 100vw;
+    .marquee {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background-color: black;
+      color: white;
+      span {
+        display: inline-block;
+        white-space: nowrap;
+        padding-left: 100%;
+        -webkit-animation: marquee 10s linear infinite;
+        animation: marquee 10s linear infinite;
+      }
     }
-  }
-  app-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    app-footer {
+      position: relative;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
   }
 }
 
@@ -164,16 +169,6 @@
     }
     .dot-group {
       padding-bottom: 60px;
-    }
-    .marquee {
-      position: absolute;
-      bottom: 40px;
-      left: 0;
-      z-index: 2;
-    }
-    app-footer {
-      position: absolute;
-      bottom: 0;
     }
   }
 

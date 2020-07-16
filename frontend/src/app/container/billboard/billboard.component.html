@@ -25,6 +25,8 @@
     <div class="dot-group">
       <div class="dot" *ngFor="let dot of dotList" (click)="dotSwitch(dot)" [ngClass]="{'active': currentShop === dot}"></div>
     </div>
+  </div>
+  <div class="footer">
     <ng-container *ngIf="!!billBoardInfo">
       <div class="marquee"><span>{{billBoardInfo.marquee}}</span></div>
     </ng-container>
