@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../component/dialog/dialog.component';
 import { Router } from '@angular/router';
 import { AdminService } from '../../service/admin.service';
+import { LayoutConfigService } from '../../service/layout-config.service';
 import { switchMap, take } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { WelfareWebsocketService } from '../../service/welfare-websocket.service';
@@ -14,8 +15,16 @@ import { WelfareWebsocketService } from '../../service/welfare-websocket.service
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private matDialog: MatDialog, private router: Router, private adminService: AdminService,
-              private welfareWebsocketService: WelfareWebsocketService) { }
+  constructor(
+    private matDialog: MatDialog,
+    private router: Router,
+    private adminService: AdminService,
+    private welfareWebsocketService: WelfareWebsocketService,
+    public layoutConfigService: LayoutConfigService) {
+    this.layoutConfigService.setIsShowToolBar(true);
+    this.layoutConfigService.setShowToolBarBottom(true);
+    this.layoutConfigService.setShowCartInfo(false);
+  }
   orders: any;
   showOrder = [];
   selectTab = 'All';
