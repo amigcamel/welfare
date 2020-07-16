@@ -10,7 +10,7 @@
                 <mat-expansion-panel-header>
                     <mat-panel-title class="header" fxLayout="row" fxLayoutAlign="start center">
                         {{history.date}}
-                      <mat-icon (click)="showQRCode($event, history.qr)">center_focus_strong</mat-icon>
+                      <svg-icon style="display: block; width: 16px; height: 16px; margin-left: 10px" src="/assets/icons/QR-cord-01.svg" (click)="showQRCode($event, history.qr)">center_focus_strong</svg-icon>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="grid-order">
