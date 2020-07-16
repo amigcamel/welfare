@@ -4,6 +4,8 @@
   .mat-expansion-panel-header-title,.mat-expansion-panel {
     color: black;
   }
+  display: grid;
+  grid-template-rows: 90px auto 40px;
   background-color: white;
   height: calc(100vh - 90px);
   overflow-y: scroll;
@@ -14,8 +16,6 @@
   .grid-content {
     max-width: 750px;
     margin: 0 auto;
-    height: 500px;
-    overflow-y: auto;
     .header {
       font-size: 16px;
     }
