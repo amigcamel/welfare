@@ -7,8 +7,9 @@ dbs=(
   staff
 )
 
+CON=$(docker ps --filter name=welfare_mongo -q)
+docker cp ./mongodemo.gz $CON:/ 
+
 for db in "${dbs[@]}"; do
-  CON=$(docker ps --filter name=welfare_mongo -q)
-  docker cp ./$db.gz $CON:/ 
-  docker exec -t $CON mongorestore -d $db --gzip --drop --archive=$db.gz
+  docker exec -t $CON mongorestore --drop --archive=$db.gz --gzip --db=$db
 done

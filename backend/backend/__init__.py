@@ -26,13 +26,7 @@ def get_coming_soon():
 @naive_cache(ttl=3600, extend=True)
 def get_billboard():
     """Latest billboard info."""
-    return (
-        App()
-        .db.billboard.find({}, {"_id": 0})
-        .sort([("_id", pymongo.DESCENDING)])
-        .limit(1)
-        .next()
-    )
+    return App().db.billboard.find_one({"_id": get_default_col()}, {"_id": 0})
 
 
 @naive_cache(ttl=3600, extend=True)
