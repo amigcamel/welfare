@@ -288,7 +288,7 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
     this.matDialog.open(DialogComponent, {
       data: {
         contentType: 'cart',
-        dialogType: 'tipDialog',
+        dialogType: '',
         faIcon: faShoppingBag,
         title: 'Order',
         positiveBtn: 'Confirm',
