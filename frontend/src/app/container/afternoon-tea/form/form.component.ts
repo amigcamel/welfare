@@ -134,13 +134,7 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
   }
 
   public seeMenu(src: string): void {
-    this.matDialog.open(DialogComponent, {
-      data: {
-        contentType: 'image',
-        imageSource: src
-      },
-      panelClass: 'photo-dialog'
-    });
+    window.open(src, '_blank');
   }
   updateItem(newItem, oldItem) {
     console.log(newItem, oldItem);
