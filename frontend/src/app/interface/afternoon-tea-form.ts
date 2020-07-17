@@ -25,6 +25,7 @@ export interface Item {
   };
   isClone?: boolean;
   options: Options[];
+  canClone: boolean;
 }
 export interface RadioSelection {
   selectionLabel: string;
