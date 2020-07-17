@@ -25,11 +25,6 @@ export class HistoryComponent implements OnInit {
   ngOnInit(): void {
     this.historyData = this.activatedRoute.snapshot.data.historyData;
   }
-  public showExtra(order): string {
-    if (!!order.options && order.options.length > 0) {
-      return order.sugar + ' Sugar, ' + order.ice + ' Ice, ' + order.options.join(', ');
-    }
-  }
   showQRCode(e, qr) {
     e.stopPropagation();
     this.matDialog.open(DialogComponent, {

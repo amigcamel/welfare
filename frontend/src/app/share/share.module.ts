@@ -8,13 +8,15 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { WelfareIconDirective } from '../directive/welfare-icon.directive';
 import { FooterComponent } from '../component/footer/footer.component';
 import { HammerModule } from '@angular/platform-browser';
+import { ExtraInfoPipe } from '../pipe/extra-info.pipe';
 
 
 @NgModule({
   declarations: [
     HistoryCalculatorPipe,
     WelfareIconDirective,
-    FooterComponent
+    FooterComponent,
+    ExtraInfoPipe
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { HammerModule } from '@angular/platform-browser';
     ZXingScannerModule,
     WelfareIconDirective,
     FooterComponent,
-    HammerModule
+    HammerModule,
+    ExtraInfoPipe
   ]
 })
 export class ShareModule { }

@@ -20,7 +20,7 @@
                     <ng-container *ngFor="let order of history.orders">
                         <div>{{order.item}}
                             <div fxLayout="rows">
-                                <div class="extra-text" >{{showExtra(order)}}</div>
+                                <div class="extra-text" >{{order | extraInfo}}</div>
                             </div>
                         </div>
                         <div>{{order.value}}</div>
