@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { WelfareTimeService } from "../../../service/welfare-time.service";
-import { CountDown } from "../../../interface/count-down";
-import { LayoutConfigService } from "../../../service/layout-config.service";
+import { Router } from '@angular/router';
+import { WelfareTimeService } from '../../../service/welfare-time.service';
+import { ComingSoonInfo, CountDown } from '../../../interface/count-down';
+import { LayoutConfigService } from '../../../service/layout-config.service';
+import { WelfareSpinnerService } from '../../../service/welfare-spinner.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-coming-soon',
@@ -11,20 +13,31 @@ import { LayoutConfigService } from "../../../service/layout-config.service";
 })
 export class ComingSoonComponent implements OnInit, OnDestroy {
   public countdownDate: CountDown;
-  public isDesktop: boolean = true;
+  public comingSoonInfo: ComingSoonInfo;
   private setIn: any;
   constructor(
     private router: Router,
     private welfareTimeService: WelfareTimeService,
-    public layoutConfigService: LayoutConfigService
+    public layoutConfigService: LayoutConfigService,
+    private welfareSpinnerService: WelfareSpinnerService
   ) {
     this.layoutConfigService.setIsShowToolBar(true);
+    this.layoutConfigService.setShowToolBarBottom(false);
+    this.layoutConfigService.setShowCartInfo(false);
   }
 
   ngOnInit(): void {
-    this. setIn = setInterval(_ => {
-      this.countdownDate = this.welfareTimeService.countDown('2020-06-30');
-    }, 1000);
+    this.welfareSpinnerService.showSpinner();
+    this.welfareTimeService.getInfo().pipe(take(1)).subscribe(data => {
+      this.comingSoonInfo = data;
+      this.setIn = setInterval(_ => {
+        this.countdownDate = this.welfareTimeService.countDown(this.comingSoonInfo.date);
+        if (this.setIn) {
+          this.welfareSpinnerService.stopSpinner();
+        }
+      }, 1000);
+    });
+
   }
   goBack(): void {
     this.router.navigateByUrl('/billboard');

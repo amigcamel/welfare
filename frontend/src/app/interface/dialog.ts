@@ -6,4 +6,5 @@ export interface DialogConfig {
   faIcon?: string;
   title: string;
   items?: any;
+  qr?: string;
 }

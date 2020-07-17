@@ -2,5 +2,10 @@
     "/api": {
         "target": "http://welfare.local.com:5000",
         "secure": false
+    },
+    "/ws": {
+        "target": "ws://welfare.local.com:6789/",
+        "secure": false,
+        "ws": true
     }
 }

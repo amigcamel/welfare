@@ -10,3 +10,4 @@ COPY robots.txt /usr/share/nginx/html
 RUN apk add --no-cache tzdata \
   && ln -sfn /usr/share/zoneinfo/$TZ /etc/localtime \
   && echo $TZ > /etc/timezone
+VOLUME ["/uwsgi"]

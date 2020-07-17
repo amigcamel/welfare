@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../service/auth.service";
-import { LayoutConfigService } from "../../service/layout-config.service";
+import {AuthService} from '../../service/auth.service';
+import { LayoutConfigService } from '../../service/layout-config.service';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +12,8 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
               private layoutConfigService: LayoutConfigService) {
     this.layoutConfigService.setIsShowToolBar(false);
+    this.layoutConfigService.setShowToolBarBottom(false);
+    this.layoutConfigService.setShowCartInfo(false);
   }
 
   ngOnInit(): void {

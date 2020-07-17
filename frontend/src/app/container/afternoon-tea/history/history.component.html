@@ -1,5 +1,5 @@
 <div class="container">
-    <div fxLayout="column" fxLayoutAlign="center center">
+    <div>
         <div class="page-title">
             <h1>Your Order History</h1>
         </div>
@@ -10,23 +10,31 @@
                 <mat-expansion-panel-header>
                     <mat-panel-title class="header" fxLayout="row" fxLayoutAlign="start center">
                         {{history.date}}
+                      <svg-icon style="display: block; width: 16px; height: 16px; margin-left: 10px" src="/assets/icons/QR-cord-01.svg" (click)="showQRCode($event, history.qr)">center_focus_strong</svg-icon>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="grid-order">
                     <div class="title">Item Name</div>
                     <div class="title">Count</div>
                     <div class="title">Price</div>
-                    <ng-container *ngFor="let order of history['orders']">
-                        <div>{{order['item']}}
+                    <ng-container *ngFor="let order of history.orders">
+                        <div>{{order.item}}
                             <div fxLayout="rows">
-                                <div class="extra-text" >{{showExtra(order)}}</div>
+                                <div class="extra-text" >{{order | extraInfo}}</div>
                             </div>
                         </div>
-                        <div>{{order['value']}}</div>
-                        <div>{{order['price']}}</div>
+                        <div>{{order.value}}</div>
+                        <div>{{order.price}}</div>
                     </ng-container>
+                </div>
+                <div class="total-grid">
+                  <div class="title">Total</div>
+                  <div class="title">{{ (history | historyCalculator).count }}</div>
+                  <div class="title">{{ (history | historyCalculator).sum }}</div>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
+      <div class="resubmit-btn" (click)="navigateForm()">Re-order</div>
     </div>
+  <app-footer></app-footer>
 </div>

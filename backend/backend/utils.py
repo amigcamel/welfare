@@ -1,13 +1,10 @@
 """Utilities."""
-import gzip
-
-from flask import json, make_response
+import websocket
 
 
-def gzip_jsonify(data: dict):
-    content = gzip.compress(json.dumps(data).encode("utf-8"), 6)
-    response = make_response(content)
-    response.headers["Content-Type"] = "application/json"
-    response.headers["Content-length"] = len(content)
-    response.headers["Content-Encoding"] = "gzip"
-    return response
+def send_action(action: str, token: str):
+    """Send action message via websocket client."""
+    ws = websocket.WebSocket()
+    ws.connect(f"ws://websocket:6789/?token={token}")
+    ws.send(action)
+    ws.close(reason=b"finish sending action ({action})")

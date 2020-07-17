@@ -2,7 +2,7 @@ version: "3"
 
 services:
   backend:
-    command: --ini uwsgi.ini --py-autoreload 1
+    command: --ini uwsgi-test.ini
     depends_on:
       - mongo
       - redis
@@ -13,7 +13,9 @@ services:
     environment:
       - DEBUG=True
       - FAKE_LOGIN=True
+      - ENABLE_CACHE=False
       - APP_SECRET=aji
+      - QR_SECRET=DmM6CYfjU4Mm7jKqG4bPmZgKQAh_RhLVA8YcW0ieClo=
       - SITE_URL=
       - JWK_KEY={}
       - OAUTH_BASE_URL=
@@ -47,6 +49,19 @@ services:
       - welfare
     ports:
       - 6379:6379
+  websocket:
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    environment:
+      - DEBUG=True
+      - WEBSOCKET_PREFIX=/ws
+    image: ffntea/websocket:develop
+    networks:
+      - welfare
+    ports:
+      - 6789:6789
 
 
 networks:

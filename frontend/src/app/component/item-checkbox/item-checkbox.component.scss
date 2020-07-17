@@ -1,0 +1,72 @@
+@import "src/styles/global-varible";
+.container {
+  .option {
+    display: flex;
+    flex-direction: column;
+    .option-title {
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .selection {
+      display: flex;
+      .select:first-child {
+        padding-left: 0;
+      }
+      .select {
+        padding-left: 10px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $mobile-width){
+  .container {
+    width: 100%;
+    border-top: #e6e6e6 1px solid;
+    overflow: hidden;
+    transition: all 500ms ease-in;
+    &.active {
+      .option {
+        .option-title {
+          border-top: 1px solid #f2a202;
+        }
+        .selection {
+          .select {
+            border-top: 1px solid #f2a202;
+          }
+        }
+      }
+    }
+    .option {
+      display: flex;
+      flex-direction: column;
+
+      .option-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Lato', sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+
+      .selection {
+        flex-direction: column;
+
+        .select:first-child {
+          padding-left: 10px;
+        }
+
+        .select {
+          width: 100%;
+          padding: 10px;
+          border-top: 1px solid #e6e6e6;
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
+}

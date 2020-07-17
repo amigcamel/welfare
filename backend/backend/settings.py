@@ -1,8 +1,10 @@
 """Settings."""
+from distutils.util import strtobool
 import os
 
-DEBUG = os.environ.get("DEBUG", False)
-FAKE_LOGIN = DEBUG and os.environ.get("FAKE_LOGIN", False)
+DEBUG = strtobool(os.environ.get("DEBUG", "False"))
+FAKE_LOGIN = DEBUG and strtobool(os.environ.get("FAKE_LOGIN", "False"))
+ENABLE_CACHE = strtobool(os.environ.get("ENABLE_CACHE", "True"))
 FAKE_USER_DATA = {
     "email": "aji@ffn.com",
     "family_name": "Liu",
@@ -15,6 +17,7 @@ FAKE_USER_DATA = {
     "chinese_name": "劉阿吉",
     "english_name": "Aji Liu",
     "sid": "0666",
+    "level": 300,
 }
 FAKE_TOKEN = "test_token"
 
@@ -25,6 +28,7 @@ OAUTH_CLIENT_SECRET = os.environ["OAUTH_CLIENT_SECRET"]
 EMAIL_ALLOWED_DOMAINS = os.environ["EMAIL_ALLOWED_DOMAINS"].split(",")
 SITE_URL = os.environ["SITE_URL"]
 OAUTH_CLIENT_ID = os.environ["OAUTH_CLIENT_ID"]
+QR_SECRET = os.environ["QR_SECRET"]
 
 MONGODB = {"host": "mongo", "port": 27017}
 REDIS = {"host": "redis", "port": 6379, "db": 0}

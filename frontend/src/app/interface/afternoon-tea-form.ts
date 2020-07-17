@@ -20,8 +20,12 @@ export interface Item {
   itemKey: string;
   value: number;
   collapse: boolean;
-  selections: Object;
+  selections: {
+    size?: number
+  };
+  isClone?: boolean;
   options: Options[];
+  canClone: boolean;
 }
 export interface RadioSelection {
   selectionLabel: string;

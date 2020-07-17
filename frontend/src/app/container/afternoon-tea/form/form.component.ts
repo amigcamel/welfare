@@ -1,18 +1,19 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { animate, state, style, transition, trigger } from "@angular/animations";
-import { of, Subject } from "rxjs";
-import { CountExpiration } from "../../../interface/count-down";
-import { AfternoonTeaForm, CheckBoxSelection, Form, Item } from "../../../interface/afternoon-tea-form";
-import { FormService } from "../../../service/form.service";
-import { MatDialog } from "@angular/material/dialog";
-import { WelfareTimeService } from "../../../service/welfare-time.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { DialogComponent } from "../../../component/dialog/dialog.component";
-import { switchMap, takeUntil } from "rxjs/operators";
-import { Cart } from "../../../interface/cart";
-import { LayoutConfigService } from "../../../service/layout-config.service";
-import { ViewportScroller } from "@angular/common";
-import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { of, Subject } from 'rxjs';
+import { CountExpiration } from '../../../interface/count-down';
+import { AfternoonTeaForm, CheckBoxSelection, Form, Item } from '../../../interface/afternoon-tea-form';
+import { FormService } from '../../../service/form.service';
+import { MatDialog } from '@angular/material/dialog';
+import { WelfareTimeService } from '../../../service/welfare-time.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DialogComponent } from '../../../component/dialog/dialog.component';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { Cart } from '../../../interface/cart';
+import { LayoutConfigService } from '../../../service/layout-config.service';
+import { ViewportScroller } from '@angular/common';
+import { faExclamationTriangle, faShoppingBag, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-form',
   animations: [
@@ -21,8 +22,8 @@ import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-sv
         height: '*',
       })),
       state('closed', style({
-        height: '75px',
-      })),
+        height: '{{minHeight}}',
+      }), {params: {minHeight: '36px'}}),
       transition('open <=> closed', [
         animate('.5s ease-in')
       ]),
@@ -32,16 +33,18 @@ import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-sv
   styleUrls: ['./form.component.scss']
 })
 
-export class FormComponent implements OnInit, OnDestroy {
+export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
   @ViewChild('container', {static: true}) container: ElementRef;
-  public sum = 0;
+  public sum: number;
   public filterTarget = '';
   public expiration: CountExpiration;
   public formData: AfternoonTeaForm;
-  public isDesktop;
+  public isDesktop: boolean;
   public currentForm = 0;
+  public minHeight: string;
   // Private
   private unSubscribe = new Subject<boolean>();
+
   constructor(
     private formService: FormService,
     private matDialog: MatDialog,
@@ -50,34 +53,48 @@ export class FormComponent implements OnInit, OnDestroy {
     private router: Router,
     private viewportScroller: ViewportScroller,
     public layoutConfigService: LayoutConfigService
-  ) { }
+  ) {
+    this.layoutConfigService.setShowCartInfo(true);
+    this.layoutConfigService.setShowToolBarBottom(true);
+    this.layoutConfigService.setIsShowToolBar(true);
+  }
 
   ngOnInit(): void {
     this.formData = this.activatedRoute.snapshot.data.formData;
-    // this.formData = data['default'];
     if (this.formData.user === 'default') {
       this.initialFormData();
     }
 
-    this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(state => {
-      this.isDesktop = state;
-    })
+    this.layoutConfigService.isDesktop$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(check => {
+      this.isDesktop = check;
+      this.minHeight = this.isDesktop ? '45px' : '47px';
+    });
+    this.formService.cartDialog$.pipe(takeUntil(this.unSubscribe.asObservable())).subscribe(
+      _ => this.openPreview()
+    );
+  }
+  ngAfterViewInit() {
+
+  }
+  ngAfterContentInit() {
     this.calculatorSum();
   }
+
   nextPage() {
     this.closeAllCollapse(this.formData.form[this.currentForm]);
     if (this.currentForm + 1 < this.formData.form.length) {
-      this.container.nativeElement.scrollTop = 0
+      this.container.nativeElement.scrollTop = 0;
     }
     this.currentForm = this.currentForm + 1 < this.formData.form.length ? this.currentForm + 1 : this.currentForm;
 
   }
+
   previousPage() {
     this.closeAllCollapse(this.formData.form[this.currentForm]);
     if (this.currentForm - 1 >= 0) {
-      this.container.nativeElement.scrollTop = 0
+      this.container.nativeElement.scrollTop = 0;
     }
-    this.currentForm = this.currentForm - 1 < 0 ? this.currentForm : this.currentForm -1;
+    this.currentForm = this.currentForm - 1 < 0 ? this.currentForm : this.currentForm - 1;
 
   }
   private initialFormData(){
@@ -85,15 +102,17 @@ export class FormComponent implements OnInit, OnDestroy {
       form.items.forEach(item => {
         item.options.forEach(option => {
           if (!!option.radioSelections && option.radioSelections.length > 0) {
-            const key = option.optionKey
+            const key = option.optionKey;
             item.selections = Object.assign({...item.selections},
-              {[key]: option.radioSelections[0].value})
+              {[key]: option.radioSelections[0].value});
           }
-        })
-      })
-    })
+        });
+      });
+    });
   }
-
+  public handleFilterTarget(target) {
+    this.filterTarget = target;
+  }
   public filterText(target: string): boolean {
     if (this.filterTarget === '') {
       return true;
@@ -103,65 +122,74 @@ export class FormComponent implements OnInit, OnDestroy {
     }
   }
 
-  public subOnFlow(form: Form, target: Item, event: Event): void {
-    event.stopPropagation()
-    target = this.subOne(target);
-    this.calculatorSum();
-    target.collapse = target.value !== 0;
-  }
-
-  private subOne(item: Item): Item {
-    item.value = item.value > 0 ? item.value - 1 : item.value;
-    return item
-  }
-
-  private addOne(item: Item): Item {
-    item.value = item.value + 1;
-    return item
-  }
-
-  public addOneFlow(form: Form, target: Item, event: Event): void {
-    event.stopPropagation()
-    target = this.addOne(target);
+  public handleItem(item, newItem) {
+    item = newItem;
     this.calculatorSum();
     if (this.sum > this.formData.budget) {
-      target = this.subOne(target);
+      item.value -= 1;
       this.calculatorSum();
       return;
     }
-    target.collapse = true;
+    item.collapse = item.value !== 0;
   }
 
   public seeMenu(src: string): void {
+    window.open(src, '_blank');
+  }
+  updateItem(newItem, oldItem) {
+    oldItem = newItem;
+    this.calculatorSum();
+  }
+  cloneItem(item, index) {
     this.matDialog.open(DialogComponent, {
       data: {
-        contentType: 'image',
-        imageSource: src
+        contentType: 'warning',
+        dialogType: 'checkDialog',
+        faIcon: faInfoCircle,
+        title: 'What is this about?',
+        errorMessage: 'Want to select the same item with different combinations?',
+        positiveBtn: 'Yes',
+        negativeBtn: 'No',
       },
-      panelClass: 'photo-dialog'
+      panelClass: 'form-dialog'
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        let newItem: Item = JSON.parse(JSON.stringify(item));
+        newItem = {...newItem, isClone: true, value: 0};
+        newItem.itemKey = newItem.itemKey += this.uuidV4();
+        this.formData.form[this.currentForm].items.splice(index + 1, 0, newItem);
+      }
     });
   }
-
-  public checkedOption(selection: CheckBoxSelection): void {
-    selection.choose = !selection.choose;
+  popItem(index) {
+    this.formData.form[this.currentForm].items.splice(index, 1);
     this.calculatorSum();
+  }
+  uuidV4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      // tslint:disable-next-line:no-bitwise
+      const r = Math.random() * 16 | 0;
+      // tslint:disable-next-line:no-bitwise
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
   }
 
   public calculatorSum(): void {
     this.sum = 0;
-    for (let form of this.formData.form) {
-      for (let item of form.items) {
+    for (const form of this.formData.form) {
+      for (const item of form.items) {
         let extraValue = 0;
-        for (let option of item.options) {
+        for (const option of item.options) {
           if (!!option.checkBoxOptions){
-            for (let select of option.checkBoxOptions) {
+            for (const select of option.checkBoxOptions) {
               if (select.choose) {
                 extraValue += select.price;
               }
             }
           }
         }
-        this.sum += item.value * (item.selections['size'] + extraValue)
+        this.sum += item.value * (item.selections.size + extraValue);
       }
     }
     if (this.sum > this.formData.budget) {
@@ -177,8 +205,15 @@ export class FormComponent implements OnInit, OnDestroy {
         panelClass: 'form-dialog'
       });
     }
+    setTimeout(() => {
+      this.formService.setCartInfo({
+        budget: this.formData.budget,
+        sum: this.sum
+      });
+    }, 100);
   }
   public toggleCollapse(item: Item){
+    console.log('toggle');
     if (item.value === 0 && this.isDesktop ) {
       item.collapse = false;
     } else {
@@ -193,8 +228,7 @@ export class FormComponent implements OnInit, OnDestroy {
     this.filterTarget = '';
   }
 
-  finishOrder(): void
-  {
+  finishOrder(): void {
     if (this.sum > this.formData.budget) {
       this.matDialog.open(DialogComponent, {
         data: {
@@ -256,12 +290,12 @@ export class FormComponent implements OnInit, OnDestroy {
     const data: Cart[] = [];
     for (const form of this.formData.form) {
       for (const item of form.items) {
-        if (item['value'] >  0) {
+        if (item.value >  0) {
           let price = 0;
           let optionList = '';
           for (const option of item.options) {
             if (!!option.checkBoxOptions){
-              for (let select of option.checkBoxOptions) {
+              for (const select of option.checkBoxOptions) {
                 if (select.choose) {
                   price += select.price;
                   optionList += select.selectionLabel;
@@ -269,11 +303,11 @@ export class FormComponent implements OnInit, OnDestroy {
               }
             }
           }
-          price += item.selections['size']
+          price += item.selections.size;
           data.push({
               productName: item.itemLabel,
               subExtra: optionList,
-              price: price,
+              price,
               count: item.value,
               total: item.value * price,
             }
@@ -283,18 +317,19 @@ export class FormComponent implements OnInit, OnDestroy {
     }
     return data;
   }
-  getPriceLabel(item: Item): string {
-    let result = [];
-    for (let option of item.options) {
-      if (option.optionKey === 'size') {
-        for(let selection of option.radioSelections) {
-          result.push((option.radioSelections.length > 1 ? `${selection.selectionLabel} :` : "") + selection.price)
-        }
-      }
-    }
-    return result.join(" | ");
+  openPreview() {
+    this.matDialog.open(DialogComponent, {
+      data: {
+        contentType: 'cart',
+        dialogType: '',
+        faIcon: faShoppingBag,
+        title: 'Order',
+        positiveBtn: 'Confirm',
+        items: this.previewCart(),
+      },
+      panelClass: 'cart-dialog'
+    });
   }
-
   ngOnDestroy() {
     this.unSubscribe.next(true);
     this.unSubscribe.complete();

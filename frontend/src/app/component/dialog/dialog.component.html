@@ -9,15 +9,18 @@
     </div>
   </div>
 
-  <div class="content" [ngSwitch]="data.contentType" fxLayoutAlign="space-between center">
+  <div class="content" [ngSwitch]="data.contentType" [ngClass]="{'qr': data.contentType === 'qr'}">
     <div *ngSwitchCase="'warning'">
       <ng-container *ngTemplateOutlet="warning"></ng-container>
     </div>
-    <div *ngSwitchCase="'image'">
-      <ng-container *ngTemplateOutlet="image"></ng-container>
-    </div>
-    <div *ngSwitchCase="'cart'">
+    <div *ngSwitchCase="'cart'" style="width: 100%">
       <ng-container *ngTemplateOutlet="cart"></ng-container>
+    </div>
+    <div *ngSwitchCase="'qr'">
+      <ng-container *ngTemplateOutlet="qr"></ng-container>
+    </div>
+    <div *ngSwitchCase="'oderCollected'" style="width: 100%; margin: 0 auto">
+      <ng-container *ngTemplateOutlet="oderCollected"></ng-container>
     </div>
   </div>
   <div [ngSwitch]="data.dialogType">
@@ -36,27 +39,48 @@
   <div class="message">{{data['errorMessage']}}</div>
 </ng-template>
 
-<ng-template #image>
-  <div style="width: 100%; height: 100%; overflow: auto" >
-    <img [attr.src]="data['imageSource']" style="max-width: 1280px" alt="">
-  </div>
-</ng-template>
-
 <ng-template #cart>
   <div class="cart-grid">
     <div class="title">Item</div>
-    <div class="title">Price</div>
     <div class="title">Count</div>
-    <div class="title">Total</div>
+    <div class="title">Price</div>
     <ng-container *ngFor="let item of data['items']">
       <div class="item">
         <div>{{item['productName']}}</div>
         <div class="item-sub">{{item['subExtra']}}</div>
       </div>
-      <div class="item">{{item['price']}}</div>
       <div class="item">{{item['count']}}</div>
       <div class="item">{{item['total']}}</div>
     </ng-container>
+  </div>
+  <div class="cart-grid upper-line">
+    <div class="title">Total</div>
+    <div class="item">{{totalValue}}</div>
+    <div class="item">{{totalPrice}}</div>
+  </div>
+</ng-template>
+
+<ng-template #oderCollected>
+  <div class="grid-order">
+    <div class="title">Item Name</div>
+    <div class="title">Count</div>
+    <div class="title">Price</div>
+    <ng-container *ngFor="let order of data['orders']['orders']">
+      <div>{{order['item']}}
+        <div fxLayout="rows">
+          <div class="extra-text" >{{order | extraInfo}}</div>
+        </div>
+      </div>
+      <div>{{order['value']}}</div>
+      <div>{{order['price']}}</div>
+    </ng-container>
+  </div>
+</ng-template>
+
+
+<ng-template #qr>
+  <div>
+    <qrcode [qrdata]="data.qr" [errorCorrectionLevel]="'L'"></qrcode>
   </div>
 </ng-template>
 

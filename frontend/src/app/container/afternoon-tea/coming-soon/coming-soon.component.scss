@@ -1,63 +1,106 @@
+@import "src/styles/global-varible";
 .coming-soon {
   width: 100%;
-  background: url('/assets/background/coming-soon-wallpaper.jpg') no-repeat;
+  background: white;
   background-size: cover;
   height: 100%;
-  .shadow-cover {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0,0,0, .7);
+  padding-top: 50px;
+  display: grid;
+  grid-template-rows: auto 240px;
+  overflow-y: auto;
+  .coming-group {
+    margin-bottom: 50px;
     .title {
-      color: white;
-      font-size: 32px;
-      font-weight: 300;
-      padding: 0 20px;
+      text-align: center;
+      color: black;
+      font-size: 30px;
+      font-weight: bold;
       box-sizing: border-box;
+      line-height: 1.2;
     }
-    .subtitle {
-      color: white;
+    .subtitle, .message {
+      color: #aaaaaa;
+      max-width: 600px;
       padding: 0 40px;
+      margin: 0 auto;
+      white-space: pre-wrap;
       box-sizing: border-box;
+      text-align: center;
     }
-    .message {
-      color: white;
-      padding: 0 40px;
-      box-sizing: border-box;
-    }
-    .circle {
-      width: 120px;
-      height: 120px;
-      padding: 20px;
-      border-radius: 50%;
-      border: solid white 2px;
-      box-sizing: border-box;
+    .count-time {
+      margin: 0 auto;
       display: flex;
-      justify-content: center;
       align-items: center;
-      color: white;
-      margin: 10px 10px;
-      .time-text {
-        font-size: 40px;
-        line-height: 1.1;
-        font-weight: 300;
-        opacity: .9;
-      }
-      .time-unit {
-        font-size: 16px;
-        font-weight: 300;
-        opacity: .7;
+      justify-content: center;
+      .circle {
+        width: 120px;
+        height: 120px;
+        padding: 20px;
+        border-radius: 50%;
+        border: solid white 2px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        margin: 10px 10px;
+        background-color: black;
+        .time-text {
+          font-size: 50px;
+          line-height: 1.1;
+          font-weight: 300;
+          opacity: .9;
+        }
+        .time-unit {
+          font-size: 16px;
+          font-weight: 300;
+        }
       }
     }
-    .go-back {
-      background-color: transparent;
-      border-radius: 5px;
-      padding: 10px 20px;
-      color: white;
-      border: solid white 1px;
+  }
+  .footer {
+    width: 100%;
+    min-height: 240px;
+    background-color: #f2a202;
+    position: relative;
+    .black-board {
+      position: relative;
+      margin: 0 auto;
+      width: 210px;
       cursor: pointer;
+      svg-icon {
+        position: relative;
+        top: -70px;
+      }
+    }
+    app-footer {
+      position: absolute;
+      bottom: 50px;
+      width: 100%;
+
+    }
+  }
+}
+@media screen and (max-width: $mobile-width){
+  .coming-soon{
+    overflow-y: scroll;
+    .coming-group {
+      .count-time {
+        .circle {
+          width: 60px;
+          height: 60px;
+          .time-text {
+            font-size: 24px;
+            line-height: 1.1;
+            font-weight: 300;
+            opacity: .9;
+          }
+          .time-unit {
+            font-size: 10px;
+            font-weight: 300;
+          }
+        }
+      }
     }
   }
 }

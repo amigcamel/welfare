@@ -1,6 +1,5 @@
 .container{
   display: flex;
-  color: #694026;
   flex-direction: column;
   height: 100%;
   position: absolute;
@@ -9,6 +8,10 @@
   top: 0;
   bottom: 0;
   .content {
-    height: 100%;
+    height: 100vh;
+    overflow: hidden;
+    &.sub-header {
+      height: calc(100vh - 90px);
+    }
   }
 }

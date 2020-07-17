@@ -1,0 +1,24 @@
+.logo-title {
+  font-family: 'Source Sans Pro', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  cursor: pointer;
+  .title {
+    font-size: 45px;
+    font-weight: bold;
+  }
+  .sub-text {
+    display: flex;
+    flex-direction: column;
+    .text {
+      font-size: 14px;
+    }
+    .bold {
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+
+}

@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormComponent } from './form.component';
-import { HttpClientModule } from "@angular/common/http";
-import { MaterialModule } from "../../../material/material.module";
-import { ActivatedRoute, Router } from "@angular/router";
-import { RouterTestingModule } from "@angular/router/testing";
-import * as data from "../../../service/mock2.json";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from '../../../material/material.module';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import * as data from '../../../service/mock2.json';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 describe('FormComponent', () => {
   let component: FormComponent;
   let fixture: ComponentFixture<FormComponent>;
@@ -24,7 +24,7 @@ describe('FormComponent', () => {
         { provide: ActivatedRoute, useValue: {
             snapshot: {
               data: {
-                formData: data['default']
+                formData: data
               }
             }
           }

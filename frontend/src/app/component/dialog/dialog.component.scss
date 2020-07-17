@@ -1,9 +1,9 @@
 .container {
-  color: #694026;
+  color: black;
   .header {
     padding: 20px 20px 10px;
-    background-color: #fdf8f6;
-    color: #694026;
+    color: black;
+    background-color: #f2a202;
     .title {
       font-size: 20px;
       .icon {
@@ -16,15 +16,27 @@
     }
   }
   .content {
-    padding: 10px 20px 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px 10px 20px;
     font-size: 16px;
     min-height: 90px;
     box-sizing: border-box;
+    &.qr {
+      padding: 0;
+      justify-content: center;
+    }
     .cart-grid {
       display: grid;
-      grid-template-columns: 100fr 40fr 40fr 10fr;
+      grid-template-columns: 3fr 1fr 1fr;
       grid-row-gap: 10px;
       width: 100%;
+      padding-bottom: 20px;
+      &.upper-line {
+        border-top: 1px solid #aaa;
+        padding-top: 20px;
+      }
       .item {
         justify-self: start;
         .item-sub {
@@ -38,18 +50,34 @@
         font-weight: 500;
       }
     }
+    .grid-order {
+      width: 100%;
+      font-size: 16px;
+      display: grid;
+      grid-template-columns: minmax(100px, 130px) 1fr 1fr;
+      grid-row-gap: 10px;
+      max-width: 750px;
+      .title{
+        font-weight: 500;
+      }
+      .extra-text {
+        font-size: 10px;
+        color: black;
+      }
+    }
   }
   .footer {
     width: 100%;
     text-align: center;
-    padding: 0 10px 0 10px;
+    padding: 10px 10px 0 10px;
     box-sizing: border-box;
+    border-top: #ededed 1px solid;
     .footer-text {
       font-size: 20px;
       font-weight: 500;
-      color: #694026;
+      color: black;
       cursor: pointer;
-      padding: 10px 0 15px 0;
+      padding: 10px 0 20px 0;
     }
     &[type='checkDialog'] {
       border-top: 1px solid #fdf8f6;
@@ -62,13 +90,19 @@
         background-color: transparent;
         border: 0;
         outline: none;
-        color: #694026;
+        color: black;
         font-size: 16px;
         cursor: pointer;
         &:last-child {
           border-left: solid 1px #fdf8f6;
         }
       }
+    }
+  }
+  qrcode::ng-deep {
+    canvas {
+      margin: 0 auto;
+      display: block;
     }
   }
 }

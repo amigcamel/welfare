@@ -7,7 +7,7 @@ import { BehaviorSubject } from "rxjs";
 export class SideBarService {
 
   private isShow = new BehaviorSubject<boolean>(false);
-  public isShow$ = this.isShow.asObservable()
+  public isShow$ = this.isShow.asObservable();
 
   constructor() { }
 

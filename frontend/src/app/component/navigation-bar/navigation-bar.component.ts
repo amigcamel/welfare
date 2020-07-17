@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { Router } from "@angular/router";
-import { SideBarService } from "../../service/side-bar.service";
-import { takeUntil } from "rxjs/operators";
-import { AuthService } from "../../service/auth.service";
-import { Subject } from "rxjs";
+import { Router } from '@angular/router';
+import { SideBarService } from '../../service/side-bar.service';
+import { takeUntil } from 'rxjs/operators';
+import { AuthService } from '../../service/auth.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -11,11 +11,11 @@ import { Subject } from "rxjs";
   styleUrls: ['./navigation-bar.component.scss']
 })
 export class NavigationBarComponent implements OnInit, OnDestroy{
-  private unSubscribe = new Subject<boolean>()
+  private unSubscribe = new Subject<boolean>();
   constructor(private router: Router,
               private sideBarService: SideBarService,
-              private authService: AuthService) { }
-  @Output() private closeSideBar: EventEmitter<boolean> = new EventEmitter()
+              public authService: AuthService) { }
+  @Output() private closeSideBar: EventEmitter<boolean> = new EventEmitter();
   ngOnInit(): void {
   }
   public navigateTo(url: string) {
@@ -28,8 +28,8 @@ export class NavigationBarComponent implements OnInit, OnDestroy{
       localStorage.removeItem('token');
       this.authService.setIsLogin(false);
       this.router.navigateByUrl('/login');
-    },error => {
-      console.log("log out error:", error)
+    }, error => {
+      console.log('log out error:', error);
     });
   }
   ngOnDestroy() {

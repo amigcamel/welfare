@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { LayoutConfigService } from "../../../service/layout-config.service";
+import { Router } from '@angular/router';
+import { LayoutConfigService } from '../../../service/layout-config.service';
 
 @Component({
   selector: 'app-no-auth',
@@ -12,6 +12,8 @@ export class NoAuthComponent implements OnInit {
   constructor(private layoutConfigService: LayoutConfigService,
               private router: Router) {
     this.layoutConfigService.setIsShowToolBar(false);
+    this.layoutConfigService.setShowToolBarBottom(true);
+    this.layoutConfigService.setShowCartInfo(false);
 
   }
 

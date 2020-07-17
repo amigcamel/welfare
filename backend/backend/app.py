@@ -1,16 +1,22 @@
 """App."""
 from datetime import datetime
+import re
+import traceback
 
 from flask import Flask, request, redirect, jsonify, url_for, g
 from loguru import logger
 
 from .auth import gen_login_url, get_userinfo, encrypt, get_userinfo_from_token
-from .db import AfternoonTea, AuthToken, Order
-from .utils import gzip_jsonify
+from .db import AfternoonTea, AuthToken, Order, Staff
+from .qr import QR
+from .utils import send_action
 from . import (
     settings,
     exceptions,
     get_default_form,
+    get_billboard,
+    get_coming_soon,
+    get_default_col,
 )
 
 app = Flask(__name__)
@@ -29,15 +35,17 @@ def auth():
         return
     if request.method == "OPTIONS":
         return
-    if request.path in (url_for("login"),):
-        return
+    for route in (url_for("login"),):
+        if re.search(request.path, route):
+            return
     auth = request.headers.get("Authorization")
     if auth:
         token = request.headers["Authorization"].split("Bearer")[-1].strip()
         data = get_userinfo_from_token(token)
         g.token = token
         g.user = data["email"]
-        return
+    else:
+        raise exceptions.UnauthorizedError("Unauthorized")
 
 
 @app.errorhandler(Exception)
@@ -50,7 +58,7 @@ def handle_error(error):
         response.status_code = error.args[1]
         return response
     else:
-        logger.critical(error)
+        logger.critical(traceback.format_exc())
         return "Internal Server Error", 500
 
 
@@ -88,14 +96,14 @@ def user():
 @app.route("/afternoontea/<col>", methods=["GET", "POST"])
 def afternoontea(col):
     """Afternoon Tea."""
-    if not col:
-        col = "demo_1"  # XXX: do not hardcode this
+    if col is None:
+        col = get_default_col()
     if request.method == "GET":
         try:
             data = AfternoonTea(col=col, user=g.user).get()
         except exceptions.NoAfternoonTeaFound:
             data = get_default_form(col=col)
-        return gzip_jsonify(data)
+        return jsonify(data)
 
     elif request.method == "POST":
         data = request.json
@@ -108,3 +116,67 @@ def afternoontea(col):
 def history():
     """Afternoon order history."""
     return jsonify(list(Order(g.user)))
+
+
+@app.route("/order", defaults={"col": None}, methods=["GET", "POST"])
+@app.route("/order/<col>", methods=["GET", "POST"])
+def order(col):
+    """CRUD order."""
+    if col is None:
+        col = get_default_col()
+    if not Staff(g.user).is_admin:
+        raise exceptions.UnauthorizedError(f"No admin permission: {g.user}")
+    if request.method == "GET":
+        user = request.args.get("user", None)  # TODO: DRY - request.args.get("user")
+
+        # TODO: refactor - separate endpoints
+        if user:
+            return jsonify(list(Order(user=user, col=col)))
+        else:
+            return jsonify(Order(user=user, col=col).get())
+    elif request.method == "POST":
+        if (user := request.args.get("user")) and (data := request.get_json()):
+            stat = Order(user=user, col=col).update(data)
+            logger.info(stat)
+            if stat["updatedExisting"]:
+                send_action(action="update", token=g.token)
+                return jsonify({"msg": "ok"})
+            else:
+                return jsonify({"msg": "update failed"}), 400  # TODO: make it clear
+        else:
+            return jsonify({"msg": "not ok"}), 400  # TODO: make it clear
+
+
+@app.route("/qr", methods=["POST"])
+def qr():
+    """Handle QR hash."""
+    qr = request.json.get("qr")
+    if qr is None:
+        return "No QR token", 400
+
+    _, col, user = QR.decrypt(qr)
+
+    # TODO: DRY - same as /order?user=<user>
+    # TODO: add error handling
+    stat = Order(user=user, col=col).update({"user": user, "collected": True})
+    logger.info(stat)
+    send_action(action="update", token=g.token)
+    return jsonify(list(Order(user=user, col=col)))
+
+
+@app.route("/token_info")
+def token_info():  # XXX: requested by the internal only?
+    """Show token status."""
+    return jsonify(get_userinfo_from_token(g.token))
+
+
+@app.route("/billboard", methods=["GET"])
+def billboard():
+    """Billboard endpoint."""
+    return jsonify(get_billboard())
+
+
+@app.route("/coming_soon", methods=["GET"])
+def coming_soon():
+    """Coming Soon endpoint."""
+    return jsonify(get_coming_soon())
