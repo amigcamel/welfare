@@ -12,7 +12,7 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 import { Cart } from '../../../interface/cart';
 import { LayoutConfigService } from '../../../service/layout-config.service';
 import { ViewportScroller } from '@angular/common';
-import { faExclamationTriangle, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle, faShoppingBag, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-form',
@@ -141,11 +141,25 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
     this.calculatorSum();
   }
   cloneItem(item, index) {
-    let newItem: Item = JSON.parse(JSON.stringify(item));
-    newItem = {...newItem, isClone: true, value: 0};
-    newItem.itemKey = newItem.itemKey += this.uuidV4();
-    this.formData.form[this.currentForm].items.splice(index + 1, 0, newItem);
-
+    this.matDialog.open(DialogComponent, {
+      data: {
+        contentType: 'warning',
+        dialogType: 'checkDialog',
+        faIcon: faInfoCircle,
+        title: 'What is this about?',
+        errorMessage: 'Want to select the same item with different combinations?',
+        positiveBtn: 'Yes',
+        negativeBtn: 'No',
+      },
+      panelClass: 'form-dialog'
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        let newItem: Item = JSON.parse(JSON.stringify(item));
+        newItem = {...newItem, isClone: true, value: 0};
+        newItem.itemKey = newItem.itemKey += this.uuidV4();
+        this.formData.form[this.currentForm].items.splice(index + 1, 0, newItem);
+      }
+    });
   }
   popItem(index) {
     this.formData.form[this.currentForm].items.splice(index, 1);
