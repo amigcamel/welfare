@@ -57,6 +57,17 @@
 
           }
         }
+        .multi-item {
+          background-color: black;
+          border-radius: 5px;
+          width: 70px;
+          height: 25px;
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
       }
     }
     .total {
@@ -147,6 +158,9 @@
           &.active {
             background-color: #fffbf2;
             border: solid #f2a202 1px;
+          }
+          .multi-item {
+            margin: 10px 10px 10px auto;
           }
         }
       }

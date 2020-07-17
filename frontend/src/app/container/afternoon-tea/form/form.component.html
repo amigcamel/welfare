@@ -11,7 +11,7 @@
         <div class="count-down-item">Due Date: {{formData.expiration}}</div>
       </div>
       <app-filter-bar (filterEmitter)="handleFilterTarget($event)"></app-filter-bar>
-      <div *ngFor="let item of formData.form[currentForm].items">
+      <div *ngFor="let item of formData.form[currentForm].items; let i = index">
         <ng-container *ngIf="filterText(item.itemLabel)">
           <div fxLayout="column" class="item" [ngClass]="{'active': item.value > 0}"
                [@openClose]="{value: item.collapse ? 'open' : 'closed', params: {minHeight: minHeight}}">
@@ -21,6 +21,8 @@
                 <app-item-option [isActive]="item.value > 0" [options]="option" [item]="item" (optionEmitter)="updateItem($event, item)"></app-item-option>
                 <app-item-checkbox [isActive]="item.value > 0" [options]="option" [item]="item" (optionEmitter)="updateItem($event, item)"></app-item-checkbox>
               </ng-container>
+              <div class="multi-item" *ngIf="!item.isClone" (click)="cloneItem(item, i)">clone</div>
+              <div class="multi-item" *ngIf="!!item.isClone" (click)="popItem(i)">remove</div>
             </div>
           </div>
         </ng-container>

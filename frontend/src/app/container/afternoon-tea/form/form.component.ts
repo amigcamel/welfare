@@ -141,6 +141,34 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
     oldItem = newItem;
     this.calculatorSum();
   }
+  cloneItem(item, index) {
+    console.log(item, index);
+    let newItem: Item = JSON.parse(JSON.stringify(item));
+    newItem = {...newItem, isClone: true, value: 0};
+    newItem.itemKey = newItem.itemKey += this.uuidV4();
+    console.log(newItem);
+    this.formData.form[this.currentForm].items.splice(index + 1, 0, newItem);
+    console.log(this.formData.form[this.currentForm].items);
+
+  }
+  popItem(index) {
+    this.formData.form[this.currentForm].items.splice(index, 1);
+    this.calculatorSum();
+  }
+  uuidV4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      // tslint:disable-next-line:no-bitwise
+      const r = Math.random() * 16 | 0;
+      // tslint:disable-next-line:no-bitwise
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+  appendItemName(str): string {
+    const reg = /[0-9]*$/g;
+    const num = parseInt(str.match(reg)[0], 10) + 1;
+    return str.split('-')[0] + '-' + num;
+  }
 
   public calculatorSum(): void {
     this.sum = 0;

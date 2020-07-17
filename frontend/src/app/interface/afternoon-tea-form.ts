@@ -23,6 +23,7 @@ export interface Item {
   selections: {
     size?: number
   };
+  isClone?: boolean;
   options: Options[];
 }
 export interface RadioSelection {
